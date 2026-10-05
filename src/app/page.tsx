@@ -706,12 +706,12 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-10 mb-8">
               <div>
                 <p className="text-white/40 text-xs mb-2 uppercase tracking-widest font-semibold">Call Us</p>
-                <p className="text-white text-lg font-medium mb-1">+1 (850) 213-9930</p>
-                <p className="text-white text-lg font-medium">+92 332 2568950</p>
+                <a href="tel:+18502139930" className="text-white text-lg font-medium mb-1 hover:text-[#ff6b35] transition block">+1 (850) 213-9930</a>
+                <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">+92 332 2568950</a>
               </div>
               <div>
                 <p className="text-white/40 text-xs mb-2 uppercase tracking-widest font-semibold">Email Us</p>
-                <p className="text-white text-lg font-medium">info@amazonfastservices.com</p>
+                <a href="mailto:info@amazonfastservices.com" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">info@amazonfastservices.com</a>
               </div>
             </div>
           </div>
@@ -785,7 +785,7 @@ export default function Home() {
               <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Contact Us</h4>
               <ul className="flex flex-col gap-4">
                 <li>
-                  <a href="tel:+923322568950" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
+                  <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b35] mt-1.5 shrink-0"></span> +92-332-2568950
                   </a>
                 </li>
