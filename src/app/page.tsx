@@ -3,22 +3,18 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
+  const rawLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useSpring(rawLineHeight, { stiffness: 60, damping: 20 });
 
-  const servicesList = [
-    "Amazon FBA Automation",
-    "Amazon PPC",
-    "Amazon Product Hunting",
-    "Amazon Virtual Assistant",
-    "Amazon Store Creation",
-    "A+ Content/EBC",
-    "Shopify Dropshipping"
-  ];
 
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
@@ -46,133 +42,7 @@ export default function Home() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff6b35]/10 blur-[120px] rounded-full"></div>
         </div>
         
-        {/* Navbar Section */}
-        <header className="relative z-50 w-full px-6 sm:px-8 py-6 flex justify-between items-center">
-          {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0">
-            <Image src="/image.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-8 sm:h-10 w-auto" priority />
-          </Link>
 
-          {/* Center Pill Navbar */}
-          <nav className="hidden lg:flex items-center bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20">
-            <Link href="#" className="bg-white text-black px-6 py-2 rounded-full text-sm font-medium transition">Home</Link>
-            <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">About us</Link>
-            
-            {/* Services Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1.5 text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">
-                Services
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:rotate-180 transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-              
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2.5 w-64 shadow-2xl flex flex-col gap-1">
-                  {servicesList.map((service) => (
-                    <Link key={service} href="#" className="text-white/70 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link">
-                      {service}
-                      <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Cases</Link>
-            <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Contact</Link>
-          </nav>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-3">
-            {/* Social Icons (Hidden on Mobile) */}
-            <div className="hidden md:flex items-center gap-3">
-              <Link href="#" className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-              </Link>
-              <Link href="#" className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </Link>
-              <Link href="#" className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-              </Link>
-            </div>
-            
-            {/* Mobile Hamburger Menu */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition z-50"
-            >
-              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-          
-          {/* Mobile Menu Dropdown (Premium Agency Style) */}
-          <motion.div 
-            initial={false}
-            animate={{ 
-              height: isMobileMenuOpen ? 'calc(100vh - 88px)' : 0, 
-              opacity: isMobileMenuOpen ? 1 : 0 
-            }}
-            className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
-          >
-            <div className="flex flex-col p-8 gap-8 mt-4 overflow-y-auto">
-              {['Services', 'Our Work', 'About', 'Contact'].map((item, i) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 20 }}
-                  transition={{ delay: isMobileMenuOpen ? i * 0.1 : 0, duration: 0.4, ease: "easeOut" }}
-                  className="flex flex-col"
-                >
-                  {item === 'Services' ? (
-                    <>
-                      <button 
-                        onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                        className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group w-full text-left"
-                      >
-                        {item}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-white/20 group-hover:text-[#ff6b35] transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
-                      </button>
-                      
-                      {/* Mobile Submenu */}
-                      <motion.div 
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ 
-                          height: isMobileServicesOpen ? 'auto' : 0,
-                          opacity: isMobileServicesOpen ? 1 : 0,
-                          marginTop: isMobileServicesOpen ? 24 : 0
-                        }}
-                        className="overflow-hidden flex flex-col gap-4 pl-4 border-l border-white/10"
-                      >
-                        {servicesList.map(service => (
-                          <Link key={service} href="#" className="text-white/60 hover:text-white text-xl font-medium transition-colors">
-                            {service}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    </>
-                  ) : (
-                    <Link href="#" className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group">
-                      {item}
-                      <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={28} />
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-            
-            {/* Mobile Menu Footer CTA */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-auto p-8 border-t border-white/10 mb-4"
-            >
-              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
-                Book a Meeting
-              </Link>
-            </motion.div>
-          </motion.div>
-        </header>
 
       {/* Main Content Layout */}
       <main className="relative z-10 max-w-[1400px] mx-auto px-8 h-full flex flex-col justify-center pt-20">
@@ -429,13 +299,19 @@ export default function Home() {
             </button>
           </div>
           
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-50px", amount: 0.1 }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
-          >
+          <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
+            {/* Static dim background line */}
+            <div className="absolute left-[38px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/10"></div>
+
+            {/* Scroll-driven glowing orange line */}
+            <motion.div
+              style={{ height: lineHeight }}
+              className="absolute left-[38px] top-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top"
+            >
+              {/* Glowing dot at the tip of the line */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 rounded-full bg-[#ff6b35] shadow-[0_0_20px_8px_rgba(255,107,53,0.8)]"></div>
+            </motion.div>
+            
             {[
               { title: "Store Creation", desc: "Expert store setup and optimization services providing a solid basis for success on Amazon." },
               { title: "Listing Optimization", desc: "Optimize conversions and guarantee visibility to potential customers searching for products." },
@@ -448,38 +324,75 @@ export default function Home() {
             ].map((service, idx) => (
               <motion.div 
                 key={idx} 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-25% 0px -25% 0px" }}
                 variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                  hidden: { opacity: 0.3, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
-                className="group p-8 rounded-[2rem] bg-[#111111] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/[0.1] transition-all duration-500 flex flex-col justify-between min-h-[280px]"
+                className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0"
               >
-                <div>
-                  <div className="w-12 h-12 mb-8 rounded-full bg-[#ff6b35]/10 flex items-center justify-center text-[#ff6b35] group-hover:scale-110 group-hover:bg-[#ff6b35] group-hover:text-white transition-all duration-500">
-                    <Sparkles size={20} />
+                {/* Number Circle with Glow */}
+                <motion.div 
+                  variants={{
+                    hidden: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
+                    visible: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)", transition: { duration: 0.4 } }
+                  }}
+                  className="relative z-10 shrink-0 w-[76px] h-[76px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-all duration-300"
+                >
+                  <span className="text-[#ff6b35] font-bold text-2xl tracking-wide">{String(idx + 1).padStart(2, '0')}</span>
+                </motion.div>
+                
+                {/* Horizontal connection line */}
+                <motion.div 
+                  variants={{
+                    hidden: { scaleX: 0, opacity: 0 },
+                    visible: { scaleX: 1, opacity: 1, transition: { duration: 0.4 } }
+                  }}
+                  style={{ transformOrigin: "left" }}
+                  className="hidden sm:block absolute left-[76px] w-10 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
+                ></motion.div>
+                
+                {/* Content Box */}
+                <motion.div 
+                  variants={{
+                    hidden: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
+                    visible: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)", transition: { duration: 0.4 } }
+                  }}
+                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-8 rounded-[2rem] transition-all duration-500 relative overflow-hidden group"
+                >
+                  
+                  {/* Subtle corner decorations like in the image */}
+                  <motion.div 
+                    variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
+                    className="absolute top-5 left-5 w-5 h-5 border-t-2 border-l-2 transition-colors duration-500"
+                  ></motion.div>
+                  <motion.div 
+                    variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
+                    className="absolute bottom-5 right-5 w-5 h-5 border-b-2 border-r-2 transition-colors duration-500"
+                  ></motion.div>
+                  
+                  {/* Orange ambient glow inside box when active */}
+                  <motion.div 
+                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.6 } } }}
+                    className="absolute -right-20 -bottom-20 w-40 h-40 bg-[#ff6b35]/20 blur-[50px] rounded-full pointer-events-none"
+                  ></motion.div>
+
+                  <div className="flex items-center gap-4 mb-3 relative z-10">
+                    <Sparkles className="text-[#ff6b35]" size={24} />
+                    <motion.h3 
+                      variants={{ hidden: { color: "#ffffff" }, visible: { color: "#ff6b35" } }}
+                      className="text-2xl sm:text-3xl font-bold uppercase tracking-wide transition-colors duration-500"
+                    >
+                      {service.title}
+                    </motion.h3>
                   </div>
-                  <motion.h3 
-                    variants={{
-                      hidden: { color: "rgba(255, 255, 255, 0.3)" },
-                      visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 1, ease: "easeOut", delay: 0.2 } }
-                    }}
-                    className="text-xl font-semibold mb-4"
-                  >
-                    {service.title}
-                  </motion.h3>
-                  <motion.p 
-                    variants={{
-                      hidden: { color: "rgba(255, 255, 255, 0.1)" },
-                      visible: { color: "rgba(255, 255, 255, 0.5)", transition: { duration: 1, ease: "easeOut", delay: 0.3 } }
-                    }}
-                    className="text-sm leading-relaxed"
-                  >
-                    {service.desc}
-                  </motion.p>
-                </div>
+                  <p className="text-white/50 text-lg leading-relaxed relative z-10 pl-10">{service.desc}</p>
+                </motion.div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -544,17 +457,17 @@ export default function Home() {
             {/* Right: Glowing Animated Graph (Moved here from above) */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end py-8">
                <motion.div 
-                 initial={{ y: 150, opacity: 0, boxShadow: "0px 0px 0px rgba(255,107,53,0)" }}
+                 initial={{ y: 50, opacity: 0, boxShadow: "0px 0px 0px rgba(255,107,53,0)" }}
                  whileInView={{ 
                     y: 0, 
                     opacity: 1,
-                    boxShadow: ["0px 0px 0px rgba(255,107,53,0)", "0px 30px 100px rgba(255,107,53,0.5)", "0px 10px 40px rgba(255,107,53,0.1)"] 
+                    boxShadow: ["0px 0px 0px rgba(255,107,53,0)", "0px 30px 100px rgba(255,107,53,0.4)", "0px 10px 40px rgba(255,107,53,0.1)"] 
                  }}
-                 viewport={{ once: false, margin: "-50px" }}
+                 viewport={{ once: false, margin: "50px" }}
                  transition={{ 
-                   duration: 1.5, 
+                   duration: 0.7, 
                    ease: "easeOut", 
-                   boxShadow: { duration: 2, times: [0, 0.4, 1], ease: "easeInOut" } 
+                   boxShadow: { duration: 1, times: [0, 0.5, 1], ease: "easeInOut" } 
                  }}
                  className="relative w-full max-w-[450px] h-[300px] bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] rounded-3xl border border-white/10 p-6 flex flex-col justify-end overflow-hidden shadow-2xl"
                >
@@ -573,8 +486,8 @@ export default function Home() {
                         key={i}
                         initial={{ height: 0 }}
                         whileInView={{ height: `${h}%` }}
-                        viewport={{ once: false }}
-                        transition={{ duration: 1, delay: 0.5 + (i * 0.08), ease: [0.22, 1, 0.36, 1] }}
+                        viewport={{ once: false, margin: "50px" }}
+                        transition={{ duration: 0.6, delay: 0.1 + (i * 0.05), ease: [0.22, 1, 0.36, 1] }}
                         className="w-full bg-gradient-to-t from-[#ff6b35]/20 to-[#ff6b35] rounded-t-md relative group cursor-pointer"
                       >
                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -603,10 +516,16 @@ export default function Home() {
           </div>
 
           {/* Bottom Row (VCard & CTA) */}
-          <div className="flex flex-col-reverse lg:flex-row gap-16 items-center">
+          <div className="flex flex-col-reverse lg:flex-row gap-16 items-center overflow-hidden">
             
             {/* VCard Composition */}
-            <div className="w-full lg:w-1/2 flex justify-center items-center relative py-12">
+            <motion.div
+              initial={{ x: -120, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full lg:w-1/2 flex justify-center items-center relative py-12"
+            >
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#ff6b35]/15 blur-[120px] z-0 rounded-full pointer-events-none"></div>
                
                {/* Background Orange Card */}
@@ -664,9 +583,15 @@ export default function Home() {
 
                  </div>
                </div>
-            </div>
+            </motion.div>
             
-            <div className="w-full lg:w-1/2 lg:pl-8">
+            <motion.div
+              initial={{ x: 120, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full lg:w-1/2 lg:pl-8"
+            >
               {/* Animated Text */}
               <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-6 leading-tight animate-pulse" style={{ animationDuration: '3s' }}>
                 Your Brand Deserves<br />Safe and Simple Scaling
@@ -682,7 +607,7 @@ export default function Home() {
                   Book Consultation
                 </button>
               </div>
-            </div>
+            </motion.div>
 
           </div>
 
@@ -740,80 +665,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative w-full bg-[#0a0a0a] pt-24 pb-8 px-6 sm:px-12 border-t border-white/[0.05]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-            
-            {/* Brand */}
-            <div className="col-span-1 lg:col-span-5 pr-0 lg:pr-12">
-              <Link href="/" className="inline-block mb-6">
-                <Image src="/image.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 w-auto" />
-              </Link>
-              <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-sm">
-                With years of expertise, Amazon Fast Services has established a solid reputation as one of the most respected Amazon marketing agencies in the United States.
-              </p>
-              <div className="flex gap-3">
-                {/* Facebook */}
-                <Link href="https://www.facebook.com/AmazonFastServices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#1877F2] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></Link>
-                {/* Instagram */}
-                <Link href="https://www.instagram.com/amazonfastservices.pk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#E4405F] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></Link>
-                {/* LinkedIn */}
-                <Link href="https://pk.linkedin.com/company/amazonfastservices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#0A66C2] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></Link>
-                {/* TikTok */}
-                <Link href="https://www.tiktok.com/@amazonfastservices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-black transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-3.328.026c0 1.258.53 2.457 1.417 3.344C6.15 21.67 7.348 22 8.606 22a8.653 8.653 0 0 0 8.606-8.606v-3.791c1.336 1.096 3.031 1.737 4.788 1.76V8.049a4.877 4.877 0 0 1-2.411-1.363z"/></svg></Link>
-              </div>
-            </div>
-
-            {/* Services Links */}
-            <div className="col-span-1 lg:col-span-3">
-              <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Our Services</h4>
-              <ul className="flex flex-col gap-3">
-                {["A+ Content / EBC", "Amazon FBA Automation", "Amazon PPC", "Product Hunting", "Store Creation", "Shopify Dropshipping"].map(link => (
-                  <li key={link}><Link href="#" className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link}</Link></li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Pages Links */}
-            <div className="col-span-1 lg:col-span-2">
-              <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Pages</h4>
-              <ul className="flex flex-col gap-3">
-                {["Home", "Blog", "About Us", "Contact Us", "Privacy Policy"].map(link => (
-                  <li key={link}><Link href="#" className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link}</Link></li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="col-span-1 lg:col-span-2">
-              <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Contact Us</h4>
-              <ul className="flex flex-col gap-4">
-                <li>
-                  <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b35] mt-1.5 shrink-0"></span> +92-332-2568950
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:info@amazonfastservices.com" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b35] mt-1.5 shrink-0"></span> info@amazonfastservices.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-            
-          </div>
-
-          <div className="border-t border-white/[0.05] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/30 text-xs font-medium tracking-wide uppercase">
-              &copy; {new Date().getFullYear()} Amazon Fast Services. All rights reserved.
-            </p>
-            <p className="text-white/30 text-xs font-medium tracking-wide uppercase">
-              Powered By <span className="text-white/60">X One Hub</span>
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
