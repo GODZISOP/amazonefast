@@ -167,9 +167,9 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               className="mt-auto p-8 border-t border-white/10 mb-4"
             >
-              <button className="w-full bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
-                Start a Project
-              </button>
+              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
+                Book a Meeting
+              </Link>
             </motion.div>
           </motion.div>
         </header>
@@ -197,12 +197,12 @@ export default function Home() {
 
             {/* Start a project button */}
             <div className="mb-10">
-              <button className="flex items-center gap-4 pl-6 pr-2 py-2 rounded-full border border-white/30 text-white hover:bg-white/10 transition group backdrop-blur-sm">
-                <span className="text-sm font-medium">Start a project</span>
+              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full border border-white/30 text-white hover:bg-white/10 transition group backdrop-blur-sm">
+                <span className="text-sm font-medium">Book a Meeting</span>
                 <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-[#ff6b35] group-hover:text-white transition">
                   <ArrowUpRight size={20} />
                 </div>
-              </button>
+              </Link>
             </div>
 
             {/* Metric Cards Row (Mobile: 3 Cards, Desktop: 2 Cards) */}
