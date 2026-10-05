@@ -203,7 +203,7 @@ export default function Home() {
             </div>
 
             {/* Profile Floating Card (Desktop Only) */}
-            <div className="hidden sm:flex bg-[#f6efe7] p-3.5 rounded-[28px] w-full max-w-[280px] shadow-2xl relative lg:mt-auto flex-col items-stretch gap-0">
+            <div className="hidden sm:flex bg-[#f6efe7] p-3.5 rounded-[28px] w-full max-w-[280px] shadow-2xl relative mt-8 lg:mt-24 flex-col items-stretch gap-0">
               
               {/* Image Side */}
               <div className="w-full h-auto aspect-square bg-[#0a0a0a] rounded-[20px] overflow-hidden shrink-0 relative mb-4 flex justify-center items-center">
