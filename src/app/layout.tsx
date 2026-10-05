@@ -17,13 +17,18 @@ export const metadata: Metadata = {
   description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
 };
 
+import Chatbot from "@/components/Chatbot";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Chatbot />
+      </body>
     </html>
   );
 }
