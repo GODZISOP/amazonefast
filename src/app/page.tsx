@@ -8,6 +8,17 @@ import { motion } from "framer-motion";
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+
+  const servicesList = [
+    "Amazon FBA Automation",
+    "Amazon PPC",
+    "Amazon Product Hunting",
+    "Amazon Virtual Assistant",
+    "Amazon Store Creation",
+    "A+ Content/EBC",
+    "Shopify Dropshipping"
+  ];
 
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
@@ -45,7 +56,26 @@ export default function Home() {
           <nav className="hidden lg:flex items-center bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20">
             <Link href="#" className="bg-white text-black px-6 py-2 rounded-full text-sm font-medium transition">Home</Link>
             <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">About us</Link>
-            <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Services</Link>
+            
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <button className="flex items-center gap-1.5 text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">
+                Services
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:rotate-180 transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2.5 w-64 shadow-2xl flex flex-col gap-1">
+                  {servicesList.map((service) => (
+                    <Link key={service} href="#" className="text-white/70 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link">
+                      {service}
+                      <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Cases</Link>
             <Link href="#" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Contact</Link>
           </nav>
@@ -83,18 +113,48 @@ export default function Home() {
             }}
             className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
           >
-            <div className="flex flex-col p-8 gap-8 mt-4">
+            <div className="flex flex-col p-8 gap-8 mt-4 overflow-y-auto">
               {['Services', 'Our Work', 'About', 'Contact'].map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 20 }}
                   transition={{ delay: isMobileMenuOpen ? i * 0.1 : 0, duration: 0.4, ease: "easeOut" }}
+                  className="flex flex-col"
                 >
-                  <Link href="#" className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group">
-                    {item}
-                    <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={28} />
-                  </Link>
+                  {item === 'Services' ? (
+                    <>
+                      <button 
+                        onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                        className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group w-full text-left"
+                      >
+                        {item}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-white/20 group-hover:text-[#ff6b35] transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                      
+                      {/* Mobile Submenu */}
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ 
+                          height: isMobileServicesOpen ? 'auto' : 0,
+                          opacity: isMobileServicesOpen ? 1 : 0,
+                          marginTop: isMobileServicesOpen ? 24 : 0
+                        }}
+                        className="overflow-hidden flex flex-col gap-4 pl-4 border-l border-white/10"
+                      >
+                        {servicesList.map(service => (
+                          <Link key={service} href="#" className="text-white/60 hover:text-white text-xl font-medium transition-colors">
+                            {service}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    </>
+                  ) : (
+                    <Link href="#" className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group">
+                      {item}
+                      <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={28} />
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
