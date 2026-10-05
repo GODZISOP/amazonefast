@@ -203,33 +203,33 @@ export default function Home() {
             </div>
 
             {/* Profile Floating Card (Desktop Only) */}
-            <div className="hidden sm:flex bg-[#f6efe7] p-4 rounded-[32px] w-full max-w-[340px] shadow-2xl relative lg:mt-auto flex-col items-stretch gap-0">
+            <div className="hidden sm:flex bg-[#f6efe7] p-3.5 rounded-[28px] w-full max-w-[280px] shadow-2xl relative lg:mt-auto flex-col items-stretch gap-0">
               
               {/* Image Side */}
-              <div className="w-full h-auto aspect-[4/5] bg-gray-300 rounded-[24px] overflow-hidden shrink-0 relative mb-6">
-                <img src="/profile.png" alt="Amazon Expert" className="w-full h-full object-cover" />
+              <div className="w-full h-auto aspect-square bg-[#0a0a0a] rounded-[20px] overflow-hidden shrink-0 relative mb-4 flex justify-center items-center">
+                <img src="/profile.png" alt="Amazon Expert" className="w-full h-full object-contain p-4" />
               </div>
 
               {/* Text & Button Side */}
               <div className="flex flex-col justify-start w-full">
                 
-                <div className="flex items-center gap-2 mb-4 px-2">
-                  <div className="w-6 h-6 bg-[#ff6b35] text-white flex items-center justify-center rounded text-xs font-bold">A</div>
-                  <span className="text-xs font-semibold text-black/60 uppercase tracking-wider">Available for new sellers</span>
+                <div className="flex items-center gap-2 mb-3 px-2">
+                  <div className="w-5 h-5 bg-[#ff6b35] text-white flex items-center justify-center rounded text-[10px] font-bold">A</div>
+                  <span className="text-[10px] font-semibold text-black/60 uppercase tracking-wider">Available for new sellers</span>
                 </div>
 
-                <div className="px-2 mb-6 text-black">
-                  <p className="text-sm font-medium mb-1">hello@amazonfast.com</p>
-                  <h4 className="text-2xl font-semibold mb-2 leading-tight">Amazon Expert</h4>
-                  <p className="text-black/60 text-sm leading-relaxed">
+                <div className="px-2 mb-4 text-black">
+                  <p className="text-xs font-medium mb-1">hello@amazonfast.com</p>
+                  <h4 className="text-xl font-semibold mb-1.5 leading-tight">Amazon Expert</h4>
+                  <p className="text-black/60 text-xs leading-relaxed">
                     Helping sellers grow through FBA & PPC
                   </p>
                 </div>
 
-                <button className="w-full bg-[#ea5c2b] hover:bg-[#d94a1b] text-white p-2 pl-6 rounded-full flex items-center justify-between transition group">
+                <button className="w-full bg-[#ea5c2b] hover:bg-[#d94a1b] text-white p-1.5 pl-5 rounded-full flex items-center justify-between transition group">
                   <span className="font-semibold text-sm">Get Started</span>
-                  <div className="w-10 h-10 shrink-0 rounded-full bg-white text-[#ea5c2b] flex items-center justify-center group-hover:scale-105 transition transform">
-                    <ArrowUpRight size={20} />
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-white text-[#ea5c2b] flex items-center justify-center group-hover:scale-105 transition transform">
+                    <ArrowUpRight size={18} />
                   </div>
                 </button>
               </div>
