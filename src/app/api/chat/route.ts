@@ -26,7 +26,7 @@ CRITICAL INSTRUCTIONS:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant', // Fast model from Groq
+        model: 'qwen/qwen3.8-27b', // Fast model from Groq
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
