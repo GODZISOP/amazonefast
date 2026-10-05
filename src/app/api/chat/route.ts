@@ -13,6 +13,7 @@ Always be extremely polite and maintain a premium agency tone.
 CRITICAL INSTRUCTIONS:
 - Give highly informative and accurate answers regarding Amazon business, FBA, LLCs, and Shopify.
 - ONLY redirect them to WhatsApp (+92 332 2568950) if they explicitly ask about our agency pricing, want to hire us for a project, or want a customized business audit.
+- FORMATTING: Do NOT use Markdown (no asterisks **, no hashes ###). Use plain text. Use line breaks (newlines) and simple numbered lists (1. 2. 3.) to make the text clean and easy to read.
 - Keep your answers concise enough to fit in a chat window, but detailed enough to be genuinely helpful.`;
 
     const groqApiKey = process.env.GROQ_API_KEY;
