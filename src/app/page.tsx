@@ -2,11 +2,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sparkles, Wifi, Menu } from "lucide-react";
+import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
@@ -36,12 +37,9 @@ export default function Home() {
         {/* Navbar Section */}
         <header className="relative z-50 w-full px-6 sm:px-8 py-6 flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center gap-2 text-white font-semibold text-xl tracking-tight">
-            <div className="w-8 h-8 bg-white text-black flex items-center justify-center rounded-lg font-bold text-lg leading-none shrink-0">
-              A
-            </div>
-            <span>AmazonFast</span>
-          </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image src="/image.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-8 sm:h-10 w-auto" priority />
+          </Link>
 
           {/* Center Pill Navbar */}
           <nav className="hidden lg:flex items-center bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20">
@@ -68,10 +66,51 @@ export default function Home() {
             </div>
             
             {/* Mobile Hamburger Menu */}
-            <button className="lg:hidden w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition">
-              <Menu size={18} />
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition z-50"
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
+          
+          {/* Mobile Menu Dropdown (Premium Agency Style) */}
+          <motion.div 
+            initial={false}
+            animate={{ 
+              height: isMobileMenuOpen ? 'calc(100vh - 88px)' : 0, 
+              opacity: isMobileMenuOpen ? 1 : 0 
+            }}
+            className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
+          >
+            <div className="flex flex-col p-8 gap-8 mt-4">
+              {['Services', 'Our Work', 'About', 'Contact'].map((item, i) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 20 }}
+                  transition={{ delay: isMobileMenuOpen ? i * 0.1 : 0, duration: 0.4, ease: "easeOut" }}
+                >
+                  <Link href="#" className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group">
+                    {item}
+                    <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={28} />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Mobile Menu Footer CTA */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-auto p-8 border-t border-white/10 mb-4"
+            >
+              <button className="w-full bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
+                Start a Project
+              </button>
+            </motion.div>
+          </motion.div>
         </header>
 
       {/* Main Content Layout */}
@@ -220,7 +259,7 @@ export default function Home() {
         <div className="absolute inset-0 z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none">
           
           {/* Top Section (Huge Headline & Paragraph) */}
-          <div className="flex flex-col md:flex-row justify-between items-start pt-12 sm:pt-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-start pt-6 sm:pt-20 gap-4 sm:gap-8">
             
             {/* Top Left: Massive Bold Headline */}
             <div className="w-full md:w-[45%] lg:w-[40%]">
@@ -229,7 +268,7 @@ export default function Home() {
                 whileInView="visible" 
                 viewport={{ once: false, margin: "0px 0px -100px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold leading-[0.95] tracking-[-0.04em] flex flex-wrap gap-x-[14px] gap-y-2"
+                className="text-4xl sm:text-6xl lg:text-[5.5rem] font-bold leading-[1] tracking-[-0.04em] flex flex-wrap gap-x-2 sm:gap-x-[14px] gap-y-1 sm:gap-y-2"
               >
                 {"The future of seamless Amazon scaling".split(" ").map((word, i) => (
                   <motion.span 
@@ -249,7 +288,7 @@ export default function Home() {
                 whileInView="visible" 
                 viewport={{ once: false, margin: "0px 0px -50px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.4 } } }}
-                className="text-xl sm:text-2xl lg:text-[1.65rem] leading-snug font-medium flex flex-wrap gap-x-2 gap-y-1"
+                className="text-lg sm:text-2xl lg:text-[1.65rem] leading-snug font-medium flex flex-wrap gap-x-1 sm:gap-x-2 gap-y-1"
               >
                 {"Redefines what Amazon scaling can be—transforming passive sales into exponential, automated growth.".split(" ").map((word, i) => (
                   <motion.span 
@@ -647,10 +686,9 @@ export default function Home() {
             
             {/* Brand */}
             <div className="col-span-1 lg:col-span-5 pr-0 lg:pr-12">
-              <div className="flex items-center gap-2 text-white font-bold text-2xl tracking-tight mb-6">
-                <div className="w-10 h-10 bg-white text-black flex items-center justify-center rounded-xl font-black text-xl leading-none">A</div>
-                AmazonFast
-              </div>
+              <Link href="/" className="inline-block mb-6">
+                <Image src="/image.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 w-auto" />
+              </Link>
               <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-sm">
                 With years of expertise, Amazon Fast Services has established a solid reputation as one of the most respected Amazon marketing agencies in the United States.
               </p>
