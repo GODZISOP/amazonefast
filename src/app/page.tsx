@@ -23,28 +23,29 @@ export default function Home() {
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
       
-      {/* Hero Section Background (Fixed for Parallax Effect) */}
-      <div className="fixed top-0 left-0 w-full h-[100vh] z-0 pointer-events-none">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover object-center"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
+      {/* Hero Section Container */}
+      <section className="relative w-full min-h-[100vh] flex flex-col pb-10 overflow-hidden">
         
-        {/* Gentle gradient overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+        {/* Background Video strictly confined to this section */}
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover object-center"
+          >
+            <source src="/hero-bg.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Gentle gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          
+          {/* Extra ambient glow just for the aesthetic */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff6b35]/10 blur-[120px] rounded-full"></div>
+        </div>
         
-        {/* Extra ambient glow just for the aesthetic */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff6b35]/10 blur-[120px] rounded-full"></div>
-      </div>
-      
-      {/* Hero Section Content Wrapper */}
-      <div className="relative w-full min-h-[100vh] flex flex-col pb-10 z-10">
-
         {/* Navbar Section */}
         <header className="relative z-50 w-full px-6 sm:px-8 py-6 flex justify-between items-center">
           {/* Logo */}
@@ -299,7 +300,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-    </div>
+    </section>
 
     {/* Second Section: Perfect Full Cover Image with Scroll Text */}
       <section ref={sectionRef} className="relative w-full h-[85vh] md:h-auto md:aspect-video flex justify-center items-center overflow-hidden bg-[#0a0400]">
