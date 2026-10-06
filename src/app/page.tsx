@@ -6,7 +6,6 @@ import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RealEarth } from "../components/RealEarth";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
-import SplitText from "../components/SplitText";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
