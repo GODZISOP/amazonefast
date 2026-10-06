@@ -116,23 +116,32 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={{
-              hidden: { backgroundPosition: "0% 50%" },
+              hidden: {},
               visible: { 
-                backgroundPosition: ["0% 50%", "200% 50%"],
                 transition: { 
-                  staggerChildren: 0.3,
-                  backgroundPosition: { duration: 6, ease: "linear", repeat: Infinity }
+                  staggerChildren: 0.3
                 } 
               }
             }}
-            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-white bg-[length:200%_auto]"
+            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 text-white"
           >
-            {["Scale", "Your", "Amazon", "Brand"].map((word, i) => (
-              <motion.span key={i} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
-                {word}
-              </motion.span>
-            ))}
+            {/* First Line with Gradient Animation */}
+            <motion.span 
+              initial={{ backgroundPosition: "0% 50%" }}
+              animate={{ backgroundPosition: ["0% 50%", "200% 50%"] }}
+              transition={{ duration: 6, ease: "linear", repeat: Infinity }}
+              className="flex flex-wrap justify-center gap-x-3 gap-y-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-white bg-[length:200%_auto]"
+            >
+              {["Scale", "Your", "Amazon", "Brand"].map((word, i) => (
+                <motion.span key={i} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
+                  {word}
+                </motion.span>
+              ))}
+            </motion.span>
+
             <div className="w-full h-0"></div>
+            
+            {/* Second Line without Gradient */}
             {["Without", "Borders"].map((word, i) => (
               <motion.span key={`l2-${i}`} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
                 {word}
