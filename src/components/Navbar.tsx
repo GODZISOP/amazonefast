@@ -22,9 +22,9 @@ export default function Navbar() {
   return (
     <header className="fixed z-50 w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
       {/* Logo */}
-      <Link href="/" className="flex items-center shrink-0">
+      <a href="/" className="flex items-center shrink-0">
         <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 sm:h-12 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
-      </Link>
+      </a>
 
       {/* Center Pill Navbar */}
       <nav className="hidden lg:flex items-center bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20">
