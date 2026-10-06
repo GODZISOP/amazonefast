@@ -3,11 +3,14 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { RealEarth } from "../components/RealEarth";
+import AnimatedGraphSection from "../components/AnimatedGraphSection";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
@@ -15,162 +18,202 @@ export default function Home() {
   const rawLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const lineHeight = useSpring(rawLineHeight, { stiffness: 60, damping: 20 });
 
+  // Mouse Parallax Logic
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = (clientX / innerWidth - 0.5) * 2;
+    const y = (clientY / innerHeight - 0.5) * 2;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const rotateX = useTransform(mouseY, [-1, 1], [15, -15]);
+  const rotateY = useTransform(mouseX, [-1, 1], [-15, 15]);
+
+  const springConfig = { damping: 30, stiffness: 100, mass: 1 };
+  const smoothRotateX = useSpring(rotateX, springConfig);
+  const smoothRotateY = useSpring(rotateY, springConfig);
+
+  // Generate 40 random moving stars (White and Orange)
+  const [stars, setStars] = useState<any[]>([]);
+  useEffect(() => {
+    setStars(Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 2,
+      left: Math.random() * 100,
+      duration: Math.random() * 10 + 8,
+      delay: Math.random() * -10,
+      isOrange: Math.random() > 0.5
+    })));
+  }, []);
 
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
       
+      <style>{`
+        @keyframes drift-up {
+          0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+          20% { opacity: 1; scale: 1; }
+          80% { opacity: 1; scale: 1; }
+          100% { transform: translateY(-20vh) scale(0.5); opacity: 0; }
+        }
+        .moving-star {
+          position: absolute;
+          border-radius: 50%;
+          animation: drift-up linear infinite;
+          z-index: 0;
+        }
+      `}</style>
+
       {/* Hero Section Container */}
-      <section className="relative w-full min-h-[100vh] flex flex-col pb-10 overflow-hidden">
+      <section 
+        className="relative w-full min-h-[100vh] flex flex-col overflow-hidden bg-black perspective-[1000px]"
+        onMouseMove={handleMouseMove}
+      >
         
-        {/* Background Video strictly confined to this section */}
-        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover object-center"
+        {/* Starry Space Background */}
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-black to-black"></div>
+        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/stardust.png')" }}></div>
+
+        {/* Animated Moving Stars (White & Orange) */}
+        {stars.map((star) => (
+          <div 
+            key={star.id} 
+            className="moving-star"
+            style={{
+              width: star.size,
+              height: star.size,
+              left: `${star.left}%`,
+              backgroundColor: star.isOrange ? '#ff6b35' : '#ffffff',
+              animationDuration: `${star.duration}s`,
+              animationDelay: `${star.delay}s`,
+              boxShadow: `0 0 ${star.size * 3}px ${star.isOrange ? '#ff6b35' : '#ffffff'}`
+            }}
+          />
+        ))}
+
+        {/* Background Image requested by user */}
+        <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-[#3a0d00] to-black">
+          <Image 
+            src="/image copy.png" 
+            alt="Hero Background" 
+            fill
+            priority
+            className="object-cover object-bottom opacity-90 mix-blend-screen" 
+          />
+          {/* Subtle gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a]"></div>
+        </div>
+
+        {/* Main Content Layout (Center/Lower) */}
+        <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center">
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight text-shadow-sm mb-6"
           >
-            <source src="/hero-bg.mp4" type="video/mp4" />
-          </video>
+            Scale Your Amazon Brand<br />Without Borders
+          </motion.h1>
           
-          {/* Gentle gradient overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="text-white/80 text-base md:text-lg max-w-2xl mb-10 leading-relaxed font-medium"
+          >
+            Build and manage international sales with optimized listings, automated PPC campaigns, and seamless FBA logistics from a single platform.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          >
+            <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold text-[15px] hover:bg-gray-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+              Start Scaling Today
+            </Link>
+          </motion.div>
           
-          {/* Extra ambient glow just for the aesthetic */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#ff6b35]/10 blur-[120px] rounded-full"></div>
-        </div>
-        
-
-
-      {/* Main Content Layout */}
-      <main className="relative z-10 max-w-[1400px] mx-auto px-8 h-full flex flex-col justify-center pt-20">
-        
-        {/* Top Info (Creative Agency) */}
-        <div className="flex items-center gap-2 text-white/80 text-sm tracking-wide uppercase font-medium mb-8 lg:mb-12">
-          <span>Amazon LLC Services</span>
-          <span className="w-1 h-1 rounded-full bg-[#ff6b35]"></span>
-        </div>
-
-        <div className="flex flex-col lg:flex-row justify-between items-start flex-grow">
+          {/* Floating Glassmorphism Elements (Amazon Focus) */}
           
-          {/* Left Column */}
-          <div className="w-full lg:w-3/5 flex flex-col">
-            <h1 className="text-4xl sm:text-6xl lg:text-[5.5rem] font-medium text-white leading-[1.05] tracking-tight mb-6 drop-shadow-sm">
-              Scale your brand<br />on Amazon
-            </h1>
-            
-            <p className="text-white/70 text-lg sm:text-xl max-w-lg mb-10 leading-relaxed">
-              We help sellers launch, connect with millions of buyers, and grow through smart FBA strategies and advertising.
+          {/* Left Feature Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+            className="hidden lg:block absolute left-[-5%] xl:left-[-15%] top-[65%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
+          >
+            <h4 className="text-white font-bold mb-2">Automated PPC Optimization</h4>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Discover highly profitable keywords through intelligent matching based on search volume and competition worldwide today.
             </p>
+          </motion.div>
 
-            {/* Start a project button */}
-            <div className="mb-10">
-              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full border border-white/30 text-white hover:bg-white/10 transition group backdrop-blur-sm">
-                <span className="text-sm font-medium">Book a Meeting</span>
-                <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-[#ff6b35] group-hover:text-white transition">
-                  <ArrowUpRight size={20} />
-                </div>
-              </Link>
-            </div>
+          {/* Right Feature Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+            className="hidden lg:block absolute right-[-5%] xl:right-[-15%] top-[70%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
+          >
+            <h4 className="text-white font-bold mb-2">Global Market Access</h4>
+            <p className="text-white/70 text-sm leading-relaxed">
+              Connect with millions of buyers worldwide while expanding your product offerings across multiple Amazon marketplaces.
+            </p>
+          </motion.div>
 
-            {/* Metric Cards Row (Mobile: 3 Cards, Desktop: 2 Cards) */}
-            <div className="flex flex-row gap-2 sm:gap-6 mt-auto w-full">
-              {/* Solid White Card */}
-              <div className="bg-[#fcfaf7] rounded-2xl sm:rounded-[32px] p-3 sm:p-8 w-1/3 sm:w-[260px] text-black shadow-lg flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-5xl font-semibold tracking-tight mb-1 sm:mb-2">$10M+</h3>
-                  <p className="text-black/60 font-medium text-[10px] sm:text-base mb-1 sm:mb-8 leading-tight">Client Revenue</p>
-                </div>
-                <p className="text-[10px] sm:text-xs text-black/50 leading-relaxed font-medium hidden sm:block">
-                  Driving massive sales through optimized listings & PPC
-                </p>
-              </div>
+          {/* Floating Nodes (simulating the map locations) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.2, ease: "backOut" }}
+            className="hidden md:flex absolute top-[60%] left-[20%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
+          >
+            <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/gb.png')" }}></span>
+            <span className="text-white text-xs font-semibold">UK Market</span>
+          </motion.div>
 
-              {/* Glass Card */}
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-[32px] p-3 sm:p-8 w-1/3 sm:w-[260px] text-white flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-5xl font-semibold tracking-tight mb-1 sm:mb-2">99%</h3>
-                  <p className="text-white/70 font-medium text-[10px] sm:text-base mb-1 sm:mb-8 leading-tight">Seller Satisfaction</p>
-                </div>
-                <p className="text-[10px] sm:text-xs text-white/50 leading-relaxed font-medium hidden sm:block">
-                  Building long-term partnerships with Amazon brands
-                </p>
-              </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.4, ease: "backOut" }}
+            className="hidden md:flex absolute top-[63%] right-[25%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
+          >
+            <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/de.png')" }}></span>
+            <span className="text-white text-xs font-semibold">Germany</span>
+          </motion.div>
 
-              {/* Mobile-Only Amazon Expert Card (3rd in the row) */}
-              <div className="sm:hidden bg-[#f6efe7] p-2 rounded-2xl w-1/3 shadow-2xl flex flex-col justify-between items-center text-center">
-                <div className="w-full aspect-square bg-gray-300 rounded-[12px] overflow-hidden relative mb-2">
-                  <img src="/profile.png" alt="Amazon Expert" className="w-full h-full object-cover" />
-                </div>
-                <h4 className="text-[10px] font-bold leading-tight text-black mb-1">Amazon Expert</h4>
-                <div className="w-full bg-[#ea5c2b] text-white py-1 rounded-full flex items-center justify-center">
-                  <span className="font-semibold text-[8px]">Get Started</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.6, ease: "backOut" }}
+            className="hidden md:flex absolute top-[75%] left-[30%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
+          >
+            <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/us.png')" }}></span>
+            <span className="text-white text-xs font-semibold">United States</span>
+          </motion.div>
 
-          {/* Right Column */}
-          <div className="w-full lg:w-2/5 flex flex-col items-start lg:items-end mt-16 lg:mt-0 relative h-full">
-            
-            {/* Avatars / Projects Delivered */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 rounded-full bg-gray-400 border-2 border-transparent relative z-30">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" className="w-full h-full object-cover rounded-full" alt="avatar 1" />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-gray-500 border-2 border-transparent relative z-20">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" className="w-full h-full object-cover rounded-full" alt="avatar 2" />
-                </div>
-                <div className="w-10 h-10 rounded-full bg-gray-600 border-2 border-transparent relative z-10">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" className="w-full h-full object-cover rounded-full" alt="avatar 3" />
-                </div>
-              </div>
-              <div className="text-white/80 text-sm font-medium leading-tight max-w-[120px]">
-                500+ Successful<br />Amazon Stores
-              </div>
-            </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.8, ease: "backOut" }}
+            className="hidden md:flex absolute top-[85%] right-[30%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
+          >
+            <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/nl.png')" }}></span>
+            <span className="text-white text-xs font-semibold">Netherlands</span>
+          </motion.div>
 
-            {/* Profile Floating Card (Desktop Only) */}
-            <div className="hidden sm:flex bg-[#f6efe7] p-3.5 rounded-[28px] w-full max-w-[280px] shadow-2xl relative mt-8 lg:mt-24 flex-col items-stretch gap-0">
-              
-              {/* Image Side */}
-              <div className="w-full h-auto aspect-square bg-[#0a0a0a] rounded-[20px] overflow-hidden shrink-0 relative mb-4 flex justify-center items-center">
-                <img src="/profile.png" alt="Amazon Expert" className="w-full h-full object-contain p-4" />
-              </div>
+        </main>
+      </section>
 
-              {/* Text & Button Side */}
-              <div className="flex flex-col justify-start w-full">
-                
-                <div className="flex items-center gap-2 mb-3 px-2">
-                  <div className="w-5 h-5 bg-[#ff6b35] text-white flex items-center justify-center rounded text-[10px] font-bold">A</div>
-                  <span className="text-[10px] font-semibold text-black/60 uppercase tracking-wider">Available for new sellers</span>
-                </div>
-
-                <div className="px-2 mb-4 text-black">
-                  <p className="text-xs font-medium mb-1">hello@amazonfast.com</p>
-                  <h4 className="text-xl font-semibold mb-1.5 leading-tight">Amazon Expert</h4>
-                  <p className="text-black/60 text-xs leading-relaxed">
-                    Helping sellers grow through FBA & PPC
-                  </p>
-                </div>
-
-                <button className="w-full bg-[#ea5c2b] hover:bg-[#d94a1b] text-white p-1.5 pl-5 rounded-full flex items-center justify-between transition group">
-                  <span className="font-semibold text-sm">Get Started</span>
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-white text-[#ea5c2b] flex items-center justify-center group-hover:scale-105 transition transform">
-                    <ArrowUpRight size={18} />
-                  </div>
-                </button>
-              </div>
-
-            </div>
-            
-          </div>
-        </div>
-      </main>
-    </section>
+      {/* New Animated Graph Section (Matching provided image with Orange theme) */}
+      <AnimatedGraphSection />
 
     {/* Second Section: Perfect Full Cover Image with Scroll Text */}
       <section ref={sectionRef} className="relative w-full h-[85vh] md:h-auto md:aspect-video flex justify-center items-center overflow-hidden bg-[#0a0400]">
