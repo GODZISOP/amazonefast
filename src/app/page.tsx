@@ -422,13 +422,12 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
               <motion.div
                 key={idx}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, margin: "-25% 0px -25% 0px" }}
+                whileHover="visible"
                 variants={{
-                  hidden: { opacity: 0.3, scale: 0.95 },
+                  hidden: { opacity: 0.5, scale: 0.98 },
                   visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
-                className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0"
+                className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0 cursor-pointer"
               >
                 {/* Number Circle with Glow */}
                 <motion.div
