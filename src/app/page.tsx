@@ -702,8 +702,8 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                     </div>
                     <div className="flex justify-between items-end">
                       <div>
-                        <p className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 font-semibold">Card Holder</p>
-                        <p className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase drop-shadow-sm">AMAZON BRAND</p>
+                        <p className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 font-semibold">AmazonFast Service</p>
+                        <p className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase drop-shadow-sm">AMAZON SELLER</p>
                       </div>
 
                       {/* Fake Master/Visa Style Logo */}
