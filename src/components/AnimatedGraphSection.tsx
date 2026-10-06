@@ -102,8 +102,8 @@ export default function AnimatedGraphSection() {
           style={{ clipPath: hexClipPath }}
         >
           <div className="absolute inset-0 bg-[#ff6b35]/20 animate-pulse"></div>
-          <span className="text-[#ff6b35] text-6xl font-bold font-sans tracking-tighter">AF</span>
-          <span className="text-white text-[10px] font-bold tracking-widest mt-1">AMAZONFAST</span>
+          <span className="text-[#ff6b35] text-5xl font-bold font-sans tracking-tighter">AFS</span>
+          <span className="text-white text-[9px] font-bold tracking-widest mt-1 text-center px-1">AMAZON FAST SERVICE</span>
         </motion.div>
 
         {/* Outer Hexagons */}
