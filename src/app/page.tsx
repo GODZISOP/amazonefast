@@ -214,7 +214,8 @@ export default function Home() {
             />
             {/* Bright moving pulse connecting them endlessly */}
             <motion.path
-              d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
+
+d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
               fill="none"
               stroke="#ff6b35"
               strokeWidth="2.5"
@@ -284,7 +285,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/section2-highres.jpg')" }}
       >
         {/* Typography & Scroll Reveal Container */}
-        <div className="relative z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none">
+        <div className="relative z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none -mt-24 lg:-mt-40">
 
           {/* Top Section (Huge Headline & Paragraph) */}
           <div className="flex flex-col md:flex-row justify-between items-start pt-6 sm:pt-20 gap-4 sm:gap-8">
