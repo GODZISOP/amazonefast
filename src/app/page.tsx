@@ -891,88 +891,104 @@ function FAQSection() {
           </h2>
         </motion.div>
 
-        {/* Glow from ABOVE the box - outside */}
-        <div className="relative">
-          {/* Vertical orange beam from top, flows into box */}
-          <motion.div
-            animate={{ x: [0, 12, -12, 8, -8, 0], scaleX: [1, 1.5, 0.6, 1.3, 0.8, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute left-1/2 -translate-x-1/2 -top-16 w-[3px] h-[120px] bg-gradient-to-b from-transparent via-[#ff6b35] to-[#ff6b35] pointer-events-none z-10"
-          />
-          {/* Top glow blob above box */}
-          <motion.div
-            animate={{ x: [0, 20, -18, 12, -20, 0], scale: [1, 1.2, 0.85, 1.15, 0.9, 1], opacity: [0.7, 1, 0.6, 0.9, 0.7, 0.7] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute left-1/2 -translate-x-1/2 -top-8 w-[100px] h-[120px] bg-[#ff6b35]/80 blur-[40px] rounded-full pointer-events-none z-10"
+        {/* Vertical beam section wrapper */}
+        <div className="relative pt-20">
+          {/* Subtle background grid pattern */}
+          <div 
+            className="absolute inset-x-0 -top-24 h-[300px] pointer-events-none opacity-25"
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`,
+              backgroundSize: '36px 36px',
+              maskImage: 'radial-gradient(ellipse at top, black 40%, transparent 80%)',
+              WebkitMaskImage: 'radial-gradient(ellipse at top, black 40%, transparent 80%)'
+            }}
           />
 
-          {/* Dark box */}
-          <div className="relative rounded-[2rem] border border-white/[0.06] bg-[#0d0d0d] overflow-hidden">
-            {/* Left side glow line */}
-            <div className="absolute left-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#ff6b35]/60 via-[#ff6b35]/20 to-transparent pointer-events-none z-10" />
-            {/* Right side glow line */}
-            <div className="absolute right-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#ff6b35]/60 via-[#ff6b35]/20 to-transparent pointer-events-none z-10" />
+          {/* 1. Main Vertical Pillar Beam coming down from above */}
+          <div className="absolute left-1/2 -translate-x-1/2 -top-24 h-[180px] w-[300px] pointer-events-none flex justify-center items-end z-0">
+            {/* Outer soft vertical red/orange glow */}
+            <motion.div
+              animate={{ opacity: [0.75, 1, 0.75], scaleX: [1, 1.1, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute bottom-0 w-[180px] h-[220px] bg-gradient-to-t from-[#ff4500] via-[#ff4500]/60 to-transparent blur-[45px]"
+            />
+            {/* Mid intense vertical glow */}
+            <motion.div
+              animate={{ opacity: [0.85, 1, 0.85] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute bottom-0 w-[50px] h-[220px] bg-gradient-to-t from-[#ff6b35] via-[#ff4500] to-transparent blur-[14px]"
+            />
+            {/* Sharp inner vertical laser line */}
+            <div className="absolute bottom-0 w-[4px] h-[240px] bg-gradient-to-t from-[#ffaa55] via-[#ff5500] to-transparent shadow-[0_0_20px_#ff4500]" />
+          </div>
 
-            {/* Inside top glow (continuation of beam flowing in) */}
+          {/* 2. Dark Box Container with Horizontal Spreading Glow */}
+          <div className="relative rounded-[2rem] border border-white/[0.08] bg-[#0d0d0d] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+            {/* Impact Point Flare (where vertical beam hits top of box) */}
             <motion.div
-              animate={{ x: [0, 22, -18, 14, -22, 0], y: [0, 20, 40, 25, 10, 0], scale: [1, 1.15, 0.9, 1.2, 0.95, 1], opacity: [0.75, 1, 0.65, 0.9, 0.7, 0.75] }}
-              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute left-1/2 -translate-x-1/2 top-0 w-[90px] h-[250px] bg-[#ff6b35]/80 blur-[40px] rounded-full pointer-events-none z-0"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.85, 1, 0.85] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute left-1/2 -translate-x-1/2 -top-7 w-[220px] h-[60px] bg-[#ff4500] blur-[28px] rounded-full pointer-events-none z-20"
             />
+            <div className="absolute left-1/2 -translate-x-1/2 -top-2 w-[90px] h-[20px] bg-[#ffcc77] blur-[8px] rounded-full pointer-events-none z-20" />
+
+            {/* Horizontal Light Bar spreading left & right along top border ("water spreading" effect) */}
             <motion.div
-              animate={{ x: [0, -28, 18, -14, 24, 0], y: [0, 30, 55, 38, 18, 0], scale: [1, 1.2, 0.85, 1.15, 0.9, 1], opacity: [0.35, 0.6, 0.3, 0.55, 0.35, 0.35] }}
-              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-              className="absolute left-1/2 -translate-x-1/2 top-0 w-[300px] h-[380px] bg-[#ff4500]/35 blur-[80px] rounded-full pointer-events-none z-0"
+              animate={{ opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#ff8c42] via-[#ff4500] to-transparent pointer-events-none z-30 shadow-[0_0_18px_#ff4500]"
             />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[50px] bg-gradient-to-b from-[#ff4500]/60 via-[#ff4500]/15 to-transparent blur-[20px] pointer-events-none z-10" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[160px] bg-gradient-to-b from-[#ff6b35]/25 to-transparent blur-[50px] pointer-events-none z-0" />
 
             {/* FAQ grid */}
             <div className="relative z-10 p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-0">
-            {[left, right].map((col, colIdx) => (
-              <div key={colIdx} className="flex flex-col">
-                {col.map((item, i) => {
-                  const globalIdx = colIdx * 4 + i;
-                  const isOpen = openIdx === globalIdx;
-                  return (
-                    <motion.div
-                      key={globalIdx}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.05 }}
-                      viewport={{ once: false, margin: '-50px' }}
-                      className={`border-b transition-colors duration-300 ${isOpen ? 'border-[#ff6b35]/40' : 'border-white/[0.06]'}`}
-                    >
-                      <button
-                        onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
-                        className="w-full flex items-center justify-between py-6 text-left gap-4 group"
-                      >
-                        <span className={`text-sm sm:text-base font-semibold uppercase tracking-wider transition-colors duration-300 ${isOpen ? 'text-[#ff6b35]' : 'text-white/80 group-hover:text-white'}`}>
-                          {item.q}
-                        </span>
-                        <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${isOpen ? 'bg-[#ff6b35] border-[#ff6b35] rotate-45' : 'border-white/20 group-hover:border-[#ff6b35]/50'}`}>
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                          </svg>
-                        </span>
-                      </button>
+              {[left, right].map((col, colIdx) => (
+                <div key={colIdx} className="flex flex-col">
+                  {col.map((item, i) => {
+                    const globalIdx = colIdx * 4 + i;
+                    const isOpen = openIdx === globalIdx;
+                    return (
                       <motion.div
-                        initial={false}
-                        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="overflow-hidden"
+                        key={globalIdx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        viewport={{ once: false, margin: '-50px' }}
+                        className={`border-b transition-colors duration-300 ${isOpen ? 'border-[#ff6b35]/40' : 'border-white/[0.06]'}`}
                       >
-                        <p className="text-white/50 text-sm leading-relaxed pb-6 max-w-lg">
-                          {item.a}
-                        </p>
+                        <button
+                          onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
+                          className="w-full flex items-center justify-between py-6 text-left gap-4 group"
+                        >
+                          <span className={`text-sm sm:text-base font-semibold uppercase tracking-wider transition-colors duration-300 ${isOpen ? 'text-[#ff6b35]' : 'text-white/80 group-hover:text-white'}`}>
+                            {item.q}
+                          </span>
+                          <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${isOpen ? 'bg-[#ff6b35] border-[#ff6b35] rotate-45' : 'border-white/20 group-hover:border-[#ff6b35]/50'}`}>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                              <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                            </svg>
+                          </span>
+                        </button>
+                        <motion.div
+                          initial={false}
+                          animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-white/50 text-sm leading-relaxed pb-6 max-w-lg">
+                            {item.a}
+                          </p>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            ))}
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 );
 }
