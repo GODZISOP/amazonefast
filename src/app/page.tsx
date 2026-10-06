@@ -6,6 +6,7 @@ import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RealEarth } from "../components/RealEarth";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
+import SplitText from "../components/SplitText";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -405,10 +406,7 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
             <motion.div
               style={{ height: lineHeight }}
               className="absolute left-[38px] top-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top"
-            >
-              {/* Glowing dot at the tip of the line */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 rounded-full bg-[#ff6b35] shadow-[0_0_20px_8px_rgba(255,107,53,0.8)]"></div>
-            </motion.div>
+            ></motion.div>
 
             {[
               { title: "Amazon FBA Automation", desc: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth." },
@@ -421,30 +419,39 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
             ].map((service, idx) => (
               <motion.div
                 key={idx}
-                initial="hidden"
-                whileHover="visible"
+                initial="dim"
+                whileInView="glowing"
+                viewport={{ margin: "-40% 0px -40% 0px" }}
                 variants={{
-                  hidden: { opacity: 0.5, scale: 0.98 },
-                  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } }
+                  dim: { opacity: 0.5, scale: 0.98 },
+                  glowing: { opacity: 1, scale: 1.03, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
                 className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0 cursor-pointer"
               >
                 {/* Number Circle with Glow */}
                 <motion.div
                   variants={{
-                    hidden: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
-                    visible: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)", transition: { duration: 0.4 } }
+                    dim: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
+                    glowing: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)" }
                   }}
-                  className="relative z-10 shrink-0 w-[76px] h-[76px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-all duration-300"
+                  className="relative z-10 shrink-0 w-[76px] h-[76px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-colors duration-300"
                 >
-                  <span className="text-[#ff6b35] font-bold text-2xl tracking-wide">{String(idx + 1).padStart(2, '0')}</span>
+                  <motion.span 
+                    variants={{
+                      dim: { color: "rgba(255,255,255,0.5)" },
+                      glowing: { color: "rgba(255,107,53,1)" }
+                    }}
+                    className="font-bold text-2xl tracking-wide"
+                  >
+                    {String(idx + 1).padStart(2, '0')}
+                  </motion.span>
                 </motion.div>
 
                 {/* Horizontal connection line */}
                 <motion.div
                   variants={{
-                    hidden: { scaleX: 0, opacity: 0 },
-                    visible: { scaleX: 1, opacity: 1, transition: { duration: 0.4 } }
+                    dim: { scaleX: 0, opacity: 0 },
+                    glowing: { scaleX: 1, opacity: 1 }
                   }}
                   style={{ transformOrigin: "left" }}
                   className="hidden sm:block absolute left-[76px] w-10 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
@@ -453,33 +460,32 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                 {/* Content Box */}
                 <motion.div
                   variants={{
-                    hidden: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
-                    visible: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)", transition: { duration: 0.4 } }
+                    dim: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
+                    glowing: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)" }
                   }}
-                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-8 rounded-[2rem] transition-all duration-500 relative overflow-hidden group"
+                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-8 rounded-[2rem] relative overflow-hidden"
                 >
-
                   {/* Subtle corner decorations like in the image */}
                   <motion.div
-                    variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
-                    className="absolute top-5 left-5 w-5 h-5 border-t-2 border-l-2 transition-colors duration-500"
+                    variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
+                    className="absolute top-5 left-5 w-5 h-5 border-t-2 border-l-2 transition-colors duration-300"
                   ></motion.div>
                   <motion.div
-                    variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
-                    className="absolute bottom-5 right-5 w-5 h-5 border-b-2 border-r-2 transition-colors duration-500"
+                    variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
+                    className="absolute bottom-5 right-5 w-5 h-5 border-b-2 border-r-2 transition-colors duration-300"
                   ></motion.div>
 
                   {/* Orange ambient glow inside box when active */}
                   <motion.div
-                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.6 } } }}
+                    variants={{ dim: { opacity: 0 }, glowing: { opacity: 1 } }}
                     className="absolute -right-20 -bottom-20 w-40 h-40 bg-[#ff6b35]/20 blur-[50px] rounded-full pointer-events-none"
                   ></motion.div>
 
                   <div className="flex items-center gap-4 mb-3 relative z-10">
                     <Sparkles className="text-[#ff6b35]" size={24} />
                     <motion.h3
-                      variants={{ hidden: { color: "#ffffff" }, visible: { color: "#ff6b35" } }}
-                      className="text-2xl sm:text-3xl font-bold uppercase tracking-wide transition-colors duration-500"
+                      variants={{ dim: { color: "#ffffff" }, glowing: { color: "#ff6b35" } }}
+                      className="text-2xl sm:text-3xl font-bold uppercase tracking-wide transition-colors duration-300"
                     >
                       {service.title}
                     </motion.h3>
@@ -512,19 +518,43 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
             ></motion.div>
 
             {[
-              { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false },
-              { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true },
-              { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false }
+              { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false, dir: -1 },
+              { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, dir: 0 },
+              { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, dir: 1 }
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                variants={{ hidden: { opacity: 0, scale: 0.8, y: 30 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } } }}
+                initial={
+                  item.active
+                    ? { opacity: 0, scale: 0.9 }
+                    : { opacity: 0, x: item.dir === -1 ? '100%' : '-100%' }
+                }
+                whileInView={
+                  item.active
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 1, x: 0 }
+                }
+                transition={
+                  item.active
+                    ? { duration: 0.25, ease: 'easeOut' }
+                    : { duration: 0.45, delay: 0.15, ease: [0.22, 1, 0.36, 1] }
+                }
+                viewport={{ once: false, margin: '-80px' }}
                 className={`relative z-10 rounded-[2rem] overflow-hidden group ${item.active ? 'bg-[#ff6b35]' : 'bg-[#0a0a0a] border border-white/[0.05]'} p-8 flex flex-col items-center text-center transition-transform duration-500 hover:-translate-y-2 shadow-2xl`}
               >
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-black/20 relative">
+                {/* Sliding shine for active card */}
+                {item.active && (
+                  <motion.div
+                    initial={{ x: '-100%', opacity: 0 }}
+                    whileInView={{ x: '100%', opacity: [0, 0.6, 0] }}
+                    transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2 }}
+                    className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent z-0 pointer-events-none"
+                  />
+                )}
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-black/20 relative z-10">
                   <img src={item.img} alt="Avatar" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 </div>
-                <p className={`text-sm leading-relaxed font-medium ${item.active ? 'text-white' : 'text-white/60'}`}>{item.text}</p>
+                <p className={`text-sm leading-relaxed font-medium relative z-10 ${item.active ? 'text-white' : 'text-white/60'}`}>{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -532,12 +562,26 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
           {/* Middle Row (Community & Graphic) */}
           <div className="flex flex-col lg:flex-row gap-16 items-center mb-32">
             <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-8 leading-[1.1]">
-                Join the Trusted<br />AmazonFast Community
-              </h2>
-              <p className="text-white/60 text-lg mb-10 max-w-md leading-relaxed">
-                We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.
-              </p>
+              <div className="mb-8">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]"
+                >
+                  Join the Trusted<br />AmazonFast Community
+                </motion.h2>
+              </div>
+              <div className="mb-10 max-w-md">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-white/60 text-lg leading-relaxed"
+                >
+                  We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.
+                </motion.p>
+              </div>
 
               <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500">
                 <div className="w-10 h-10 rounded-xl bg-[#ff6b35] flex items-center justify-center shrink-0 shadow-lg shadow-[#ff6b35]/20">
@@ -689,12 +733,26 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
               className="w-full lg:w-1/2 lg:pl-8"
             >
               {/* Animated Text */}
-              <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-6 leading-tight animate-pulse" style={{ animationDuration: '3s' }}>
-                Your Brand Deserves<br />Safe and Simple Scaling
-              </h2>
-              <p className="text-white/60 text-lg mb-10 max-w-md leading-relaxed">
-                Don't put financial freedom on hold. Partner with AmazonFast and start scaling your eCommerce empire today.
-              </p>
+              <div className="mb-6">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight"
+                >
+                  Your Brand Deserves<br />Safe and Simple Scaling
+                </motion.h2>
+              </div>
+              <div className="mb-10 max-w-md">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-white/60 text-lg leading-relaxed"
+                >
+                  Don't put financial freedom on hold. Partner with AmazonFast and start scaling your eCommerce empire today.
+                </motion.p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-[#ff6b35] hover:bg-[#e85c2b] text-white px-8 py-4 rounded-xl font-semibold transition shadow-lg shadow-[#ff6b35]/20 text-center">
                   Start a Project
@@ -717,10 +775,15 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
 
           {/* Left Text */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
-              Become a <br />
-              <span className="text-[#ff6b35]">Best Seller</span>
-            </h2>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6 flex flex-wrap gap-x-4 items-center"
+            >
+              <span className="text-[clamp(3rem,6vw,4rem)] font-bold text-white leading-tight">Become a</span>
+              <span className="text-[clamp(3rem,6vw,4rem)] font-bold text-[#ff6b35] leading-tight">Best Seller</span>
+            </motion.div>
             <p className="text-white/60 text-lg md:text-xl mb-12 max-w-lg leading-relaxed">
               With a professional set of eyes, your store will work wonders! Connect with our strategists now and make your brand a best-seller.
             </p>
@@ -761,6 +824,155 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQSection />
+
     </div>
   );
+}
+
+function FAQSection() {
+  const [openIdx, setOpenIdx] = React.useState<number | null>(null);
+
+  const faqs = [
+    {
+      q: "What is Amazon FBA and how does AmazonFast help with it?",
+      a: "FBA (Fulfillment by Amazon) means Amazon stores, packs, and ships your products. AmazonFast handles the entire FBA setup — from product sourcing and labeling to shipment creation and inventory management — so your products reach customers fast without you lifting a finger."
+    },
+    {
+      q: "How long does it take to launch a new Amazon store?",
+      a: "A fully optimized Amazon store with listings, A+ content, and PPC campaigns can be launched in as little as 2–4 weeks. Product sourcing and shipping timelines may vary depending on your supplier, but we guide you through every step."
+    },
+    {
+      q: "What is Amazon PPC and do I really need it?",
+      a: "Amazon PPC (Pay-Per-Click) advertising puts your products in front of buyers who are actively searching. Without it, new listings get buried. AmazonFast builds data-driven PPC campaigns that minimize your ACoS while maximizing sales velocity and organic rank."
+    },
+    {
+      q: "How do you find winning products for my brand?",
+      a: "We use a combination of professional tools (Helium 10, Jungle Scout), real market data, and competitor analysis to identify products with high demand, low competition, and strong profit margins — tailored to your budget and niche."
+    },
+    {
+      q: "Can you help if my Amazon account is suspended?",
+      a: "Yes. Our reinstatement team specializes in writing effective Plan of Action (POA) letters and navigating Amazon's appeal process. We have a strong track record of successfully reinstating suspended seller accounts."
+    },
+    {
+      q: "What marketplaces do you support?",
+      a: "We operate across all major Amazon marketplaces — USA, UK, UAE, Canada, Germany, and more. Whether you're launching locally or going global, we have the expertise to scale your brand internationally."
+    },
+    {
+      q: "How do you optimize product listings for more sales?",
+      a: "We combine keyword research, competitor analysis, and conversion-focused copywriting to craft titles, bullet points, descriptions, and A+ content that rank high and convert visitors into buyers."
+    },
+    {
+      q: "How do we get started with AmazonFast?",
+      a: "Simply book a free consultation or fill out our contact form. Within 48 hours, our team will analyze your current situation and deliver a customized growth plan for your Amazon business — completely free."
+    },
+  ];
+
+  const left = faqs.slice(0, 4);
+  const right = faqs.slice(4, 8);
+
+  return (
+    <section className="relative py-28 overflow-hidden bg-[#0a0a0a]">
+      <div className="max-w-[1300px] mx-auto px-6 sm:px-12 relative z-10">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 mb-5">
+            <span className="text-[#ff6b35] text-sm font-semibold tracking-wide">FAQ</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
+            Frequently Asked<br />
+            <span className="text-[#ff6b35]">Questions</span>
+          </h2>
+        </motion.div>
+
+        {/* Glow from ABOVE the box - outside */}
+        <div className="relative">
+          {/* Vertical orange beam from top, flows into box */}
+          <motion.div
+            animate={{ x: [0, 12, -12, 8, -8, 0], scaleX: [1, 1.5, 0.6, 1.3, 0.8, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute left-1/2 -translate-x-1/2 -top-16 w-[3px] h-[120px] bg-gradient-to-b from-transparent via-[#ff6b35] to-[#ff6b35] pointer-events-none z-10"
+          />
+          {/* Top glow blob above box */}
+          <motion.div
+            animate={{ x: [0, 20, -18, 12, -20, 0], scale: [1, 1.2, 0.85, 1.15, 0.9, 1], opacity: [0.7, 1, 0.6, 0.9, 0.7, 0.7] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute left-1/2 -translate-x-1/2 -top-8 w-[100px] h-[120px] bg-[#ff6b35]/80 blur-[40px] rounded-full pointer-events-none z-10"
+          />
+
+          {/* Dark box */}
+          <div className="relative rounded-[2rem] border border-white/[0.06] bg-[#0d0d0d] overflow-hidden">
+            {/* Left side glow line */}
+            <div className="absolute left-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#ff6b35]/60 via-[#ff6b35]/20 to-transparent pointer-events-none z-10" />
+            {/* Right side glow line */}
+            <div className="absolute right-0 top-0 w-[2px] h-full bg-gradient-to-b from-[#ff6b35]/60 via-[#ff6b35]/20 to-transparent pointer-events-none z-10" />
+
+            {/* Inside top glow (continuation of beam flowing in) */}
+            <motion.div
+              animate={{ x: [0, 22, -18, 14, -22, 0], y: [0, 20, 40, 25, 10, 0], scale: [1, 1.15, 0.9, 1.2, 0.95, 1], opacity: [0.75, 1, 0.65, 0.9, 0.7, 0.75] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute left-1/2 -translate-x-1/2 top-0 w-[90px] h-[250px] bg-[#ff6b35]/80 blur-[40px] rounded-full pointer-events-none z-0"
+            />
+            <motion.div
+              animate={{ x: [0, -28, 18, -14, 24, 0], y: [0, 30, 55, 38, 18, 0], scale: [1, 1.2, 0.85, 1.15, 0.9, 1], opacity: [0.35, 0.6, 0.3, 0.55, 0.35, 0.35] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+              className="absolute left-1/2 -translate-x-1/2 top-0 w-[300px] h-[380px] bg-[#ff4500]/35 blur-[80px] rounded-full pointer-events-none z-0"
+            />
+
+            {/* FAQ grid */}
+            <div className="relative z-10 p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-0">
+            {[left, right].map((col, colIdx) => (
+              <div key={colIdx} className="flex flex-col">
+                {col.map((item, i) => {
+                  const globalIdx = colIdx * 4 + i;
+                  const isOpen = openIdx === globalIdx;
+                  return (
+                    <motion.div
+                      key={globalIdx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.05 }}
+                      viewport={{ once: false, margin: '-50px' }}
+                      className={`border-b transition-colors duration-300 ${isOpen ? 'border-[#ff6b35]/40' : 'border-white/[0.06]'}`}
+                    >
+                      <button
+                        onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
+                        className="w-full flex items-center justify-between py-6 text-left gap-4 group"
+                      >
+                        <span className={`text-sm sm:text-base font-semibold uppercase tracking-wider transition-colors duration-300 ${isOpen ? 'text-[#ff6b35]' : 'text-white/80 group-hover:text-white'}`}>
+                          {item.q}
+                        </span>
+                        <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${isOpen ? 'bg-[#ff6b35] border-[#ff6b35] rotate-45' : 'border-white/20 group-hover:border-[#ff6b35]/50'}`}>
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                          </svg>
+                        </span>
+                      </button>
+                      <motion.div
+                        initial={false}
+                        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-white/50 text-sm leading-relaxed pb-6 max-w-lg">
+                          {item.a}
+                        </p>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 }

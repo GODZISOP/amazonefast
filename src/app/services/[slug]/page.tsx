@@ -23,7 +23,7 @@ const serviceDetails: Record<string, any> = {
     title: "Amazon PPC Advertising",
     tagline: "Maximize ROAS and Dominate Your Niche",
     description: "Stop wasting money on ineffective ad campaigns. Our Amazon PPC experts use advanced data analytics, keyword harvesting, and bidding algorithms to lower your ACoS, increase your organic ranking, and maximize your profitability.",
-    image: "/srv_amazon_ppc.jpg",
+    image: "/srv_amazon_ppc_new.png",
     benefits: [
       "In-Depth Keyword & Competitor Research",
       "Campaign Setup (Sponsored Products, Brands, Display)",

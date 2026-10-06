@@ -1,11 +1,10 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 
-export const metadata = {
-  title: "Contact Us | AmazonFast",
-  description: "Get in touch with Amazon Fast Services for expert Amazon scaling and marketing.",
-};
+import { motion } from "framer-motion";
 
 export default function ContactUs() {
   return (
@@ -23,9 +22,16 @@ export default function ContactUs() {
               <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 mb-6">
                 <span className="text-[#ff6b35] text-sm font-semibold tracking-wide">GET IN TOUCH</span>
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight mb-6">
-                Let's Scale Your Brand Together
-              </h1>
+              <div className="mb-6">
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-[clamp(2.5rem,6vw,3.75rem)] font-bold text-white leading-[1.1]"
+                >
+                  Let's Scale Your Brand Together
+                </motion.h1>
+              </div>
               <p className="text-white/60 text-lg leading-relaxed max-w-lg">
                 Ready to dominate your niche on Amazon? Contact our experts today to discuss how we can automate your operations, boost your sales, and build a highly profitable e-commerce empire.
               </p>
@@ -67,29 +73,58 @@ export default function ContactUs() {
             </div>
           </div>
 
-          {/* Right: Embed Calendly / Form */}
+          {/* Right: Contact Form & Calendly */}
           <div className="bg-[#111] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff6b35]/20 blur-[60px] rounded-full pointer-events-none"></div>
-            <h3 className="text-2xl font-bold text-white mb-6">Schedule a Meeting</h3>
-            <p className="text-white/60 mb-8">
-              Pick a time that works best for you and talk directly to our experts via Google Meet or Zoom.
-            </p>
             
+            <h3 className="text-2xl font-bold text-white mb-2">Send us a Message</h3>
+            <p className="text-white/50 mb-8 text-sm">We'll get back to you within 24 hours.</p>
+            
+            <form className="flex flex-col gap-4 mb-8" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm text-white/70 font-medium px-1">First Name</label>
+                  <input type="text" placeholder="John" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm text-white/70 font-medium px-1">Last Name</label>
+                  <input type="text" placeholder="Doe" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm text-white/70 font-medium px-1">Email Address</label>
+                <input type="email" placeholder="john@example.com" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+              </div>
+              
+              <div className="flex flex-col gap-1.5">
+                <label className="text-sm text-white/70 font-medium px-1">Message</label>
+                <textarea rows={4} placeholder="How can we help you scale on Amazon?" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors resize-none"></textarea>
+              </div>
+              
+              <button type="submit" className="mt-2 w-full bg-[#ff6b35] hover:bg-[#e85c2b] text-white py-4 rounded-xl font-bold transition-colors shadow-[0_0_15px_rgba(255,107,53,0.3)] hover:shadow-[0_0_25px_rgba(255,107,53,0.5)]">
+                Send Message
+              </button>
+            </form>
+            
+            <div className="relative flex items-center py-2 mb-6">
+              <div className="flex-grow border-t border-white/10"></div>
+              <span className="shrink-0 px-4 text-white/40 text-sm font-medium">OR</span>
+              <div className="flex-grow border-t border-white/10"></div>
+            </div>
+            
+            <h3 className="text-lg font-bold text-white mb-4 text-center">Schedule a Video Meeting</h3>
             <a 
               href="https://calendly.com/amazonfastservice1/new-meeting-1" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group relative w-full flex items-center justify-center gap-3 bg-[#ff6b35] hover:bg-[#e85c2b] text-white py-5 px-8 rounded-2xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(255,107,53,0.3)] hover:shadow-[0_0_30px_rgba(255,107,53,0.5)] overflow-hidden"
+              className="group relative w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-200 text-black py-3.5 px-8 rounded-xl font-bold transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] overflow-hidden"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Open Calendly Booking
-                <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </a>
-            
-            <div className="mt-8 pt-8 border-t border-white/10 text-center">
-              <p className="text-white/40 text-sm">We typically respond within 24 hours.</p>
-            </div>
           </div>
 
         </div>
