@@ -1,94 +1,76 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-[#0a0a0a] pt-24 pb-8 px-6 sm:px-12 border-t border-white/[0.05]">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+    <footer className="relative w-full bg-[#0a0a0a] overflow-hidden flex flex-col justify-between pt-16">
+      
+      {/* Background Gradient matching the image */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-[#ff6b35]/40 to-[#ff6b35] pointer-events-none z-0"></div>
+
+      <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
           
-          {/* Brand */}
-          <div className="col-span-1 lg:col-span-5 pr-0 lg:pr-12">
-            <Link href="/" className="inline-block mb-6">
-              <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-12 w-auto" />
-            </Link>
-            <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-sm">
-              With years of expertise, Amazon Fast Services has established a solid reputation as one of the most respected Amazon marketing agencies in the United States.
-            </p>
-            <div className="flex gap-3">
-              {/* Facebook */}
-              <Link href="https://www.facebook.com/AmazonFastServices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#1877F2] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></Link>
-              {/* Instagram */}
-              <Link href="https://www.instagram.com/amazonfastservices.pk/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#E4405F] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></Link>
-              {/* LinkedIn */}
-              <Link href="https://pk.linkedin.com/company/amazonfastservices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-[#0A66C2] hover:border-transparent hover:text-white transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></Link>
-              {/* TikTok */}
-              <Link href="https://www.tiktok.com/@amazonfastservices" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white hover:text-black transition"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-3.328.026c0 1.258.53 2.457 1.417 3.344C6.15 21.67 7.348 22 8.606 22a8.653 8.653 0 0 0 8.606-8.606v-3.791c1.336 1.096 3.031 1.737 4.788 1.76V8.049a4.877 4.877 0 0 1-2.411-1.363z"/></svg></Link>
+          {/* Column 1: Quick Links */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-medium mb-2 opacity-80">Quick Links</h4>
+            <Link href="/" className="text-white/60 hover:text-white transition text-sm">Home</Link>
+            <Link href="/about" className="text-white/60 hover:text-white transition text-sm">About Us</Link>
+            <Link href="/blog" className="text-white/60 hover:text-white transition text-sm">Blogs</Link>
+            <Link href="/contact-us" className="text-white/60 hover:text-white transition text-sm">Contact Us</Link>
+          </div>
+
+          {/* Column 2: Legal Links */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-medium mb-2 opacity-80">Legal Links</h4>
+            <Link href="/terms" className="text-white/60 hover:text-white transition text-sm">Terms Of Service</Link>
+            <Link href="/privacy-policy" className="text-white/60 hover:text-white transition text-sm">Privacy Policy</Link>
+          </div>
+
+          {/* Column 3: Stay Connect */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-medium mb-2 opacity-80">Stay Connect</h4>
+            <div className="flex gap-4 items-center">
+              <Link href="https://twitter.com" target="_blank" className="text-white/60 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </Link>
+              <Link href="https://pk.linkedin.com/company/amazonfastservices" target="_blank" className="text-white/60 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </Link>
+              <Link href="mailto:info@amazonfastservices.com" className="text-white/60 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </Link>
             </div>
           </div>
 
-          {/* Services Links */}
-          <div className="col-span-1 lg:col-span-3">
-            <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Our Services</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { name: "Amazon FBA Automation", slug: "amazon-fba-automation" },
-                { name: "Amazon PPC Advertising", slug: "amazon-ppc-advertising" },
-                { name: "Product Hunting & Sourcing", slug: "product-hunting" },
-                { name: "Amazon Store Creation", slug: "store-creation" },
-                { name: "A+ Content & EBC", slug: "a-content-ebc" },
-                { name: "Listing SEO & Optimization", slug: "listing-seo" },
-                { name: "Account Reinstatement", slug: "account-reinstatement" }
-              ].map(link => (
-                <li key={link.slug}><Link href={`/services/${link.slug}`} className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link.name}</Link></li>
-              ))}
-            </ul>
+          {/* Column 4: Newsletter */}
+          <div className="flex flex-col gap-4">
+            <h4 className="text-white font-medium mb-2 opacity-80">Newsletter</h4>
+            <p className="text-white font-medium text-lg leading-snug">
+              You Read This Far, Might As Well Sign Up.
+            </p>
+            <div className="flex w-full mt-2 bg-black/20 rounded-md overflow-hidden border border-white/10 backdrop-blur-sm">
+              <input 
+                type="email" 
+                placeholder="sample@gmail.com" 
+                className="bg-transparent text-white placeholder-white/30 px-4 py-3 outline-none w-full text-sm"
+              />
+              <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 text-sm font-medium transition whitespace-nowrap border-l border-white/10">
+                Submit
+              </button>
+            </div>
           </div>
-
-          {/* Pages Links */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Pages</h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                { name: "Home", href: "/" },
-                { name: "About Us", href: "/about" },
-                { name: "Contact Us", href: "/contact-us" },
-                { name: "Privacy Policy", href: "/privacy-policy" }
-              ].map(link => (
-                <li key={link.name}><Link href={link.href} className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link.name}</Link></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="col-span-1 lg:col-span-2">
-            <h4 className="text-white font-medium mb-6 uppercase tracking-wider text-xs">Contact Us</h4>
-            <ul className="flex flex-col gap-4">
-              <li>
-                <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b35] mt-1.5 shrink-0"></span> +92-332-2568950
-                </a>
-              </li>
-              <li>
-                <a href="mailto:info@amazonfastservices.com" className="text-white/50 hover:text-white text-sm transition flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#ff6b35] mt-1.5 shrink-0"></span> info@amazonfastservices.com
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-        </div>
-
-        <div className="border-t border-white/[0.05] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/30 text-xs font-medium tracking-wide uppercase">
-            &copy; {new Date().getFullYear()} Amazon Fast Services. All rights reserved.
-          </p>
-          <p className="text-white/30 text-xs font-medium tracking-wide uppercase">
-            Powered By <span className="text-white/60">X One Hub</span>
-          </p>
         </div>
       </div>
+
+      {/* Massive Bottom Text */}
+      <div className="relative z-10 w-full flex justify-center items-end mt-auto pointer-events-none pb-4">
+        <h1 className="text-[18vw] leading-[0.75] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/40 drop-shadow-2xl select-none">
+          AmazonFast
+        </h1>
+      </div>
+      
     </footer>
   );
 }

@@ -205,7 +205,7 @@ export default function Home() {
           >
             {/* Dim background track connecting all nodes */}
             <motion.path
-              d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
+              d="M 20 60 L 30 75 L 70 85 L 75 63"
               fill="none"
               stroke="rgba(255,107,53,0.2)"
               strokeWidth="1"
@@ -215,7 +215,7 @@ export default function Home() {
             {/* Bright moving pulse connecting them endlessly */}
             <motion.path
 
-d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
+d="M 20 60 L 30 75 L 70 85 L 75 63"
               fill="none"
               stroke="#ff6b35"
               strokeWidth="2.5"
