@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-geist-sans: "Inter", sans-serif;
+  --font-geist-mono: monospace;
+  --font-instrument: "Instrument Serif", serif;
 }
 
 @theme inline {
