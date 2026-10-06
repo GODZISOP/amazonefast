@@ -62,7 +62,7 @@ const serviceDetails: Record<string, any> = {
     title: "A+ Content & EBC",
     tagline: "Boost Conversions with Premium Listing Designs",
     description: "Enhanced Brand Content (A+ Content) increases conversion rates by up to 20%. Our design team crafts compelling, benefit-driven infographics, lifestyle images, and comparison charts that turn browsers into buyers.",
-    image: "/srv_a_plus_content.jpg",
+    image: "/srv_a_plus_content_new.jpg",
     benefits: [
       "High-Converting Graphic Design",
       "SEO-Optimized Image Alt Text",
@@ -88,7 +88,7 @@ const serviceDetails: Record<string, any> = {
     title: "Account Reinstatement",
     tagline: "Professional Appeals & Reinstatement Plans",
     description: "A suspended Amazon account can be devastating to your business. Our team of policy experts crafts tailored Plans of Action (POA) and handles all communication with Amazon to get your account reactivated quickly and securely.",
-    image: "/srv_fba_automation.jpg",
+    image: "/srv_account_reinstatement.png",
     benefits: [
       "In-Depth Suspension Analysis",
       "Customized Plan of Action (POA)",
