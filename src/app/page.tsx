@@ -417,7 +417,6 @@ d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
               { title: "Amazon Store Creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
               { title: "A+ Content & EBC", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
               { title: "Listing SEO & Optimization", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
-              { title: "Shopify Dropshipping", desc: "End-to-end Shopify store development and winning product research to diversify your eCommerce income." },
               { title: "Account Reinstatement", desc: "Professional appeal services and tailored plans of action to recover suspended seller accounts securely." }
             ].map((service, idx) => (
               <motion.div

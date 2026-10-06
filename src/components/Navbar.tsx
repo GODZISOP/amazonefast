@@ -12,7 +12,6 @@ export const servicesList = [
   { name: "Amazon Store Creation", slug: "store-creation" },
   { name: "A+ Content & EBC", slug: "a-content-ebc" },
   { name: "Listing SEO & Optimization", slug: "listing-seo" },
-  { name: "Shopify Dropshipping", slug: "shopify-dropshipping" },
   { name: "Account Reinstatement", slug: "account-reinstatement" }
 ];
 

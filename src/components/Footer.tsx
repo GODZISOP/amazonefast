@@ -39,7 +39,6 @@ export default function Footer() {
                 { name: "Amazon Store Creation", slug: "store-creation" },
                 { name: "A+ Content & EBC", slug: "a-content-ebc" },
                 { name: "Listing SEO & Optimization", slug: "listing-seo" },
-                { name: "Shopify Dropshipping", slug: "shopify-dropshipping" },
                 { name: "Account Reinstatement", slug: "account-reinstatement" }
               ].map(link => (
                 <li key={link.slug}><Link href={`/services/${link.slug}`} className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link.name}</Link></li>
