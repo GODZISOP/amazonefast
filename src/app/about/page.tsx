@@ -81,11 +81,17 @@ export default function AboutPage() {
         </div>
 
         {/* CTA */}
-        <div className="bg-gradient-to-r from-[#ff6b35] to-[#e85c2b] rounded-3xl p-12 text-center flex flex-col items-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Scale?</h2>
-          <p className="text-white/90 text-lg mb-8 max-w-xl">
-            Let's discuss how we can skyrocket your Amazon sales and automate your business operations.
-          </p>
+        <div className="relative overflow-hidden rounded-3xl p-12 text-center flex flex-col items-center shadow-[0_20px_50px_rgba(255,107,53,0.3)]">
+          {/* Rich Mesh-like Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#991b00] via-[#ff6b35] to-[#ffb347] z-0"></div>
+          <div className="absolute -top-[50%] -right-[20%] w-[80%] h-[150%] bg-gradient-to-bl from-[#ffaa00]/50 to-transparent blur-[80px] rounded-full z-0 pointer-events-none transform rotate-12"></div>
+          <div className="absolute -bottom-[50%] -left-[20%] w-[80%] h-[150%] bg-gradient-to-tr from-[#661200]/60 to-transparent blur-[80px] rounded-full z-0 pointer-events-none transform -rotate-12"></div>
+
+          <div className="relative z-10 flex flex-col items-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Scale?</h2>
+            <p className="text-white/95 text-lg md:text-xl mb-8 max-w-xl drop-shadow-md font-medium">
+              Let's discuss how we can skyrocket your Amazon sales and automate your business operations.
+            </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
               Book a Call
