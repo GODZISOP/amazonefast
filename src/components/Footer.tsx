@@ -72,7 +72,7 @@ export default function Footer() {
         <h1 className="text-[13vw] whitespace-nowrap leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] drop-shadow-[0_0_30px_rgba(255,107,53,0.5)] select-none">
           AmazonFast
         </h1>
-        <h1 className="text-[9vw] whitespace-nowrap leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/90 to-white/30 drop-shadow-2xl select-none -mt-2 md:-mt-6">
+        <h1 className="text-[9vw] whitespace-nowrap leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] drop-shadow-[0_0_30px_rgba(255,107,53,0.5)] select-none mt-2 md:mt-4">
           SERVICES
         </h1>
       </div>
