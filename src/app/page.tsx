@@ -116,37 +116,25 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.3 } } // Slower stagger to reveal word by word
+              hidden: { backgroundPosition: "0% 50%" },
+              visible: { 
+                backgroundPosition: ["0% 50%", "200% 50%"],
+                transition: { 
+                  staggerChildren: 0.3,
+                  backgroundPosition: { duration: 6, ease: "linear", repeat: Infinity }
+                } 
+              }
             }}
-            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight text-shadow-sm mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2"
+            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-white bg-[length:200%_auto]"
           >
-            {["Scale", "Your"].map((word, i) => (
+            {["Scale", "Your", "Amazon", "Brand"].map((word, i) => (
               <motion.span key={i} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
                 {word}
               </motion.span>
             ))}
-            <motion.span 
-              initial={{ opacity: 0, y: 30, scale: 0.9, backgroundPosition: "0% 50%" }}
-              animate={{ 
-                opacity: 1, 
-                y: 0, 
-                scale: 1, 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
-              }}
-              transition={{ 
-                opacity: { duration: 0.8, ease: "easeOut", delay: 0.6 },
-                y: { duration: 0.8, ease: "easeOut", delay: 0.6 },
-                scale: { duration: 0.8, ease: "easeOut", delay: 0.6 },
-                backgroundPosition: { duration: 4, ease: "linear", repeat: Infinity }
-              }}
-              className="bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-white bg-[length:200%_auto]"
-            >
-              Amazon Brand
-            </motion.span>
             <div className="w-full h-0"></div>
             {["Without", "Borders"].map((word, i) => (
-              <motion.span key={i} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
+              <motion.span key={`l2-${i}`} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
                 {word}
               </motion.span>
             ))}
