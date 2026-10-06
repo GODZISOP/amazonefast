@@ -19,8 +19,8 @@ const serviceDetails: Record<string, any> = {
       "Daily Account Health Monitoring"
     ]
   },
-  "amazon-ppc": {
-    title: "Amazon PPC Management",
+  "amazon-ppc-advertising": {
+    title: "Amazon PPC Advertising",
     tagline: "Maximize ROAS and Dominate Your Niche",
     description: "Stop wasting money on ineffective ad campaigns. Our Amazon PPC experts use advanced data analytics, keyword harvesting, and bidding algorithms to lower your ACoS, increase your organic ranking, and maximize your profitability.",
     image: "/srv_amazon_ppc.jpg",
@@ -32,11 +32,11 @@ const serviceDetails: Record<string, any> = {
       "Detailed Weekly Performance Reports"
     ]
   },
-  "amazon-product-hunting": {
-    title: "Amazon Product Hunting",
+  "product-hunting": {
+    title: "Product Hunting & Sourcing",
     tagline: "Find High-Demand, Low-Competition Winners",
     description: "The secret to Amazon success starts with the right product. We use premium tools and proprietary strategies to identify products with high search volume, strong margins, and low competition to ensure your launch is a massive success.",
-    image: "/srv_product_hunting_v2_1791215473466.jpg",
+    image: "/srv_product_hunting.jpg",
     benefits: [
       "Data-Backed Market Analysis",
       "Competitor Weakness Identification",
@@ -45,11 +45,11 @@ const serviceDetails: Record<string, any> = {
       "Supplier Sourcing Reports"
     ]
   },
-  "amazon-store-creation": {
+  "store-creation": {
     title: "Amazon Store Creation",
     tagline: "Build a Premium Brand Experience",
-    description: "Transform your Amazon presence with a highly converted, custom-designed Amazon Storefront. We create visually stunning storefronts that tell your brand story, cross-sell your catalog, and increase average order value.",
-    image: "/section2-bg-wide.jpg",
+    description: "Transform your Amazon presence with a highly converting, custom-designed Amazon Storefront. We create visually stunning storefronts that tell your brand story, cross-sell your catalog, and increase average order value.",
+    image: "/srv_store_creation.jpg",
     benefits: [
       "Custom Graphic Design & Layouts",
       "Brand Story Integration",
@@ -59,10 +59,10 @@ const serviceDetails: Record<string, any> = {
     ]
   },
   "a-content-ebc": {
-    title: "A+ Content / EBC",
+    title: "A+ Content & EBC",
     tagline: "Boost Conversions with Premium Listing Designs",
     description: "Enhanced Brand Content (A+ Content) increases conversion rates by up to 20%. Our design team crafts compelling, benefit-driven infographics, lifestyle images, and comparison charts that turn browsers into buyers.",
-    image: "/srv_a_plus_content_v2_1791214962821.jpg",
+    image: "/srv_a_plus_content.jpg",
     benefits: [
       "High-Converting Graphic Design",
       "SEO-Optimized Image Alt Text",
@@ -71,17 +71,30 @@ const serviceDetails: Record<string, any> = {
       "A/B Testing Support"
     ]
   },
-  "shopify-dropshipping": {
-    title: "Shopify Dropshipping",
-    tagline: "Your Own Highly Profitable E-Commerce Brand",
-    description: "Expand beyond Amazon with a custom Shopify dropshipping store. We build high-converting websites, source winning products, and manage Facebook/TikTok ad campaigns to drive massive traffic and sales.",
-    image: "/srv_shopify_dropshipping.jpg",
+  "listing-seo": {
+    title: "Listing SEO & Optimization",
+    tagline: "Rank Higher, Sell Faster",
+    description: "Without visibility, even the best product won't sell. We strategically optimize your product titles, bullet points, backend search terms, and descriptions to ensure maximum visibility on Amazon's A9 search algorithm.",
+    image: "/srv_listing_seo.jpg",
     benefits: [
-      "Premium Premium Theme Customization",
-      "Winning Product Integration",
-      "Payment Gateway Setup",
-      "Social Media Ad Strategies",
-      "Conversion Rate Optimization (CRO)"
+      "Comprehensive Keyword Research",
+      "SEO-Optimized Titles & Bullets",
+      "Backend Search Term Optimization",
+      "HTML Formatted Product Descriptions",
+      "Index Checking & Ranking Strategy"
+    ]
+  },
+  "account-reinstatement": {
+    title: "Account Reinstatement",
+    tagline: "Professional Appeals & Reinstatement Plans",
+    description: "A suspended Amazon account can be devastating to your business. Our team of policy experts crafts tailored Plans of Action (POA) and handles all communication with Amazon to get your account reactivated quickly and securely.",
+    image: "/srv_reinstatement.jpg",
+    benefits: [
+      "In-Depth Suspension Analysis",
+      "Customized Plan of Action (POA)",
+      "Direct Communication with Amazon",
+      "Account Health Monitoring",
+      "Future Suspension Prevention Strategies"
     ]
   }
 };

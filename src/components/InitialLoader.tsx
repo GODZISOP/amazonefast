@@ -6,14 +6,25 @@ import Image from "next/image";
 
 export default function InitialLoader() {
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
+    // Check if loader has already been shown in this session
+    const hasLoaded = sessionStorage.getItem("hasLoaded");
+    if (hasLoaded) {
+      setIsLoading(false);
+      return;
+    }
+    
+    // If not loaded, we should render the loader
+    setShouldRender(true);
     // Lock scrolling while loading
     document.body.style.overflow = "hidden";
     
     // Simulate loading time (e.g., waiting for assets)
     const timer = setTimeout(() => {
       setIsLoading(false);
+      sessionStorage.setItem("hasLoaded", "true");
       document.body.style.overflow = "auto";
     }, 2000); // 2 seconds delay before doors open
 
@@ -23,9 +34,11 @@ export default function InitialLoader() {
     };
   }, []);
 
+  if (!shouldRender && !isLoading) return null;
+
   return (
     <AnimatePresence>
-      {isLoading && (
+      {isLoading && shouldRender && (
         <motion.div
           className="fixed inset-0 z-[99999] flex pointer-events-none"
           initial={{ opacity: 1 }}
