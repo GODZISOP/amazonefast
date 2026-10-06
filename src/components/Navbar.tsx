@@ -51,7 +51,7 @@ export default function Navbar() {
         </div>
 
         <Link href="/privacy-policy" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Privacy Policy</Link>
-        <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" className="bg-[#ff6b35] text-white hover:bg-[#e85c2b] px-6 py-2 rounded-full text-sm font-medium transition ml-2">Contact Us</Link>
+        <Link href="/contact-us" className="bg-[#ff6b35] text-white hover:bg-[#e85c2b] px-6 py-2 rounded-full text-sm font-medium transition ml-2">Contact Us</Link>
       </nav>
 
       {/* Right Actions */}
@@ -75,7 +75,7 @@ export default function Navbar() {
         className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
       >
         <div className="flex flex-col p-8 gap-8 mt-4 overflow-y-auto">
-          {[{name: 'Home', href: '/'}, {name: 'About', href: '/about'}, {name: 'Privacy Policy', href: '/privacy-policy'}, {name: 'Contact Us', href: 'https://calendly.com/amazonfastservice1/new-meeting-1'}].map((item, i) => (
+          {[{name: 'Home', href: '/'}, {name: 'About', href: '/about'}, {name: 'Privacy Policy', href: '/privacy-policy'}, {name: 'Contact Us', href: '/contact-us'}].map((item, i) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, y: 20 }}
@@ -130,7 +130,7 @@ export default function Navbar() {
           transition={{ delay: 0.4 }}
           className="mt-auto p-8 border-t border-white/10 mb-4"
         >
-          <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
+          <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
             Book a Meeting
           </Link>
         </motion.div>

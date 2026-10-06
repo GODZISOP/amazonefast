@@ -36,7 +36,7 @@ const serviceDetails: Record<string, any> = {
     title: "Product Hunting & Sourcing",
     tagline: "Find High-Demand, Low-Competition Winners",
     description: "The secret to Amazon success starts with the right product. We use premium tools and proprietary strategies to identify products with high search volume, strong margins, and low competition to ensure your launch is a massive success.",
-    image: "/srv_product_hunting.jpg",
+    image: "/srv_product_hunting_v2_1791215473466.jpg",
     benefits: [
       "Data-Backed Market Analysis",
       "Competitor Weakness Identification",
@@ -49,7 +49,7 @@ const serviceDetails: Record<string, any> = {
     title: "Amazon Store Creation",
     tagline: "Build a Premium Brand Experience",
     description: "Transform your Amazon presence with a highly converting, custom-designed Amazon Storefront. We create visually stunning storefronts that tell your brand story, cross-sell your catalog, and increase average order value.",
-    image: "/srv_store_creation.jpg",
+    image: "/srv_a_plus_content_v2_1791214962821.jpg",
     benefits: [
       "Custom Graphic Design & Layouts",
       "Brand Story Integration",
@@ -75,7 +75,7 @@ const serviceDetails: Record<string, any> = {
     title: "Listing SEO & Optimization",
     tagline: "Rank Higher, Sell Faster",
     description: "Without visibility, even the best product won't sell. We strategically optimize your product titles, bullet points, backend search terms, and descriptions to ensure maximum visibility on Amazon's A9 search algorithm.",
-    image: "/srv_listing_seo.jpg",
+    image: "/srv_a_plus_content.jpg",
     benefits: [
       "Comprehensive Keyword Research",
       "SEO-Optimized Titles & Bullets",
@@ -88,7 +88,7 @@ const serviceDetails: Record<string, any> = {
     title: "Account Reinstatement",
     tagline: "Professional Appeals & Reinstatement Plans",
     description: "A suspended Amazon account can be devastating to your business. Our team of policy experts crafts tailored Plans of Action (POA) and handles all communication with Amazon to get your account reactivated quickly and securely.",
-    image: "/srv_reinstatement.jpg",
+    image: "/srv_fba_automation.jpg",
     benefits: [
       "In-Depth Suspension Analysis",
       "Customized Plan of Action (POA)",

@@ -53,6 +53,7 @@ export default function Footer() {
               {[
                 { name: "Home", href: "/" },
                 { name: "About Us", href: "/about" },
+                { name: "Contact Us", href: "/contact-us" },
                 { name: "Privacy Policy", href: "/privacy-policy" }
               ].map(link => (
                 <li key={link.name}><Link href={link.href} className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link.name}</Link></li>
