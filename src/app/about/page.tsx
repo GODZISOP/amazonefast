@@ -86,10 +86,16 @@ export default function AboutPage() {
           <p className="text-white/90 text-lg mb-8 max-w-xl">
             Let's discuss how we can skyrocket your Amazon sales and automate your business operations.
           </p>
-          <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
-            Book a Free Consultation
-            <ArrowUpRight size={20} />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
+              Book a Call
+              <ArrowUpRight size={20} />
+            </Link>
+            <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]">
+              WhatsApp Message
+              <ArrowUpRight size={20} />
+            </Link>
+          </div>
         </div>
 
       </div>

@@ -165,7 +165,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
           >
-            <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold text-[15px] hover:bg-gray-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+            <Link href="/about" className="bg-white text-black px-8 py-4 rounded-full font-bold text-[15px] hover:bg-gray-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.4)] inline-block">
               Start Scaling Today
             </Link>
           </motion.div>
@@ -393,10 +393,10 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                 ))}
               </p>
             </motion.div>
-            <button className="flex items-center gap-4 px-8 py-4 rounded-full bg-white text-black hover:bg-[#ff6b35] hover:text-white transition-colors duration-300 w-fit">
+            <Link href="/services" className="flex items-center gap-4 px-8 py-4 rounded-full bg-white text-black hover:bg-[#ff6b35] hover:text-white transition-colors duration-300 w-fit group">
               <span className="font-semibold">View All Services</span>
-              <ArrowUpRight size={20} />
-            </button>
+              <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform" />
+            </Link>
           </div>
 
           <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
@@ -747,12 +747,12 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                 </motion.p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-[#ff6b35] hover:bg-[#e85c2b] text-white px-8 py-4 rounded-xl font-semibold transition shadow-lg shadow-[#ff6b35]/20 text-center">
+                <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] hover:bg-[#1ebd57] text-white px-8 py-4 rounded-xl font-semibold transition shadow-lg shadow-[#25D366]/20 text-center inline-block">
                   Start a Project
-                </button>
-                <button className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-xl font-semibold transition text-center">
+                </Link>
+                <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-xl font-semibold transition text-center inline-block">
                   Book Consultation
-                </button>
+                </Link>
               </div>
             </motion.div>
 
