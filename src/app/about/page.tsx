@@ -102,6 +102,7 @@ export default function AboutPage() {
               <ArrowUpRight size={20} />
             </Link>
           </div>
+          </div>
         </div>
 
       </div>
