@@ -26,15 +26,15 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages, isLoading]);
 
-  const handleSend = async (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent, textOverride?: string) => {
     e?.preventDefault();
-    if (!input.trim() || isLoading) return;
+    const textToSend = textOverride || input.trim();
+    if (!textToSend || isLoading) return;
 
-    const userMessage = input.trim();
-    setInput("");
+    if (!textOverride) setInput("");
     
     // Add user message to state
-    const newMessages: Message[] = [...messages, { role: "user", content: userMessage }];
+    const newMessages: Message[] = [...messages, { role: "user", content: textToSend }];
     setMessages(newMessages);
     setIsLoading(true);
 
@@ -108,6 +108,21 @@ export default function Chatbot() {
                   </div>
                 </div>
               ))}
+              
+              {/* Quick Action Chips (Only show at the start) */}
+              {messages.length === 1 && !isLoading && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {["What are your prices?", "How does FBA Automation work?", "Do you manage PPC?"].map((chip) => (
+                    <button
+                      key={chip}
+                      onClick={() => handleSend(undefined, chip)}
+                      className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 px-3 py-1.5 rounded-full transition-colors"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-white/10 rounded-2xl rounded-tl-sm px-4 py-4 flex gap-1.5 items-center">
