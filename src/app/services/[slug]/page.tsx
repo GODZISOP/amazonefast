@@ -75,7 +75,7 @@ const serviceDetails: Record<string, any> = {
     title: "Listing SEO & Optimization",
     tagline: "Rank Higher, Sell Faster",
     description: "Without visibility, even the best product won't sell. We strategically optimize your product titles, bullet points, backend search terms, and descriptions to ensure maximum visibility on Amazon's A9 search algorithm.",
-    image: "/srv_a_plus_content.jpg",
+    image: "/srv_listing_seo_new.png",
     benefits: [
       "Comprehensive Keyword Research",
       "SEO-Optimized Titles & Bullets",
