@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: "AmazonFast",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo.png",
         width: 1200,
         height: 675,
         alt: "AmazonFast - Expert Amazon Scaling & Marketing",
@@ -23,12 +23,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AmazonFast | Expert Amazon Scaling & Marketing",
     description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
-    images: ["/og-image.jpg"],
+    images: ["/logo.png"],
   },
 };
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import InitialLoader from "@/components/InitialLoader";
 import Chatbot from "@/components/Chatbot";
 
 export default function RootLayout({
@@ -47,6 +48,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a]">
+        <InitialLoader />
         <Navbar />
         {children}
         <Footer />
