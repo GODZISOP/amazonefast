@@ -15,7 +15,7 @@ export default function InitialLoader() {
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = "auto";
-    }, 2000); // 2 seconds delay before doors open
+    }, 500); // 0.5 seconds delay before doors open
 
     return () => {
       clearTimeout(timer);
