@@ -10,7 +10,7 @@ import AnimatedGraphSection from "../components/AnimatedGraphSection";
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
-      
+
       <style>{`
         @keyframes drift-up {
           0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
@@ -70,19 +70,19 @@ export default function Home() {
       `}</style>
 
       {/* Hero Section Container */}
-      <section 
+      <section
         className="relative w-full min-h-[100vh] flex flex-col overflow-hidden bg-black perspective-[1000px]"
         onMouseMove={handleMouseMove}
       >
-        
+
         {/* Starry Space Background */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-black to-black"></div>
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/stardust.png')" }}></div>
 
         {/* Animated Moving Stars (White & Orange) */}
         {stars.map((star) => (
-          <div 
-            key={star.id} 
+          <div
+            key={star.id}
             className="moving-star"
             style={{
               width: star.size,
@@ -98,12 +98,12 @@ export default function Home() {
 
         {/* Background Image requested by user */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-[#3a0d00] to-black">
-          <Image 
-            src="/image copy.png" 
-            alt="Hero Background" 
+          <Image
+            src="/image copy.png"
+            alt="Hero Background"
             fill
             priority
-            className="object-cover object-bottom opacity-90 mix-blend-screen" 
+            className="object-cover object-bottom opacity-90 mix-blend-screen"
           />
           {/* Subtle gradient overlay to ensure text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a]"></div>
@@ -111,22 +111,22 @@ export default function Home() {
 
         {/* Main Content Layout (Center/Lower) */}
         <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center">
-          
-          <motion.h1 
+
+          <motion.h1
             initial="hidden"
             animate="visible"
             variants={{
               hidden: {},
-              visible: { 
-                transition: { 
+              visible: {
+                transition: {
                   staggerChildren: 0.3
-                } 
+                }
               }
             }}
             className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 text-white"
           >
             {/* First Line with Gradient Animation */}
-            <motion.span 
+            <motion.span
               initial={{ backgroundPosition: "0% 50%" }}
               animate={{ backgroundPosition: ["0% 50%", "200% 50%"] }}
               transition={{ duration: 6, ease: "linear", repeat: Infinity }}
@@ -140,7 +140,7 @@ export default function Home() {
             </motion.span>
 
             <div className="w-full h-0"></div>
-            
+
             {/* Second Line without Gradient */}
             {["Without", "Borders"].map((word, i) => (
               <motion.span key={`l2-${i}`} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
@@ -148,8 +148,8 @@ export default function Home() {
               </motion.span>
             ))}
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -167,11 +167,11 @@ export default function Home() {
               Start Scaling Today
             </Link>
           </motion.div>
-          
+
           {/* Floating Glassmorphism Elements (Amazon Focus) */}
-          
+
           {/* Left Feature Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
@@ -184,7 +184,7 @@ export default function Home() {
           </motion.div>
 
           {/* Right Feature Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 1, ease: "easeOut" }}
@@ -197,41 +197,41 @@ export default function Home() {
           </motion.div>
 
           {/* Animated Connecting Lines (Network Loop) */}
-          <svg 
-            className="absolute inset-0 w-full h-full z-10 pointer-events-none hidden md:block" 
+          <svg
+            className="absolute inset-0 w-full h-full z-10 pointer-events-none hidden md:block"
             style={{ filter: "drop-shadow(0 0 10px rgba(255,107,53,1))" }}
-            viewBox="0 0 100 100" 
+            viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
             {/* Dim background track connecting all nodes */}
-            <motion.path 
-              d="M 20 60 L 30 75 L 70 85 L 75 63" 
-              fill="none" 
-              stroke="rgba(255,107,53,0.2)" 
-              strokeWidth="1" 
+            <motion.path
+              d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
+              fill="none"
+              stroke="rgba(255,107,53,0.2)"
+              strokeWidth="1"
               strokeDasharray="1 1"
               vectorEffect="non-scaling-stroke"
             />
             {/* Bright moving pulse connecting them endlessly */}
-            <motion.path 
-              d="M 20 60 L 30 75 L 70 85 L 75 63" 
-              fill="none" 
-              stroke="#ff6b35" 
-              strokeWidth="2.5" 
+            <motion.path
+              d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
+              fill="none"
+              stroke="#ff6b35"
+              strokeWidth="2.5"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
               initial={{ pathLength: 0.1, pathOffset: 0 }}
               animate={{ pathOffset: 1 }}
-              transition={{ 
-                duration: 4, 
-                ease: "linear", 
-                repeat: Infinity 
-              }} 
+              transition={{
+                duration: 4,
+                ease: "linear",
+                repeat: Infinity
+              }}
             />
           </svg>
 
           {/* Floating Nodes (simulating the map locations) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.2, ease: "backOut" }}
@@ -241,7 +241,7 @@ export default function Home() {
             <span className="text-white text-xs font-semibold">UK Market</span>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.4, ease: "backOut" }}
@@ -251,7 +251,7 @@ export default function Home() {
             <span className="text-white text-xs font-semibold">Germany</span>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.6, ease: "backOut" }}
@@ -261,7 +261,7 @@ export default function Home() {
             <span className="text-white text-xs font-semibold">United States</span>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.8, ease: "backOut" }}
@@ -277,38 +277,48 @@ export default function Home() {
       {/* New Animated Graph Section (Matching provided image with Orange theme) */}
       <AnimatedGraphSection />
 
-    {/* Second Section: Perfect Full Cover Image with Scroll Text */}
+      {/* Second Section: Perfect Full Cover Image with Scroll Text */}
       <section ref={sectionRef} className="relative w-full h-[85vh] md:h-auto md:aspect-video flex justify-center items-center overflow-hidden bg-[#0a0400]">
-        
-        {/* Background Image Optimized for Vercel */}
-        <Image 
-          src="/section2-bg-wide.jpg" 
-          alt="Amazon Pay Experience" 
+
+        {/* Blurred Background Layer to fill empty space seamlessly */}
+        <Image
+          src="/section2-highres.jpg"
+          alt="Background Blur"
           fill
           sizes="100vw"
-          quality={90}
+          quality={40}
+          className="object-cover object-center z-0 blur-2xl opacity-60 scale-110"
+        />
+
+        {/* Main Image: Contained to reduce zoom and show the phone completely */}
+        <Image
+          src="/section2-highres.jpg"
+          alt="Amazon Pay Experience"
+          fill
+          sizes="100vw"
+          quality={100}
           priority
-          className="object-cover object-center z-0" 
+          className="object-contain object-center z-10 p-4 md:p-12"
         />
 
         {/* Typography & Scroll Reveal Container (Matches Nebula Layout) */}
         <div className="absolute inset-0 z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none">
-          
+
           {/* Top Section (Huge Headline & Paragraph) */}
           <div className="flex flex-col md:flex-row justify-between items-start pt-6 sm:pt-20 gap-4 sm:gap-8">
-            
+
             {/* Top Left: Massive Bold Headline */}
             <div className="w-full md:w-[45%] lg:w-[40%]">
-              <motion.h2 
-                initial="hidden" 
-                whileInView="visible" 
+              <motion.h2
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: false, margin: "0px 0px -100px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
                 className="text-4xl sm:text-6xl lg:text-[5.5rem] font-bold leading-[1] tracking-[-0.04em] flex flex-wrap gap-x-2 sm:gap-x-[14px] gap-y-1 sm:gap-y-2"
               >
                 {"The future of seamless Amazon scaling".split(" ").map((word, i) => (
-                  <motion.span 
-                    key={i} 
+                  <motion.span
+                    key={i}
                     variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(245, 245, 245, 1)", transition: { duration: 0.4 } } }}
                   >
                     {word}
@@ -319,16 +329,16 @@ export default function Home() {
 
             {/* Top Right: Medium Description */}
             <div className="w-full md:w-[35%] lg:w-[30%] pt-2 md:pt-4">
-              <motion.p 
-                initial="hidden" 
-                whileInView="visible" 
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: false, margin: "0px 0px -50px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.4 } } }}
                 className="text-lg sm:text-2xl lg:text-[1.65rem] leading-snug font-medium flex flex-wrap gap-x-1 sm:gap-x-2 gap-y-1"
               >
                 {"Redefines what Amazon scaling can be—transforming passive sales into exponential, automated growth.".split(" ").map((word, i) => (
-                  <motion.span 
-                    key={i} 
+                  <motion.span
+                    key={i}
                     variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(229, 229, 229, 1)", transition: { duration: 0.4 } } }}
                   >
                     {word}
@@ -336,7 +346,7 @@ export default function Home() {
                 ))}
               </motion.p>
             </div>
-            
+
           </div>
 
           {/* Scattered Meta Details (Desktop Only - Just like the reference) */}
@@ -356,7 +366,7 @@ export default function Home() {
             <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">Brand Design</p>
             <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">Listing SEO</p>
           </div>
-          
+
           <div className="absolute bottom-[10%] left-12 hidden lg:block">
             <p className="text-[13px] font-medium text-white/50 mb-1 leading-tight tracking-wide">Location:</p>
             <p className="text-[13px] font-medium text-[#e5e5e5] leading-tight tracking-wide">Global, USA</p>
@@ -389,7 +399,7 @@ export default function Home() {
                   </motion.span>
                 ))}
               </h2>
-              
+
               <p className="text-lg md:text-xl max-w-2xl leading-relaxed flex flex-wrap">
                 {"Utilize Amazon Fast Service to revolutionize your online store. Our state-of-the-art solutions help you focus on what really matters—building your brand.".split(" ").map((word, i) => (
                   <motion.span key={`p-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 0.6)", transition: { duration: 0.5 } } }} className="mr-1.5">
@@ -403,7 +413,7 @@ export default function Home() {
               <ArrowUpRight size={20} />
             </button>
           </div>
-          
+
           <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
             {/* Static dim background line */}
             <div className="absolute left-[38px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/10"></div>
@@ -416,7 +426,7 @@ export default function Home() {
               {/* Glowing dot at the tip of the line */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 rounded-full bg-[#ff6b35] shadow-[0_0_20px_8px_rgba(255,107,53,0.8)]"></div>
             </motion.div>
-            
+
             {[
               { title: "Store Creation", desc: "Expert store setup and optimization services providing a solid basis for success on Amazon." },
               { title: "Listing Optimization", desc: "Optimize conversions and guarantee visibility to potential customers searching for products." },
@@ -427,8 +437,8 @@ export default function Home() {
               { title: "Product Hunting", desc: "Extensive product research to find items that are in great demand for your startup." },
               { title: "SEO Services", desc: "Trustworthy marketing to raise your product’s position with guaranteed top results." }
             ].map((service, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, margin: "-25% 0px -25% 0px" }}
@@ -439,7 +449,7 @@ export default function Home() {
                 className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0"
               >
                 {/* Number Circle with Glow */}
-                <motion.div 
+                <motion.div
                   variants={{
                     hidden: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
                     visible: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)", transition: { duration: 0.4 } }
@@ -448,9 +458,9 @@ export default function Home() {
                 >
                   <span className="text-[#ff6b35] font-bold text-2xl tracking-wide">{String(idx + 1).padStart(2, '0')}</span>
                 </motion.div>
-                
+
                 {/* Horizontal connection line */}
-                <motion.div 
+                <motion.div
                   variants={{
                     hidden: { scaleX: 0, opacity: 0 },
                     visible: { scaleX: 1, opacity: 1, transition: { duration: 0.4 } }
@@ -458,35 +468,35 @@ export default function Home() {
                   style={{ transformOrigin: "left" }}
                   className="hidden sm:block absolute left-[76px] w-10 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
                 ></motion.div>
-                
+
                 {/* Content Box */}
-                <motion.div 
+                <motion.div
                   variants={{
                     hidden: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
                     visible: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)", transition: { duration: 0.4 } }
                   }}
                   className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-8 rounded-[2rem] transition-all duration-500 relative overflow-hidden group"
                 >
-                  
+
                   {/* Subtle corner decorations like in the image */}
-                  <motion.div 
+                  <motion.div
                     variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
                     className="absolute top-5 left-5 w-5 h-5 border-t-2 border-l-2 transition-colors duration-500"
                   ></motion.div>
-                  <motion.div 
+                  <motion.div
                     variants={{ hidden: { borderColor: "rgba(255,255,255,0.1)" }, visible: { borderColor: "rgba(255,107,53,1)" } }}
                     className="absolute bottom-5 right-5 w-5 h-5 border-b-2 border-r-2 transition-colors duration-500"
                   ></motion.div>
-                  
+
                   {/* Orange ambient glow inside box when active */}
-                  <motion.div 
+                  <motion.div
                     variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.6 } } }}
                     className="absolute -right-20 -bottom-20 w-40 h-40 bg-[#ff6b35]/20 blur-[50px] rounded-full pointer-events-none"
                   ></motion.div>
 
                   <div className="flex items-center gap-4 mb-3 relative z-10">
                     <Sparkles className="text-[#ff6b35]" size={24} />
-                    <motion.h3 
+                    <motion.h3
                       variants={{ hidden: { color: "#ffffff" }, visible: { color: "#ff6b35" } }}
                       className="text-2xl sm:text-3xl font-bold uppercase tracking-wide transition-colors duration-500"
                     >
@@ -504,9 +514,9 @@ export default function Home() {
       {/* Community / VCard Section (Modeled after user's screenshot) */}
       <section className="relative w-full py-24 lg:py-32 bg-[#000000] px-6 sm:px-12 border-t border-white/[0.05] overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
-          
+
           {/* Top Avatars Row */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-50px", amount: 0.1 }}
@@ -514,19 +524,19 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32 relative"
           >
             {/* Connector Line (Desktop) */}
-            <motion.div 
+            <motion.div
               variants={{ hidden: { scaleX: 0, opacity: 0 }, visible: { scaleX: 1, opacity: 0.5, transition: { duration: 1.2, ease: "easeInOut" } } }}
               style={{ transformOrigin: "center" }}
               className="hidden md:block absolute top-[50%] left-[16%] right-[16%] h-[1px] bg-gradient-to-r from-transparent via-[#ff6b35] to-transparent z-0"
             ></motion.div>
-            
+
             {[
               { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false },
               { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true },
               { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false }
             ].map((item, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 variants={{ hidden: { opacity: 0, scale: 0.8, y: 30 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } } }}
                 className={`relative z-10 rounded-[2rem] overflow-hidden group ${item.active ? 'bg-[#ff6b35]' : 'bg-[#0a0a0a] border border-white/[0.05]'} p-8 flex flex-col items-center text-center transition-transform duration-500 hover:-translate-y-2 shadow-2xl`}
               >
@@ -547,7 +557,7 @@ export default function Home() {
               <p className="text-white/60 text-lg mb-10 max-w-md leading-relaxed">
                 We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.
               </p>
-              
+
               <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500">
                 <div className="w-10 h-10 rounded-xl bg-[#ff6b35] flex items-center justify-center shrink-0 shadow-lg shadow-[#ff6b35]/20">
                   <Sparkles size={20} className="text-white" />
@@ -558,71 +568,71 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             {/* Right: Glowing Animated Graph (Moved here from above) */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end py-8">
-               <motion.div 
-                 initial={{ y: 50, opacity: 0, boxShadow: "0px 0px 0px rgba(255,107,53,0)" }}
-                 whileInView={{ 
-                    y: 0, 
-                    opacity: 1,
-                    boxShadow: ["0px 0px 0px rgba(255,107,53,0)", "0px 30px 100px rgba(255,107,53,0.4)", "0px 10px 40px rgba(255,107,53,0.1)"] 
-                 }}
-                 viewport={{ once: false, margin: "50px" }}
-                 transition={{ 
-                   duration: 0.7, 
-                   ease: "easeOut", 
-                   boxShadow: { duration: 1, times: [0, 0.5, 1], ease: "easeInOut" } 
-                 }}
-                 className="relative w-full max-w-[450px] h-[300px] bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] rounded-3xl border border-white/10 p-6 flex flex-col justify-end overflow-hidden shadow-2xl"
-               >
-                 {/* Graph grid lines */}
-                 <div className="absolute inset-0 z-0 flex flex-col justify-between py-8 px-6 opacity-20 pointer-events-none">
-                    <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
-                    <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
-                    <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
-                    <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
-                 </div>
+              <motion.div
+                initial={{ y: 50, opacity: 0, boxShadow: "0px 0px 0px rgba(255,107,53,0)" }}
+                whileInView={{
+                  y: 0,
+                  opacity: 1,
+                  boxShadow: ["0px 0px 0px rgba(255,107,53,0)", "0px 30px 100px rgba(255,107,53,0.4)", "0px 10px 40px rgba(255,107,53,0.1)"]
+                }}
+                viewport={{ once: false, margin: "50px" }}
+                transition={{
+                  duration: 0.7,
+                  ease: "easeOut",
+                  boxShadow: { duration: 1, times: [0, 0.5, 1], ease: "easeInOut" }
+                }}
+                className="relative w-full max-w-[450px] h-[300px] bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] rounded-3xl border border-white/10 p-6 flex flex-col justify-end overflow-hidden shadow-2xl"
+              >
+                {/* Graph grid lines */}
+                <div className="absolute inset-0 z-0 flex flex-col justify-between py-8 px-6 opacity-20 pointer-events-none">
+                  <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
+                  <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
+                  <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
+                  <div className="w-full h-[1px] bg-white border-b border-dashed border-white/50"></div>
+                </div>
 
-                 {/* Animated Bars */}
-                 <div className="flex items-end justify-between h-[80%] gap-2 sm:gap-3 relative z-10">
-                    {[30, 45, 25, 60, 40, 75, 55, 90, 100].map((h, i) => (
-                      <motion.div 
-                        key={i}
-                        initial={{ height: 0 }}
-                        whileInView={{ height: `${h}%` }}
-                        viewport={{ once: false, margin: "50px" }}
-                        transition={{ duration: 0.6, delay: 0.1 + (i * 0.05), ease: [0.22, 1, 0.36, 1] }}
-                        className="w-full bg-gradient-to-t from-[#ff6b35]/20 to-[#ff6b35] rounded-t-md relative group cursor-pointer"
-                      >
-                         <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                           {h}k
-                         </div>
-                      </motion.div>
-                    ))}
-                 </div>
+                {/* Animated Bars */}
+                <div className="flex items-end justify-between h-[80%] gap-2 sm:gap-3 relative z-10">
+                  {[30, 45, 25, 60, 40, 75, 55, 90, 100].map((h, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ height: 0 }}
+                      whileInView={{ height: `${h}%` }}
+                      viewport={{ once: false, margin: "50px" }}
+                      transition={{ duration: 0.6, delay: 0.1 + (i * 0.05), ease: [0.22, 1, 0.36, 1] }}
+                      className="w-full bg-gradient-to-t from-[#ff6b35]/20 to-[#ff6b35] rounded-t-md relative group cursor-pointer"
+                    >
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                        {h}k
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
 
-                 {/* Floating Badge */}
-                 <motion.div 
-                   initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                   viewport={{ once: false }}
-                   transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
-                   className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-white text-sm font-semibold flex items-center gap-2 shadow-xl"
-                 >
-                   <div className="w-6 h-6 rounded-full bg-[#ff6b35] flex items-center justify-center">
-                     <ArrowUpRight size={14} className="text-white" />
-                   </div>
-                   +345% Revenue
-                 </motion.div>
-                 
-               </motion.div>
+                {/* Floating Badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: false }}
+                  transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
+                  className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-white text-sm font-semibold flex items-center gap-2 shadow-xl"
+                >
+                  <div className="w-6 h-6 rounded-full bg-[#ff6b35] flex items-center justify-center">
+                    <ArrowUpRight size={14} className="text-white" />
+                  </div>
+                  +345% Revenue
+                </motion.div>
+
+              </motion.div>
             </div>
           </div>
 
           {/* Bottom Row (VCard & CTA) */}
           <div className="flex flex-col-reverse lg:flex-row gap-16 items-center overflow-hidden">
-            
+
             {/* VCard Composition */}
             <motion.div
               initial={{ x: -120, opacity: 0 }}
@@ -631,65 +641,65 @@ export default function Home() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="w-full lg:w-1/2 flex justify-center items-center relative py-12"
             >
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#ff6b35]/15 blur-[120px] z-0 rounded-full pointer-events-none"></div>
-               
-               {/* Background Orange Card */}
-               <div className="absolute z-0 w-[70%] sm:w-[60%] max-w-[350px] aspect-[1.58/1] bg-[#ff6b35] rounded-3xl transform rotate-6 translate-x-12 translate-y-8 shadow-2xl opacity-90 transition-transform duration-700 group-hover:rotate-12"></div>
-               
-               {/* Foreground Black Premium CSS VCard */}
-               <div className="relative z-10 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] transform -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-700 ease-out shadow-[0_20px_50px_rgba(0,0,0,0.8)] cursor-pointer group rounded-3xl">
-                 
-                 {/* The Card Body */}
-                 <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#111] to-[#000] rounded-3xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-inner">
-                   
-                   {/* Glassy reflection sweep effect */}
-                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform -skew-x-12 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-1000 ease-in-out z-20"></div>
-                   
-                   {/* Watermark Logo Background */}
-                   <div className="absolute -right-8 -bottom-10 opacity-[0.03] transform scale-150 pointer-events-none">
-                      <div className="w-48 h-48 bg-white rounded-full flex items-center justify-center font-black text-9xl">A</div>
-                   </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#ff6b35]/15 blur-[120px] z-0 rounded-full pointer-events-none"></div>
 
-                   {/* Top Row: Logo & Contactless */}
-                   <div className="flex justify-between items-center relative z-10">
-                     <div className="flex items-center gap-3">
-                       <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white text-black font-bold text-lg sm:text-xl flex items-center justify-center rounded-xl shadow-lg">A</div>
-                       <span className="text-white font-bold text-lg sm:text-xl tracking-tight">AmazonFast</span>
-                     </div>
-                     <Wifi className="text-white/60 rotate-90" size={28} />
-                   </div>
+              {/* Background Orange Card */}
+              <div className="absolute z-0 w-[70%] sm:w-[60%] max-w-[350px] aspect-[1.58/1] bg-[#ff6b35] rounded-3xl transform rotate-6 translate-x-12 translate-y-8 shadow-2xl opacity-90 transition-transform duration-700 group-hover:rotate-12"></div>
 
-                   {/* Middle: EMV Chip */}
-                   <div className="w-12 h-10 sm:w-14 sm:h-11 rounded-lg bg-gradient-to-br from-[#d4af37] via-[#f3e5ab] to-[#aa8022] relative z-10 border border-black/20 flex items-center justify-center overflow-hidden shadow-sm mt-4 sm:mt-2">
-                      <div className="w-full h-[1px] bg-black/20 absolute top-1/2"></div>
-                      <div className="w-[1px] h-full bg-black/20 absolute left-1/3"></div>
-                      <div className="w-[1px] h-full bg-black/20 absolute right-1/3"></div>
-                      <div className="w-[70%] h-[60%] border border-black/20 absolute rounded-md"></div>
-                   </div>
+              {/* Foreground Black Premium CSS VCard */}
+              <div className="relative z-10 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] transform -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-700 ease-out shadow-[0_20px_50px_rgba(0,0,0,0.8)] cursor-pointer group rounded-3xl">
 
-                   {/* Bottom: Numbers & Details */}
-                   <div className="relative z-10 mt-auto">
-                     <div className="text-white/90 text-2xl sm:text-3xl font-mono tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 drop-shadow-md">
-                       **** **** **** 9000
-                     </div>
-                     <div className="flex justify-between items-end">
-                       <div>
-                         <p className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 font-semibold">Card Holder</p>
-                         <p className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase drop-shadow-sm">AMAZON BRAND</p>
-                       </div>
-                       
-                       {/* Fake Master/Visa Style Logo */}
-                       <div className="flex -space-x-3 sm:-space-x-4 mix-blend-screen opacity-90">
-                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff3333]"></div>
-                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ffb700] mix-blend-screen"></div>
-                       </div>
-                     </div>
-                   </div>
+                {/* The Card Body */}
+                <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#111] to-[#000] rounded-3xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-inner">
 
-                 </div>
-               </div>
+                  {/* Glassy reflection sweep effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform -skew-x-12 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-1000 ease-in-out z-20"></div>
+
+                  {/* Watermark Logo Background */}
+                  <div className="absolute -right-8 -bottom-10 opacity-[0.03] transform scale-150 pointer-events-none">
+                    <div className="w-48 h-48 bg-white rounded-full flex items-center justify-center font-black text-9xl">A</div>
+                  </div>
+
+                  {/* Top Row: Logo & Contactless */}
+                  <div className="flex justify-between items-center relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white text-black font-bold text-lg sm:text-xl flex items-center justify-center rounded-xl shadow-lg">A</div>
+                      <span className="text-white font-bold text-lg sm:text-xl tracking-tight">AmazonFast</span>
+                    </div>
+                    <Wifi className="text-white/60 rotate-90" size={28} />
+                  </div>
+
+                  {/* Middle: EMV Chip */}
+                  <div className="w-12 h-10 sm:w-14 sm:h-11 rounded-lg bg-gradient-to-br from-[#d4af37] via-[#f3e5ab] to-[#aa8022] relative z-10 border border-black/20 flex items-center justify-center overflow-hidden shadow-sm mt-4 sm:mt-2">
+                    <div className="w-full h-[1px] bg-black/20 absolute top-1/2"></div>
+                    <div className="w-[1px] h-full bg-black/20 absolute left-1/3"></div>
+                    <div className="w-[1px] h-full bg-black/20 absolute right-1/3"></div>
+                    <div className="w-[70%] h-[60%] border border-black/20 absolute rounded-md"></div>
+                  </div>
+
+                  {/* Bottom: Numbers & Details */}
+                  <div className="relative z-10 mt-auto">
+                    <div className="text-white/90 text-2xl sm:text-3xl font-mono tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 drop-shadow-md">
+                      **** **** **** 9000
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <p className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 font-semibold">Card Holder</p>
+                        <p className="text-white text-xs sm:text-sm font-semibold tracking-widest uppercase drop-shadow-sm">AMAZON BRAND</p>
+                      </div>
+
+                      {/* Fake Master/Visa Style Logo */}
+                      <div className="flex -space-x-3 sm:-space-x-4 mix-blend-screen opacity-90">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff3333]"></div>
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ffb700] mix-blend-screen"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ x: 120, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -723,7 +733,7 @@ export default function Home() {
       <section className="relative w-full py-24 lg:py-32 bg-[#050200] px-6 sm:px-12 border-t border-white/[0.05]">
         <div className="absolute inset-0 bg-[#ff6b35]/5 blur-[150px] z-0 pointer-events-none"></div>
         <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 items-center">
-          
+
           {/* Left Text */}
           <div className="w-full lg:w-1/2">
             <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
@@ -750,7 +760,7 @@ export default function Home() {
           <div className="w-full lg:w-1/2">
             <div className="bg-[#111111] border border-white/[0.05] p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff6b35]/10 blur-[80px] rounded-full pointer-events-none"></div>
-              
+
               <h3 className="text-2xl font-semibold text-white mb-8">Chat With Our Strategists</h3>
               <form className="flex flex-col gap-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
