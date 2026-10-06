@@ -113,12 +113,31 @@ export default function Home() {
         <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center">
           
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight text-shadow-sm mb-6"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08 } }
+            }}
+            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight text-shadow-sm mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2"
           >
-            Scale Your Amazon Brand<br />Without Borders
+            {["Scale", "Your"].map((word, i) => (
+              <motion.span key={i} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}>
+                {word}
+              </motion.span>
+            ))}
+            <motion.span 
+              variants={{ hidden: { opacity: 0, y: 20, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } } }}
+              className="bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-[#ffaa80]"
+            >
+              Amazon Brand
+            </motion.span>
+            <div className="w-full h-0"></div>
+            {["Without", "Borders"].map((word, i) => (
+              <motion.span key={i} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}>
+                {word}
+              </motion.span>
+            ))}
           </motion.h1>
           
           <motion.p 
@@ -167,6 +186,40 @@ export default function Home() {
               Connect with millions of buyers worldwide while expanding your product offerings across multiple Amazon marketplaces.
             </p>
           </motion.div>
+
+          {/* Animated Connecting Lines (Network Loop) */}
+          <svg 
+            className="absolute inset-0 w-full h-full z-10 pointer-events-none hidden md:block" 
+            style={{ filter: "drop-shadow(0 0 10px rgba(255,107,53,1))" }}
+            viewBox="0 0 100 100" 
+            preserveAspectRatio="none"
+          >
+            {/* Dim background track connecting all nodes */}
+            <motion.path 
+              d="M 20 60 L 30 75 L 70 85 L 75 63 Z" 
+              fill="none" 
+              stroke="rgba(255,107,53,0.2)" 
+              strokeWidth="1" 
+              strokeDasharray="1 1"
+              vectorEffect="non-scaling-stroke"
+            />
+            {/* Bright moving pulse connecting them endlessly */}
+            <motion.path 
+              d="M 20 60 L 30 75 L 70 85 L 75 63 Z" 
+              fill="none" 
+              stroke="#ff6b35" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              initial={{ pathLength: 0.1, pathOffset: 0 }}
+              animate={{ pathOffset: 1 }}
+              transition={{ 
+                duration: 4, 
+                ease: "linear", 
+                repeat: Infinity 
+              }} 
+            />
+          </svg>
 
           {/* Floating Nodes (simulating the map locations) */}
           <motion.div 
