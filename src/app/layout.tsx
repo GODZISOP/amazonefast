@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: "AmazonFast",
     images: [
       {
-        url: "/logo.png",
+        url: "/logo-new.png",
         width: 1200,
         height: 675,
         alt: "AmazonFast - Expert Amazon Scaling & Marketing",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AmazonFast | Expert Amazon Scaling & Marketing",
     description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
-    images: ["/logo.png"],
+    images: ["/logo-new.png"],
   },
 };
 

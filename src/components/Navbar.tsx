@@ -23,7 +23,7 @@ export default function Navbar() {
     <header className="absolute z-50 w-full px-6 sm:px-8 py-6 flex justify-between items-center top-0 left-0 bg-transparent">
       {/* Logo */}
       <Link href="/" className="flex items-center shrink-0">
-        <Image src="/logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 sm:h-12 w-auto" priority />
+        <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 sm:h-12 w-auto" priority />
       </Link>
 
       {/* Center Pill Navbar */}

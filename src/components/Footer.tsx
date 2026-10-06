@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 lg:col-span-5 pr-0 lg:pr-12">
             <Link href="/" className="inline-block mb-6">
-              <Image src="/logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-12 w-auto" />
+              <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-12 w-auto" />
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-sm">
               With years of expertise, Amazon Fast Services has established a solid reputation as one of the most respected Amazon marketing agencies in the United States.

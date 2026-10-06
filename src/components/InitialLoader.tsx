@@ -6,25 +6,14 @@ import Image from "next/image";
 
 export default function InitialLoader() {
   const [isLoading, setIsLoading] = useState(true);
-  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Check if loader has already been shown in this session
-    const hasLoaded = sessionStorage.getItem("hasLoaded");
-    if (hasLoaded) {
-      setIsLoading(false);
-      return;
-    }
-    
-    // If not loaded, we should render the loader
-    setShouldRender(true);
     // Lock scrolling while loading
     document.body.style.overflow = "hidden";
     
     // Simulate loading time (e.g., waiting for assets)
     const timer = setTimeout(() => {
       setIsLoading(false);
-      sessionStorage.setItem("hasLoaded", "true");
       document.body.style.overflow = "auto";
     }, 2000); // 2 seconds delay before doors open
 
@@ -34,11 +23,9 @@ export default function InitialLoader() {
     };
   }, []);
 
-  if (!shouldRender && !isLoading) return null;
-
   return (
     <AnimatePresence>
-      {isLoading && shouldRender && (
+      {isLoading && (
         <motion.div
           className="fixed inset-0 z-[99999] flex pointer-events-none"
           initial={{ opacity: 1 }}
@@ -59,7 +46,7 @@ export default function InitialLoader() {
               className="absolute right-[-75px] sm:right-[-100px] w-[150px] sm:w-[200px] h-auto flex justify-center"
             >
               <div className="w-[150px] sm:w-[200px] overflow-hidden" style={{ clipPath: "inset(0 50% 0 0)" }}>
-                <Image src="/logo.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
+                <Image src="/logo-new.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
               </div>
             </motion.div>
           </motion.div>
@@ -79,7 +66,7 @@ export default function InitialLoader() {
               className="absolute left-[-75px] sm:left-[-100px] w-[150px] sm:w-[200px] h-auto flex justify-center"
             >
               <div className="w-[150px] sm:w-[200px] overflow-hidden" style={{ clipPath: "inset(0 0 0 50%)" }}>
-                <Image src="/logo.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
+                <Image src="/logo-new.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
               </div>
             </motion.div>
           </motion.div>
