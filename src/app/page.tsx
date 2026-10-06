@@ -278,31 +278,13 @@ export default function Home() {
       <AnimatedGraphSection />
 
       {/* Second Section: Perfect Full Cover Image with Scroll Text */}
-      <section ref={sectionRef} className="relative w-full h-[85vh] md:h-auto md:aspect-video flex justify-center items-center overflow-hidden bg-[#0a0400]">
-
-        {/* Blurred Background Layer to fill empty space seamlessly */}
-        <Image
-          src="/section2-highres.jpg"
-          alt="Background Blur"
-          fill
-          sizes="100vw"
-          quality={40}
-          className="object-cover object-center z-0 blur-2xl opacity-60 scale-110"
-        />
-
-        {/* Main Image: Contained to reduce zoom and show the phone completely */}
-        <Image
-          src="/section2-highres.jpg"
-          alt="Amazon Pay Experience"
-          fill
-          sizes="100vw"
-          quality={100}
-          priority
-          className="object-contain object-center z-10 p-4 md:p-12"
-        />
-
-        {/* Typography & Scroll Reveal Container (Matches Nebula Layout) */}
-        <div className="absolute inset-0 z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none">
+      <section 
+        ref={sectionRef} 
+        className="relative w-full h-[85vh] md:h-screen flex justify-center items-center overflow-hidden bg-cover bg-bottom bg-no-repeat"
+        style={{ backgroundImage: "url('/section2-highres.jpg')" }}
+      >
+        {/* Typography & Scroll Reveal Container */}
+        <div className="relative z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none">
 
           {/* Top Section (Huge Headline & Paragraph) */}
           <div className="flex flex-col md:flex-row justify-between items-start pt-6 sm:pt-20 gap-4 sm:gap-8">
