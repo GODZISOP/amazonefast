@@ -31,11 +31,11 @@ Your goal is to politely assist users, explain our services, and ultimately pers
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': \`Bearer \${groqApiKey}\`,
+        'Authorization': `Bearer ${groqApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama3-70b-8192', // Upgraded to much smarter and reliable Groq model
+        model: 'qwen/qwen3.8-27b', // Fast model from Groq
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
