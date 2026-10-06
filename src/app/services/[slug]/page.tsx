@@ -10,7 +10,7 @@ const serviceDetails: Record<string, any> = {
     title: "Amazon FBA Automation",
     tagline: "Hands-Free Passive Income on Amazon",
     description: "Our complete Amazon FBA automation service is designed for investors who want to scale a highly profitable e-commerce business without dealing with the day-to-day operations. We handle everything from LLC formation and product research to inventory management, PPC, and customer service.",
-    image: "/srv_product_hunting.jpg",
+    image: "/srv_fba_automation_new.jpg",
     benefits: [
       "End-to-End Account Management",
       "Winning Product Sourcing",
