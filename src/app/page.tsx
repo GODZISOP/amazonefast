@@ -411,14 +411,14 @@ d="M 20 60 L 30 75 L 70 85 L 75 63 Z"
             </motion.div>
 
             {[
-              { title: "Store Creation", desc: "Expert store setup and optimization services providing a solid basis for success on Amazon." },
-              { title: "Listing Optimization", desc: "Optimize conversions and guarantee visibility to potential customers searching for products." },
-              { title: "Amazon DSP Ads", desc: "Reach a larger audience with measurable outcomes thanks to our tried-and-true tactics." },
-              { title: "FBA Management", desc: "A virtual assistant service that guarantees effective management of your seller account." },
-              { title: "PPC Advertising", desc: "Maximize revenue potential by optimizing your campaigns and decreasing your ACOS." },
-              { title: "A+ Content / EBC", desc: "Tailored EBC/A+ content with relevant keywords to improve your brand's visibility." },
-              { title: "Product Hunting", desc: "Extensive product research to find items that are in great demand for your startup." },
-              { title: "SEO Services", desc: "Trustworthy marketing to raise your product’s position with guaranteed top results." }
+              { title: "Amazon FBA Automation", desc: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth." },
+              { title: "Amazon PPC Advertising", desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." },
+              { title: "Product Hunting & Sourcing", desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." },
+              { title: "Amazon Store Creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
+              { title: "A+ Content & EBC", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
+              { title: "Listing SEO & Optimization", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
+              { title: "Shopify Dropshipping", desc: "End-to-end Shopify store development and winning product research to diversify your eCommerce income." },
+              { title: "Account Reinstatement", desc: "Professional appeal services and tailored plans of action to recover suspended seller accounts securely." }
             ].map((service, idx) => (
               <motion.div
                 key={idx}

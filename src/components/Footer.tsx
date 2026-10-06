@@ -34,11 +34,13 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {[
                 { name: "Amazon FBA Automation", slug: "amazon-fba-automation" },
-                { name: "Amazon PPC", slug: "amazon-ppc" },
-                { name: "Product Hunting", slug: "amazon-product-hunting" },
-                { name: "Store Creation", slug: "amazon-store-creation" },
-                { name: "A+ Content / EBC", slug: "a-content-ebc" },
-                { name: "Shopify Dropshipping", slug: "shopify-dropshipping" }
+                { name: "Amazon PPC Advertising", slug: "amazon-ppc-advertising" },
+                { name: "Product Hunting & Sourcing", slug: "product-hunting" },
+                { name: "Amazon Store Creation", slug: "store-creation" },
+                { name: "A+ Content & EBC", slug: "a-content-ebc" },
+                { name: "Listing SEO & Optimization", slug: "listing-seo" },
+                { name: "Shopify Dropshipping", slug: "shopify-dropshipping" },
+                { name: "Account Reinstatement", slug: "account-reinstatement" }
               ].map(link => (
                 <li key={link.slug}><Link href={`/services/${link.slug}`} className="text-white/50 hover:text-[#ff6b35] text-sm transition">{link.name}</Link></li>
               ))}
