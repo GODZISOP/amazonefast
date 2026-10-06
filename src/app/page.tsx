@@ -103,6 +103,8 @@ export default function Home() {
             alt="Hero Background"
             fill
             priority
+            fetchPriority="high"
+            unoptimized
             className="object-cover object-bottom opacity-90 mix-blend-screen"
           />
           {/* Subtle gradient overlay to ensure text readability */}
@@ -110,7 +112,7 @@ export default function Home() {
         </div>
 
         {/* Main Content Layout (Center/Lower) */}
-        <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center">
+        <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center -mt-20 md:-mt-32">
 
           <motion.h1
             initial="hidden"
@@ -119,7 +121,7 @@ export default function Home() {
               hidden: {},
               visible: {
                 transition: {
-                  staggerChildren: 0.3
+                  staggerChildren: 0.1
                 }
               }
             }}
@@ -133,7 +135,7 @@ export default function Home() {
               className="flex flex-wrap justify-center gap-x-3 gap-y-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#ff6b35] to-white bg-[length:200%_auto]"
             >
               {["Scale", "Your", "Amazon", "Brand"].map((word, i) => (
-                <motion.span key={i} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
+                <motion.span key={i} variants={{ hidden: { opacity: 0, y: 15, scale: 0.95 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: "easeOut" } } }}>
                   {word}
                 </motion.span>
               ))}
@@ -143,25 +145,25 @@ export default function Home() {
 
             {/* Second Line without Gradient */}
             {["Without", "Borders"].map((word, i) => (
-              <motion.span key={`l2-${i}`} variants={{ hidden: { opacity: 0, y: 30, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } } }}>
+              <motion.span key={`l2-${i}`} variants={{ hidden: { opacity: 0, y: 15, scale: 0.95 }, visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: "easeOut" } } }}>
                 {word}
               </motion.span>
             ))}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
             className="text-white/80 text-base md:text-lg max-w-2xl mb-10 leading-relaxed font-medium"
           >
             Build and manage international sales with optimized listings, automated PPC campaigns, and seamless FBA logistics from a single platform.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
           >
             <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold text-[15px] hover:bg-gray-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.4)]">
               Start Scaling Today
@@ -172,9 +174,9 @@ export default function Home() {
 
           {/* Left Feature Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
             className="hidden lg:block absolute left-[-5%] xl:left-[-15%] top-[65%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
           >
             <h4 className="text-white font-bold mb-2">Automated PPC Optimization</h4>
@@ -185,9 +187,9 @@ export default function Home() {
 
           {/* Right Feature Card */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
             className="hidden lg:block absolute right-[-5%] xl:right-[-15%] top-[70%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
           >
             <h4 className="text-white font-bold mb-2">Global Market Access</h4>
@@ -233,9 +235,9 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
 
           {/* Floating Nodes (simulating the map locations) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.2, ease: "backOut" }}
+            transition={{ duration: 0.4, delay: 0.5, ease: "backOut" }}
             className="hidden md:flex absolute top-[60%] left-[20%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
           >
             <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/gb.png')" }}></span>
@@ -243,9 +245,9 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.4, ease: "backOut" }}
+            transition={{ duration: 0.4, delay: 0.6, ease: "backOut" }}
             className="hidden md:flex absolute top-[63%] right-[25%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
           >
             <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/de.png')" }}></span>
@@ -253,9 +255,9 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.6, ease: "backOut" }}
+            transition={{ duration: 0.4, delay: 0.7, ease: "backOut" }}
             className="hidden md:flex absolute top-[75%] left-[30%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
           >
             <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/us.png')" }}></span>
@@ -263,9 +265,9 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.8, ease: "backOut" }}
+            transition={{ duration: 0.4, delay: 0.8, ease: "backOut" }}
             className="hidden md:flex absolute top-[85%] right-[30%] items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full shadow-lg"
           >
             <span className="w-4 h-4 rounded-full bg-cover" style={{ backgroundImage: "url('https://flagcdn.com/w20/nl.png')" }}></span>
@@ -399,12 +401,12 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
 
           <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
             {/* Static dim background line */}
-            <div className="absolute left-[38px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/10"></div>
+            <div className="absolute left-[30px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/10"></div>
 
             {/* Scroll-driven glowing orange line */}
             <motion.div
               style={{ height: lineHeight }}
-              className="absolute left-[38px] top-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top"
+              className="absolute left-[30px] top-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top"
             ></motion.div>
 
             {[
@@ -425,7 +427,7 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                   dim: { opacity: 0.5, scale: 0.98 },
                   glowing: { opacity: 1, scale: 1.03, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
-                className="relative flex items-center gap-6 sm:gap-10 mb-16 last:mb-0 cursor-pointer"
+                className="relative flex items-center gap-4 sm:gap-8 mb-10 last:mb-0 cursor-pointer"
               >
                 {/* Number Circle with Glow */}
                 <motion.div
@@ -433,14 +435,14 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                     dim: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
                     glowing: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)" }
                   }}
-                  className="relative z-10 shrink-0 w-[76px] h-[76px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-colors duration-300"
+                  className="relative z-10 shrink-0 w-[60px] h-[60px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-colors duration-300"
                 >
                   <motion.span 
                     variants={{
                       dim: { color: "rgba(255,255,255,0.5)" },
                       glowing: { color: "rgba(255,107,53,1)" }
                     }}
-                    className="font-bold text-2xl tracking-wide"
+                    className="font-bold text-xl tracking-wide"
                   >
                     {String(idx + 1).padStart(2, '0')}
                   </motion.span>
@@ -453,7 +455,7 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                     glowing: { scaleX: 1, opacity: 1 }
                   }}
                   style={{ transformOrigin: "left" }}
-                  className="hidden sm:block absolute left-[76px] w-10 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
+                  className="hidden sm:block absolute left-[60px] w-8 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
                 ></motion.div>
 
                 {/* Content Box */}
@@ -462,16 +464,16 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                     dim: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
                     glowing: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)" }
                   }}
-                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-8 rounded-[2rem] relative overflow-hidden"
+                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-6 rounded-3xl relative overflow-hidden"
                 >
                   {/* Subtle corner decorations like in the image */}
                   <motion.div
                     variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
-                    className="absolute top-5 left-5 w-5 h-5 border-t-2 border-l-2 transition-colors duration-300"
+                    className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 transition-colors duration-300"
                   ></motion.div>
                   <motion.div
                     variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
-                    className="absolute bottom-5 right-5 w-5 h-5 border-b-2 border-r-2 transition-colors duration-300"
+                    className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 transition-colors duration-300"
                   ></motion.div>
 
                   {/* Orange ambient glow inside box when active */}
@@ -480,16 +482,16 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                     className="absolute -right-20 -bottom-20 w-40 h-40 bg-[#ff6b35]/20 blur-[50px] rounded-full pointer-events-none"
                   ></motion.div>
 
-                  <div className="flex items-center gap-4 mb-3 relative z-10">
-                    <Sparkles className="text-[#ff6b35]" size={24} />
+                  <div className="flex items-center gap-3 mb-2 relative z-10">
+                    <Sparkles className="text-[#ff6b35]" size={20} />
                     <motion.h3
                       variants={{ dim: { color: "#ffffff" }, glowing: { color: "#ff6b35" } }}
-                      className="text-2xl sm:text-3xl font-bold uppercase tracking-wide transition-colors duration-300"
+                      className="text-xl sm:text-2xl font-bold uppercase tracking-wide transition-colors duration-300"
                     >
                       {service.title}
                     </motion.h3>
                   </div>
-                  <p className="text-white/50 text-lg leading-relaxed relative z-10 pl-10">{service.desc}</p>
+                  <p className="text-white/50 text-base leading-relaxed relative z-10 pl-8">{service.desc}</p>
                 </motion.div>
               </motion.div>
             ))}
@@ -523,22 +525,14 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                initial={
-                  item.active
-                    ? { opacity: 0, scale: 0.9 }
-                    : { opacity: 0, x: item.dir === -1 ? '100%' : '-100%' }
-                }
-                whileInView={
-                  item.active
-                    ? { opacity: 1, scale: 1 }
-                    : { opacity: 1, x: 0 }
-                }
-                transition={
-                  item.active
-                    ? { duration: 0.25, ease: 'easeOut' }
-                    : { duration: 0.45, delay: 0.15, ease: [0.22, 1, 0.36, 1] }
-                }
-                viewport={{ once: false, margin: '-80px' }}
+                initial={{ opacity: 0, y: item.active ? 0 : 30, scale: item.active ? 0.9 : 1 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: item.active ? 0.4 : 0.5,
+                  delay: item.active ? 0 : 0.2,
+                  ease: "easeOut"
+                }}
+                viewport={{ once: false, margin: '-20px' }}
                 className={`relative z-10 rounded-[2rem] overflow-hidden group ${item.active ? 'bg-[#ff6b35]' : 'bg-[#0a0a0a] border border-white/[0.05]'} p-8 flex flex-col items-center text-center transition-transform duration-500 hover:-translate-y-2 shadow-2xl`}
               >
                 {/* Sliding shine for active card */}
