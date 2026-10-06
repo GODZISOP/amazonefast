@@ -32,7 +32,7 @@ export function CobeGlobe({ className }: { className?: string }) {
     
     if (!canvasRef.current) return;
 
-    const globe = createGlobe(canvasRef.current, {
+    const options: any = {
       devicePixelRatio: 2,
       width: width * 2,
       height: width * 2,
@@ -52,7 +52,7 @@ export function CobeGlobe({ className }: { className?: string }) {
         { location: [51.5072, 0.1276], size: 0.08 },
         { location: [25.2048, 55.2708], size: 0.05 },
       ],
-      onRender: (state) => {
+      onRender: (state: any) => {
         if (!pointerInteracting.current) {
           phi += 0.005;
         }
@@ -60,7 +60,8 @@ export function CobeGlobe({ className }: { className?: string }) {
         state.width = width * 2;
         state.height = width * 2;
       }
-    });
+    };
+    const globe = createGlobe(canvasRef.current, options);
     
     return () => {
       globe.destroy();
