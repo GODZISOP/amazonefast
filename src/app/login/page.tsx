@@ -36,6 +36,20 @@ export default function LoginPage() {
         return;
       }
       
+      // Guarantee profile exists for old users who might have been hit by the race condition bug
+      if (data?.session?.user) {
+        const realUserId = data.session.user.id;
+        const userEmail = data.session.user.email;
+        // fullName might not be provided in login, use a placeholder or extract from metadata
+        const name = data.session.user.user_metadata?.full_name || 'Client';
+        
+        await fetch('/api/init-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: realUserId, email: userEmail, fullName: name })
+        }).catch(e => console.error(e));
+      }
+      
       window.location.href = '/portal';
     } else {
       // CUSTOM NODE.JS OTP REGISTRATION FLOW
