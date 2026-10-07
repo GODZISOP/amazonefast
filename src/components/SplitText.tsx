@@ -81,7 +81,7 @@ const SplitText = ({
     }
   );
 
-  const Tag = tag as keyof JSX.IntrinsicElements;
+  const Tag = tag as any;
   
   const renderText = () => {
     if (splitType === 'words') {
