@@ -23,28 +23,37 @@ export default function ClientPortal() {
     let intervalId: any;
 
     const fetchData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push('/login');
-        return;
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          router.push('/login');
+          return;
+        }
+        setUser(user);
+
+        // Fetch uploaded documents
+        const fetchDocs = async () => {
+          try {
+            const { data: docs } = await supabase
+              .from('documents')
+              .select('*')
+              .eq('client_id', user.id);
+              
+            if (docs) setDocuments(docs);
+          } catch (e) {
+            console.error("Error fetching docs", e);
+          }
+        };
+
+        await fetchDocs();
+        
+        // Auto-refresh documents every 5 seconds
+        intervalId = setInterval(fetchDocs, 5000);
+      } catch (error) {
+        console.error("Error in fetchData", error);
+      } finally {
+        setLoading(false);
       }
-      setUser(user);
-
-      // Fetch uploaded documents
-      const fetchDocs = async () => {
-        const { data: docs } = await supabase
-          .from('documents')
-          .select('*')
-          .eq('client_id', user.id);
-          
-        if (docs) setDocuments(docs);
-      };
-
-      await fetchDocs();
-      setLoading(false);
-
-      // Auto-refresh documents every 5 seconds
-      intervalId = setInterval(fetchDocs, 5000);
     };
 
     fetchData();

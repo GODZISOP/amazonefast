@@ -36,9 +36,9 @@ export default function LoginPage() {
         return;
       }
       if (email.includes('admin') || email === 'shabbir@amazonfastservices.com' || email === 'appointmentstudio@gmail.com') {
-        router.push('/admin-portal');
+        window.location.href = '/admin-portal';
       } else {
-        router.push('/portal');
+        window.location.href = '/portal';
       }
     } else {
       // CUSTOM NODE.JS OTP REGISTRATION FLOW
@@ -149,7 +149,7 @@ export default function LoginPage() {
     }
 
     // 4. Redirect to portal
-    router.push('/portal');
+    window.location.href = '/portal';
   };
 
   return (
