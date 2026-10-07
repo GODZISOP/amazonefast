@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from 'react';
-import { X, FileText, CheckCircle, AlertCircle, Download, Check, XCircle, Filter } from 'lucide-react';
+import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 
 export default function ClientTable({ initialClients }: { initialClients: any[] }) {
@@ -13,7 +13,24 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
 
   const handleStatusUpdate = async (docId: string, newStatus: string) => {
     setUpdating(true);
-    await supabase.from('documents').update({ status: newStatus }).eq('id', docId);
+    
+    // Server API call taake Supabase RLS block na kare
+    try {
+      const res = await fetch('/api/update-doc-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ docId, newStatus })
+      });
+      if (!res.ok) {
+        alert("Update failed! Aapke paas SUPABASE_SERVICE_ROLE_KEY nahi hai .env.local mein.");
+        setUpdating(false);
+        return;
+      }
+    } catch (e) {
+      console.error(e);
+      setUpdating(false);
+      return;
+    }
     
     const updatedClients = clients.map(c => {
       if (c.id === selectedClient.id) {
@@ -51,11 +68,19 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       if (filter === 'All') return true;
       
       const docs = c.documents || [];
-      const hasPending = docs.some((d: any) => d.status === 'Pending Review');
-      const allApproved = docs.length > 0 && docs.every((d: any) => d.status === 'Approved');
+      const sortedDocs = [...docs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
+      const getLatest = (type: string) => sortedDocs.find((d: any) => d.document_type === type);
       
-      if (filter === 'Pending') return c.status === 'New' || c.status === 'Pending' || hasPending;
-      if (filter === 'Approved') return allApproved;
+      const isFullyApproved = 
+        getLatest('ID Card (Front)')?.status === 'Approved' && 
+        getLatest('ID Card (Back)')?.status === 'Approved' && 
+        getLatest('Utility Bill')?.status === 'Approved' && 
+        getLatest('Bank Statement')?.status === 'Approved' && 
+        getLatest('Gmail Credentials')?.status === 'Approved';
+
+      if (filter === 'Approved') return isFullyApproved;
+      if (filter === 'Pending') return !isFullyApproved;
+      
       return true;
     });
   }, [clients, filter]);
@@ -100,15 +125,35 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                   <td colSpan={4} className="py-8 text-center text-gray-400 font-medium">No clients found matching this filter.</td>
                 </tr>
               ) : (
-                filteredClients.map((client: any) => (
+                filteredClients.map((client: any) => {
+                  const docs = client.documents || [];
+                  const sortedDocs = [...docs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
+                  const getLatest = (type: string) => sortedDocs.find((d: any) => d.document_type === type);
+                  
+                  const isFullyApproved = 
+                    getLatest('ID Card (Front)')?.status === 'Approved' && 
+                    getLatest('ID Card (Back)')?.status === 'Approved' && 
+                    getLatest('Utility Bill')?.status === 'Approved' && 
+                    getLatest('Bank Statement')?.status === 'Approved' && 
+                    getLatest('Gmail Credentials')?.status === 'Approved';
+
+                  return (
                   <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition group">
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-xs font-black text-gray-600 border border-gray-200">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-black border ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
                           {client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C'}
                         </div>
                         <div>
-                          <p className="font-bold text-gray-900">{client.full_name || 'Unknown'}</p>
+                          <p className="font-bold text-gray-900 flex items-center gap-2">
+                            {client.full_name || 'Unknown'}
+                            {isFullyApproved && (
+                              <span className="bg-green-100 text-green-700 border border-green-200 text-[9px] uppercase px-2 py-0.5 rounded-full font-bold tracking-wider flex items-center gap-1">
+                                <CheckCircle2 size={10} />
+                                Profile Complete
+                              </span>
+                            )}
+                          </p>
                         </div>
                       </div>
                     </td>
@@ -130,7 +175,8 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                       </button>
                     </td>
                   </tr>
-                ))
+                );
+              })
               )}
             </tbody>
           </table>
@@ -173,12 +219,18 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                         <div>
                           <p className="font-bold text-sm text-gray-900">{doc.document_type}</p>
                           {doc.document_type === 'Gmail Credentials' ? (
-                            <p className="text-xs text-gray-600 mt-2 font-mono bg-white border border-gray-200 p-3 rounded-lg shadow-inner">{doc.file_url}</p>
+                            <div className="mt-2 bg-white border border-gray-200 p-3 rounded-lg shadow-inner">
+                              <p className="text-xs text-gray-500 font-bold mb-1">Email: <span className="font-mono text-gray-800">{doc.file_name}</span></p>
+                              <p className="text-xs text-gray-500 font-bold">Password: <span className="font-mono text-gray-800">{doc.file_url}</span></p>
+                            </div>
                           ) : (
                             <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-xs text-[#ff6b35] hover:underline flex items-center gap-1 mt-1 font-medium">
                               <Download size={12} /> View / Download
                             </a>
                           )}
+                          <p className="text-[9px] text-gray-400 mt-1 uppercase tracking-wide">
+                            Uploaded: {new Date(doc.uploaded_at).toLocaleString()}
+                          </p>
                         </div>
                       </div>
                       

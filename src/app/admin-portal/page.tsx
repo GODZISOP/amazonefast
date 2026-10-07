@@ -24,9 +24,21 @@ export default async function AdminPortal() {
   }
 
   // Calculate Real Stats
+  const isFullyApproved = (client: any) => {
+    const docs = client.documents || [];
+    const sortedDocs = [...docs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
+    const getLatest = (type: string) => sortedDocs.find((d: any) => d.document_type === type);
+    
+    return getLatest('ID Card (Front)')?.status === 'Approved' && 
+           getLatest('ID Card (Back)')?.status === 'Approved' && 
+           getLatest('Utility Bill')?.status === 'Approved' && 
+           getLatest('Bank Statement')?.status === 'Approved' && 
+           getLatest('Gmail Credentials')?.status === 'Approved';
+  };
+
   const totalClients = clients.length;
-  const pendingClients = clients.filter(c => c.status === 'Pending' || c.status === 'New').length;
-  const completedProfiles = clients.filter(c => c.status === 'Active' || c.status === 'Completed').length;
+  const approvedClientsCount = clients.filter(c => isFullyApproved(c)).length;
+  const pendingClientsCount = totalClients - approvedClientsCount;
   const unreadNotifs = notifications.filter(n => !n.is_read).length;
 
   return (
@@ -117,8 +129,8 @@ export default async function AdminPortal() {
             <div className="p-6 rounded-2xl border border-red-100 bg-white flex items-center justify-between shadow-[0_4px_20px_rgba(255,59,48,0.06)] hover:shadow-[0_4px_25px_rgba(255,59,48,0.1)] transition relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
               <div>
-                <p className="text-red-500 text-xs font-bold tracking-wider uppercase mb-1">Pending Documents</p>
-                <h3 className="text-3xl font-black text-red-600">{pendingClients}</h3>
+                <p className="text-red-500 text-xs font-bold tracking-wider uppercase mb-1">Pending Clients</p>
+                <h3 className="text-3xl font-black text-red-600">{pendingClientsCount}</h3>
               </div>
               <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-500">
                 <AlertCircle size={24} />
@@ -126,8 +138,8 @@ export default async function AdminPortal() {
             </div>
             <div className="p-6 rounded-2xl border border-gray-200 bg-white flex items-center justify-between shadow-sm hover:shadow-md transition">
               <div>
-                <p className="text-gray-500 text-xs font-bold tracking-wider uppercase mb-1">Completed Profiles</p>
-                <h3 className="text-3xl font-black text-gray-900">{completedProfiles}</h3>
+                <p className="text-gray-500 text-xs font-bold tracking-wider uppercase mb-1">Approved Clients</p>
+                <h3 className="text-3xl font-black text-gray-900">{approvedClientsCount}</h3>
               </div>
               <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500">
                 <CheckCircle size={24} />

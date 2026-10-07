@@ -37,7 +37,8 @@ export default function ClientPortal() {
             const { data: docs } = await supabase
               .from('documents')
               .select('*')
-              .eq('client_id', user.id);
+              .eq('client_id', user.id)
+              .order('uploaded_at', { ascending: false });
               
             if (docs) setDocuments(docs);
           } catch (e) {
@@ -191,6 +192,14 @@ export default function ClientPortal() {
   const bankDocs = getDocuments('Bank Statement');
   const gmailDoc = getDocument('Gmail Credentials');
 
+  const isProfileApproved = 
+    frontDoc?.status === 'Approved' &&
+    backDoc?.status === 'Approved' &&
+    utilityDocs.length > 0 && utilityDocs[0].status === 'Approved' &&
+    bankDocs.length > 0 && bankDocs[0].status === 'Approved' &&
+    gmailDoc?.status === 'Approved';
+
+
   return (
     <div className="min-h-screen bg-[#f9fafb] text-[#111] pt-24 pb-20 px-4 md:px-8 font-sans selection:bg-[#ff6b35] selection:text-white">
       <header className="fixed top-0 left-0 w-full h-16 border-b border-gray-200 bg-white/90 backdrop-blur-lg flex items-center justify-between px-6 md:px-12 z-50 shadow-sm">
@@ -232,6 +241,19 @@ export default function ClientPortal() {
             <p className="text-xs text-gray-500 leading-relaxed font-medium">All uploaded documents are encrypted. Access is strictly limited to verified Amazon Fast Services compliance administrators.</p>
           </div>
         </div>
+
+        {isProfileApproved && (
+          <div className="w-full bg-green-50 border border-green-200 shadow-sm rounded-2xl p-6 mb-12 flex items-start gap-4 hover:shadow-md transition">
+            <div className="mt-1 text-green-600 bg-white border border-green-100 p-2 rounded-lg shadow-sm">
+              <CheckCircle2 size={24} strokeWidth={2.5} />
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-1 text-green-900">Congratulations!</h4>
+              <p className="text-sm text-green-700 leading-relaxed font-medium">Your profile is fully complete and all your documents have been approved for Amazon FBA Services. You are ready for the next steps!</p>
+            </div>
+          </div>
+        )}
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Custom Dual-Zone ID Card Component */}
@@ -316,12 +338,25 @@ export default function ClientPortal() {
           <p className="text-sm text-gray-500 mb-6 font-medium">Please provide the Gmail address and password you want to associate with your Amazon FBA account. This is securely encrypted.</p>
           
           {gmailDoc ? (
-            <div className="bg-green-50 rounded-xl p-4 flex items-center justify-between border border-green-200">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 size={20} className="text-green-500" />
-                <p className="text-sm font-bold text-gray-800">Credentials submitted securely for: {gmailDoc.file_name}</p>
+            <div className={`rounded-xl p-4 flex flex-col gap-3 border shadow-sm ${gmailDoc.status === 'Approved' ? 'bg-green-50 border-green-200' : gmailDoc.status === 'Rejected' ? 'bg-red-50 border-red-200' : 'bg-gray-50 border-gray-200'}`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {gmailDoc.status === 'Approved' ? <CheckCircle2 size={20} className="text-green-500" /> : gmailDoc.status === 'Rejected' ? <AlertCircle size={20} className="text-red-500" /> : <Clock size={20} className="text-orange-500" />}
+                  <p className="text-sm font-bold text-gray-800">
+                    {gmailDoc.status === 'Rejected' ? 'Credentials Rejected. Please re-upload.' : `Credentials submitted for: ${gmailDoc.file_name}`}
+                  </p>
+                </div>
+                <button onClick={() => handleDeleteDocument(gmailDoc.id)} className="text-xs font-bold text-red-500 hover:text-red-700 bg-white px-3 py-1.5 rounded-lg border border-red-100 transition shadow-sm">
+                  {gmailDoc.status === 'Rejected' ? 'Re-upload Credentials' : 'Update Credentials'}
+                </button>
               </div>
-              <button onClick={() => handleDeleteDocument(gmailDoc.id)} className="text-xs font-bold text-red-500 hover:text-red-700 bg-white px-3 py-1.5 rounded-lg border border-red-100 transition">Update Credentials</button>
+              <div className={`self-start flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                gmailDoc.status === 'Approved' ? 'bg-green-100 text-green-700 border-green-200' : 
+                gmailDoc.status === 'Rejected' ? 'bg-red-100 text-red-700 border-red-200' : 
+                'bg-orange-100 text-orange-700 border-orange-200'
+              }`}>
+                {gmailDoc.status}
+              </div>
             </div>
           ) : (
             <form onSubmit={handleGmailSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
