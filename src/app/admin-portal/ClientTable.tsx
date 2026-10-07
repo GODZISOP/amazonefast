@@ -46,22 +46,29 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
     setUpdating(false);
   };
 
-  // Auto-refresh the table every 5 seconds
+  // Auto-refresh the table every 5 seconds securely via API
   useEffect(() => {
     const fetchLatestData = async () => {
-      const { data } = await supabase.from('clients').select('*, documents(*)').order('created_at', { ascending: false });
-      if (data) {
-        setClients(data);
-        if (selectedClient) {
-          const updatedSelected = data.find((c: any) => c.id === selectedClient.id);
-          if (updatedSelected) setSelectedClient(updatedSelected);
+      try {
+        const res = await fetch('/api/get-all-clients');
+        if (res.ok) {
+          const { data } = await res.json();
+          if (data) {
+            setClients(data);
+            if (selectedClient) {
+              const updatedSelected = data.find((c: any) => c.id === selectedClient.id);
+              if (updatedSelected) setSelectedClient(updatedSelected);
+            }
+          }
         }
+      } catch (err) {
+        console.error("Failed to fetch latest clients", err);
       }
     };
     
     const intervalId = setInterval(fetchLatestData, 5000);
     return () => clearInterval(intervalId);
-  }, [selectedClient, supabase]);
+  }, [selectedClient]);
 
   const filteredClients = useMemo(() => {
     return clients.filter(c => {
