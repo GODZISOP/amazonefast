@@ -101,16 +101,27 @@ export default function LoginPage() {
       options: { data: { full_name: fullName } }
     });
 
-    if (signUpError) {
+    if (signUpError && signUpError.message.toLowerCase().includes('already registered')) {
+      // User already exists, try logging them in!
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      
+      if (signInError) {
+        setError("Account exists. Please use the Login tab or check your password.");
+        setLoading(false);
+        return;
+      }
+      finalSession = signInData.session;
+    } else if (signUpError) {
       setError(signUpError.message);
       setLoading(false);
       return;
-    }
-
-    if (signUpData?.session) {
+    } else if (signUpData?.session) {
       finalSession = signUpData.session;
     } else {
-      // If session is null, it means the user already exists OR 'Confirm email' is still ON in Supabase!
+      // If session is null, it means 'Confirm email' is still ON in Supabase!
       // Let's try to log them in directly.
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email,
@@ -118,7 +129,6 @@ export default function LoginPage() {
       });
 
       if (signInError) {
-        // This will clearly show 'Email not confirmed' if they forgot to turn it off!
         setError(signInError.message || "Failed to log in automatically.");
         setLoading(false);
         return;
