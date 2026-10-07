@@ -1,77 +1,287 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, Users, Trophy, Target } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+import { GlobeVideo } from "@/components/GlobeVideo";
+import SplitText from "@/components/SplitText";
 
 export default function AboutPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      // Intro Hero Animation
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      tl.from(".hero-pill", { y: 30, opacity: 0, duration: 1 })
+        .from(".hero-desc", { y: 20, opacity: 0, duration: 1 }, "-=0.2");
+
+      // Scroll Animations for Service Blocks
+      gsap.utils.toArray(".service-block").forEach((block: any) => {
+        gsap.from(block, {
+          scrollTrigger: {
+            trigger: block,
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+      });
+
+      // Small-to-Big Scale Animation for Images
+      gsap.utils.toArray(".scale-image").forEach((img: any) => {
+        gsap.fromTo(img, 
+          { scale: 0.6, opacity: 0 }, 
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: img,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+
+      // Scroll Animation for Cosmic Stats Box
+      gsap.from(".cosmic-stats", {
+        scrollTrigger: {
+          trigger: ".cosmic-stats",
+          start: "top 75%",
+        },
+        scale: 0.95,
+        y: 60,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out"
+      });
+
+      // Scroll Animation for Value Cards
+      gsap.utils.toArray(".value-card").forEach((card: any, i: number) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          delay: i * 0.1,
+          ease: "power3.out"
+        });
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a] text-white pt-32 pb-20 min-h-screen">
-      
-      {/* Background ambient glow */}
-      <div className="absolute top-40 left-1/4 w-96 h-96 bg-[#ff6b35]/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <div ref={containerRef} className="relative font-sans overflow-x-hidden bg-[#0a0a0a] text-white pt-32 pb-20 min-h-screen">
+
+      {/* Cinematic Globe Background for the Hero Section */}
+      <div
+        className="absolute top-0 left-0 w-full h-[600px] md:h-[800px] pointer-events-none z-0"
+        style={{
+          maskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)"
+        }}
+      >
+        <GlobeVideo />
+      </div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
-        
+
         {/* Header Section */}
         <div className="flex flex-col items-center text-center mb-20">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+          <div className="hero-pill inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
             <span className="text-[#ff6b35] text-sm font-semibold tracking-wide uppercase">Who We Are</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-            Pioneering Amazon <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">Success Stories</span>
-          </h1>
-          <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed">
+
+          <div className="mb-6 flex flex-col items-center">
+            <SplitText
+              text="Pioneering Amazon"
+              className="text-5xl md:text-7xl font-bold tracking-tight"
+              delay={40}
+              duration={0.8}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              textAlign="center"
+              tag="h1"
+            />
+            <SplitText
+              text="Success Stories"
+              className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40"
+              delay={40}
+              duration={0.8}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 30 }}
+              to={{ opacity: 1, y: 0 }}
+              textAlign="center"
+              tag="h1"
+            />
+          </div>
+
+          <p className="hero-desc text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed">
             Amazon Fast Services is a top-tier e-commerce marketing agency dedicated to scaling brands, automating FBA businesses, and delivering unmatched ROAS.
           </p>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-          <div className="relative rounded-3xl overflow-hidden aspect-square lg:aspect-auto lg:h-[600px] border border-white/10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff6b35]/20 to-transparent z-10 mix-blend-overlay"></div>
-            <Image 
-              src="/theme_gradient.png" 
-              alt="Amazon Fast Services Team" 
-              fill
-              className="object-cover"
-            />
+        {/* Editorial Team Section */}
+        <div className="relative w-full max-w-[1200px] mx-auto mb-32 pt-10">
+
+          {/* Ambient Radial Center Glow (Dark Orange/Red) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(200,50,0,0.4)_0%,rgba(0,0,0,0)_60%)] pointer-events-none z-0"></div>
+
+          {/* Section Header */}
+          <div className="relative z-10 mb-20">
+            <h2 className="text-6xl md:text-8xl font-normal tracking-tight uppercase mb-4">About Us</h2>
+            <p className="text-white/40 text-xs md:text-sm uppercase tracking-widest">
+              We joined forces to give people the start we wished we had at the beginning.
+            </p>
           </div>
 
-          <div className="flex flex-col gap-8">
-            <h2 className="text-3xl md:text-4xl font-bold">Your Growth Partner on the World's Biggest Marketplace</h2>
-            <p className="text-white/60 leading-relaxed text-lg">
-              We don't just manage accounts; we build empires. With years of deep-rooted experience in the Amazon ecosystem, our team understands the nuances of the A9 algorithm, competitive PPC strategies, and conversion-optimized storefronts.
-            </p>
-            <p className="text-white/60 leading-relaxed text-lg">
-              Whether you are a startup looking to launch your first private label or an enterprise aiming to scale globally, we provide tailored, data-driven solutions that guarantee measurable results.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
-              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col gap-3">
-                <Trophy className="text-[#ff6b35] w-8 h-8" />
-                <h4 className="text-xl font-semibold">Award-Winning</h4>
-                <p className="text-white/50 text-sm">Recognized for top-tier Amazon brand management.</p>
+          {/* Service Block 1 - Left Image, Right Text */}
+          <div className="service-block flex flex-col md:flex-row items-start relative w-full mb-32 z-10">
+            {/* Image Box */}
+            <div className="w-full md:w-[45%] flex flex-col items-start relative">
+              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
+                  alt="Amazon FBA Wholesale"
+                  fill
+                  className="object-cover scale-image"
+                />
               </div>
-              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col gap-3">
-                <Target className="text-[#ff6b35] w-8 h-8" />
-                <h4 className="text-xl font-semibold">Data-Driven</h4>
-                <p className="text-white/50 text-sm">Every decision is backed by analytics and market research.</p>
+              <div className="flex gap-4 mt-8 ml-4">
+                <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&lt;</button>
+                <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&gt;</button>
+              </div>
+            </div>
+
+            {/* Connecting Line (Desktop) */}
+            <div className="hidden md:block absolute top-[10%] left-[40%] w-[30%] h-[1px] bg-white/20 z-0"></div>
+
+            {/* Text Box */}
+            <div className="w-full md:w-[50%] mt-12 md:mt-0 md:ml-auto flex flex-col items-start md:items-end text-left md:text-right">
+              <SplitText
+                text="FBA & WHOLESALE"
+                className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1"
+                delay={20}
+                duration={0.8}
+                ease="power3.out"
+                splitType="chars"
+                tag="h3"
+              />
+              <p className="text-white/50 text-sm md:text-base mb-12 md:mb-40">End-to-end account management & scaling</p>
+
+              <p className="max-w-[300px] text-white/80 text-sm leading-relaxed">
+                We build sustainable, long-term wholesale and private label businesses. Our approach ensures stable supply chains, brand approvals, and consistent profitability without the usual roadblocks.
+              </p>
+            </div>
+          </div>
+
+          {/* Service Block 2 - Left Text, Right Image */}
+          <div className="service-block flex flex-col-reverse md:flex-row items-end relative w-full z-10">
+            {/* Text Box */}
+            <div className="w-full md:w-[50%] mb-12 md:mb-0 flex flex-col items-start text-left mt-12 md:mt-0">
+              <div className="mb-12 md:mb-40">
+                <SplitText
+                  text="GLOBAL EXPANSION"
+                  className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1"
+                  delay={20}
+                  duration={0.8}
+                  ease="power3.out"
+                  splitType="chars"
+                  tag="h3"
+                />
+                <p className="text-white/50 text-sm md:text-base">USA LLC & UK LTD Formations</p>
+              </div>
+
+              <p className="max-w-[300px] text-white/80 text-sm leading-relaxed">
+                From company formation to global banking, we handle the complete legal and operational setup. We empower sellers globally to dominate international Amazon marketplaces seamlessly.
+              </p>
+            </div>
+
+            {/* Connecting Line (Desktop) */}
+            <div className="hidden md:block absolute top-[10%] left-[25%] w-[35%] h-[1px] bg-white/20 z-0"></div>
+
+            {/* Image Box */}
+            <div className="w-full md:w-[45%] flex flex-col items-end md:ml-auto relative">
+              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+                  alt="Global Expansion"
+                  fill
+                  className="object-cover scale-image"
+                />
               </div>
             </div>
           </div>
         </div>
 
+        {/* Cosmic Stats Section (Smaller Text, Placed Below Services) */}
+        <div className="cosmic-stats relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] rounded-[30px] md:rounded-[40px] overflow-hidden mb-32 border border-[#ff3b30]/20 shadow-[0_0_80px_rgba(255,59,48,0.15)] bg-[#050000]">
+          {/* Background Image (Orbs) */}
+          <Image
+            src="/image copy 3.png"
+            alt="Amazon Fast Services Audience Stats"
+            fill
+            className="object-cover opacity-90"
+          />
+
+          {/* Top Left Text (Smaller) */}
+          <div className="absolute top-10 left-6 md:top-14 md:left-10 max-w-[280px] md:max-w-[380px] z-20">
+            <h2 className="text-xl md:text-[26px] font-medium text-white/95 leading-snug tracking-wide">
+              Your brand will be seen by <br className="hidden md:block" /> an audience that is <span className="text-[#ff3b30] font-bold">ready to buy</span> even in tough times
+            </h2>
+          </div>
+
+          {/* Bottom Left Glassmorphism Card (Smaller) */}
+          <div className="absolute bottom-8 left-6 md:bottom-10 md:left-10 z-20 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-5 max-w-[260px] md:max-w-[300px] shadow-2xl">
+            <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mb-3 border border-white/5">
+              <Users className="text-white/80 w-4 h-4" />
+            </div>
+            <p className="text-white/70 text-[11px] md:text-xs leading-relaxed">
+              Our strategies ensure that the absolute majority of your audience are high-converting, premium buyers with strong purchasing power, rather than window shoppers.
+            </p>
+          </div>
+        </div>
         {/* Core Values */}
         <div className="mb-24">
-          <h3 className="text-3xl font-bold text-center mb-12">Our Core Principles</h3>
+          <div className="flex justify-center mb-12">
+            <SplitText
+              text="Our Core Principles"
+              className="text-3xl font-bold text-center"
+              delay={30}
+              duration={0.8}
+              ease="power3.out"
+              splitType="chars"
+              tag="h3"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { title: "Transparency", desc: "No hidden fees, no black-hat tactics. Just clear reporting and honest communication." },
               { title: "Innovation", desc: "We stay ahead of Amazon's ever-changing policies and algorithm updates." },
               { title: "Dedication", desc: "Your brand's success is our success. We treat your investment as our own." }
             ].map((value, i) => (
-              <div key={i} className="bg-[#111] border border-white/5 p-8 rounded-3xl hover:bg-white/5 transition-colors">
+              <div key={i} className="value-card bg-[#111] border border-white/5 p-8 rounded-3xl hover:bg-white/5 transition-colors">
                 <CheckCircle2 className="text-[#ff6b35] mb-6 w-10 h-10" />
                 <h4 className="text-xl font-bold mb-3">{value.title}</h4>
                 <p className="text-white/50 leading-relaxed">{value.desc}</p>
@@ -92,16 +302,16 @@ export default function AboutPage() {
             <p className="text-white/95 text-lg md:text-xl mb-8 max-w-xl drop-shadow-md font-medium">
               Let's discuss how we can skyrocket your Amazon sales and automate your business operations.
             </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
-              Book a Call
-              <ArrowUpRight size={20} />
-            </Link>
-            <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]">
-              WhatsApp Message
-              <ArrowUpRight size={20} />
-            </Link>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
+                Book a Call
+                <ArrowUpRight size={20} />
+              </Link>
+              <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]">
+                WhatsApp Message
+                <ArrowUpRight size={20} />
+              </Link>
+            </div>
           </div>
         </div>
 
