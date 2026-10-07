@@ -12,7 +12,7 @@ interface Message {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hi there! 👋 I am the AmazonFast AI assistant. How can I help you scale your brand today?" }
+    { role: "assistant", content: "Hi there! 👋 I am the Amazon Fast Services AI assistant. How can I help you scale your brand today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -86,7 +86,7 @@ export default function Chatbot() {
                   <Bot size={22} />
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold leading-tight">AmazonFast AI</h3>
+                  <h3 className="text-white font-semibold leading-tight">Amazon Fast Services AI</h3>
                   <p className="text-white/50 text-xs">Replies instantly</p>
                 </div>
               </div>
