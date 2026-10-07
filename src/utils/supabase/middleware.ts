@@ -43,7 +43,13 @@ export async function updateSession(request: NextRequest) {
   // Prevent logged-in users from seeing the login page
   if (user && isAuthRoute) {
     const url = request.nextUrl.clone()
-    url.pathname = '/portal' // You can add logic to redirect to admin-portal based on email later
+    const email = user.email || '';
+    const isAdmin = email.includes('admin') || 
+                    email === 'shabbir@amazonfastservices.com' || 
+                    email === 'appointmentstudio@gmail.com' ||
+                    email === 'dimdavid480@gmail.com';
+                    
+    url.pathname = isAdmin ? '/admin-portal' : '/portal';
     return NextResponse.redirect(url)
   }
 

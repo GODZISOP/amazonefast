@@ -35,7 +35,12 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
-      if (email.includes('admin') || email === 'shabbir@amazonfastservices.com' || email === 'appointmentstudio@gmail.com') {
+      const isAdmin = email.includes('admin') || 
+                      email === 'shabbir@amazonfastservices.com' || 
+                      email === 'appointmentstudio@gmail.com' ||
+                      email === 'dimdavid480@gmail.com';
+                      
+      if (isAdmin) {
         window.location.href = '/admin-portal';
       } else {
         window.location.href = '/portal';
