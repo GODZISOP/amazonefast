@@ -27,10 +27,8 @@ export const metadata: Metadata = {
   },
 };
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ClientLayoutManager from "@/components/ClientLayoutManager";
 import InitialLoader from "@/components/InitialLoader";
-import Chatbot from "@/components/Chatbot";
 
 export default function RootLayout({
   children,
@@ -52,10 +50,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a]">
         <InitialLoader />
-        <Navbar />
-        {children}
-        <Footer />
-        <Chatbot />
+        <ClientLayoutManager>
+          {children}
+        </ClientLayoutManager>
       </body>
     </html>
   );

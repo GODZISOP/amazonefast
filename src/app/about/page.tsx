@@ -7,10 +7,7 @@ import { ArrowUpRight, CheckCircle2, Users, Trophy, Target } from "lucide-react"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
-import { GlobeVideo } from "@/components/GlobeVideo";
-import SplitText from "@/components/SplitText";
+gsap.registerPlugin(ScrollTrigger);import SplitText from "@/components/SplitText";
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -99,7 +96,6 @@ export default function AboutPage() {
           WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)"
         }}
       >
-        <GlobeVideo />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
