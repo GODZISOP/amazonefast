@@ -118,8 +118,8 @@ export default function LoginPage() {
       return;
     }
 
-    // 3. Insert Client Profile & Notify Admin (Fire and forget)
-    fetch('/api/notify-admin', {
+    // 3. Insert Client Profile & Notify Admin (Await so they don't get cancelled)
+    await fetch('/api/notify-admin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'NEW_REGISTRATION', fullName, email })
@@ -128,21 +128,11 @@ export default function LoginPage() {
     if (finalSession?.user) {
       const realUserId = finalSession.user.id;
       
-      supabase.from('clients').insert({
-        id: realUserId,
-        email: email,
-        full_name: fullName,
-        status: 'New'
-      }).then(({ error }) => {
-        if (error) console.error("Client Insert Error:", error);
-      });
-      
-      supabase.from('notifications').insert({
-        client_id: realUserId,
-        message: `New client registered: ${fullName} (${email}).`,
-      }).then(({ error }) => {
-        if (error) console.error("Notification Insert Error:", error);
-      });
+      await fetch('/api/init-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: realUserId, email: email, fullName: fullName })
+      }).catch(e => console.error(e));
     }
 
     // 4. Redirect to portal
