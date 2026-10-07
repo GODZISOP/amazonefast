@@ -125,40 +125,8 @@ export default async function AdminPortal() {
 
           {/* Content */}
           <div className="flex-1 p-4 md:p-8 overflow-y-auto w-full">
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-10 w-full">
-              <div className="p-6 rounded-2xl border border-gray-200 bg-white flex items-center justify-between shadow-sm hover:shadow-md transition">
-                <div>
-                  <p className="text-gray-500 text-xs font-bold tracking-wider uppercase mb-1">Total Active Clients</p>
-                  <h3 className="text-3xl font-black text-gray-900">{totalClients}</h3>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-[#ff6b35]/10 flex items-center justify-center text-[#ff6b35]">
-                  <Users size={24} />
-                </div>
-              </div>
-              <div className="p-6 rounded-2xl border border-red-100 bg-white flex items-center justify-between shadow-[0_4px_20px_rgba(255,59,48,0.06)] hover:shadow-[0_4px_25px_rgba(255,59,48,0.1)] transition relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
-                <div>
-                  <p className="text-red-500 text-xs font-bold tracking-wider uppercase mb-1">Pending Clients</p>
-                  <h3 className="text-3xl font-black text-red-600">{pendingClientsCount}</h3>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-500">
-                  <AlertCircle size={24} />
-                </div>
-              </div>
-              <div className="p-6 rounded-2xl border border-gray-200 bg-white flex items-center justify-between shadow-sm hover:shadow-md transition">
-                <div>
-                  <p className="text-gray-500 text-xs font-bold tracking-wider uppercase mb-1">Approved Clients</p>
-                  <h3 className="text-3xl font-black text-gray-900">{approvedClientsCount}</h3>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center text-green-500">
-                  <CheckCircle size={24} />
-                </div>
-              </div>
-            </div>
-
-            {/* Table */}
-            <ClientTable initialClients={clients} />
+          {/* Table */}
+          <ClientTable initialClients={clients} />
           </div>
         </main>
       </div>
