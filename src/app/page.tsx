@@ -217,7 +217,7 @@ export default function Home() {
             {/* Bright moving pulse connecting them endlessly */}
             <motion.path
 
-d="M 20 60 L 30 75 L 70 85 L 75 63"
+              d="M 20 60 L 30 75 L 70 85 L 75 63"
               fill="none"
               stroke="#ff6b35"
               strokeWidth="2.5"
@@ -281,8 +281,8 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
       <AnimatedGraphSection />
 
       {/* Second Section: Perfect Full Cover Image with Scroll Text */}
-      <section 
-        ref={sectionRef} 
+      <section
+        ref={sectionRef}
         className="relative w-full h-[85vh] md:h-screen flex justify-center items-center overflow-hidden bg-cover bg-bottom bg-no-repeat"
         style={{ backgroundImage: "url('/section2-highres.jpg')" }}
       >
@@ -437,7 +437,7 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
                   }}
                   className="relative z-10 shrink-0 w-[60px] h-[60px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-colors duration-300"
                 >
-                  <motion.span 
+                  <motion.span
                     variants={{
                       dim: { color: "rgba(255,255,255,0.5)" },
                       glowing: { color: "rgba(255,107,53,1)" }
@@ -768,7 +768,7 @@ d="M 20 60 L 30 75 L 70 85 L 75 63"
 
           {/* Left Text */}
           <div className="w-full lg:w-1/2">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -887,7 +887,7 @@ function FAQSection() {
         {/* Vertical beam section wrapper */}
         <div className="relative pt-20">
           {/* Subtle background grid pattern */}
-          <div 
+          <div
             className="absolute inset-x-0 -top-24 h-[300px] pointer-events-none opacity-25"
             style={{
               backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)`,
@@ -959,7 +959,7 @@ function FAQSection() {
                           </span>
                           <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${isOpen ? 'bg-[#ff6b35] border-[#ff6b35] rotate-45' : 'border-white/20 group-hover:border-[#ff6b35]/50'}`}>
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                              <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                              <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                             </svg>
                           </span>
                         </button>
@@ -983,5 +983,5 @@ function FAQSection() {
         </div>
       </div>
     </section>
-);
+  );
 }

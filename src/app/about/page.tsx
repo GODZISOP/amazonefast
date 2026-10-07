@@ -6,8 +6,9 @@ import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, Users, Trophy, Target } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LightRays } from "@/components/LightRays";
 
-gsap.registerPlugin(ScrollTrigger);import SplitText from "@/components/SplitText";
+gsap.registerPlugin(ScrollTrigger); import SplitText from "@/components/SplitText";
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -36,8 +37,8 @@ export default function AboutPage() {
 
       // Small-to-Big Scale Animation for Images
       gsap.utils.toArray(".scale-image").forEach((img: any) => {
-        gsap.fromTo(img, 
-          { scale: 0.6, opacity: 0 }, 
+        gsap.fromTo(img,
+          { scale: 0.6, opacity: 0 },
           {
             scale: 1,
             opacity: 1,
@@ -90,12 +91,26 @@ export default function AboutPage() {
 
       {/* Cinematic Globe Background for the Hero Section */}
       <div
-        className="absolute top-0 left-0 w-full h-[600px] md:h-[800px] pointer-events-none z-0"
+        className="absolute top-0 left-0 w-full h-[600px] md:h-[800px] pointer-events-none z-0 overflow-hidden"
         style={{
           maskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)",
           WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)"
         }}
       >
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ff6b35"
+          raysSpeed={0.6}
+          lightSpread={1.5}
+          rayLength={2.5}
+          pulsating={true}
+          fadeDistance={1.2}
+          saturation={0.9}
+          followMouse={true}
+          mouseInfluence={0.15}
+          noiseAmount={0.03}
+          distortion={0.04}
+        />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
@@ -156,9 +171,9 @@ export default function AboutPage() {
           <div className="service-block flex flex-col md:flex-row items-start relative w-full mb-32 z-10">
             {/* Image Box */}
             <div className="w-full md:w-[45%] flex flex-col items-start relative">
-              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden">
+              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop"
+                  src="/srv_store_creation.jpg"
                   alt="Amazon FBA Wholesale"
                   fill
                   className="object-cover scale-image"
@@ -177,39 +192,39 @@ export default function AboutPage() {
             <div className="w-full md:w-[50%] mt-12 md:mt-0 md:ml-auto flex flex-col items-start md:items-end text-left md:text-right">
               <SplitText
                 text="FBA & WHOLESALE"
-                className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1"
+                className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1 text-white"
                 delay={20}
                 duration={0.8}
                 ease="power3.out"
                 splitType="chars"
                 tag="h3"
               />
-              <p className="text-white/50 text-sm md:text-base mb-12 md:mb-40">End-to-end account management & scaling</p>
+              <p className="text-[#ff6b35] text-sm md:text-base mb-12 md:mb-40 font-medium tracking-wider">END-TO-END ACCOUNT MANAGEMENT & SCALING</p>
 
-              <p className="max-w-[300px] text-white/80 text-sm leading-relaxed">
+              <p className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed">
                 We build sustainable, long-term wholesale and private label businesses. Our approach ensures stable supply chains, brand approvals, and consistent profitability without the usual roadblocks.
               </p>
             </div>
           </div>
 
           {/* Service Block 2 - Left Text, Right Image */}
-          <div className="service-block flex flex-col-reverse md:flex-row items-end relative w-full z-10">
+          <div className="service-block flex flex-col-reverse md:flex-row items-end relative w-full mb-32 z-10">
             {/* Text Box */}
             <div className="w-full md:w-[50%] mb-12 md:mb-0 flex flex-col items-start text-left mt-12 md:mt-0">
               <div className="mb-12 md:mb-40">
                 <SplitText
                   text="GLOBAL EXPANSION"
-                  className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1"
+                  className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1 text-white"
                   delay={20}
                   duration={0.8}
                   ease="power3.out"
                   splitType="chars"
                   tag="h3"
                 />
-                <p className="text-white/50 text-sm md:text-base">USA LLC & UK LTD Formations</p>
+                <p className="text-[#ff6b35] text-sm md:text-base font-medium tracking-wider">USA LLC & UK LTD FORMATIONS</p>
               </div>
 
-              <p className="max-w-[300px] text-white/80 text-sm leading-relaxed">
+              <p className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed">
                 From company formation to global banking, we handle the complete legal and operational setup. We empower sellers globally to dominate international Amazon marketplaces seamlessly.
               </p>
             </div>
@@ -219,9 +234,9 @@ export default function AboutPage() {
 
             {/* Image Box */}
             <div className="w-full md:w-[45%] flex flex-col items-end md:ml-auto relative">
-              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden">
+              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+                  src="/theme_gradient.png"
                   alt="Global Expansion"
                   fill
                   className="object-cover scale-image"

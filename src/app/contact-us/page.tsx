@@ -1,12 +1,32 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 
 import { motion } from "framer-motion";
 
 export default function ContactUs() {
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (!res.ok) throw new Error('Failed to send');
+      setStatus('success');
+      setFormData({ firstName: '', lastName: '', email: '', message: '' });
+    } catch(err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="relative font-sans bg-[#0a0a0a] text-white pt-32 pb-24 min-h-screen overflow-x-hidden">
       {/* Background glow */}
@@ -80,30 +100,33 @@ export default function ContactUs() {
             <h3 className="text-2xl font-bold text-white mb-2">Send us a Message</h3>
             <p className="text-white/50 mb-8 text-sm">We'll get back to you within 24 hours.</p>
             
-            <form className="flex flex-col gap-4 mb-8" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-4 mb-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-sm text-white/70 font-medium px-1">First Name</label>
-                  <input type="text" placeholder="John" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+                  <input type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} required placeholder="John" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-sm text-white/70 font-medium px-1">Last Name</label>
-                  <input type="text" placeholder="Doe" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+                  <input type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} placeholder="Doe" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
                 </div>
               </div>
               
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm text-white/70 font-medium px-1">Email Address</label>
-                <input type="email" placeholder="john@example.com" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
+                <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} required placeholder="john@example.com" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors" />
               </div>
               
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm text-white/70 font-medium px-1">Message</label>
-                <textarea rows={4} placeholder="How can we help you scale on Amazon?" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors resize-none"></textarea>
+                <textarea rows={4} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} required placeholder="How can we help you scale on Amazon?" className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff6b35]/50 transition-colors resize-none"></textarea>
               </div>
               
-              <button type="submit" className="mt-2 w-full bg-[#ff6b35] hover:bg-[#e85c2b] text-white py-4 rounded-xl font-bold transition-colors shadow-[0_0_15px_rgba(255,107,53,0.3)] hover:shadow-[0_0_25px_rgba(255,107,53,0.5)]">
-                Send Message
+              {status === 'success' && <p className="text-green-500 text-sm font-bold bg-green-500/10 p-3 rounded-lg border border-green-500/20">Message sent successfully! We will get back to you soon.</p>}
+              {status === 'error' && <p className="text-red-500 text-sm font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">Failed to send message. Please try again or email us directly.</p>}
+
+              <button type="submit" disabled={status === 'loading'} className="mt-2 w-full bg-[#ff6b35] hover:bg-[#e85c2b] text-white py-4 rounded-xl font-bold transition-colors shadow-[0_0_15px_rgba(255,107,53,0.3)] hover:shadow-[0_0_25px_rgba(255,107,53,0.5)] disabled:opacity-50 disabled:cursor-not-allowed">
+                {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
             </form>
             
