@@ -35,16 +35,8 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
-      const isAdmin = email.includes('admin') || 
-                      email === 'shabbir@amazonfastservices.com' || 
-                      email === 'appointmentstudio@gmail.com' ||
-                      email === 'dimdavid480@gmail.com';
-                      
-      if (isAdmin) {
-        window.location.href = '/admin-portal';
-      } else {
-        window.location.href = '/portal';
-      }
+      
+      window.location.href = '/portal';
     } else {
       // CUSTOM NODE.JS OTP REGISTRATION FLOW
       // 1. Send OTP to email first

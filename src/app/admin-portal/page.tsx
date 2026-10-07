@@ -1,10 +1,16 @@
 import { Users, FileText, CheckCircle, Clock, Search, Bell, Settings, MoreVertical, FileCheck, AlertCircle, Activity } from 'lucide-react';
-import { createClient } from '@/utils/supabase/server';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import Image from 'next/image';
 import ClientTable from './ClientTable';
+import AdminProtector from './AdminProtector';
+import AdminLogoutButton from './AdminLogoutButton';
 
 export default async function AdminPortal() {
-  const supabase = await createClient();
+  // Use service role to bypass RLS for admin panel
+  const supabase = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
 
   // Fetch Real Data (wrapped in try-catch in case tables don't exist yet)
   let clients: any[] = [];
@@ -42,9 +48,10 @@ export default async function AdminPortal() {
   const unreadNotifs = notifications.filter(n => !n.is_read).length;
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] text-[#111] flex font-sans selection:bg-[#ff6b35] selection:text-white">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-gray-200 bg-white hidden md:flex flex-col shadow-sm z-20">
+    <AdminProtector>
+      <div className="min-h-screen bg-[#f9fafb] text-[#111] flex font-sans selection:bg-[#ff6b35] selection:text-white">
+        {/* Sidebar */}
+        <aside className="w-64 border-r border-gray-200 bg-white hidden md:flex flex-col shadow-sm z-20">
         <div className="h-20 flex items-center px-8 border-b border-gray-100">
           <Image src="/logo-new.png" alt="AmazonFast Logo" width={140} height={50} style={{ height: '50px', width: 'auto' }} className="object-contain" priority />
         </div>
@@ -65,10 +72,13 @@ export default async function AdminPortal() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="flex-1 flex flex-col overflow-hidden w-full">
         {/* Header */}
-        <header className="h-20 border-b border-gray-200 flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-10">
-          <h1 className="text-xl font-bold tracking-tight text-gray-900">Client Management</h1>
+        <header className="h-16 md:h-20 border-b border-gray-200 flex items-center justify-between px-4 md:px-8 bg-white/80 backdrop-blur-md sticky top-0 z-10">
+          <div className="flex items-center gap-2">
+            <Image src="/logo-new.png" alt="AmazonFast Logo" width={100} height={30} className="object-contain md:hidden" priority />
+            <h1 className="text-lg md:text-xl font-bold tracking-tight text-gray-900 hidden md:block">Client Management</h1>
+          </div>
           <div className="flex items-center gap-6">
             <div className="relative hidden md:block">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -109,14 +119,14 @@ export default async function AdminPortal() {
               </div>
             </div>
 
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#ff6b35] to-orange-600 border-2 border-white shadow-md cursor-pointer hover:scale-105 transition"></div>
+            <AdminLogoutButton />
           </div>
         </header>
 
         {/* Content */}
-        <div className="flex-1 p-8 overflow-y-auto">
+        <div className="flex-1 p-4 md:p-8 overflow-y-auto w-full">
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-10 w-full">
             <div className="p-6 rounded-2xl border border-gray-200 bg-white flex items-center justify-between shadow-sm hover:shadow-md transition">
               <div>
                 <p className="text-gray-500 text-xs font-bold tracking-wider uppercase mb-1">Total Active Clients</p>
@@ -152,5 +162,6 @@ export default async function AdminPortal() {
         </div>
       </main>
     </div>
+    </AdminProtector>
   )
 }

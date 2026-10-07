@@ -30,7 +30,7 @@ export async function updateSession(request: NextRequest) {
   // Get the current user session
   const { data: { user } } = await supabase.auth.getUser()
 
-  const isPortalRoute = request.nextUrl.pathname.startsWith('/portal') || request.nextUrl.pathname.startsWith('/admin-portal');
+  const isPortalRoute = request.nextUrl.pathname.startsWith('/portal');
   const isAuthRoute = request.nextUrl.pathname.startsWith('/login');
 
   // Protect dashboard routes: Redirect to login if not logged in
@@ -43,13 +43,7 @@ export async function updateSession(request: NextRequest) {
   // Prevent logged-in users from seeing the login page
   if (user && isAuthRoute) {
     const url = request.nextUrl.clone()
-    const email = user.email || '';
-    const isAdmin = email.includes('admin') || 
-                    email === 'shabbir@amazonfastservices.com' || 
-                    email === 'appointmentstudio@gmail.com' ||
-                    email === 'dimdavid480@gmail.com';
-                    
-    url.pathname = isAdmin ? '/admin-portal' : '/portal';
+    url.pathname = '/portal';
     return NextResponse.redirect(url)
   }
 

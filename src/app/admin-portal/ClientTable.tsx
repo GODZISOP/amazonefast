@@ -113,10 +113,10 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
-                <th className="py-4 px-6 font-bold">Client Info</th>
-                <th className="py-4 px-6 font-bold">Email</th>
-                <th className="py-4 px-6 font-bold">Status</th>
-                <th className="py-4 px-6 font-bold text-right">Actions</th>
+                <th className="py-3 px-4 md:px-6 font-bold">Client Info</th>
+                <th className="py-3 px-4 md:px-6 font-bold">Email</th>
+                <th className="py-3 px-4 md:px-6 font-bold">Status</th>
+                <th className="py-3 px-4 md:px-6 font-bold text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="text-sm">
@@ -139,16 +139,16 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
 
                   return (
                   <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition group">
-                    <td className="py-4 px-6">
+                    <td className="py-3 px-4 md:px-6">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-black border ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black border shrink-0 ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
                           {client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C'}
                         </div>
                         <div>
-                          <p className="font-bold text-gray-900 flex items-center gap-2">
+                          <p className="font-bold text-gray-900 flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-xs md:text-sm">
                             {client.full_name || 'Unknown'}
                             {isFullyApproved && (
-                              <span className="bg-green-100 text-green-700 border border-green-200 text-[9px] uppercase px-2 py-0.5 rounded-full font-bold tracking-wider flex items-center gap-1">
+                              <span className="bg-green-100 text-green-700 border border-green-200 text-[9px] uppercase px-2 py-0.5 rounded-full font-bold tracking-wider flex items-center gap-1 w-fit">
                                 <CheckCircle2 size={10} />
                                 Profile Complete
                               </span>
@@ -157,21 +157,21 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                         </div>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-gray-500">{client.email}</td>
-                    <td className="py-4 px-6">
-                      <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black tracking-wide uppercase shadow-sm ${
+                    <td className="py-3 px-4 md:px-6 text-gray-500 text-xs md:text-sm">{client.email}</td>
+                    <td className="py-3 px-4 md:px-6">
+                      <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] md:text-[10px] font-black tracking-wide uppercase shadow-sm ${
                         client.status === 'Pending' ? 'bg-red-50 border border-red-100 text-red-600' : 'bg-green-50 border border-green-100 text-green-600'
                       }`}>
                         {client.status === 'Pending' && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>}
                         {client.status}
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-right">
+                    <td className="py-3 px-4 md:px-6 text-right">
                       <button 
                         onClick={() => setSelectedClient(client)}
-                        className="text-xs font-bold px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition border border-transparent"
+                        className="text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition border border-transparent whitespace-nowrap"
                       >
-                        View Details
+                        Review
                       </button>
                     </td>
                   </tr>
