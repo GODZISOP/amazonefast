@@ -5,6 +5,9 @@ import ClientTable from './ClientTable';
 import AdminProtector from './AdminProtector';
 import AdminLogoutButton from './AdminLogoutButton';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 export default async function AdminPortal() {
   // Use service role to bypass RLS for admin panel
   const supabase = createSupabaseClient(
