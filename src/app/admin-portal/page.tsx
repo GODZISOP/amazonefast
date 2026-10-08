@@ -6,6 +6,7 @@ import AdminProtector from './AdminProtector';
 import AdminLogoutButton from './AdminLogoutButton';
 import GlobalDocuments from './GlobalDocuments';
 import AdminSettings from './AdminSettings';
+import AdminNotifications from './AdminNotifications';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
@@ -89,39 +90,7 @@ export default async function AdminPortal({ searchParams }: { searchParams: any 
               </h1>
             </div>
             <div className="flex items-center gap-6">
-              <div className="relative group cursor-pointer">
-                <button className="text-gray-400 hover:text-gray-900 transition relative">
-                  <Bell size={20} />
-                  {unreadNotifs > 0 && (
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 border-2 border-white rounded-full"></span>
-                  )}
-                </button>
-
-                {/* Notification Dropdown */}
-                <div className="absolute top-10 right-0 w-80 bg-white border border-gray-200 shadow-xl rounded-2xl hidden group-hover:block z-50 overflow-hidden">
-                  <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                    <h4 className="font-bold text-sm text-gray-900">Recent Activity</h4>
-                    <span className="text-xs text-[#ff6b35] font-semibold cursor-pointer">Mark all as read</span>
-                  </div>
-                  <div className="max-h-80 overflow-y-auto">
-                    {notifications.length === 0 ? (
-                      <div className="p-6 text-center text-sm text-gray-500">No new notifications</div>
-                    ) : (
-                      notifications.map((notif: any) => (
-                        <div key={notif.id} className={`p-4 border-b border-gray-50 flex gap-3 hover:bg-gray-50 transition ${!notif.is_read ? 'bg-orange-50/30' : ''}`}>
-                          <div className="w-8 h-8 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] flex items-center justify-center shrink-0">
-                            <Activity size={14} />
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-800"><span className="font-bold">{notif.clients?.full_name || 'A client'}</span> {notif.message}</p>
-                            <p className="text-xs text-gray-400 mt-1">{new Date(notif.created_at).toLocaleDateString()}</p>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-              </div>
+              <AdminNotifications notifications={notifications} unreadNotifs={unreadNotifs} />
 
               <AdminLogoutButton />
             </div>
