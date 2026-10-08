@@ -9,7 +9,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const to = process.env.EMAIL_USER || 'appointmentstudio@gmail.com';
+    const to = 'amazonfastservice1@gmail.com';
     const subject = `New Contact Form Submission from ${firstName} ${lastName}`;
     const html = `
       <h2>New Contact Form Submission</h2>

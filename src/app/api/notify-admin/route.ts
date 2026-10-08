@@ -6,12 +6,12 @@ export async function POST(req: Request) {
     const { fullName, email, type, docType } = await req.json();
 
     if (type === 'NEW_REGISTRATION') {
-      const date = new Date().toLocaleString('en-US', { 
-        timeZone: 'Asia/Karachi', 
-        dateStyle: 'full', 
-        timeStyle: 'long' 
+      const date = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Karachi',
+        dateStyle: 'full',
+        timeStyle: 'long'
       });
-      
+
       const emailHtml = `
         <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 12px; padding: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
           <div style="text-align: center; border-bottom: 2px solid #ff6b35; padding-bottom: 16px; mb-4">
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
       // Send to Admin
       await sendEmail({
-        to: process.env.EMAIL_USER || 'appointmentstudio@gmail.com',
+        to: 'amazonfastservice1@gmail.com',
         subject: `New Client Alert: ${fullName}`,
         html: emailHtml
       });
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       `;
 
       await sendEmail({
-        to: process.env.EMAIL_USER || 'appointmentstudio@gmail.com',
+        to: 'amazonfastservice1@gmail.com',
         subject: `Document Uploaded: ${fullName}`,
         html: emailHtml
       });
