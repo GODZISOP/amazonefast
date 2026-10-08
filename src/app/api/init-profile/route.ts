@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     );
 
     // Check if client already exists
-    const { data: existingClient } = await supabase.from('clients').select('id').eq('id', id).single();
+    const { data: existingClient } = await supabase.from('clients').select('id, full_name').eq('id', id).single();
 
     if (!existingClient) {
       // Insert client profile bypassing RLS
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: clientError.message }, { status: 500 });
       }
 
+
       // Insert notification bypassing RLS
       const { error: notifError } = await supabase.from('notifications').insert({
         client_id: id,
@@ -36,6 +37,9 @@ export async function POST(req: Request) {
       if (notifError) {
         console.error("Supabase insert notification error:", notifError);
       }
+    } else if (existingClient.full_name !== fullName) {
+      // Keep full_name in sync with Auth/Google if it changes
+      await supabase.from('clients').update({ full_name: fullName }).eq('id', id);
     }
 
     return NextResponse.json({ success: true });
