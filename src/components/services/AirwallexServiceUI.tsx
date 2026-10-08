@@ -41,7 +41,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             </h1>
             
             <p className="text-white/60 text-lg md:text-xl font-medium max-w-md mb-10 leading-relaxed">
-              Set up your verified Airwallex business account for seamless Amazon payouts, zero international fees, and virtual corporate cards.
+              Create your Airwallex global business account for seamless international payments, multi-currency management, and unlimited virtual corporate cards.
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
@@ -95,12 +95,12 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
           
           {/* Left Text */}
           <div className="w-full lg:w-1/3 flex flex-col justify-center relative">
-            <span className="text-[#ff6b35] font-bold text-sm mb-4 tracking-wider uppercase">Seamless E-Commerce</span>
+            <span className="text-[#ff6b35] font-bold text-sm mb-4 tracking-wider uppercase">Multi-Currency Mastery</span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-6">
-              Streamline Global <br/> Commerce.
+              Global Accounts <br/> in Minutes.
             </h2>
             <p className="text-white/50 text-base mb-10 max-w-sm leading-relaxed font-medium">
-              Eliminate unnecessary currency conversion fees. Keep your profits high while paying suppliers across the globe instantly.
+              Open local accounts in 11+ currencies instantly. Receive Amazon payouts without forced conversions and pay suppliers in their native currency.
             </p>
             <div>
               <Link 
@@ -128,23 +128,23 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             
             {/* Feature 1 */}
             <div>
-              <h3 className="text-white font-bold text-xl mb-2">Zero Hidden Fees</h3>
+              <h3 className="text-white font-bold text-xl mb-2">Market-Leading FX Rates</h3>
               <p className="text-white/50 text-sm mb-6 max-w-xs leading-relaxed font-medium">
-                Save up to 3% on foreign exchange fees when paying your global suppliers or receiving Amazon payouts.
+                Save significantly on foreign exchange fees. Airwallex offers interbank rates with a minimal, transparent markup.
               </p>
               <div className="flex flex-col">
                 <span className="text-white font-extrabold text-5xl mb-1 flex items-baseline">
                   0% <span className="text-[#ff6b35] text-5xl ml-1">.</span>
                 </span>
-                <span className="text-white/30 text-xs font-semibold uppercase tracking-wider">International transfer margin</span>
+                <span className="text-white/30 text-xs font-semibold uppercase tracking-wider">Local account details in USD, EUR, GBP, HKD, and more.</span>
               </div>
             </div>
 
             {/* Feature 2 */}
             <div>
-              <h3 className="text-white font-bold text-xl mb-2">Virtual Cards instantly</h3>
+              <h3 className="text-white font-bold text-xl mb-2">Unlimited Borderless Cards</h3>
               <p className="text-white/50 text-sm mb-6 max-w-xs leading-relaxed font-medium">
-                Generate Visa company cards instantly to manage ad spend securely across different platforms.
+                Create unlimited virtual Visa cards to pay for inventory, software, and ads with zero international transaction fees.
               </p>
               <div className="flex flex-col">
                 <span className="text-white font-extrabold text-5xl mb-1 flex items-baseline">
@@ -201,7 +201,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
                   {/* Top Badge Area */}
                   <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/5 py-3 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
                     <Sparkles size={14} className="text-[#ff6b35]" />
-                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
+                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Top Choice For Sellers</span>
                   </div>
 
                   {/* Inner Content */}

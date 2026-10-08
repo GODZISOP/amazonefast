@@ -134,7 +134,7 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
           
           <div className="col-span-1 bg-[#111] border border-white/5 hover:border-[#ff6b35]/30 rounded-[32px] p-8 relative overflow-hidden group min-h-[300px] transition-colors duration-500">
             <div className="absolute -right-10 -bottom-20 text-[250px] font-black text-white/5 group-hover:text-[#ff6b35]/10 transition-colors duration-500">$</div>
-            <h3 className="text-xl font-bold text-white mb-4 relative z-10">Zero Hidden Fees</h3>
+            <h3 className="text-xl font-bold text-white mb-4 relative z-10">Global Processing</h3>
             <p className="text-white/60 font-medium relative z-10">
               Get real mid-market exchange rates. Stop losing 3-5% on every transfer from standard banks.
             </p>
@@ -243,7 +243,7 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
               <div className="bg-[#111111] rounded-[2.5rem] border border-white/10 shadow-2xl flex flex-col overflow-hidden relative z-10">
                 {/* Top Badge Area */}
                 <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/5 py-3 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
-                  <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
+                  <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Payment Standard</span>
                 </div>
 
                 {/* Inner Content */}

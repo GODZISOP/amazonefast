@@ -273,7 +273,7 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
                 <div className="bg-[#111111] rounded-[2.5rem] border border-white/10 shadow-2xl flex flex-col overflow-hidden relative z-10">
                   {/* Top Badge Area */}
                   <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/5 py-3 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
-                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
+                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">E-Commerce Favorite</span>
                   </div>
 
                   {/* Inner Content */}
