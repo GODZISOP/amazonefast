@@ -1,11 +1,29 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { FileText, Search, Download, CheckCircle2, AlertCircle, Clock, ChevronDown, ChevronUp, User } from 'lucide-react';
 
-export default function GlobalDocuments({ clients }: { clients: any[] }) {
+export default function GlobalDocuments({ clients: initialClients }: { clients: any[] }) {
+  const [clients, setClients] = useState(initialClients);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedClients, setExpandedClients] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const fetchLatestData = async () => {
+      try {
+        const res = await fetch('/api/get-all-clients');
+        if (res.ok) {
+          const { data } = await res.json();
+          if (data) setClients(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch latest docs", err);
+      }
+    };
+    
+    const intervalId = setInterval(fetchLatestData, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const toggleClient = (clientId: string) => {
     setExpandedClients(prev => ({
