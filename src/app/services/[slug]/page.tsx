@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Sparkles, CreditCard, ShieldCheck, Zap, Globe } from "lucide-react";
 import { notFound } from "next/navigation";
 
 // Service Data
@@ -96,6 +96,97 @@ const serviceDetails: Record<string, any> = {
       "Account Health Monitoring",
       "Future Suspension Prevention Strategies"
     ]
+  },
+  "payoneer-wallet": {
+    title: "Payoneer Setup",
+    tagline: "Digital Wallet Setup ($100)",
+    description: "Set up a professional Payoneer account to manage your international Amazon payouts securely and efficiently with low transaction fees.",
+    image: "/srv_payoneer_setup.png",
+    benefits: [
+      "Fast Account Approval",
+      "Multi-Currency Receiving Accounts",
+      "Seamless Amazon Integration",
+      "Low Conversion Fees",
+      "Global Payment Solutions"
+    ]
+  },
+  "wise-wallet": {
+    title: "Wise Setup",
+    tagline: "Digital Wallet Setup ($100)",
+    description: "Get your Wise (formerly TransferWise) business account set up correctly for Amazon to receive funds with real exchange rates and zero hidden fees.",
+    image: "/srv_wise_setup.png",
+    benefits: [
+      "Real Mid-Market Exchange Rate",
+      "Local Bank Details in 10+ Currencies",
+      "Direct Integration with Amazon Seller Central",
+      "Fast International Transfers",
+      "Business Expense Cards"
+    ]
+  },
+  "airwallex-wallet": {
+    title: "Airwallex Setup",
+    tagline: "Digital Wallet Setup ($100)",
+    description: "Create your Airwallex global business account for seamless international Amazon payments and multi-currency management.",
+    image: "/srv_airwallex_setup.jpg",
+    benefits: [
+      "Global Accounts in 11+ Currencies",
+      "Zero International Transaction Fees",
+      "Virtual Visa Company Cards",
+      "Automated Xero/QuickBooks Sync",
+      "Optimized for E-commerce Sellers"
+    ]
+  },
+  "stripe-setup": {
+    title: "Stripe Setup",
+    tagline: "Digital Wallet Setup ($100)",
+    description: "Professional Stripe account setup to process global payments, manage cash flow, and integrate flawlessly with your e-commerce ecosystem.",
+    image: "/srv_account_reinstatement.png",
+    benefits: [
+      "Accept Global Payments",
+      "Advanced Fraud Protection",
+      "Seamless E-commerce Integration",
+      "Custom Checkout Experiences",
+      "Comprehensive Financial Reporting"
+    ]
+  },
+  "chase-bank": {
+    title: "Chase Bank Setup",
+    tagline: "Physical Bank Setup ($1,500)",
+    description: "Get a legitimate physical US bank account with Chase Bank for your Amazon business, providing ultimate credibility and financial flexibility.",
+    image: "/srv_account_reinstatement.png",
+    benefits: [
+      "Premium US Banking Entity",
+      "High-Limit Business Credit Cards",
+      "Dedicated Business Banking Support",
+      "Secure Wire Transfers",
+      "Maximum Amazon Trust Level"
+    ]
+  },
+  "bank-of-america": {
+    title: "Bank of America Setup",
+    tagline: "Physical Bank Setup ($1,500)",
+    description: "Establish a strong financial foundation with a Bank of America physical business account, tailored for international Amazon sellers.",
+    image: "/srv_account_reinstatement.png",
+    benefits: [
+      "Top-Tier US Physical Bank",
+      "Business Advantage Banking",
+      "Global Wire Transfer Capabilities",
+      "Advanced Cash Flow Management",
+      "Highly Trusted by Amazon"
+    ]
+  },
+  "amazon-account-creation": {
+    title: "Amazon Account Creation",
+    tagline: "Professional Setup ($100)",
+    description: "Avoid suspension on day one. We professionally set up and verify your Amazon Seller Central account, ensuring all legal and tax details are perfectly aligned.",
+    image: "/srv_amazon_creation.png",
+    benefits: [
+      "Guaranteed Approval Process",
+      "Utility Bill & Identity Verification",
+      "Tax Interview Completion (W8/W9)",
+      "Bank Account Linking",
+      "Immediate Selling Privileges"
+    ]
   }
 };
 
@@ -114,71 +205,354 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     notFound();
   }
 
+  // Extract price if it exists in tagline, e.g. "Digital Wallet Setup ($100)"
+  const priceMatch = data.tagline.match(/\(\$([0-9,]+)\)/);
+  const price = priceMatch ? priceMatch[1] : null;
+  const cleanTagline = data.tagline.replace(/\s*\(\$[0-9,]+\)/, '');
+
+  const whatsappMessage = `Hello Amazon Fast! I am interested in the ${data.title} service.`;
+
   return (
-    <div className="relative font-sans bg-[#0a0a0a] text-white pt-32 pb-24 min-h-screen overflow-x-hidden">
+    <div className="relative font-sans bg-[#0a0a0a] text-white pt-32 pb-24 min-h-screen overflow-x-hidden selection:bg-[#ff6b35]/30">
       
       {/* Dynamic Background Glow */}
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-[#ff6b35]/5 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-[#ff6b35]/10 blur-[150px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
         
         {/* Back link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-12 text-sm font-medium">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <Link href="/" className="inline-flex items-center gap-2 text-white/50 hover:text-[#ff6b35] transition-colors mb-12 text-sm font-medium uppercase tracking-widest">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
           Back to Home
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
+        {/* Split Hero Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-32">
           
-          {/* Text Content */}
-          <div className="flex flex-col gap-6">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 self-start">
-              <span className="text-[#ff6b35] text-sm font-semibold tracking-wide">{data.tagline}</span>
+          {/* Left Text Content */}
+          <div className="lg:col-span-6 flex flex-col items-start gap-6">
+            <div className="inline-flex px-5 py-2 rounded-full bg-gradient-to-r from-[#ff6b35]/20 to-transparent border border-[#ff6b35]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(255,107,53,0.1)]">
+              <span className="text-[#ff6b35] text-sm font-bold tracking-widest uppercase flex items-center gap-2">
+                <Sparkles size={14} />
+                {cleanTagline}
+              </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white leading-[1.1]">
               {data.title}
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed mt-4">
+            
+            <p className="text-white/60 text-lg md:text-xl leading-relaxed mt-2 font-light max-w-xl">
               {data.description}
             </p>
             
-            <div className="mt-8">
-              <h3 className="text-xl font-bold mb-6 border-b border-white/10 pb-4">What's Included?</h3>
-              <ul className="flex flex-col gap-4">
-                {data.benefits.map((benefit: string, idx: number) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-[#ff6b35] shrink-0 mt-0.5" size={20} />
-                    <span className="text-white/80">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-12 flex flex-wrap gap-4">
-              <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-[#ff6b35] hover:bg-[#e85c2b] text-white px-8 py-4 rounded-full font-bold transition-colors flex items-center gap-2">
-                Book a Call
+            <div className="mt-4 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <Link 
+                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#f44b0e] text-white rounded-full font-bold text-base transition-all shadow-[0_5px_20px_rgba(255,107,53,0.3)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.5)] hover:-translate-y-1 flex items-center justify-center gap-2"
+              >
+                Get Started Now
                 <ArrowUpRight size={18} />
               </Link>
-              <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold transition-colors flex items-center gap-2">
-                Message Us
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964 1.006-3.588c-.608-1.065-.928-2.294-.928-3.544 0-3.9 3.17-7.07 7.071-7.071 3.899 0 7.07 3.172 7.071 7.073-.001 3.901-3.173 7.07-7.071 7.07z"/></svg>
-              </a>
             </div>
           </div>
-
-          {/* Image */}
-          <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 mix-blend-overlay"></div>
+          
+          {/* Right Image Content */}
+          <div className="lg:col-span-6 relative w-full aspect-[4/3] lg:aspect-[16/11] rounded-[32px] overflow-hidden group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 bg-[#0a0a0a]">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent z-20 pointer-events-none opacity-80"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff6b35]/20 to-transparent z-20 pointer-events-none mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
+            
             <Image 
               src={data.image}
               alt={data.title}
               fill
-              className="object-cover transition-transform duration-700 hover:scale-105"
+              className="object-contain object-center transition-transform duration-[2000ms] group-hover:scale-[1.03]"
               priority
+              quality={100}
             />
+
+            {/* Floating Trust Banner inside the image */}
+            <div className="absolute bottom-6 left-6 right-6 z-30 bg-[#1a1a1a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col gap-3 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="text-[#ff6b35] w-5 h-5 shrink-0" />
+                <span className="text-white/90 text-sm font-semibold">Guaranteed Approval</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Zap className="text-[#ff6b35] w-5 h-5 shrink-0" />
+                <span className="text-white/90 text-sm font-semibold">Fast Processing in 24-48 Hrs</span>
+              </div>
+            </div>
           </div>
 
+        </div>
+
+        {/* Pain Points / Common Mistakes */}
+        <div className="mt-24 mb-16 text-center max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white">Most people get {data.title} wrong — and pay the price later</h2>
+          <p className="text-white/60 text-lg">We've seen the same costly mistakes over and over. Here's how we fix them for you.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+          {/* Mistake 1 */}
+          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
+            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+              <span className="text-red-500 font-bold text-xl">!</span>
+            </div>
+            <h3 className="text-red-400 font-bold text-xl mb-3">Application Rejections</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
+              Failing to provide exact matching documentation often leads to instant rejections and banned details on day one.
+            </p>
+            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
+              <p className="text-green-400 text-sm font-medium flex gap-2">
+                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
+                We pre-verify all documents to guarantee approval.
+              </p>
+            </div>
+          </div>
+          {/* Mistake 2 */}
+          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
+            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+              <span className="text-red-500 font-bold text-xl">✕</span>
+            </div>
+            <h3 className="text-red-400 font-bold text-xl mb-3">Compliance & Legal Risks</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
+              Missing crucial entity setup requirements or tax forms can trigger massive penalties and account freezes down the line.
+            </p>
+            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
+              <p className="text-green-400 text-sm font-medium flex gap-2">
+                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
+                Expert filing ensures 100% policy and tax compliance.
+              </p>
+            </div>
+          </div>
+          {/* Mistake 3 */}
+          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
+            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+              <span className="text-red-500 font-bold text-xl">?</span>
+            </div>
+            <h3 className="text-red-400 font-bold text-xl mb-3">Endless Delays & Holds</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
+              Submitting unverified information triggers security reviews, freezing your progress for weeks or months.
+            </p>
+            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
+              <p className="text-green-400 text-sm font-medium flex gap-2">
+                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
+                We handle the entire setup to get you live in record time.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3 Steps Process */}
+        <div className="bg-[#111] border border-white/5 rounded-[40px] p-10 md:p-16 mb-32 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#ff6b35]/5 blur-[100px] pointer-events-none"></div>
+          
+          <div className="text-center mb-16 relative z-10">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">From idea to {data.title.replace(' Setup', '')} in 3 steps</h2>
+            <p className="text-white/60 text-lg">100% remote — hassle-free, from anywhere in the world.</p>
+          </div>
+
+          <div className="relative z-10 max-w-4xl mx-auto">
+            {/* Connecting Line */}
+            <div className="hidden md:block absolute top-6 left-[15%] right-[15%] h-[2px] bg-white/10 -z-10"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 text-center">
+              {/* Step 1 */}
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">1</div>
+                <h3 className="text-xl font-bold text-white mb-3">Book a Free Call</h3>
+                <p className="text-white/50 text-sm leading-relaxed">We understand your business needs and ensure you choose the right structure.</p>
+              </div>
+              {/* Step 2 */}
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">2</div>
+                <h3 className="text-xl font-bold text-white mb-3">We File Everything</h3>
+                <p className="text-white/50 text-sm leading-relaxed">Our experts handle all paperwork, identity verification, and platform approvals.</p>
+              </div>
+              {/* Step 3 */}
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">3</div>
+                <h3 className="text-xl font-bold text-white mb-3">You're Live</h3>
+                <p className="text-white/50 text-sm leading-relaxed">Your {data.title.replace(' Setup', '')} is fully active, verified, and ready for business.</p>
+              </div>
+            </div>
+
+            <div className="mt-16 flex justify-center">
+              <Link 
+                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                target="_blank" 
+                className="px-8 py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-lg flex items-center gap-2"
+              >
+                Get Started Now <ArrowUpRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparison Table */}
+        <div className="mb-32">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Why AmazonFast for {data.title} vs DIY</h2>
+            <p className="text-white/60 text-lg">We are the only option with 100% human WhatsApp support and specialized platform expertise.</p>
+          </div>
+
+          <div className="max-w-5xl mx-auto overflow-x-auto rounded-[24px] border border-white/10 bg-[#111] shadow-2xl">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="p-6 font-semibold text-white/60 w-1/3">Feature</th>
+                  <th className="p-6 font-bold text-[#ff6b35] bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center w-1/4">AmazonFast</th>
+                  <th className="p-6 font-semibold text-white/60 text-center">Doing it yourself</th>
+                  <th className="p-6 font-semibold text-white/60 text-center">Generic Agencies</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                <tr>
+                  <td className="p-6 text-white/80 font-medium">Expert Human Support</td>
+                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> Direct WhatsApp</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> None</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Tickets Only</div></td>
+                </tr>
+                <tr>
+                  <td className="p-6 text-white/80 font-medium">Platform Policy Compliance</td>
+                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> Guaranteed</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> High Risk</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Not tailored</div></td>
+                </tr>
+                <tr>
+                  <td className="p-6 text-white/80 font-medium">Setup Speed</td>
+                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> 24-48 Hours</div></td>
+                  <td className="p-6 text-center text-white/50 font-medium">Weeks</td>
+                  <td className="p-6 text-center text-white/50 font-medium">Days/Weeks</td>
+                </tr>
+                <tr>
+                  <td className="p-6 text-white/80 font-medium">Hidden Fees</td>
+                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> None</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Costly Mistakes</div></td>
+                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Constant Upsells</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Pricing Section */}
+        {price && (
+          <div className="mb-32">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Transparent, All-Inclusive Pricing</h2>
+              <p className="text-white/60 text-lg">Simple flat fee. No hidden costs or surprise charges.</p>
+            </div>
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-sm">
+                {/* Outer Container mimicking the image */}
+                <div className="bg-[#111111] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1 group">
+                  {/* Top Badge Area */}
+                  <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 py-2.5 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
+                    <Sparkles size={14} className="text-[#ff6b35]" />
+                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
+                  </div>
+                  {/* Inner Content */}
+                  <div className="p-8 sm:p-10 flex flex-col">
+                    {/* Title */}
+                    <h3 className="text-xl font-semibold text-white mb-4">Professional</h3>
+                    {/* Price */}
+                    <div className="flex items-end gap-1 mb-4">
+                      <span className="text-5xl font-black text-white leading-none tracking-tight">${price}</span>
+                      <span className="text-white/50 text-sm font-medium mb-1">/ one-time</span>
+                    </div>
+                    {/* Description */}
+                    <p className="text-white/50 text-sm leading-relaxed mb-6">
+                      Perfect for businesses that need speed, structure, and a premium setup for {data.title.replace(' Setup', '')}.
+                    </p>
+                    {/* Pay Now Button */}
+                    <Link 
+                      href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                      Pay Now
+                    </Link>
+                    {/* Features List */}
+                    <div className="flex flex-col gap-3.5">
+                      {data.benefits.map((benefit: string, idx: number) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b35]/70 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
+                          <span className="text-white/80 text-sm font-medium">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Testimonials */}
+        <div className="mb-24">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Trusted by Founders Worldwide</h2>
+            <p className="text-white/60 text-lg">Real results from our clients — no buzzwords, just clear success.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[
+              { name: "Michael T.", role: "E-commerce Founder", quote: `AmazonFast made the ${data.title.replace(' Setup', '')} process seamless. They handled everything perfectly and we were live fast!` },
+              { name: "Sarah L.", role: "Global Seller", quote: `I tried doing ${data.title.replace(' Setup', '')} myself and got stuck. Reached out to them and they sorted it instantly. Highly recommended.` },
+              { name: "David O.", role: "Dropshipping Pro", quote: `The best investment for my business. Their WhatsApp support is incredible. The ${data.title.replace(' Setup', '')} setup was completely hands-off.` }
+            ].map((t, i) => (
+              <div key={i} className="bg-[#111] border border-white/5 rounded-[24px] p-8 shadow-xl">
+                <div className="flex gap-1 text-[#ff6b35] mb-4">
+                  {[...Array(5)].map((_, j) => <Sparkles key={j} size={14} className="fill-[#ff6b35]" />)}
+                </div>
+                <p className="text-white/70 text-sm leading-relaxed mb-6 italic">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] font-bold">{t.name.charAt(0)}</div>
+                  <div>
+                    <h4 className="text-white font-semibold text-sm">{t.name}</h4>
+                    <p className="text-white/40 text-xs">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Features Bento Grid Section */}
+        <div className="mt-24 mb-16 text-center max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">Core features that set us apart</h2>
+          <p className="text-white/60 text-lg">Explore our standout features designed to deliver exceptional performance and value, ensuring your success from day one.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.benefits.map((benefit: string, idx: number) => {
+            const icons = [ShieldCheck, Zap, Globe, CreditCard, Sparkles, CheckCircle2];
+            const IconComponent = icons[idx % icons.length];
+            
+            return (
+              <div 
+                key={idx} 
+                className={`p-8 rounded-[32px] bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 hover:border-[#ff6b35]/50 transition-all duration-500 group flex flex-col justify-start relative overflow-hidden ${idx === 0 || idx === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ff6b35]/0 to-[#ff6b35]/0 group-hover:from-[#ff6b35]/5 group-hover:to-transparent transition-all duration-500 z-0"></div>
+                
+                <div className="w-14 h-14 rounded-2xl bg-[#ff6b35]/10 border border-[#ff6b35]/20 flex items-center justify-center mb-6 relative z-10 group-hover:scale-110 transition-transform duration-500">
+                  <IconComponent className="text-[#ff6b35]" size={28} strokeWidth={2} />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{benefit}</h3>
+                <p className="text-white/50 leading-relaxed relative z-10">
+                  Ensuring premium service delivery directly integrated with your overarching {data.title} goals.
+                </p>
+              </div>
+            );
+          })}
         </div>
 
       </div>
