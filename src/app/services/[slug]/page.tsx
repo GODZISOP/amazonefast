@@ -3,6 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, Sparkles, CreditCard, ShieldCheck, Zap, Globe } from "lucide-react";
 import { notFound } from "next/navigation";
+import WalletServiceUI from "@/components/services/WalletServiceUI";
+import WiseServiceUI from "@/components/services/WiseServiceUI";
+import StripeServiceUI from "@/components/services/StripeServiceUI";
+import AirwallexServiceUI from "@/components/services/AirwallexServiceUI";
+import BOAServiceUI from "@/components/services/BOAServiceUI";
+import ChaseBankServiceUI from "@/components/services/ChaseBankServiceUI";
 
 // Service Data
 const serviceDetails: Record<string, any> = {
@@ -205,6 +211,30 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
     notFound();
   }
 
+  if (params.slug === "payoneer-wallet") {
+    return <WalletServiceUI data={data} />;
+  }
+
+  if (params.slug === "wise-wallet") {
+    return <WiseServiceUI data={data} />;
+  }
+
+  if (params.slug === "stripe-setup") {
+    return <StripeServiceUI data={data} />;
+  }
+
+  if (params.slug === "airwallex-wallet") {
+    return <AirwallexServiceUI data={data} />;
+  }
+
+  if (params.slug === "bank-of-america") {
+    return <BOAServiceUI data={data} />;
+  }
+
+  if (params.slug === "chase-bank") {
+    return <ChaseBankServiceUI data={data} />;
+  }
+
   // Extract price if it exists in tagline, e.g. "Digital Wallet Setup ($100)"
   const priceMatch = data.tagline.match(/\(\$([0-9,]+)\)/);
   const price = priceMatch ? priceMatch[1] : null;
@@ -227,300 +257,66 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
           Back to Home
         </Link>
 
-        {/* Split Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-32">
+        {/* Modern Centered Hero Section */}
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16 lg:mb-24">
           
-          {/* Left Text Content */}
-          <div className="lg:col-span-6 flex flex-col items-start gap-6">
-            <div className="inline-flex px-5 py-2 rounded-full bg-gradient-to-r from-[#ff6b35]/20 to-transparent border border-[#ff6b35]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(255,107,53,0.1)]">
-              <span className="text-[#ff6b35] text-sm font-bold tracking-widest uppercase flex items-center gap-2">
-                <Sparkles size={14} />
-                {cleanTagline}
-              </span>
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white leading-[1.1]">
-              {data.title}
-            </h1>
-            
-            <p className="text-white/60 text-lg md:text-xl leading-relaxed mt-2 font-light max-w-xl">
-              {data.description}
-            </p>
-            
-            <div className="mt-4 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-              <Link 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#f44b0e] text-white rounded-full font-bold text-base transition-all shadow-[0_5px_20px_rgba(255,107,53,0.3)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.5)] hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                Get Started Now
-                <ArrowUpRight size={18} />
-              </Link>
-            </div>
+          <div className="inline-flex px-5 py-2 rounded-full bg-gradient-to-r from-[#ff6b35]/20 to-transparent border border-[#ff6b35]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(255,107,53,0.1)] mb-8">
+            <span className="text-[#ff6b35] text-sm font-bold tracking-widest uppercase flex items-center gap-2">
+              <Sparkles size={14} />
+              {cleanTagline}
+            </span>
           </div>
           
-          {/* Right Image Content */}
-          <div className="lg:col-span-6 relative w-full aspect-[4/3] lg:aspect-[16/11] rounded-[32px] overflow-hidden group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10 bg-[#0a0a0a]">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent z-20 pointer-events-none opacity-80"></div>
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff6b35]/20 to-transparent z-20 pointer-events-none mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
-            
-            <Image 
-              src={data.image}
-              alt={data.title}
-              fill
-              className="object-contain object-center transition-transform duration-[2000ms] group-hover:scale-[1.03]"
-              priority
-              quality={100}
-            />
-
-            {/* Floating Trust Banner inside the image */}
-            <div className="absolute bottom-6 left-6 right-6 z-30 bg-[#1a1a1a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col gap-3 shadow-2xl">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="text-[#ff6b35] w-5 h-5 shrink-0" />
-                <span className="text-white/90 text-sm font-semibold">Guaranteed Approval</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Zap className="text-[#ff6b35] w-5 h-5 shrink-0" />
-                <span className="text-white/90 text-sm font-semibold">Fast Processing in 24-48 Hrs</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Pain Points / Common Mistakes */}
-        <div className="mt-24 mb-16 text-center max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 text-white">Most people get {data.title} wrong — and pay the price later</h2>
-          <p className="text-white/60 text-lg">We've seen the same costly mistakes over and over. Here's how we fix them for you.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
-          {/* Mistake 1 */}
-          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
-            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
-              <span className="text-red-500 font-bold text-xl">!</span>
-            </div>
-            <h3 className="text-red-400 font-bold text-xl mb-3">Application Rejections</h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
-              Failing to provide exact matching documentation often leads to instant rejections and banned details on day one.
-            </p>
-            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
-              <p className="text-green-400 text-sm font-medium flex gap-2">
-                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
-                We pre-verify all documents to guarantee approval.
-              </p>
-            </div>
-          </div>
-          {/* Mistake 2 */}
-          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
-            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
-              <span className="text-red-500 font-bold text-xl">✕</span>
-            </div>
-            <h3 className="text-red-400 font-bold text-xl mb-3">Compliance & Legal Risks</h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
-              Missing crucial entity setup requirements or tax forms can trigger massive penalties and account freezes down the line.
-            </p>
-            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
-              <p className="text-green-400 text-sm font-medium flex gap-2">
-                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
-                Expert filing ensures 100% policy and tax compliance.
-              </p>
-            </div>
-          </div>
-          {/* Mistake 3 */}
-          <div className="bg-[#111] border border-red-500/20 rounded-[24px] p-8 relative overflow-hidden flex flex-col hover:border-red-500/40 transition-colors">
-            <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
-              <span className="text-red-500 font-bold text-xl">?</span>
-            </div>
-            <h3 className="text-red-400 font-bold text-xl mb-3">Endless Delays & Holds</h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-8 flex-grow">
-              Submitting unverified information triggers security reviews, freezing your progress for weeks or months.
-            </p>
-            <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 mt-auto">
-              <p className="text-green-400 text-sm font-medium flex gap-2">
-                <CheckCircle2 size={16} className="shrink-0 mt-0.5" />
-                We handle the entire setup to get you live in record time.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 3 Steps Process */}
-        <div className="bg-[#111] border border-white/5 rounded-[40px] p-10 md:p-16 mb-32 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#ff6b35]/5 blur-[100px] pointer-events-none"></div>
+          <h1 className="text-5xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1] mb-6">
+            {data.title}
+          </h1>
           
-          <div className="text-center mb-16 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">From idea to {data.title.replace(' Setup', '')} in 3 steps</h2>
-            <p className="text-white/60 text-lg">100% remote — hassle-free, from anywhere in the world.</p>
-          </div>
+          <p className="text-white/60 text-lg md:text-xl leading-relaxed font-light max-w-2xl mx-auto mb-10">
+            {data.description}
+          </p>
 
-          <div className="relative z-10 max-w-4xl mx-auto">
-            {/* Connecting Line */}
-            <div className="hidden md:block absolute top-6 left-[15%] right-[15%] h-[2px] bg-white/10 -z-10"></div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 text-center">
-              {/* Step 1 */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">1</div>
-                <h3 className="text-xl font-bold text-white mb-3">Book a Free Call</h3>
-                <p className="text-white/50 text-sm leading-relaxed">We understand your business needs and ensure you choose the right structure.</p>
-              </div>
-              {/* Step 2 */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">2</div>
-                <h3 className="text-xl font-bold text-white mb-3">We File Everything</h3>
-                <p className="text-white/50 text-sm leading-relaxed">Our experts handle all paperwork, identity verification, and platform approvals.</p>
-              </div>
-              {/* Step 3 */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-[#ff6b35] text-white font-bold text-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(255,107,53,0.4)]">3</div>
-                <h3 className="text-xl font-bold text-white mb-3">You're Live</h3>
-                <p className="text-white/50 text-sm leading-relaxed">Your {data.title.replace(' Setup', '')} is fully active, verified, and ready for business.</p>
-              </div>
-            </div>
-
-            <div className="mt-16 flex justify-center">
-              <Link 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
-                target="_blank" 
-                className="px-8 py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-lg flex items-center gap-2"
-              >
-                Get Started Now <ArrowUpRight size={16} />
-              </Link>
-            </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+            <Link 
+              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-[#ff6b35] to-[#f44b0e] text-white rounded-full font-bold text-base transition-all shadow-[0_5px_20px_rgba(255,107,53,0.3)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.5)] hover:-translate-y-1 flex items-center justify-center gap-2"
+            >
+              Get Started Now
+              <ArrowUpRight size={18} />
+            </Link>
           </div>
         </div>
 
-        {/* Comparison Table */}
-        <div className="mb-32">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Why AmazonFast for {data.title} vs DIY</h2>
-            <p className="text-white/60 text-lg">We are the only option with 100% human WhatsApp support and specialized platform expertise.</p>
-          </div>
-
-          <div className="max-w-5xl mx-auto overflow-x-auto rounded-[24px] border border-white/10 bg-[#111] shadow-2xl">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="p-6 font-semibold text-white/60 w-1/3">Feature</th>
-                  <th className="p-6 font-bold text-[#ff6b35] bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center w-1/4">AmazonFast</th>
-                  <th className="p-6 font-semibold text-white/60 text-center">Doing it yourself</th>
-                  <th className="p-6 font-semibold text-white/60 text-center">Generic Agencies</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                <tr>
-                  <td className="p-6 text-white/80 font-medium">Expert Human Support</td>
-                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> Direct WhatsApp</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> None</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Tickets Only</div></td>
-                </tr>
-                <tr>
-                  <td className="p-6 text-white/80 font-medium">Platform Policy Compliance</td>
-                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> Guaranteed</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> High Risk</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Not tailored</div></td>
-                </tr>
-                <tr>
-                  <td className="p-6 text-white/80 font-medium">Setup Speed</td>
-                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> 24-48 Hours</div></td>
-                  <td className="p-6 text-center text-white/50 font-medium">Weeks</td>
-                  <td className="p-6 text-center text-white/50 font-medium">Days/Weeks</td>
-                </tr>
-                <tr>
-                  <td className="p-6 text-white/80 font-medium">Hidden Fees</td>
-                  <td className="p-6 bg-[#ff6b35]/5 border-x border-[#ff6b35]/20 text-center text-[#ff6b35] font-bold"><div className="flex items-center justify-center gap-2"><CheckCircle2 size={16}/> None</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Costly Mistakes</div></td>
-                  <td className="p-6 text-center text-red-400 font-medium"><div className="flex items-center justify-center gap-2"><span className="text-lg">✕</span> Constant Upsells</div></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Pricing Section */}
-        {price && (
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Transparent, All-Inclusive Pricing</h2>
-              <p className="text-white/60 text-lg">Simple flat fee. No hidden costs or surprise charges.</p>
-            </div>
-            <div className="flex justify-center">
-              <div className="relative w-full max-w-sm">
-                {/* Outer Container mimicking the image */}
-                <div className="bg-[#111111] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1 group">
-                  {/* Top Badge Area */}
-                  <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 py-2.5 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
-                    <Sparkles size={14} className="text-[#ff6b35]" />
-                    <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
-                  </div>
-                  {/* Inner Content */}
-                  <div className="p-8 sm:p-10 flex flex-col">
-                    {/* Title */}
-                    <h3 className="text-xl font-semibold text-white mb-4">Professional</h3>
-                    {/* Price */}
-                    <div className="flex items-end gap-1 mb-4">
-                      <span className="text-5xl font-black text-white leading-none tracking-tight">${price}</span>
-                      <span className="text-white/50 text-sm font-medium mb-1">/ one-time</span>
-                    </div>
-                    {/* Description */}
-                    <p className="text-white/50 text-sm leading-relaxed mb-6">
-                      Perfect for businesses that need speed, structure, and a premium setup for {data.title.replace(' Setup', '')}.
-                    </p>
-                    {/* Pay Now Button */}
-                    <Link 
-                      href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                      Pay Now
-                    </Link>
-                    {/* Features List */}
-                    <div className="flex flex-col gap-3.5">
-                      {data.benefits.map((benefit: string, idx: number) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b35]/70 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
-                          <span className="text-white/80 text-sm font-medium">{benefit}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Testimonials */}
-        <div className="mb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">Trusted by Founders Worldwide</h2>
-            <p className="text-white/60 text-lg">Real results from our clients — no buzzwords, just clear success.</p>
-          </div>
+        {/* Hero Showcase Image */}
+        <div className="relative w-full max-w-6xl mx-auto aspect-[16/10] md:aspect-video rounded-[32px] md:rounded-[40px] overflow-hidden group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] mb-32 border border-white/10 bg-[#111]">
+          {/* Subtle Overlays for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-20 pointer-events-none opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#ff6b35]/20 to-transparent z-20 pointer-events-none mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              { name: "Michael T.", role: "E-commerce Founder", quote: `AmazonFast made the ${data.title.replace(' Setup', '')} process seamless. They handled everything perfectly and we were live fast!` },
-              { name: "Sarah L.", role: "Global Seller", quote: `I tried doing ${data.title.replace(' Setup', '')} myself and got stuck. Reached out to them and they sorted it instantly. Highly recommended.` },
-              { name: "David O.", role: "Dropshipping Pro", quote: `The best investment for my business. Their WhatsApp support is incredible. The ${data.title.replace(' Setup', '')} setup was completely hands-off.` }
-            ].map((t, i) => (
-              <div key={i} className="bg-[#111] border border-white/5 rounded-[24px] p-8 shadow-xl">
-                <div className="flex gap-1 text-[#ff6b35] mb-4">
-                  {[...Array(5)].map((_, j) => <Sparkles key={j} size={14} className="fill-[#ff6b35]" />)}
-                </div>
-                <p className="text-white/70 text-sm leading-relaxed mb-6 italic">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] font-bold">{t.name.charAt(0)}</div>
-                  <div>
-                    <h4 className="text-white font-semibold text-sm">{t.name}</h4>
-                    <p className="text-white/40 text-xs">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <Image 
+            src={data.image}
+            alt={data.title}
+            fill
+            className="object-cover object-center transition-transform duration-[2000ms] group-hover:scale-[1.03]"
+            priority
+            quality={100}
+          />
+          
+          {/* Floating Trust Banner */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-[90%] md:w-max bg-[#1a1a1a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:px-8 md:py-4 flex flex-wrap justify-center gap-6 md:gap-12 shadow-2xl">
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="text-[#ff6b35] w-5 h-5" />
+              <span className="text-white/90 text-sm font-semibold">Guaranteed Approval</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Zap className="text-[#ff6b35] w-5 h-5" />
+              <span className="text-white/90 text-sm font-semibold">Fast Processing</span>
+            </div>
+            <div className="flex items-center gap-3 hidden sm:flex">
+              <Globe className="text-[#ff6b35] w-5 h-5" />
+              <span className="text-white/90 text-sm font-semibold">Global Support</span>
+            </div>
           </div>
         </div>
 
@@ -554,6 +350,66 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             );
           })}
         </div>
+
+        {/* Exact Layout of the Image Pricing Card */}
+        {price && (
+          <div className="mt-32 mb-10 flex justify-center">
+            <div className="relative w-full max-w-sm">
+              
+              {/* Outer Container mimicking the image */}
+              <div className="bg-[#111111] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1 group">
+                
+                {/* Top Badge Area (Like the purple bar in the image) */}
+                <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 py-2.5 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
+                  <Sparkles size={14} className="text-[#ff6b35]" />
+                  <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
+                </div>
+
+                {/* Inner Content */}
+                <div className="p-8 sm:p-10 flex flex-col">
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-semibold text-white mb-4">Professional</h3>
+                  
+                  {/* Price */}
+                  <div className="flex items-end gap-1 mb-4">
+                    <span className="text-5xl font-black text-white leading-none tracking-tight">${price}</span>
+                    <span className="text-white/50 text-sm font-medium mb-1">/ one-time</span>
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-white/50 text-sm leading-relaxed mb-6">
+                    Perfect for sellers that need speed, structure, and a premium setup for success.
+                  </p>
+                  
+                  {/* Pay Now Button (Positioned exactly like the image) */}
+                  <Link 
+                    href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden"
+                  >
+                    {/* Button highlight effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                    Pay Now
+                  </Link>
+
+                  {/* Features List */}
+                  <div className="flex flex-col gap-3.5">
+                    {data.benefits.map((benefit: string, idx: number) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b35]/70 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
+                        <span className="text-white/80 text-sm font-medium">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

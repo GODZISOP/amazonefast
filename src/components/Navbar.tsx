@@ -12,13 +12,23 @@ export const servicesList = [
   { name: "Amazon Store Creation", slug: "store-creation" },
   { name: "A+ Content & EBC", slug: "a-content-ebc" },
   { name: "Listing SEO & Optimization", slug: "listing-seo" },
-  { name: "Account Reinstatement", slug: "account-reinstatement" }
+  { name: "Account Reinstatement", slug: "account-reinstatement" },
+  { name: "Amazon Account Creation", slug: "amazon-account-creation" }
+];
+
+export const bankAccountsList = [
+  { name: "Payoneer Setup", slug: "payoneer-wallet" },
+  { name: "Wise Setup", slug: "wise-wallet" },
+  { name: "Airwallex Setup", slug: "airwallex-wallet" },
+  { name: "Stripe Setup", slug: "stripe-setup" },
+  { name: "Chase Bank", slug: "chase-bank" },
+  { name: "Bank of America", slug: "bank-of-america" }
 ];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
-  const [isMobileAccountCreationOpen, setIsMobileAccountCreationOpen] = useState(false);
+  const [isMobileBankCreationOpen, setIsMobileBankCreationOpen] = useState(false);
   const [isDesktopNestedOpen, setIsDesktopNestedOpen] = useState(false);
 
   return (
@@ -41,9 +51,10 @@ export default function Navbar() {
           </button>
           
           <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-            <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2.5 w-72 shadow-2xl flex flex-col gap-1 relative">
+            {/* Reduced gap and padding to prevent overflow */}
+            <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 w-[280px] shadow-2xl flex flex-col gap-0.5 relative">
               {servicesList.map((service) => (
-                <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link">
+                <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link">
                   {service.name}
                   <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                 </Link>
@@ -51,32 +62,24 @@ export default function Navbar() {
 
               <div className="w-full h-px bg-white/10 my-1"></div>
 
-              {/* Nested Dropdown for Amazon Account Creation */}
+              {/* Nested Dropdown for Bank Account Creation */}
               <div 
                 className="relative"
                 onMouseEnter={() => setIsDesktopNestedOpen(true)}
                 onMouseLeave={() => setIsDesktopNestedOpen(false)}
               >
-                <button className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center justify-between ${isDesktopNestedOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}>
-                  Amazon Account Creation
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-70 transition-transform duration-200 ${isDesktopNestedOpen ? 'rotate-90 text-[#ff6b35]' : ''}`}><path d="m9 18 6-6-6-6"/></svg>
+                <button className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${isDesktopNestedOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}>
+                  Bank Account Creation
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-70 transition-transform duration-200 ${isDesktopNestedOpen ? '-rotate-90 text-[#ff6b35]' : '-rotate-90'}`}><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 
-                {/* Sub Menu appearing on the right or bottom */}
+                {/* Sub Menu appearing on the right */}
                 <div 
-                  className={`absolute top-0 left-[105%] transition-all duration-300 ${isDesktopNestedOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-4'}`}
+                  className={`absolute bottom-0 left-[105%] transition-all duration-300 ${isDesktopNestedOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-4'}`}
                 >
-                  <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2.5 w-64 shadow-2xl flex flex-col gap-1">
-                    {[
-                      { name: "Payoneer Setup", slug: "payoneer-wallet" },
-                      { name: "Wise Setup", slug: "wise-wallet" },
-                      { name: "Airwallex Setup", slug: "airwallex-wallet" },
-                      { name: "Stripe Setup", slug: "stripe-setup" },
-                      { name: "Chase Bank", slug: "chase-bank" },
-                      { name: "Bank of America", slug: "bank-of-america" },
-                      { name: "Amazon Account Creation", slug: "amazon-account-creation" }
-                    ].map((service) => (
-                      <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link2">
+                  <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 w-56 shadow-2xl flex flex-col gap-0.5">
+                    {bankAccountsList.map((service) => (
+                      <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link2">
                         {service.name}
                         <ArrowUpRight size={14} className="opacity-0 group-hover/link2:opacity-100 transition-opacity text-[#ff6b35]" />
                       </Link>
@@ -113,48 +116,48 @@ export default function Navbar() {
         }}
         className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
       >
-        <div className="flex flex-col p-8 gap-8 mt-4 overflow-y-auto">
-          {[{name: 'Home', href: '/'}, {name: 'About', href: '/about'}, {name: 'Privacy Policy', href: '/privacy-policy'}, {name: 'Contact Us', href: '/contact-us'}].map((item, i) => (
+        <div className="flex flex-col p-6 gap-6 mt-2 overflow-y-auto max-h-[calc(100vh-200px)]">
+          {[{name: 'Home', href: '/'}, {name: 'About', href: '/about'}].map((item, i) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 20 }}
-              transition={{ delay: isMobileMenuOpen ? i * 0.1 : 0, duration: 0.4, ease: "easeOut" }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 10 }}
+              transition={{ delay: isMobileMenuOpen ? i * 0.1 : 0, duration: 0.3 }}
               className="flex flex-col"
             >
-              <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group">
+              <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-[#ff6b35] transition flex items-center justify-between group">
                 {item.name}
-                <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={28} />
+                <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={24} />
               </Link>
             </motion.div>
           ))}
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 20 }}
-            transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 10 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
             className="flex flex-col"
           >
             <button 
               onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-              className="text-4xl font-semibold text-white hover:text-[#ff6b35] transition tracking-tight flex items-center justify-between group w-full text-left"
+              className="text-2xl font-semibold text-white hover:text-[#ff6b35] transition flex items-center justify-between w-full text-left"
             >
               Services
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-white/20 group-hover:text-[#ff6b35] transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-white/20 transition-transform duration-300 ${isMobileServicesOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
             </button>
             
-            {/* Mobile Submenu */}
+            {/* Mobile Submenu - Compacted */}
             <motion.div 
               initial={{ height: 0, opacity: 0 }}
               animate={{ 
                 height: isMobileServicesOpen ? 'auto' : 0,
                 opacity: isMobileServicesOpen ? 1 : 0,
-                marginTop: isMobileServicesOpen ? 24 : 0
+                marginTop: isMobileServicesOpen ? 16 : 0
               }}
-              className="overflow-hidden flex flex-col gap-4 pl-4 border-l border-white/10"
+              className="overflow-hidden flex flex-col gap-3 pl-3 border-l-2 border-white/10"
             >
               {servicesList.map(service => (
-                <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-white text-xl font-medium transition-colors">
+                <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-white text-base font-medium transition-colors py-1">
                   {service.name}
                 </Link>
               ))}
@@ -162,38 +165,41 @@ export default function Navbar() {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsMobileAccountCreationOpen(!isMobileAccountCreationOpen);
+                  setIsMobileBankCreationOpen(!isMobileBankCreationOpen);
                 }}
-                className="text-white/60 hover:text-white text-xl font-medium transition-colors flex items-center justify-between text-left mt-2"
+                className="text-white/60 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1 mt-1 border-t border-white/10 pt-3"
               >
-                Amazon Account Creation
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileAccountCreationOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+                Bank Account Creation
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileBankCreationOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
               </button>
               
               <motion.div 
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ 
-                  height: isMobileAccountCreationOpen ? 'auto' : 0,
-                  opacity: isMobileAccountCreationOpen ? 1 : 0,
-                  marginTop: isMobileAccountCreationOpen ? 8 : 0
+                  height: isMobileBankCreationOpen ? 'auto' : 0,
+                  opacity: isMobileBankCreationOpen ? 1 : 0,
+                  marginTop: isMobileBankCreationOpen ? 4 : 0
                 }}
-                className="overflow-hidden flex flex-col gap-3 pl-4 border-l border-white/10"
+                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
               >
-                {[
-                  { name: "Payoneer Setup", slug: "payoneer-wallet" },
-                  { name: "Wise Setup", slug: "wise-wallet" },
-                  { name: "Airwallex Setup", slug: "airwallex-wallet" },
-                  { name: "Stripe Setup", slug: "stripe-setup" },
-                  { name: "Chase Bank", slug: "chase-bank" },
-                  { name: "Bank of America", slug: "bank-of-america" },
-                  { name: "Amazon Account Creation", slug: "amazon-account-creation" }
-                ].map((service) => (
-                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/50 hover:text-[#ff6b35] text-lg font-medium transition-colors">
+                {bankAccountsList.map((service) => (
+                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/40 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
                     {service.name}
                   </Link>
                 ))}
               </motion.div>
             </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: isMobileMenuOpen ? 1 : 0, y: isMobileMenuOpen ? 0 : 10 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+          >
+            <Link href="/privacy-policy" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-semibold text-white hover:text-[#ff6b35] transition flex items-center justify-between group">
+              Privacy Policy
+              <ArrowUpRight className="text-white/20 group-hover:text-[#ff6b35] transition-colors" size={24} />
+            </Link>
           </motion.div>
         </div>
         
@@ -202,9 +208,9 @@ export default function Navbar() {
           initial={{ opacity: 0 }}
           animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-auto p-8 border-t border-white/10 mb-4"
+          className="mt-auto p-6 border-t border-white/10 bg-[#0a0a0a]"
         >
-          <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-4 rounded-full font-bold tracking-wide text-lg">
+          <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-3.5 rounded-full font-bold tracking-wide text-base shadow-lg">
             Book a Meeting
           </Link>
         </motion.div>
