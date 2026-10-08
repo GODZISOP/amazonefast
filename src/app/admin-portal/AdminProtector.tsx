@@ -18,7 +18,8 @@ export default function AdminProtector({ children }: { children: React.ReactNode
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'admin0000') {
+    const savedPassword = localStorage.getItem('admin_master_password') || 'admin0000';
+    if (password === savedPassword) {
       localStorage.setItem('admin_auth', 'true');
       setIsAuthenticated(true);
       setError('');

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell } from 'lucide-react';
+import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User } from 'lucide-react';
 import Image from 'next/image';
 
 export default function ClientPortal() {
@@ -191,6 +191,7 @@ export default function ClientPortal() {
   const utilityDocs = getDocuments('Utility Bill');
   const bankDocs = getDocuments('Bank Statement');
   const gmailDoc = getDocument('Gmail Credentials');
+  const profileImageDoc = getDocument('Profile Image');
 
   const isProfileApproved = 
     frontDoc?.status === 'Approved' &&
@@ -259,15 +260,45 @@ export default function ClientPortal() {
 
       <div className="max-w-[1000px] mx-auto mt-8">
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900">
-              Welcome back, {user?.user_metadata?.full_name || 'Client'}.
-            </h1>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
-              <span className="w-2 h-2 rounded-full bg-green-500"></span>
-              <span className="text-sm font-bold text-gray-700">{user?.email}</span>
+          <div className="flex items-center gap-6">
+            <div className="relative group">
+              <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center overflow-hidden shrink-0 relative z-10">
+                {profileImageDoc ? (
+                  <img src={profileImageDoc.file_url} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  <User size={40} className="text-gray-300" />
+                )}
+                
+                {/* Upload Overlay */}
+                <label className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center cursor-pointer z-20">
+                  {uploading ? (
+                    <Loader2 className="animate-spin text-white w-6 h-6" />
+                  ) : (
+                    <>
+                      <Camera size={20} className="text-white mb-1" />
+                      <span className="text-[10px] text-white font-bold uppercase tracking-wider">Update</span>
+                    </>
+                  )}
+                  <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'Profile Image')} disabled={uploading} />
+                </label>
+              </div>
+              {profileImageDoc && (
+                <button onClick={() => handleDeleteDocument(profileImageDoc.id)} className="absolute -bottom-2 -right-2 bg-red-100 text-red-500 rounded-full p-1.5 shadow-sm border border-red-200 z-30 hover:bg-red-500 hover:text-white transition">
+                  <AlertCircle size={12} />
+                </button>
+              )}
             </div>
-            <p className="text-gray-500 text-lg max-w-xl font-medium mt-2">Please upload the required documents below to continue your Amazon FBA setup process.</p>
+
+            <div>
+              <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900">
+                Welcome, {user?.user_metadata?.full_name?.split(' ')[0] || 'Client'}!
+              </h1>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                <span className="text-sm font-bold text-gray-700">{user?.email}</span>
+              </div>
+              <p className="text-gray-500 text-lg max-w-xl font-medium mt-2">Please upload the required documents below to continue your Amazon FBA setup process.</p>
+            </div>
           </div>
         </div>
 

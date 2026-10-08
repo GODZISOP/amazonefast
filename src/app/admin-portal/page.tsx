@@ -4,16 +4,20 @@ import Image from 'next/image';
 import ClientTable from './ClientTable';
 import AdminProtector from './AdminProtector';
 import AdminLogoutButton from './AdminLogoutButton';
+import GlobalDocuments from './GlobalDocuments';
+import AdminSettings from './AdminSettings';
 
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
-export default async function AdminPortal() {
+export default async function AdminPortal({ searchParams }: { searchParams: any }) {
   // Use service role to bypass RLS for admin panel
   const supabase = createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
+
+  const tab = (await searchParams)?.tab || 'clients';
 
   // Fetch Real Data (wrapped in try-catch in case tables don't exist yet)
   let clients: any[] = [];
@@ -59,17 +63,17 @@ export default async function AdminPortal() {
             <Image src="/logo-new.png" alt="AmazonFast Logo" width={140} height={50} style={{ height: '50px', width: 'auto' }} className="object-contain" priority />
           </div>
           <nav className="flex-1 py-8 px-4 space-y-2">
-            <a href="#" className="flex items-center gap-3 px-4 py-3 bg-gray-50 text-[#111] rounded-xl transition border border-gray-100">
-              <Users size={18} className="text-[#ff6b35]" />
-              <span className="text-sm font-semibold">Clients</span>
+            <a href="?tab=clients" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${tab === 'clients' ? 'bg-gray-50 text-[#111] border border-gray-100 font-semibold' : 'text-gray-500 hover:bg-gray-50 hover:text-[#111] font-medium'}`}>
+              <Users size={18} className={tab === 'clients' ? 'text-[#ff6b35]' : ''} />
+              <span>Clients</span>
             </a>
-            <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-[#111] rounded-xl transition">
-              <FileText size={18} />
-              <span className="text-sm font-medium">Documents</span>
+            <a href="?tab=documents" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${tab === 'documents' ? 'bg-gray-50 text-[#111] border border-gray-100 font-semibold' : 'text-gray-500 hover:bg-gray-50 hover:text-[#111] font-medium'}`}>
+              <FileText size={18} className={tab === 'documents' ? 'text-[#ff6b35]' : ''} />
+              <span>Global Documents</span>
             </a>
-            <a href="#" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-[#111] rounded-xl transition">
-              <Settings size={18} />
-              <span className="text-sm font-medium">Settings</span>
+            <a href="?tab=settings" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${tab === 'settings' ? 'bg-gray-50 text-[#111] border border-gray-100 font-semibold' : 'text-gray-500 hover:bg-gray-50 hover:text-[#111] font-medium'}`}>
+              <Settings size={18} className={tab === 'settings' ? 'text-[#ff6b35]' : ''} />
+              <span>Admin Settings</span>
             </a>
           </nav>
         </aside>
@@ -80,14 +84,11 @@ export default async function AdminPortal() {
           <header className="h-16 md:h-20 border-b border-gray-200 flex items-center justify-between px-4 md:px-8 bg-white/80 backdrop-blur-md sticky top-0 z-10">
             <div className="flex items-center gap-2">
               <Image src="/logo-new.png" alt="AmazonFast Logo" width={100} height={30} className="object-contain md:hidden" priority />
-              <h1 className="text-lg md:text-xl font-bold tracking-tight text-gray-900 hidden md:block">Client Management</h1>
+              <h1 className="text-lg md:text-xl font-bold tracking-tight text-gray-900 hidden md:block">
+                {tab === 'clients' ? 'Client Management' : tab === 'documents' ? 'Global Documents' : 'Admin Settings'}
+              </h1>
             </div>
             <div className="flex items-center gap-6">
-              <div className="relative hidden md:block">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type="text" placeholder="Search clients..." className="bg-gray-50 border border-gray-200 rounded-full pl-10 pr-4 py-2 text-sm text-[#111] placeholder:text-gray-400 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition w-64 shadow-inner" />
-              </div>
-
               <div className="relative group cursor-pointer">
                 <button className="text-gray-400 hover:text-gray-900 transition relative">
                   <Bell size={20} />
@@ -96,7 +97,7 @@ export default async function AdminPortal() {
                   )}
                 </button>
 
-                {/* Instagram-style Notification Dropdown */}
+                {/* Notification Dropdown */}
                 <div className="absolute top-10 right-0 w-80 bg-white border border-gray-200 shadow-xl rounded-2xl hidden group-hover:block z-50 overflow-hidden">
                   <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
                     <h4 className="font-bold text-sm text-gray-900">Recent Activity</h4>
@@ -126,10 +127,26 @@ export default async function AdminPortal() {
             </div>
           </header>
 
+          {/* Mobile Navigation Row */}
+          <nav className="md:hidden flex overflow-x-auto border-b border-gray-200 bg-white sticky top-16 z-10 hide-scrollbar shadow-sm">
+            <a href="?tab=clients" className={`flex-1 min-w-[120px] text-center py-3.5 text-xs font-bold uppercase tracking-wider border-b-2 transition ${tab === 'clients' ? 'border-[#ff6b35] text-[#ff6b35]' : 'border-transparent text-gray-500 hover:text-gray-900'}`}>
+              Clients
+            </a>
+            <a href="?tab=documents" className={`flex-1 min-w-[140px] text-center py-3.5 text-xs font-bold uppercase tracking-wider border-b-2 transition ${tab === 'documents' ? 'border-[#ff6b35] text-[#ff6b35]' : 'border-transparent text-gray-500 hover:text-gray-900'}`}>
+              Global Docs
+            </a>
+            <a href="?tab=settings" className={`flex-1 min-w-[120px] text-center py-3.5 text-xs font-bold uppercase tracking-wider border-b-2 transition ${tab === 'settings' ? 'border-[#ff6b35] text-[#ff6b35]' : 'border-transparent text-gray-500 hover:text-gray-900'}`}>
+              Settings
+            </a>
+          </nav>
+
           {/* Content */}
           <div className="flex-1 p-4 md:p-8 overflow-y-auto w-full">
-          {/* Table */}
-          <ClientTable initialClients={clients} />
+            {tab === 'clients' && <ClientTable initialClients={clients} />}
+            
+            {tab === 'documents' && <GlobalDocuments clients={clients} />}
+
+            {tab === 'settings' && <AdminSettings />}
           </div>
         </main>
       </div>

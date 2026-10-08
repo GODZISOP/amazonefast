@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from 'react';
-import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter, Users } from 'lucide-react';
+import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter, Users, Search } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 
 export default function ClientTable({ initialClients }: { initialClients: any[] }) {
@@ -9,6 +9,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   const [selectedClient, setSelectedClient] = useState<any>(null);
   const [updating, setUpdating] = useState(false);
   const [filter, setFilter] = useState('All'); // 'All', 'Pending', 'Approved'
+  const [searchQuery, setSearchQuery] = useState('');
   const supabase = createClient();
 
   const handleStatusUpdate = async (docId: string, newStatus: string) => {
@@ -72,6 +73,15 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
 
   const filteredClients = useMemo(() => {
     return clients.filter(c => {
+      // 1. Search Filter
+      if (searchQuery.trim() !== '') {
+        const query = searchQuery.toLowerCase();
+        const nameMatch = c.full_name?.toLowerCase().includes(query);
+        const emailMatch = c.email?.toLowerCase().includes(query);
+        if (!nameMatch && !emailMatch) return false;
+      }
+
+      // 2. Status Filter
       if (filter === 'All') return true;
       
       const docs = c.documents || [];
@@ -103,7 +113,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       
       return getLatestTime(b) - getLatestTime(a);
     });
-  }, [clients, filter]);
+  }, [clients, filter, searchQuery]);
 
   const isFullyApproved = (client: any) => {
     const docs = client.documents || [];
@@ -155,22 +165,35 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="flex items-center gap-2 mb-6">
-        <Filter size={16} className="text-gray-400 mr-2" />
-        {['All', 'Pending', 'Approved'].map(f => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-              filter === f 
-                ? 'bg-[#111] text-white shadow-md' 
-                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-            }`}
-          >
-            {f}
-          </button>
-        ))}
+      {/* Controls: Search and Filters */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div className="relative w-full md:w-72">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input 
+            type="text" 
+            placeholder="Search by name or email..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-white border border-gray-200 rounded-full pl-10 pr-4 py-2 text-sm text-[#111] placeholder:text-gray-400 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition shadow-sm" 
+          />
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+          <Filter size={16} className="text-gray-400 mr-1 hidden sm:block" />
+          {['All', 'Pending', 'Approved'].map(f => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
+                filter === f 
+                  ? 'bg-[#111] text-white shadow-md' 
+                  : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
@@ -205,14 +228,19 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                     getLatest('Bank Statement')?.status === 'Approved' && 
                     getLatest('Gmail Credentials')?.status === 'Approved';
 
-                  const pendingDocs = docs.filter((d: any) => d.status === 'Pending Review');
+                  const pendingDocs = docs.filter((d: any) => d.status === 'Pending Review' && d.document_type !== 'Profile Image');
+                  const profileDoc = getLatest('Profile Image');
 
                   return (
                   <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition group">
                     <td className="py-3 px-4 md:px-6">
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black border shrink-0 ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
-                          {client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C'}
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black border shrink-0 overflow-hidden ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
+                          {profileDoc ? (
+                            <img src={profileDoc.file_url} alt="Profile" className="w-full h-full object-cover" />
+                          ) : (
+                            client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C'
+                          )}
                         </div>
                         <div>
                           <p className="font-bold text-gray-900 flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-xs md:text-sm">
@@ -273,9 +301,17 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50">
-              <div>
-                <h3 className="font-bold text-lg text-gray-900">{selectedClient.full_name}</h3>
-                <p className="text-sm text-gray-500">{selectedClient.email}</p>
+              <div className="flex items-center gap-4">
+                {(() => {
+                  const pDoc = selectedClient.documents?.sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime()).find((d: any) => d.document_type === 'Profile Image');
+                  return pDoc ? (
+                    <img src={pDoc.file_url} alt="Profile" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
+                  ) : null;
+                })()}
+                <div>
+                  <h3 className="font-bold text-lg text-gray-900">{selectedClient.full_name}</h3>
+                  <p className="text-sm text-gray-500">{selectedClient.email}</p>
+                </div>
               </div>
               <button 
                 onClick={() => setSelectedClient(null)}
