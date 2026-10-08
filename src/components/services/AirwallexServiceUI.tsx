@@ -41,7 +41,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             </h1>
             
             <p className="text-white/60 text-lg md:text-xl font-medium max-w-md mb-10 leading-relaxed">
-              Stop struggling with verification rejections. We specialize in setting up and fully verifying your Airwallex business account for seamless Amazon payouts.
+              Open a global Airwallex account with ease. Stop struggling with verification rejections and let us fully verify your business account for seamless Amazon payouts.
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
@@ -57,10 +57,10 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-gray-800 overflow-hidden relative">
-                    <Image src="/profile.png" alt="Seller" fill className="object-cover" />
+                    <Image src="/avatar-male.jpg" alt="Verified Seller" fill className="object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-gray-700 overflow-hidden relative">
-                    <Image src="/profile.png" alt="Seller" fill className="object-cover" />
+                    <Image src="/avatar-female.jpg" alt="Verified Seller" fill className="object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-[#ff6b35] text-white flex items-center justify-center font-bold text-xs">
                     +

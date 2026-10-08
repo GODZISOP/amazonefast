@@ -183,8 +183,8 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
                   <Wallet className="text-[#ff6b35]" size={24} />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">Get Global Bank Details</h4>
-                  <p className="text-white/60 font-medium">Instantly receive US, UK, and EU bank accounts tailored specifically for your business profile.</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Get Multi-Currency Bank Details</h4>
+                  <p className="text-white/60 font-medium">Instantly receive USD, GBP, and EUR bank accounts tailored specifically for your business profile.</p>
                 </div>
               </div>
 

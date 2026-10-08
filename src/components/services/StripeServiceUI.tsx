@@ -136,7 +136,7 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
             <div className="absolute -right-10 -bottom-20 text-[250px] font-black text-white/5 group-hover:text-[#ff6b35]/10 transition-colors duration-500">$</div>
             <h3 className="text-xl font-bold text-white mb-4 relative z-10">Global Processing</h3>
             <p className="text-white/60 font-medium relative z-10">
-              Get real mid-market exchange rates. Stop losing 3-5% on every transfer from standard banks.
+              Instantly process customer payments worldwide with advanced local acquiring network routing.
             </p>
           </div>
         </div>
@@ -183,8 +183,8 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
                   <Wallet className="text-[#ff6b35]" size={24} />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">Get Global Bank Details</h4>
-                  <p className="text-white/60 font-medium">Instantly receive US, UK, and EU bank accounts tailored specifically for your business profile.</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Enable Payment Gateways</h4>
+                  <p className="text-white/60 font-medium">We configure your checkout forms and integrate Stripe securely into your Shopify, WooCommerce, or custom site.</p>
                 </div>
               </div>
 
@@ -193,8 +193,8 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
                   <TrendingUp className="text-[#ff6b35]" size={24} />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">Sync with Amazon</h4>
-                  <p className="text-white/60 font-medium">Connect your new accounts directly to Seller Central and start receiving payouts without hidden fees.</p>
+                  <h4 className="text-xl font-bold text-white mb-2">Start Processing Payments</h4>
+                  <p className="text-white/60 font-medium">Monitor real-time payments, prevent chargebacks, and enjoy automated 2-day payouts to your bank.</p>
                 </div>
               </div>
             </div>
