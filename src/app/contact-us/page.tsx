@@ -58,29 +58,29 @@ export default function ContactUs() {
             </div>
 
             <div className="flex flex-col gap-6 mt-8">
-              <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center shrink-0">
-                  <Phone className="text-[#ff6b35]" size={24} />
+              <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center shrink-0 group-hover:bg-[#ff6b35] transition-colors">
+                  <Phone className="text-[#ff6b35] group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
-                  <p className="text-white/50 text-sm font-medium mb-1">Call or WhatsApp</p>
-                  <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-xl font-bold text-white hover:text-[#ff6b35] transition-colors">
+                  <p className="text-white/50 text-sm font-medium mb-1 group-hover:text-white/70 transition-colors">Call or WhatsApp</p>
+                  <p className="text-xl font-bold text-white group-hover:text-[#ff6b35] transition-colors">
                     +92 332 2568950
-                  </a>
+                  </p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center shrink-0">
-                  <Mail className="text-[#ff6b35]" size={24} />
+              <a href="mailto:info@amazonfastservices.com" className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center shrink-0 group-hover:bg-[#ff6b35] transition-colors">
+                  <Mail className="text-[#ff6b35] group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
-                  <p className="text-white/50 text-sm font-medium mb-1">Email Us</p>
-                  <a href="mailto:info@amazonfastservices.com" className="text-xl font-bold text-white hover:text-[#ff6b35] transition-colors break-all">
+                  <p className="text-white/50 text-sm font-medium mb-1 group-hover:text-white/70 transition-colors">Email Us</p>
+                  <p className="text-xl font-bold text-white group-hover:text-[#ff6b35] transition-colors break-all">
                     info@amazonfastservices.com
-                  </a>
+                  </p>
                 </div>
-              </div>
+              </a>
             </div>
             
             <div className="mt-8">
