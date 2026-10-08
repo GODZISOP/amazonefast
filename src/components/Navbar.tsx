@@ -11,9 +11,7 @@ export const servicesList = [
   { name: "Product Hunting & Sourcing", slug: "product-hunting" },
   { name: "Amazon Store Creation", slug: "store-creation" },
   { name: "A+ Content & EBC", slug: "a-content-ebc" },
-  { name: "Listing SEO & Optimization", slug: "listing-seo" },
-  { name: "Account Reinstatement", slug: "account-reinstatement" },
-  { name: "Amazon Account Creation", slug: "amazon-account-creation" }
+  { name: "Listing SEO & Optimization", slug: "listing-seo" }
 ];
 
 export const bankAccountsList = [

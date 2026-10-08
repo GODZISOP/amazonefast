@@ -78,7 +78,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a] via-transparent to-transparent z-10 pointer-events-none opacity-50"></div>
             
             <Image 
-              src="/airwallex-hero.png" 
+              src={data?.image || "/srv_airwallex_setup.jpg"}
               alt="Airwallex Premium Account" 
               fill 
               className="object-cover object-center"
@@ -116,10 +116,10 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
 
           <div className="w-full lg:w-1/3 h-[300px] sm:h-[400px] lg:h-[500px] relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <Image 
-              src="/airwallex-hand.png" 
-              alt="Airwallex Card Hand" 
+              src="/airwallex-card.png"
+              alt="Airwallex Card"
               fill 
-              className="object-cover object-center"
+              className="object-contain object-center p-8"
             />
           </div>
 

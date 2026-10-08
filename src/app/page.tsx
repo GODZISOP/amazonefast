@@ -446,7 +446,7 @@ export default function Home() {
               { title: "Amazon Store Creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
               { title: "A+ Content & EBC", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
               { title: "Listing SEO & Optimization", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
-              { title: "Account Reinstatement", desc: "Professional appeal services and tailored plans of action to recover suspended seller accounts securely." }
+              { title: "Bank Account Creation", desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." }
             ].map((service, idx) => (
               <motion.div
                 key={idx}

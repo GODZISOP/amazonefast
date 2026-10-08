@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, Sparkles, TrendingUp, Search, ShoppingBag, PenTool, Layout, ShieldAlert } from "lucide-react";
+import { ArrowUpRight, Sparkles, TrendingUp, Search, ShoppingBag, PenTool, Layout, UserPlus } from "lucide-react";
 
 export const servicesData = [
   {
@@ -40,10 +40,10 @@ export const servicesData = [
     icon: <Sparkles className="text-[#ff6b35] w-8 h-8" />
   },
   {
-    name: "Account Reinstatement",
-    slug: "account-reinstatement",
-    description: "Professional appeal services and tailored plans of action to recover suspended seller accounts securely.",
-    icon: <ShieldAlert className="text-[#ff6b35] w-8 h-8" />
+    name: "Bank Account Creation",
+    slug: "payoneer-wallet",
+    description: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds.",
+    icon: <UserPlus className="text-[#ff6b35] w-8 h-8" />
   }
 ];
 
