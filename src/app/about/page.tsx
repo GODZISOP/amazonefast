@@ -123,7 +123,7 @@ export default function AboutPage() {
           <div className="mb-6 flex flex-col items-center">
             <SplitText
               text="Pioneering Amazon"
-              className="text-5xl md:text-7xl font-bold tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
               delay={40}
               duration={0.8}
               ease="power3.out"
@@ -135,7 +135,7 @@ export default function AboutPage() {
             />
             <SplitText
               text="Success Stories"
-              className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40"
               delay={40}
               duration={0.8}
               ease="power3.out"
