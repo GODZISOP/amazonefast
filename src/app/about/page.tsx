@@ -89,28 +89,27 @@ export default function AboutPage() {
   return (
     <div ref={containerRef} className="relative font-sans overflow-x-hidden bg-[#0a0a0a] text-white pt-32 pb-20 min-h-screen">
 
-      {/* Cinematic Globe Background for the Hero Section */}
+      {/* Cinematic Globe Video Background for the Hero Section */}
       <div
         className="absolute top-0 left-0 w-full h-[600px] md:h-[800px] pointer-events-none z-0 overflow-hidden"
         style={{
-          maskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 70%)"
+          maskImage: "radial-gradient(ellipse at top center, black 0%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 80%)"
         }}
       >
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#ff6b35"
-          raysSpeed={0.6}
-          lightSpread={1.5}
-          rayLength={2.5}
-          pulsating={true}
-          fadeDistance={1.2}
-          saturation={0.9}
-          followMouse={true}
-          mouseInfluence={0.15}
-          noiseAmount={0.03}
-          distortion={0.04}
-        />
+        <div className="absolute inset-0 bg-[#ff6b35]/20 mix-blend-color z-10" /> {/* Orange tint */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ff6b35]/30 to-transparent mix-blend-overlay z-10" />
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          style={{ filter: "hue-rotate(140deg) saturate(1.5)" }}
+          poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/82e7eb75-c65f-490a-99b5-f3d1cad54200.webp"
+        >
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260912_104036_bd6924f6-3c8e-417e-8465-6d03c8c2e9e6.mp4" type="video/mp4" />
+        </video>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
