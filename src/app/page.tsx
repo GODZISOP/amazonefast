@@ -51,6 +51,35 @@ export default function Home() {
     })));
   }, []);
 
+  const [contactData, setContactData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [contactStatus, setContactStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setContactStatus('loading');
+    try {
+      const payload = {
+        firstName: contactData.name,
+        lastName: '',
+        email: contactData.email,
+        message: contactData.subject ? `Subject: ${contactData.subject}\n\n${contactData.message}` : contactData.message
+      };
+      
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Failed to send');
+      setContactStatus('success');
+      setContactData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setContactStatus('idle'), 3000);
+    } catch(err) {
+      setContactStatus('error');
+      setTimeout(() => setContactStatus('idle'), 3000);
+    }
+  };
+
   return (
     <div className="relative font-sans overflow-x-hidden bg-[#0a0a0a]">
 
@@ -863,16 +892,51 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff6b35]/10 blur-[80px] rounded-full pointer-events-none"></div>
 
               <h3 className="text-2xl font-semibold text-white mb-8">Chat With Our Strategists</h3>
-              <form className="flex flex-col gap-4 relative z-10">
+              <form onSubmit={handleContactSubmit} className="flex flex-col gap-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Your name" className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" />
-                  <input type="email" placeholder="Your email" className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" />
+                  <input 
+                    type="text" 
+                    required
+                    value={contactData.name}
+                    onChange={(e) => setContactData({...contactData, name: e.target.value})}
+                    placeholder="Your name" 
+                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                  />
+                  <input 
+                    type="email" 
+                    required
+                    value={contactData.email}
+                    onChange={(e) => setContactData({...contactData, email: e.target.value})}
+                    placeholder="Your email" 
+                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                  />
                 </div>
-                <input type="text" placeholder="Subject" className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" />
-                <textarea placeholder="Your message (optional)" rows={4} className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition resize-none"></textarea>
-                <button type="button" className="mt-4 w-full bg-[#ff6b35] hover:bg-[#e85c2b] text-white font-semibold py-4 rounded-2xl transition flex justify-center items-center gap-2">
-                  Send Message
-                  <ArrowUpRight size={18} />
+                <input 
+                  type="text" 
+                  value={contactData.subject}
+                  onChange={(e) => setContactData({...contactData, subject: e.target.value})}
+                  placeholder="Subject" 
+                  className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                />
+                <textarea 
+                  required
+                  value={contactData.message}
+                  onChange={(e) => setContactData({...contactData, message: e.target.value})}
+                  placeholder="Your message" 
+                  rows={4} 
+                  className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition resize-none"
+                ></textarea>
+                
+                {contactStatus === 'success' && <p className="text-green-500 text-sm font-bold bg-green-500/10 p-3 rounded-lg border border-green-500/20">Message sent successfully!</p>}
+                {contactStatus === 'error' && <p className="text-red-500 text-sm font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">Failed to send message. Please try again.</p>}
+                
+                <button 
+                  type="submit" 
+                  disabled={contactStatus === 'loading'}
+                  className="mt-4 w-full bg-[#ff6b35] hover:bg-[#e85c2b] disabled:bg-[#ff6b35]/50 text-white font-semibold py-4 rounded-2xl transition flex justify-center items-center gap-2 disabled:cursor-not-allowed"
+                >
+                  {contactStatus === 'loading' ? 'Sending...' : 'Send Message'}
+                  {!contactStatus || contactStatus !== 'loading' ? <ArrowUpRight size={18} /> : null}
                 </button>
               </form>
             </div>
