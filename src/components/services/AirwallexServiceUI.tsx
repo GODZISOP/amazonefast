@@ -36,12 +36,12 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
           {/* Left Text Block */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
             <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.05] tracking-tight mb-6">
-              Global Banking <br/>
-              <span className="text-[#ff6b35]">for Sellers</span>
+              Professional Airwallex <br/>
+              <span className="text-[#ff6b35]">Account Setup</span>
             </h1>
             
             <p className="text-white/60 text-lg md:text-xl font-medium max-w-md mb-10 leading-relaxed">
-              Create your Airwallex global business account for seamless international payments, multi-currency management, and unlimited virtual corporate cards.
+              Stop struggling with verification rejections. We specialize in setting up and fully verifying your Airwallex business account for seamless Amazon payouts.
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
@@ -134,7 +134,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
               </p>
               <div className="flex flex-col">
                 <span className="text-white font-extrabold text-5xl mb-1 flex items-baseline">
-                  0% <span className="text-[#ff6b35] text-5xl ml-1">.</span>
+                  11+ <span className="text-[#ff6b35] text-5xl ml-1">.</span>
                 </span>
                 <span className="text-white/30 text-xs font-semibold uppercase tracking-wider">Local account details in USD, EUR, GBP, HKD, and more.</span>
               </div>
