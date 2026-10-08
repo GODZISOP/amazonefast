@@ -324,14 +324,14 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
             <div className="p-6 overflow-y-auto flex-1 bg-gray-50/30">
               <h4 className="font-bold text-gray-900 mb-4">Uploaded Documents</h4>
               
-              {(!selectedClient.documents || selectedClient.documents.length === 0) ? (
+              {(!selectedClient.documents || selectedClient.documents.filter((d: any) => d.document_type !== 'Profile Image').length === 0) ? (
                 <div className="text-center p-8 border-2 border-dashed border-gray-200 rounded-xl bg-white">
                   <AlertCircle size={32} className="mx-auto text-gray-300 mb-2" />
                   <p className="text-gray-500 font-medium">This client hasn't uploaded any documents yet.</p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {selectedClient.documents.map((doc: any) => (
+                  {selectedClient.documents.filter((d: any) => d.document_type !== 'Profile Image').map((doc: any) => (
                     <div key={doc.id} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400">

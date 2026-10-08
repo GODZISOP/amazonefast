@@ -83,10 +83,11 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
         ) : (
           filteredClients.map((client) => {
             const isExpanded = expandedClients[client.id];
-            const docs = client.documents || [];
-            const sortedDocs = [...docs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
-            const pendingDocs = docs.filter((d: any) => d.status === 'Pending' && d.document_type !== 'Profile Image').length;
-            const profileDoc = sortedDocs.find((d: any) => d.document_type === 'Profile Image');
+            const allDocs = client.documents || [];
+            const displayDocs = allDocs.filter((d: any) => d.document_type !== 'Profile Image');
+            const sortedDisplayDocs = [...displayDocs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
+            const pendingDocs = displayDocs.filter((d: any) => d.status === 'Pending').length;
+            const profileDoc = allDocs.find((d: any) => d.document_type === 'Profile Image');
             
             return (
               <div key={client.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all">
@@ -111,10 +112,10 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
 
                   <div className="flex items-center gap-6">
                     <div className="text-right hidden sm:block">
-                      <p className="text-sm font-bold text-gray-900">{docs.length} Documents</p>
+                      <p className="text-sm font-bold text-gray-900">{displayDocs.length} Documents</p>
                       {pendingDocs > 0 ? (
                         <p className="text-xs font-bold text-orange-500">{pendingDocs} Pending Review</p>
-                      ) : docs.length > 0 ? (
+                      ) : displayDocs.length > 0 ? (
                         <p className="text-xs font-bold text-green-500">All Reviewed</p>
                       ) : (
                         <p className="text-xs text-gray-400">No uploads yet</p>
@@ -130,11 +131,11 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
                 {/* Expanded Documents View */}
                 {isExpanded && (
                   <div className="border-t border-gray-100 bg-gray-50/50 p-4">
-                    {docs.length === 0 ? (
+                    {displayDocs.length === 0 ? (
                       <p className="text-sm text-center text-gray-500 py-4 font-medium">This client hasn't uploaded any documents yet.</p>
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {docs.map((doc: any, idx: number) => (
+                        {sortedDisplayDocs.map((doc: any, idx: number) => (
                           <div key={doc.id || idx} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm flex flex-col justify-between h-full hover:border-[#ff6b35]/30 transition-colors">
                             <div className="flex items-start justify-between mb-3">
                               <div>
