@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, ArrowRight, Loader2, KeyRound } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Loader2, KeyRound, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [step, setStep] = useState<'form' | 'otp' | 'forgot-password' | 'reset-otp'>('form');
+  const [step, setStep] = useState<'form' | 'otp' | 'forgot-password' | 'reset-otp' | 'password-success'>('form');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -204,8 +204,7 @@ export default function LoginPage() {
         throw new Error(data.error || "Failed to reset password.");
       }
 
-      setSuccessMsg("Password reset successfully! Please log in with your new password.");
-      setStep('form');
+      setStep('password-success');
       setIsLogin(true);
       setPassword('');
       setOtp('');
@@ -224,12 +223,16 @@ export default function LoginPage() {
           <div className="mb-6">
             <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain" />
           </div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight">
-            {step === 'otp' ? 'Enter OTP Code' : (isLogin ? 'Welcome back' : 'Create an account')}
-          </h2>
-          <p className="text-sm text-gray-500 font-medium mt-1 text-center">
-            {step === 'otp' ? `We sent a 6-digit code to ${email}` : (isLogin ? 'Enter your email & password to access your portal' : 'Start your Amazon FBA journey')}
-          </p>
+          {step !== 'password-success' && (
+            <>
+              <h2 className="text-2xl font-black text-gray-900 tracking-tight">
+                {step === 'otp' ? 'Enter OTP Code' : step === 'forgot-password' ? 'Reset Password' : step === 'reset-otp' ? 'Create New Password' : (isLogin ? 'Welcome back' : 'Create an account')}
+              </h2>
+              <p className="text-sm text-gray-500 font-medium mt-1 text-center">
+                {step === 'otp' ? `We sent a 6-digit code to ${email}` : step === 'forgot-password' ? 'Enter your email to receive a reset code' : step === 'reset-otp' ? `We sent a reset code to ${email}` : (isLogin ? 'Enter your email & password to access your portal' : 'Start your Amazon FBA journey')}
+              </p>
+            </>
+          )}
         </div>
 
         {/* Dynamic Form based on step */}
@@ -273,7 +276,18 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">Password</label>
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">Password</label>
+                {isLogin && (
+                  <button
+                    type="button"
+                    onClick={() => { setStep('forgot-password'); setError(''); setSuccessMsg(''); }}
+                    className="text-xs font-bold text-[#ff6b35] hover:text-orange-600 transition"
+                  >
+                    Forgot Password?
+                  </button>
+                )}
+              </div>
               <div className="relative">
                 <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
@@ -296,7 +310,7 @@ export default function LoginPage() {
               {!loading && <ArrowRight size={18} />}
             </button>
           </form>
-        ) : (
+        ) : step === 'otp' ? (
           <form onSubmit={handleVerifyOtp} className="space-y-5">
             {error && (
               <div className="p-3 text-sm font-medium text-red-600 bg-red-50 border border-red-100 rounded-xl">
@@ -334,6 +348,109 @@ export default function LoginPage() {
               {!loading && <ArrowRight size={18} />}
             </button>
           </form>
+        ) : step === 'forgot-password' ? (
+          <form onSubmit={handleForgotPasswordSendOtp} className="space-y-5">
+            {error && (
+              <div className="p-3 text-sm font-medium text-red-600 bg-red-50 border border-red-100 rounded-xl">
+                {error}
+              </div>
+            )}
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">Email Address</label>
+              <div className="relative">
+                <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#ff6b35]/20 focus:border-[#ff6b35] transition"
+                  placeholder="you@company.com"
+                  required
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 disabled:opacity-70"
+            >
+              {loading ? <Loader2 size={18} className="animate-spin" /> : 'Send Reset Code'}
+              {!loading && <ArrowRight size={18} />}
+            </button>
+            <div className="mt-4 text-center">
+              <button type="button" onClick={() => { setStep('form'); setError(''); setSuccessMsg(''); }} className="text-sm font-bold text-gray-500 hover:text-gray-800 transition">Back to Login</button>
+            </div>
+          </form>
+        ) : step === 'reset-otp' ? (
+          <form onSubmit={handleResetPassword} className="space-y-5">
+            {error && (
+              <div className="p-3 text-sm font-medium text-red-600 bg-red-50 border border-red-100 rounded-xl">
+                {error}
+              </div>
+            )}
+            {successMsg && (
+              <div className="p-3 text-sm font-medium text-green-600 bg-green-50 border border-green-100 rounded-xl">
+                {successMsg}
+              </div>
+            )}
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">6-Digit Reset Code</label>
+              <div className="relative">
+                <KeyRound size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-lg tracking-[0.2em] font-black text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-[#ff6b35]/20 focus:border-[#ff6b35] transition"
+                  placeholder="000000"
+                  maxLength={6}
+                  required
+                />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">New Password</label>
+              <div className="relative">
+                <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#ff6b35]/20 focus:border-[#ff6b35] transition"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 disabled:opacity-70"
+            >
+              {loading ? <Loader2 size={18} className="animate-spin" /> : 'Update Password'}
+              {!loading && <ArrowRight size={18} />}
+            </button>
+            <div className="mt-4 text-center">
+              <button type="button" onClick={() => { setStep('form'); setError(''); setSuccessMsg(''); }} className="text-sm font-bold text-gray-500 hover:text-gray-800 transition">Cancel</button>
+            </div>
+          </form>
+        ) : (
+          <div className="flex flex-col items-center justify-center text-center py-6 animate-in fade-in zoom-in duration-300">
+            <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
+              <CheckCircle2 size={40} className="text-green-500" />
+            </div>
+            <h3 className="text-2xl font-black text-gray-900 mb-2">Password Updated!</h3>
+            <p className="text-gray-500 text-sm mb-8 font-medium">
+              Your password has been changed successfully. You can now log in with your new credentials.
+            </p>
+            <button
+              onClick={() => { setStep('form'); setSuccessMsg(''); setError(''); }}
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#ff6b35] to-orange-500 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2"
+            >
+              Back to Login
+              <ArrowRight size={18} />
+            </button>
+          </div>
         )}
 
         {/* Toggle between Login/Signup (Only show if not on OTP step) */}

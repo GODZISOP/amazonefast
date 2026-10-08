@@ -89,6 +89,19 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       if (filter === 'Pending') return !isFullyApproved;
       
       return true;
+    }).sort((a: any, b: any) => {
+      const getLatestTime = (client: any) => {
+        if (!client.documents || client.documents.length === 0) {
+          return new Date(client.created_at || 0).getTime();
+        }
+        const latestDoc = [...client.documents].sort((x: any, y: any) => new Date(y.uploaded_at).getTime() - new Date(x.uploaded_at).getTime())[0];
+        return Math.max(
+          new Date(client.created_at || 0).getTime(),
+          new Date(latestDoc.uploaded_at).getTime()
+        );
+      };
+      
+      return getLatestTime(b) - getLatestTime(a);
     });
   }, [clients, filter]);
 
@@ -192,6 +205,8 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                     getLatest('Bank Statement')?.status === 'Approved' && 
                     getLatest('Gmail Credentials')?.status === 'Approved';
 
+                  const pendingDocs = docs.filter((d: any) => d.status === 'Pending Review');
+
                   return (
                   <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition group">
                     <td className="py-3 px-4 md:px-6">
@@ -208,7 +223,22 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                                 Profile Complete
                               </span>
                             )}
+                            {pendingDocs.length > 0 && (
+                              <span className="bg-orange-100 text-orange-700 border border-orange-200 text-[9px] uppercase px-2 py-0.5 rounded-full font-bold tracking-wider flex items-center gap-1 w-fit shadow-sm">
+                                <AlertCircle size={10} />
+                                {pendingDocs.length} New Document{pendingDocs.length > 1 ? 's' : ''}
+                              </span>
+                            )}
                           </p>
+                          {pendingDocs.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-1.5 max-w-[200px] md:max-w-[300px]">
+                              {pendingDocs.map((d: any, idx: number) => (
+                                <span key={idx} className="text-[9px] bg-gray-100 text-gray-600 border border-gray-200 px-1.5 py-0.5 rounded font-medium whitespace-nowrap">
+                                  {d.document_type}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </td>
