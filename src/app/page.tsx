@@ -6,6 +6,8 @@ import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RealEarth } from "../components/RealEarth";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
+import TestimonialSection from "../components/TestimonialSection";
+import SecureScalingSection from "../components/SecureScalingSection";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -816,6 +818,12 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* Testimonials */}
+      <TestimonialSection />
+
+      {/* Secure Scaling / Wise Card Section */}
+      <SecureScalingSection />
 
       {/* FAQ Section */}
       <FAQSection />
