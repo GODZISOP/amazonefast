@@ -35,7 +35,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
           
           {/* Left Text Block */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
-            <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.05] tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.05] tracking-tight mb-6">
               Professional Airwallex <br/>
               <span className="text-[#ff6b35]">Account Setup</span>
             </h1>
@@ -57,10 +57,10 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-gray-800 overflow-hidden relative">
-                    <Image src="/avatar-male.jpg" alt="Verified Seller" fill className="object-cover" />
+                    <Image src="/avatar-male.jpg" alt="Verified Seller" fill sizes="40px" className="object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-gray-700 overflow-hidden relative">
-                    <Image src="/avatar-female.jpg" alt="Verified Seller" fill className="object-cover" />
+                    <Image src="/avatar-female.jpg" alt="Verified Seller" fill sizes="40px" className="object-cover" />
                   </div>
                   <div className="w-10 h-10 rounded-full border-2 border-[#0a0a0a] bg-[#ff6b35] text-white flex items-center justify-center font-bold text-xs">
                     +
@@ -78,9 +78,9 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a] via-transparent to-transparent z-10 pointer-events-none opacity-50"></div>
             
             <Image 
-              src={data?.image || "/srv_airwallex_setup.jpg"}
+              src="/airwallex-hero-v2.png"
               alt="Airwallex Premium Account" 
-              fill 
+              fill sizes="(max-width: 768px) 100vw, 50vw" 
               className="object-cover object-center"
               priority
             />
@@ -96,7 +96,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
           {/* Left Text */}
           <div className="w-full lg:w-1/3 flex flex-col justify-center relative">
             <span className="text-[#ff6b35] font-bold text-sm mb-4 tracking-wider uppercase">Multi-Currency Mastery</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-6">
               Global Accounts <br/> in Minutes.
             </h2>
             <p className="text-white/50 text-base mb-10 max-w-sm leading-relaxed font-medium">
@@ -118,7 +118,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             <Image 
               src="/airwallex-card.png"
               alt="Airwallex Card"
-              fill 
+              fill sizes="(max-width: 768px) 100vw, 50vw" 
               className="object-contain object-center p-8"
             />
           </div>
@@ -166,7 +166,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             
             {/* Left Side Text & Guarantees */}
             <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
                 Ready to Setup Your <br/> <span className="text-[#ff6b35]">Airwallex Account?</span>
               </h2>
               <p className="text-white/60 text-lg mb-12 max-w-lg">

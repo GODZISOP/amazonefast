@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Column 1: Brand & Social */}
           <div className="col-span-1 lg:col-span-4 flex flex-col gap-4">
             <Link href="/" className="inline-block mb-2">
-              <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 w-auto" style={{ filter: "drop-shadow(0 0 10px rgba(255,107,53,0.5))" }} />
+              <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 w-auto" style={{ filter: "drop-shadow(0 0 10px rgba(255,107,53,0.5))" }} />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-4 max-w-sm">
               Your partner in scaling Amazon businesses globally with automated PPC, product sourcing, and reinstatement services.

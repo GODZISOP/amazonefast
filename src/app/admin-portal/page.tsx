@@ -61,7 +61,7 @@ export default async function AdminPortal({ searchParams }: { searchParams: any 
         {/* Sidebar */}
         <aside className="w-64 border-r border-gray-200 bg-white hidden md:flex flex-col shadow-sm z-20">
           <div className="h-20 flex items-center px-8 border-b border-gray-100">
-            <Image src="/logo-new.png" alt="AmazonFast Logo" width={140} height={50} style={{ height: '50px', width: 'auto' }} className="object-contain" priority />
+            <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={140} height={50} style={{ height: '50px', width: 'auto' }} className="object-contain" priority />
           </div>
           <nav className="flex-1 py-8 px-4 space-y-2">
             <a href="?tab=clients" className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${tab === 'clients' ? 'bg-gray-50 text-[#111] border border-gray-100 font-semibold' : 'text-gray-500 hover:bg-gray-50 hover:text-[#111] font-medium'}`}>
@@ -84,7 +84,7 @@ export default async function AdminPortal({ searchParams }: { searchParams: any 
           {/* Header */}
           <header className="h-16 md:h-20 border-b border-gray-200 flex items-center justify-between px-4 md:px-8 bg-white/80 backdrop-blur-md sticky top-0 z-10">
             <div className="flex items-center gap-2">
-              <Image src="/logo-new.png" alt="AmazonFast Logo" width={100} height={30} className="object-contain md:hidden" priority />
+              <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={100} height={30} className="object-contain md:hidden" priority />
               <h1 className="text-lg md:text-xl font-bold tracking-tight text-gray-900 hidden md:block">
                 {tab === 'clients' ? 'Client Management' : tab === 'documents' ? 'Global Documents' : 'Admin Settings'}
               </h1>

@@ -28,7 +28,7 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
             </div>
             <span className="text-[#ff6b35] font-bold tracking-widest uppercase text-sm">Expert Payoneer Account Setup</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
             Secure Your Global Business with Professional <span className="text-[#ff6b35]">Payoneer Account Opening</span>
           </h1>
           <p className="text-white/60 text-lg mb-10 leading-relaxed max-w-lg">
@@ -52,11 +52,11 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
         <div className="w-full md:w-1/2 relative h-[500px] md:h-[600px] flex items-center justify-center">
           <div className="grid grid-cols-2 gap-4 w-full h-[400px] md:h-[500px] max-w-lg p-4 relative">
             <div className="col-span-1 h-full relative rounded-[40px] overflow-hidden shadow-2xl border border-white/10">
-              <Image src={data.image} alt="Service 1" fill className="object-cover" />
+              <Image src={data.image} alt="Service 1" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-black/20"></div>
             </div>
             <div className="col-span-1 h-[75%] mt-[25%] relative rounded-[40px] overflow-hidden shadow-2xl border border-white/10">
-              <Image src="/payoneer-dashboard.png" alt="Service 2" fill className="object-cover" />
+              <Image src="/payoneer-dashboard.png" alt="Service 2" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               <div className="absolute inset-0 bg-black/20"></div>
             </div>
             {/* Circular floating badge */}
@@ -92,7 +92,7 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
             </div>
             <span className="text-[#ff6b35] font-bold tracking-widest uppercase text-sm">Why Choose Us</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
             Flawless Payoneer Account <br/> Opening & Verification
           </h2>
         </div>
@@ -239,7 +239,7 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
             
             {/* Left Side Text & Guarantees */}
             <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
                 Ready to Scale Your <br/> <span className="text-[#ff6b35]">Global Business?</span>
               </h2>
               <p className="text-white/60 text-lg mb-12 max-w-lg">

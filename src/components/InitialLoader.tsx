@@ -46,7 +46,7 @@ export default function InitialLoader() {
               className="absolute right-[-75px] sm:right-[-100px] w-[150px] sm:w-[200px] h-auto flex justify-center"
             >
               <div className="w-[150px] sm:w-[200px] overflow-hidden" style={{ clipPath: "inset(0 50% 0 0)" }}>
-                <Image src="/logo-new.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
+                <Image src="/amazon-fast-logo.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
               </div>
             </motion.div>
           </motion.div>
@@ -66,7 +66,7 @@ export default function InitialLoader() {
               className="absolute left-[-75px] sm:left-[-100px] w-[150px] sm:w-[200px] h-auto flex justify-center"
             >
               <div className="w-[150px] sm:w-[200px] overflow-hidden" style={{ clipPath: "inset(0 0 0 50%)" }}>
-                <Image src="/logo-new.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
+                <Image src="/amazon-fast-logo.png" alt="Logo" width={200} height={200} priority className="w-full h-auto" />
               </div>
             </motion.div>
           </motion.div>

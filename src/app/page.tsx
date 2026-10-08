@@ -129,7 +129,7 @@ export default function Home() {
         {/* Background Image requested by user */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-[#3a0d00] to-black">
           <Image
-            src="/image copy.png"
+            src="/homepage-hero.png"
             alt="Hero Background"
             fill
             priority

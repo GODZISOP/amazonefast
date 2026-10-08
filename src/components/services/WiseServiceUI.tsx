@@ -23,7 +23,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
           
           {/* Hero Left Content */}
           <div className="w-full lg:w-1/2 flex flex-col items-start z-10">
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
               Professional <span className="text-[#ff6b35]">Wise Account Opening</span>
             </h1>
             <p className="text-white/70 text-lg md:text-xl mb-10 max-w-lg leading-relaxed font-medium">
@@ -64,7 +64,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
               <Image 
                 src="/wise-hero.png" 
                 alt="Wise Dashboard and Card" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, 50vw" 
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
               />
@@ -82,7 +82,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
             <div className="px-4 py-1.5 bg-[#ff6b35]/10 border border-[#ff6b35]/20 text-[#ff6b35] rounded-full text-xs font-bold inline-block mb-6">
               Features
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
               Get your <span className="text-[#ff6b35]">Wise Account</span> set up correctly and securely to streamline your <span className="text-white/70">global payments</span> — all in one platform.
             </h2>
           </div>
@@ -93,7 +93,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
                <Image 
                  src="/wise-card.png" 
                  alt="Wise Business Card" 
-                 fill 
+                 fill sizes="(max-width: 768px) 100vw, 50vw" 
                  className="object-contain drop-shadow-[0_30px_60px_rgba(136,224,0,0.25)]"
                />
             </div>
@@ -104,12 +104,12 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
         </div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-auto md:h-[400px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[400px]">
           <div className="col-span-1 bg-[#111] rounded-[32px] overflow-hidden relative flex flex-col justify-end p-8 min-h-[300px] border border-white/5">
             <Image 
-              src="/wise-wallet.png"
+              src="/wise-wallet-card.png"
               alt="Wallet Feature"
-              fill
+              fill sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover object-bottom opacity-80"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10"></div>
@@ -155,7 +155,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
                <Image 
                  src="/wise-card.png" 
                  alt="Wise Business Card" 
-                 fill 
+                 fill sizes="(max-width: 768px) 100vw, 50vw" 
                  className="object-contain drop-shadow-[0_30px_60px_rgba(136,224,0,0.3)]"
                />
             </div>
@@ -163,7 +163,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
 
           {/* Steps List */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-12 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-12 leading-tight">
               Open Your Wise Account <br/> in 3 Easy Steps
             </h2>
 
@@ -209,7 +209,7 @@ export default function WiseServiceUI({ data }: WiseServiceUIProps) {
           
           {/* Left Side Text & Guarantees */}
           <div className="w-full lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
               Ready to Scale Your <br/> <span className="text-[#ff6b35]">Global Business?</span>
             </h2>
             <p className="text-white/60 text-lg mb-12 max-w-lg">

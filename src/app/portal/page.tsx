@@ -217,7 +217,7 @@ export default function ClientPortal() {
     <div className="min-h-screen bg-[#f9fafb] text-[#111] pt-24 pb-20 px-4 md:px-8 font-sans selection:bg-[#ff6b35] selection:text-white">
       <header className="fixed top-0 left-0 w-full h-16 border-b border-gray-200 bg-white/90 backdrop-blur-lg flex items-center justify-between px-6 md:px-12 z-50 shadow-sm">
         <div className="flex items-center gap-3">
-          <Image src="/logo-new.png" alt="AmazonFast Logo" width={120} height={40} style={{ height: '40px', width: 'auto' }} className="object-contain" priority />
+          <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={120} height={40} style={{ height: '40px', width: 'auto' }} className="object-contain" priority />
           <span className="hidden md:inline-block border-l border-gray-300 pl-3 text-sm font-bold tracking-wide text-gray-500">Client Workspace</span>
         </div>
         <div className="flex items-center gap-4">

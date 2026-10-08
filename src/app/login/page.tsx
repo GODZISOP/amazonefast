@@ -221,7 +221,7 @@ export default function LoginPage() {
         {/* Branding (Logo) */}
         <div className="flex flex-col items-center justify-center mb-8">
           <div className="mb-6">
-            <Image src="/logo-new.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain" />
+            <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain" />
           </div>
           {step !== 'password-success' && (
             <>

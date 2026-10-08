@@ -236,7 +236,7 @@ export default function AboutPage() {
             <div className="w-full md:w-[45%] flex flex-col items-end md:ml-auto relative">
               <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
                 <Image
-                  src="/theme_gradient.png"
+                  src="/theme-gradient.png"
                   alt="Global Expansion"
                   fill
                   className="object-cover scale-image"
@@ -250,7 +250,7 @@ export default function AboutPage() {
         <div className="cosmic-stats relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] rounded-[30px] md:rounded-[40px] overflow-hidden mb-32 border border-[#ff3b30]/20 shadow-[0_0_80px_rgba(255,59,48,0.15)] bg-[#050000]">
           {/* Background Image (Orbs) */}
           <Image
-            src="/image copy 3.png"
+            src="/amazon-account-setup.png"
             alt="Amazon Fast Services Audience Stats"
             fill
             className="object-cover opacity-90"

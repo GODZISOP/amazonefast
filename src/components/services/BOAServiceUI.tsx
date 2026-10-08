@@ -81,7 +81,7 @@ export default function BOAServiceUI({ data }: BOAServiceUIProps) {
                 <span className="font-bold">5.0</span>
                 <span className="text-white/50 text-sm">Verified Service</span>
                 <div className="w-6 h-6 rounded-full bg-gray-700 ml-2 overflow-hidden border border-[#ff6b35]">
-                  <Image src="/profile.png" alt="User" width={24} height={24} className="object-cover" />
+                  <Image src="/profile-avatar.png" alt="User" width={24} height={24} className="object-cover" />
                 </div>
               </div>
             </div>

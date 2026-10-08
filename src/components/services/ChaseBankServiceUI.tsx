@@ -61,7 +61,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
           <div className="lg:col-span-5 relative h-[450px] sm:h-[550px] lg:h-[700px] flex items-center justify-center">
             <div className="relative w-full h-full drop-shadow-[0_0_50px_rgba(255,107,53,0.15)] rounded-[2.5rem] overflow-hidden">
               <Image 
-                src="/chase-hero-v2.png" 
+                src="/chase-hero-alternate.png"
                 alt="Chase Bank App" 
                 fill 
                 className="object-contain object-center scale-110"
@@ -81,7 +81,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
                 <span className="font-bold">5.0</span>
                 <span className="text-white/50 text-sm">Verified Service</span>
                 <div className="w-6 h-6 rounded-full bg-gray-700 ml-2 overflow-hidden border border-[#ff6b35]">
-                  <Image src="/profile.png" alt="User" width={24} height={24} className="object-cover" />
+                  <Image src="/profile-avatar.png" alt="User" width={24} height={24} className="object-cover" />
                 </div>
               </div>
             </div>
