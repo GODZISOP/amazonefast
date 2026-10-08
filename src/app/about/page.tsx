@@ -104,7 +104,8 @@ export default function AboutPage() {
           muted 
           loop 
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover opacity-80 translate-y-16 md:translate-y-32 scale-110"
           style={{ filter: "hue-rotate(140deg) saturate(1.5)" }}
           poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/82e7eb75-c65f-490a-99b5-f3d1cad54200.webp"
         >
