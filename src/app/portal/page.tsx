@@ -16,6 +16,7 @@ export default function ClientPortal() {
   const [gmailAddress, setGmailAddress] = useState('');
   const [gmailPassword, setGmailPassword] = useState('');
   const [submittingGmail, setSubmittingGmail] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const router = useRouter();
   const supabase = createClient();
@@ -226,8 +227,11 @@ export default function ClientPortal() {
           </div>
 
           {/* Client Notification Bell */}
-          <div className="relative group cursor-pointer mr-2 md:mr-4">
-            <button className="text-gray-400 hover:text-gray-900 transition relative p-1">
+          <div className="relative mr-2 md:mr-4">
+            <button 
+              onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+              className="text-gray-400 hover:text-gray-900 transition relative p-1"
+            >
               <Bell size={20} />
               {unreadCount > 0 && (
                 <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
@@ -235,29 +239,31 @@ export default function ClientPortal() {
             </button>
             
             {/* Dropdown */}
-            <div className="absolute top-10 right-0 w-80 bg-white border border-gray-200 shadow-xl rounded-2xl hidden group-hover:block z-50 overflow-hidden">
-              <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                <h4 className="font-bold text-sm text-gray-900">Notifications</h4>
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Updates</span>
-              </div>
-              <div className="max-h-80 overflow-y-auto">
-                {clientNotifications.length === 0 ? (
-                  <div className="p-6 text-center text-sm text-gray-500 font-medium">No recent updates.</div>
-                ) : (
-                  clientNotifications.map((doc: any) => (
-                    <div key={doc.id} className="p-4 border-b border-gray-50 flex gap-3 hover:bg-gray-50 transition items-start">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${doc.status === 'Approved' ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500'}`}>
-                        {doc.status === 'Approved' ? <CheckCircle2 size={14} strokeWidth={2.5} /> : <AlertCircle size={14} strokeWidth={2.5} />}
+            {isNotificationsOpen && (
+              <div className="absolute top-10 right-0 w-80 bg-white border border-gray-200 shadow-xl rounded-2xl z-50 overflow-hidden">
+                <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                  <h4 className="font-bold text-sm text-gray-900">Notifications</h4>
+                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Updates</span>
+                </div>
+                <div className="max-h-80 overflow-y-auto">
+                  {clientNotifications.length === 0 ? (
+                    <div className="p-6 text-center text-sm text-gray-500 font-medium">No recent updates.</div>
+                  ) : (
+                    clientNotifications.map((doc: any) => (
+                      <div key={doc.id} className="p-4 border-b border-gray-50 flex gap-3 hover:bg-gray-50 transition items-start">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${doc.status === 'Approved' ? 'bg-green-50 text-green-500' : 'bg-red-50 text-red-500'}`}>
+                          {doc.status === 'Approved' ? <CheckCircle2 size={14} strokeWidth={2.5} /> : <AlertCircle size={14} strokeWidth={2.5} />}
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-800 font-medium">Your <span className="font-bold text-gray-900">{doc.document_type}</span> was {doc.status.toLowerCase()}.</p>
+                          <p className="text-xs text-gray-400 mt-1">{new Date(doc.uploaded_at).toLocaleDateString()}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm text-gray-800 font-medium">Your <span className="font-bold text-gray-900">{doc.document_type}</span> was {doc.status.toLowerCase()}.</p>
-                        <p className="text-xs text-gray-400 mt-1">{new Date(doc.uploaded_at).toLocaleDateString()}</p>
-                      </div>
-                    </div>
-                  ))
-                )}
+                    ))
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-bold text-red-500 hover:text-red-600 transition">
