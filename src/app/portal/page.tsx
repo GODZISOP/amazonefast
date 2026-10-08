@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 export default function ClientPortal() {
   const [user, setUser] = useState<any>(null);
+  const [clientName, setClientName] = useState<string>('');
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -30,10 +31,17 @@ export default function ClientPortal() {
           return;
         }
         setUser(user);
+        setClientName(user.user_metadata?.full_name || 'Client'); // Fallback
 
-        // Fetch uploaded documents
+        // Fetch uploaded documents and client info
         const fetchDocs = async () => {
           try {
+            // Get exact name from DB so it matches Admin
+            const { data: clientRecord } = await supabase.from('clients').select('full_name').eq('id', user.id).single();
+            if (clientRecord?.full_name) {
+              setClientName(clientRecord.full_name);
+            }
+
             const { data: docs } = await supabase
               .from('documents')
               .select('*')
@@ -291,7 +299,7 @@ export default function ClientPortal() {
 
             <div>
               <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900">
-                Welcome, {user?.user_metadata?.full_name?.split(' ')[0] || 'Client'}!
+                Welcome, {clientName}!
               </h1>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
                 <span className="w-2 h-2 rounded-full bg-green-500"></span>
