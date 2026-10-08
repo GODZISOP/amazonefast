@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [step, setStep] = useState<'form' | 'otp'>('form');
+  const [step, setStep] = useState<'form' | 'otp' | 'forgot-password' | 'reset-otp'>('form');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');

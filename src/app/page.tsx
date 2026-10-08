@@ -519,9 +519,9 @@ export default function Home() {
             ></motion.div>
 
             {[
-              { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false, dir: -1 },
-              { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, dir: 0 },
-              { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, dir: 1 }
+              { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false, name: "David M.", role: "Brand Owner" },
+              { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, name: "Sarah J.", role: "Established Seller" },
+              { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, name: "Michael C.", role: "eCommerce Director" }
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -544,10 +544,36 @@ export default function Home() {
                     className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent z-0 pointer-events-none"
                   />
                 )}
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-black/20 relative z-10">
-                  <img src={item.img} alt="Avatar" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+
+                {/* Quote Icon Background */}
+                <div className={`absolute top-6 left-6 opacity-20 ${item.active ? 'text-white' : 'text-[#ff6b35]'}`}>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21L16.44 14.282C16.666 13.567 16.515 12.784 16.035 12.193C15.556 11.603 14.814 11.282 14.017 11.282H10.741L11.531 8.525C11.678 8.01 12.138 7.641 12.671 7.641H16.017V3.535H12.671C10.518 3.535 8.653 5.03 8.058 7.108L4.629 19.066C4.422 19.789 4.962 20.535 5.723 20.535H14.017V21ZM22.585 21L25.008 14.282C25.234 13.567 25.083 12.784 24.603 12.193C24.124 11.603 23.382 11.282 22.585 11.282H19.309L20.099 8.525C20.246 8.01 20.706 7.641 21.239 7.641H24.585V3.535H21.239C19.086 3.535 17.221 5.03 16.626 7.108L13.197 19.066C12.99 19.789 13.53 20.535 14.291 20.535H22.585V21Z" transform="scale(0.8) translate(-2, 0)"/>
+                  </svg>
                 </div>
-                <p className={`text-sm leading-relaxed font-medium relative z-10 ${item.active ? 'text-white' : 'text-white/60'}`}>{item.text}</p>
+
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 border-4 border-black/20 relative z-10 shadow-lg">
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                </div>
+                
+                {/* 5 Stars */}
+                <div className="flex gap-1 mb-4 relative z-10">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={item.active ? "white" : "#ffb700"} className={item.active ? "opacity-90" : ""}>
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p className={`text-sm sm:text-base leading-relaxed italic relative z-10 mb-6 flex-grow flex items-center ${item.active ? 'text-white' : 'text-white/70'}`}>
+                  "{item.text}"
+                </p>
+
+                {/* Author Info */}
+                <div className="mt-auto relative z-10 flex flex-col items-center">
+                  <span className={`font-bold ${item.active ? 'text-white' : 'text-white'}`}>{item.name}</span>
+                  <span className={`text-xs mt-1 ${item.active ? 'text-white/80' : 'text-[#ff6b35]'}`}>{item.role}</span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
