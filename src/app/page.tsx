@@ -6,8 +6,6 @@ import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RealEarth } from "../components/RealEarth";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
-import TestimonialSection from "../components/TestimonialSection";
-import SecureScalingSection from "../components/SecureScalingSection";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -659,21 +657,51 @@ export default function Home() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full lg:w-1/2 flex justify-center items-center relative py-12"
+              className="w-full lg:w-1/2 flex justify-center items-center relative py-20 min-h-[400px] group cursor-pointer perspective-[1200px]"
             >
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#ff6b35]/15 blur-[120px] z-0 rounded-full pointer-events-none"></div>
 
-              {/* Background Orange Card */}
-              <div className="absolute z-0 w-[70%] sm:w-[60%] max-w-[350px] aspect-[1.58/1] bg-[#ff6b35] rounded-3xl transform rotate-6 translate-x-12 translate-y-8 shadow-2xl opacity-90 transition-transform duration-700 group-hover:rotate-12"></div>
+              {/* Background Orange Accent (Optional subtle glow) */}
+              <div className="absolute z-0 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] bg-[#ff6b35] rounded-3xl transform rotate-12 translate-x-14 translate-y-10 shadow-2xl opacity-40 blur-xl"></div>
 
-              {/* Foreground Black Premium CSS VCard */}
-              <div className="relative z-10 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] transform -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-700 ease-out shadow-[0_20px_50px_rgba(0,0,0,0.8)] cursor-pointer group rounded-3xl">
+              {/* SECOND CARD (Wise Style Card) - Starts at BACK */}
+              <div className="absolute z-0 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] rounded-3xl shadow-2xl overflow-hidden bg-gradient-to-br from-[#111111] to-[#1a1a1a] border border-[#ff6b35]/20 p-6 sm:p-8 flex flex-col justify-between transform rotate-12 translate-x-12 translate-y-8 scale-90 opacity-90 transition-all duration-700 ease-in-out group-hover:rotate-[-6deg] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-hover:z-20 group-hover:shadow-[0_20px_50px_rgba(255,107,53,0.3)]">
+                {/* Glowing Wise Accent */}
+                <div className="absolute -right-10 -top-10 w-40 h-40 bg-[#ff6b35]/30 blur-[50px] rounded-full pointer-events-none"></div>
+                
+                {/* Top of secondary card */}
+                <div className="flex justify-between items-center opacity-90 relative z-10">
+                  <span className="text-white font-black italic tracking-tighter text-xl sm:text-2xl drop-shadow-md">WISE<span className="text-[#ff6b35]">PAY</span></span>
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#ff6b35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* Middle details */}
+                <div className="w-10 h-8 sm:w-12 sm:h-10 rounded-lg bg-gradient-to-br from-gray-200 to-gray-400 opacity-90 border border-black/10 relative z-10 mt-4 shadow-sm"></div>
+                
+                {/* Bottom details */}
+                <div className="text-white relative z-10 mt-auto">
+                  <div className="text-white/90 text-xl sm:text-3xl font-mono tracking-widest drop-shadow-md mb-2 sm:mb-4">
+                    **** **** **** 1234
+                  </div>
+                  <div className="flex justify-between items-end">
+                    <p className="text-[#ff6b35] text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">Secure Connection</p>
+                    <p className="text-white/60 text-[10px] sm:text-xs font-bold tracking-widest uppercase">Global</p>
+                  </div>
+                </div>
+              </div>
 
+              {/* FOREGROUND CARD (AmazonFast Black Card) - Starts at FRONT */}
+              <div className="absolute z-10 w-[85%] sm:w-[75%] max-w-[450px] aspect-[1.58/1] transform -rotate-6 transition-all duration-700 ease-in-out shadow-[0_20px_50px_rgba(0,0,0,0.8)] rounded-3xl group-hover:rotate-12 group-hover:translate-x-12 group-hover:translate-y-8 group-hover:scale-90 group-hover:opacity-60 group-hover:z-0">
+                
                 {/* The Card Body */}
                 <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#111] to-[#000] rounded-3xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden shadow-inner">
 
                   {/* Glassy reflection sweep effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform -skew-x-12 -translate-x-[150%] group-hover:translate-x-[150%] transition-all duration-1000 ease-in-out z-20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-0 transform -skew-x-12 -translate-x-[150%] transition-all duration-1000 ease-in-out z-20"></div>
 
                   {/* Watermark Logo Background */}
                   <div className="absolute -right-8 -bottom-10 opacity-[0.03] transform scale-150 pointer-events-none">
@@ -727,6 +755,14 @@ export default function Home() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="w-full lg:w-1/2 lg:pl-8"
             >
+              {/* Secure Payment Gateways Tag */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-xs font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Secure Payment Gateways
+              </div>
+
               {/* Animated Text */}
               <div className="mb-6">
                 <motion.h2
@@ -818,12 +854,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      {/* Testimonials */}
-      <TestimonialSection />
-
-      {/* Secure Scaling / Wise Card Section */}
-      <SecureScalingSection />
 
       {/* FAQ Section */}
       <FAQSection />
