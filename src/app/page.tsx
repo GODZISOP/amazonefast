@@ -436,14 +436,41 @@ export default function Home() {
             ></motion.div>
 
             {[
-              { title: "Amazon FBA Automation", slug: "amazon-fba-automation", desc: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth." },
-              { title: "Amazon PPC Advertising", slug: "amazon-ppc-advertising", desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." },
-              { title: "Product Hunting & Sourcing", slug: "product-hunting", desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." },
-              { title: "Amazon Store Creation", slug: "store-creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
-              { title: "A+ Content & EBC", slug: "a-content-ebc", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
-              { title: "Listing SEO & Optimization", slug: "listing-seo", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
-              { title: "Bank Account Creation", slug: "payoneer-wallet", desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." },
-              { title: "US LLC Formation", slug: "llc-formation", desc: "Turnkey 100% remote US company registration (Wyoming, Florida, Texas) with registered agent, US address, and IRS EIN." }
+              { 
+                title: "Amazon Account Creation", 
+                slug: "amazon-account-creation", 
+                desc: "Professional setup & identity verification for non-resident sellers with utility bill matching and zero rejection rate." 
+              },
+              { 
+                title: "Amazon PPC Advertising", 
+                slug: "amazon-ppc-advertising", 
+                desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." 
+              },
+              { 
+                title: "Product Hunting & Sourcing", 
+                slug: "product-hunting", 
+                desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." 
+              },
+              { 
+                title: "Amazon Store Creation", 
+                slug: "store-creation", 
+                desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." 
+              },
+              { 
+                title: "A+ Content & EBC", 
+                slug: "a-content-ebc", 
+                desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." 
+              },
+              { 
+                title: "Listing SEO & Optimization", 
+                slug: "listing-seo", 
+                desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." 
+              },
+              { 
+                title: "Bank Account Creation", 
+                slug: "payoneer-wallet", 
+                desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." 
+              }
             ].map((service, idx) => (
               <motion.div
                 key={idx}

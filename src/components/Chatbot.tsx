@@ -112,7 +112,7 @@ export default function Chatbot() {
               {/* Quick Action Chips (Only show at the start) */}
               {messages.length === 1 && !isLoading && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {["What are your prices?", "How does FBA Automation work?", "Do you manage PPC?"].map((chip) => (
+                  {["What are your prices?", "How does US LLC Formation work?", "Do you manage PPC?"].map((chip) => (
                     <button
                       key={chip}
                       onClick={() => handleSend(undefined, chip)}

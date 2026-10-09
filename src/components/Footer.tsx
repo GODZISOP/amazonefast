@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Column 2: Services */}
           <div className="col-span-1 lg:col-span-3 flex flex-col gap-4">
             <h4 className="text-white font-medium mb-2 opacity-80">Our Services</h4>
-            <Link href="/services/amazon-fba-automation" className="text-white/60 hover:text-white transition text-sm">FBA Automation</Link>
+            <Link href="/services/amazon-account-creation" className="text-white/60 hover:text-white transition text-sm">Account Creation</Link>
             <Link href="/services/amazon-ppc-advertising" className="text-white/60 hover:text-white transition text-sm">PPC Advertising</Link>
             <Link href="/services/product-hunting" className="text-white/60 hover:text-white transition text-sm">Product Hunting</Link>
             <Link href="/services/store-creation" className="text-white/60 hover:text-white transition text-sm">Store Creation</Link>

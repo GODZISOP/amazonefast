@@ -32,7 +32,8 @@ export default function WalletServiceUI({ data }: WalletServiceUIProps) {
             Secure Your Global Business with Professional <span className="text-[#ff6b35]">Payoneer Account Opening</span>
           </h1>
           <p className="text-white/60 text-lg mb-10 leading-relaxed max-w-lg">
-            Stop risking frozen funds and high conversion fees. We handle your entire Payoneer account creation, ensuring perfectly matched business details so you can receive Amazon payouts securely.
+            Stop risking frozen funds and high conversion fees. We handle your entire Payo
+            neer account creation, ensuring perfectly matched business details so you can receive Amazon payouts securely.
           </p>
           <div className="flex flex-wrap items-center gap-6">
             <Link 

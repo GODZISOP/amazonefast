@@ -13,20 +13,108 @@ import WyomingLLCServiceUI from "@/components/services/WyomingLLCServiceUI";
 import FloridaLLCServiceUI from "@/components/services/FloridaLLCServiceUI";
 import TexasLLCServiceUI from "@/components/services/TexasLLCServiceUI";
 import LLCFormationServiceUI from "@/components/services/LLCFormationServiceUI";
+import AmazonAccountCreationServiceUI from "@/components/services/AmazonAccountCreationServiceUI";
+import WholesaleFBAServiceUI from "@/components/services/WholesaleFBAServiceUI";
+import PrivateLabelServiceUI from "@/components/services/PrivateLabelServiceUI";
+import BrandApprovalsServiceUI from "@/components/services/BrandApprovalsServiceUI";
+import TrademarkServiceUI from "@/components/services/TrademarkServiceUI";
 
 // Service Data
 const serviceDetails: Record<string, any> = {
-  "amazon-fba-automation": {
-    title: "Amazon FBA Automation",
-    tagline: "Hands-Free Passive Income on Amazon",
-    description: "Our complete Amazon FBA automation service is designed for investors who want to scale a highly profitable e-commerce business without dealing with the day-to-day operations. We handle everything from LLC formation and product research to inventory management, PPC, and customer service.",
+  "trademark-brand-registry": {
+    title: "Amazon Trademark & Brand Registry",
+    tagline: "Logo ($600) & Wordmark ($700) Protection",
+    description: "Official USPTO trademark filing and Amazon Brand Registry protection. Serial number in 2 to 3 days to unlock A+ Content, Storefront, and counterfeit protection.",
+    image: "/srv_store_creation.jpg",
+    benefits: [
+      "Official USPTO Filing Included",
+      "Licensed US Attorney Representation",
+      "Serial Number in 2 to 3 Days",
+      "Instant Amazon Brand Registry Enrollment",
+      "Unlocks A+ Content & Video Ads",
+      "Counterfeit & Hijacker Protection"
+    ]
+  },
+  "trademark-logo": {
+    title: "Logo Trademark Registration",
+    tagline: "USPTO Design Mark ($600)",
+    description: "Official USPTO Logo / Design mark registration. Protects your unique brand logo and unlocks Amazon Brand Registry.",
+    image: "/srv_store_creation.jpg",
+    benefits: [
+      "Official USPTO Filing Included",
+      "Logo Conflict & Clearance Search",
+      "Serial Number in 2 to 3 Days",
+      "Amazon Brand Registry Activation",
+      "Unlocks A+ Content & Storefront"
+    ]
+  },
+  "trademark-word": {
+    title: "Word Trademark Registration",
+    tagline: "USPTO Wordmark ($700)",
+    description: "Strongest Amazon legal protection. Protects your brand name text in any font or color and gives full Brand Registry privileges.",
+    image: "/srv_store_creation.jpg",
+    benefits: [
+      "Official USPTO Filing Included",
+      "Complete Name Clearance Search",
+      "Serial Number in 2 to 3 Days",
+      "Amazon Brand Registry Activation",
+      "100% Brand Name Ownership"
+    ]
+  },
+  "brand-approvals": {
+    title: "Amazon Brand Approvals & Ungating",
+    tagline: "Guaranteed Approvals ($3,000 – $10,000)",
+    description: "Get official approvals to sell big brands on Amazon. Official Letter of Authorization (LOA), Brand Registry approval, Proforma Invoices, Paid Invoices, and complete Seller Central setup.",
+    image: "/srv_product_hunting_v2_1791215473466.jpg",
+    benefits: [
+      "20% to 70% Profit Margin Brands",
+      "Official Letter of Authorization (LOA)",
+      "Proforma & Paid Commercial Invoices",
+      "Brand Registry Approval Setup",
+      "Complete Seller Central Ungating",
+      "Zero Inauthentic Suspension Risk"
+    ]
+  },
+  "amazon-private-label": {
+    title: "Complete Private Label Account Management",
+    tagline: "Build Your 7-Figure Amazon Brand From Scratch ($500 x 6 Mo · 60/40 Profit)",
+    description: "Full-service private label incubation: product hunting, competitor review mining, direct OEM manufacturing, patent validation, custom packaging & testing, studio 3D/photography, A+ content, and aggressive PPC launch. $500/mo for 6 Months, then 60/40 Profit Share.",
+    image: "/srv_store_creation.jpg",
+    benefits: [
+      "Data-Driven Product Hunting & Niche Selection",
+      "Competitor Weakness & Reverse-ASIN Gap Analysis",
+      "Direct OEM/ODM Factory Sourcing & Price Negotiation",
+      "USPTO Patent Search & Design Verification",
+      "Pre-Shipment Quality Testing (AQL 2.5) & Inspection",
+      "Custom Die-Cut Packaging & Compliant Labeling",
+      "Studio 3D Renders, Lifestyle Photography & A+ Content",
+      "Honeymoon Period PPC Launch & Algorithmic Ranking"
+    ]
+  },
+  "amazon-wholesale-fba": {
+    title: "Complete Amazon Wholesale FBA",
+    tagline: "Turnkey Brand Approvals & Scaled Operations",
+    description: "End-to-end wholesale operations: direct brand approvals, distributor invoice procurement, FBA prep & shipment planning, and daily BuyBox store management. Month 1: $300, Month 2: $300, Month 3+: Profit Share %.",
     image: "/srv_fba_automation_new.jpg",
     benefits: [
-      "End-to-End Account Management",
-      "Winning Product Sourcing",
-      "Supplier Negotiation & Logistics",
-      "Advanced Inventory Forecasting",
-      "Daily Account Health Monitoring"
+      "Direct Brand Account Opening & Resale Approvals",
+      "Authorized Distributor Invoices (Zero Ungate Risk)",
+      "Send-To-Amazon (STA) Inbound Shipment Plans",
+      "Prep Center Barcode & FNSKU Logistics",
+      "24/7 Algorithmic BuyBox Repricing & Inventory Forecasting"
+    ]
+  },
+  "amazon-account-creation": {
+    title: "Amazon Account Creation",
+    tagline: "Professional Setup & Verification",
+    description: "Avoid suspension on day one. We professionally set up and verify your Amazon Seller Central account, ensuring all legal and tax details are perfectly aligned.",
+    image: "/srv_amazon_creation.png",
+    benefits: [
+      "Guaranteed Approval Process",
+      "Utility Bill & Identity Verification",
+      "Tax Interview Completion (W8/W9)",
+      "Bank Account Linking",
+      "Immediate Selling Privileges"
     ]
   },
   "amazon-ppc-advertising": {
@@ -185,19 +273,6 @@ const serviceDetails: Record<string, any> = {
       "Highly Trusted by Amazon"
     ]
   },
-  "amazon-account-creation": {
-    title: "Amazon Account Creation",
-    tagline: "Professional Setup ($100)",
-    description: "Avoid suspension on day one. We professionally set up and verify your Amazon Seller Central account, ensuring all legal and tax details are perfectly aligned.",
-    image: "/srv_amazon_creation.png",
-    benefits: [
-      "Guaranteed Approval Process",
-      "Utility Bill & Identity Verification",
-      "Tax Interview Completion (W8/W9)",
-      "Bank Account Linking",
-      "Immediate Selling Privileges"
-    ]
-  },
   "llc-formation": {
     title: "US LLC Formation",
     tagline: "Turnkey US LLC Setup for Global Founders",
@@ -265,6 +340,34 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
   if (!data) {
     notFound();
+  }
+
+  if (params.slug === "amazon-account-creation") {
+    return <AmazonAccountCreationServiceUI data={data} />;
+  }
+
+  if (params.slug === "amazon-wholesale-fba") {
+    return <WholesaleFBAServiceUI data={data} />;
+  }
+
+  if (params.slug === "amazon-private-label") {
+    return <PrivateLabelServiceUI data={data} />;
+  }
+
+  if (params.slug === "brand-approvals") {
+    return <BrandApprovalsServiceUI data={data} />;
+  }
+
+  if (params.slug === "trademark-brand-registry") {
+    return <TrademarkServiceUI data={data} />;
+  }
+
+  if (params.slug === "trademark-logo") {
+    return <TrademarkServiceUI data={data} defaultPlan="logo" />;
+  }
+
+  if (params.slug === "trademark-word") {
+    return <TrademarkServiceUI data={data} defaultPlan="word" />;
   }
 
   if (params.slug === "llc-formation") {

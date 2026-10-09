@@ -442,7 +442,7 @@ export const serviceDetails = {
   "amazon-account-creation": {
     "id": "amazon-account-creation",
     "title": "Amazon Account Creation",
-    "tagline": "Professional Setup ($100)",
+    "tagline": "Professional Setup & Verification",
     "description": "Avoid suspension on day one. We professionally set up and verify your Amazon Seller Central account, ensuring all legal and tax details are perfectly aligned.",
     "image": "/srv_amazon_creation.png",
     "benefits": [

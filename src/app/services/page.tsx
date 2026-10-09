@@ -37,17 +37,20 @@ export interface ServiceItem {
 }
 
 export const servicesData: ServiceItem[] = [
-  // --- Amazon Growth & Store Scaling ---
+  // 1. Amazon Account Creation
   {
-    name: "Amazon FBA Automation",
-    slug: "amazon-fba-automation",
+    name: "Amazon Account Creation",
+    slug: "amazon-account-creation",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "Hands-Off Passive",
-    description: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth.",
-    icon: TrendingUp,
-    highlights: ["Hands-off passive operations", "Winning product sourcing", "Daily inventory & health monitoring"]
+    tag: "Guaranteed Setup",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Avoid instant Section 3 suspension. Guaranteed non-resident Seller Central registration with complete document pre-audit, utility bill match, and tax clearance.",
+    icon: UserPlus,
+    highlights: ["Safe non-resident registration (10+ countries)", "Utility bill & bank statement pre-audit", "Zero initial rejection guarantee"]
   },
+
+  // 2. Amazon PPC Advertising
   {
     name: "Amazon PPC Advertising",
     slug: "amazon-ppc-advertising",
@@ -58,6 +61,8 @@ export const servicesData: ServiceItem[] = [
     icon: Search,
     highlights: ["Advanced keyword isolation", "Targeted 18%–24% ACoS", "Dayparting & bid optimization"]
   },
+
+  // 3. Product Hunting & Sourcing
   {
     name: "Product Hunting & Sourcing",
     slug: "product-hunting",
@@ -68,6 +73,8 @@ export const servicesData: ServiceItem[] = [
     icon: ShoppingBag,
     highlights: ["High-demand niche analysis", "Direct factory price negotiation", "Sample inspection & quality checks"]
   },
+
+  // 4. Amazon Store Creation
   {
     name: "Amazon Store Creation",
     slug: "store-creation",
@@ -78,6 +85,8 @@ export const servicesData: ServiceItem[] = [
     icon: Layout,
     highlights: ["Custom brand storefronts", "Mobile-optimized UX design", "Higher organic basket size"]
   },
+
+  // 5. A+ Content & EBC
   {
     name: "A+ Content & EBC",
     slug: "a-content-ebc",
@@ -88,6 +97,8 @@ export const servicesData: ServiceItem[] = [
     icon: PenTool,
     highlights: ["High-resolution visual storytelling", "Competitor comparison tables", "Boosts conversion by up to 20%"]
   },
+
+  // 6. Listing SEO & Optimization
   {
     name: "Listing SEO & Optimization",
     slug: "listing-seo",
@@ -98,18 +109,70 @@ export const servicesData: ServiceItem[] = [
     icon: Sparkles,
     highlights: ["Top-tier search indexing", "Persuasive sales copywriting", "Backend search term maximization"]
   },
+
+  // 7. Bank Account Creation & Wallets
   {
-    name: "Amazon Account Creation",
-    slug: "amazon-account-creation",
-    category: "amazon",
-    categoryLabel: "Amazon Growth",
+    name: "Bank Account Creation",
+    slug: "payoneer-wallet",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
+    tag: "Multi-Currency",
+    description: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds.",
+    icon: Wallet,
+    highlights: ["Direct Amazon disbursements", "USD, EUR, GBP virtual receiving", "Low withdrawal fees to local banks"]
+  },
+  {
+    name: "Wise Business Account",
+    slug: "wise-wallet",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
+    tag: "Global Treasury",
+    description: "Multi-currency borderless banking for international supplier payments with real mid-market exchange rates.",
+    icon: CreditCard,
+    highlights: ["Real mid-market FX rates", "Fast supplier international wires", "Debit card & multi-currency wallets"]
+  },
+  {
+    name: "Airwallex Setup",
+    slug: "airwallex-wallet",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
+    tag: "Fintech Scale",
+    description: "Global treasury and cross-border payment platform with corporate virtual cards and zero foreign transaction fees.",
+    icon: Layers,
+    highlights: ["Virtual corporate Visa cards", "Zero international transaction fees", "Fast batch supplier payouts"]
+  },
+  {
+    name: "Stripe Payment Gateway",
+    slug: "stripe-setup",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
     tag: "$100 Setup",
-    description: "Avoid suspension on day one. We professionally set up and verify your Amazon Seller Central account.",
-    icon: UserPlus,
-    highlights: ["Safe non-resident registration", "Utility bill verification guidance", "Zero initial rejection guarantee"]
+    description: "Professional Stripe account setup to process global payments, manage cash flow, and integrate with Shopify.",
+    icon: Banknote,
+    highlights: ["Accept global credit cards", "Direct Shopify & web integration", "Instant payout support"]
+  },
+  {
+    name: "Chase Bank Setup",
+    slug: "chase-bank",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
+    tag: "$1,500 Physical",
+    description: "Get a legitimate physical US bank account with Chase Bank for ultimate credibility and financial flexibility.",
+    icon: Building,
+    highlights: ["Premier Wall Street banking entity", "High-limit business credit cards", "Dedicated commercial banker support"]
+  },
+  {
+    name: "Bank of America Setup",
+    slug: "bank-of-america",
+    category: "banking",
+    categoryLabel: "Banking & Wallets",
+    tag: "$1,500 Physical",
+    description: "Establish a strong financial foundation with a Bank of America physical business account for Amazon sellers.",
+    icon: Landmark,
+    highlights: ["Top-tier US physical bank branch", "High-limit corporate checking", "Maximum Amazon trust status"]
   },
 
-  // --- US LLC Formation ---
+  // 8. US LLC Formation
   {
     name: "US LLC Formation",
     slug: "llc-formation",
@@ -155,66 +218,56 @@ export const servicesData: ServiceItem[] = [
     highlights: ["Includes $300 Texas SOS fee", "No Personal State Income Tax", "Tier-1 US Commercial Banking Weight"]
   },
 
-  // --- Banking & Payment Infrastructure ---
+  // 9. Wholesale Account Management
   {
-    name: "Bank Account Creation",
-    slug: "payoneer-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Multi-Currency",
-    description: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds.",
-    icon: Wallet,
-    highlights: ["Direct Amazon disbursements", "USD, EUR, GBP virtual receiving", "Low withdrawal fees to local banks"]
+    name: "Wholesale Account Management",
+    slug: "amazon-wholesale-fba",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "$300 M1 & M2 · Profit %",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Complete wholesale operations: direct brand purchasing, Send-to-Amazon shipment plans, prep center labels, and daily BuyBox store management.",
+    icon: Building2,
+    highlights: ["Brand approvals & real invoices", "Send-to-Amazon (STA) shipment plans", "$300 M1 & M2, then profit percentage"]
   },
+
+  // 10. Private Label Management
   {
-    name: "Wise Business Account",
-    slug: "wise-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Global Treasury",
-    description: "Multi-currency borderless banking for international supplier payments with real mid-market exchange rates.",
-    icon: CreditCard,
-    highlights: ["Real mid-market FX rates", "Fast supplier international wires", "Debit card & multi-currency wallets"]
+    name: "Private Label Account Management",
+    slug: "amazon-private-label",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "$500 x 6 Mo · 60/40 Profit",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Build your brand from scratch. Product finding, competitor research, factory sourcing, patent check, product testing, custom packaging, photos, A+ content, and PPC ads.",
+    icon: ShoppingBag,
+    highlights: ["Complete launch from scratch", "Sourcing, testing & patent clearance", "$500/mo for 6 months, then 60/40 profit share"]
   },
+
+  // 11. Brand Approvals & Ungating
   {
-    name: "Stripe Payment Gateway",
-    slug: "stripe-setup",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$100 Setup",
-    description: "Professional Stripe account setup to process global payments, manage cash flow, and integrate with Shopify.",
-    icon: Banknote,
-    highlights: ["Accept global credit cards", "Direct Shopify & web integration", "Instant payout support"]
+    name: "Brand Approvals & Ungating",
+    slug: "brand-approvals",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "20%–70% Margin · $3K–$10K",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Get official approvals to sell big brands on Amazon. Official Letter of Authorization (LOA), Brand Registry approval, Proforma Invoices, Paid Invoices, and complete account setup.",
+    icon: ShieldCheck,
+    highlights: ["20% to 70% Profit Margin Brands", "Letter of Authorization (LOA) & invoices", "Full ungating setup in Seller Central"]
   },
+
+  // 12. Trademark & Brand Registry
   {
-    name: "Bank of America Setup",
-    slug: "bank-of-america",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$1,500 Physical",
-    description: "Establish a strong financial foundation with a Bank of America physical business account for Amazon sellers.",
-    icon: Landmark,
-    highlights: ["Top-tier US physical bank branch", "High-limit corporate checking", "Maximum Amazon trust status"]
-  },
-  {
-    name: "Chase Bank Setup",
-    slug: "chase-bank",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$1,500 Physical",
-    description: "Get a legitimate physical US bank account with Chase Bank for ultimate credibility and financial flexibility.",
-    icon: Building,
-    highlights: ["Premier Wall Street banking entity", "High-limit business credit cards", "Dedicated commercial banker support"]
-  },
-  {
-    name: "Airwallex Setup",
-    slug: "airwallex-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Fintech Scale",
-    description: "Global treasury and cross-border payment platform with corporate virtual cards and zero foreign transaction fees.",
-    icon: Layers,
-    highlights: ["Virtual corporate Visa cards", "Zero international transaction fees", "Fast batch supplier payouts"]
+    name: "Trademark & Brand Registry",
+    slug: "trademark-brand-registry",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "Logo $600 · Word $700",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Official USPTO trademark filing. Get your serial number in 2 to 3 days to unlock Amazon Brand Registry, A+ Content, video ads, and protect against copycats.",
+    icon: Sparkles,
+    highlights: ["Logo ($600) & Wordmark ($700)", "Serial number in 2 to 3 days", "Instant Amazon Brand Registry access"]
   }
 ];
 

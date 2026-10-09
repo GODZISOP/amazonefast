@@ -18,7 +18,7 @@ import {
 
 export default function AnimatedGraphSection() {
   const servicePills = [
-    { name: "Amazon FBA Automation", slug: "amazon-fba-automation", icon: Zap },
+    { name: "Amazon Account Creation", slug: "amazon-account-creation", icon: Zap },
     { name: "Amazon PPC Advertising", slug: "amazon-ppc-advertising", icon: Target },
     { name: "Product Hunting & Sourcing", slug: "product-hunting", icon: Search },
     { name: "Store Creation & Brand Registry", slug: "store-creation", icon: Store },
