@@ -150,9 +150,9 @@ export const servicesData: ServiceItem[] = [
     categoryLabel: "US Corporate",
     tag: "$550 Complete",
     tagColor: "bg-[#ff6b35] text-black font-bold",
-    description: "Commercial powerhouse with $2.47M franchise tax exemption, central logistics across 25+ Amazon fulfillment centers.",
+    description: "Commercial powerhouse entity in the #2 US economy, with central logistics access across 25+ Amazon fulfillment centers.",
     icon: Landmark,
-    highlights: ["Includes $300 Texas SOS fee", "$2.47M franchise tax exemption", "Tier-1 US commercial banking weight"]
+    highlights: ["Includes $300 Texas SOS fee", "No Personal State Income Tax", "Tier-1 US Commercial Banking Weight"]
   },
 
   // --- Banking & Payment Infrastructure ---

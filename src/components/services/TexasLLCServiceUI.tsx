@@ -111,24 +111,9 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
           </h1>
 
           <p className="text-white/70 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
-            Establish your business in the industrial and e-commerce capital of the southern US for <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl">$550 all-inclusive</span>. Zero personal state tax, $2.47M franchise exemption, and top banking status.
+            Establish your business in the industrial and e-commerce capital of the southern US for <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl">$550 all-inclusive</span>. Zero personal state tax, top-tier corporate prestige, and premier commercial banking status.
           </p>
 
-          {/* Quick Metrics Strip */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-xl mx-auto p-4 rounded-2xl bg-[#120703]/90 border border-white/10 mb-8 text-center shadow-lg">
-            <div>
-              <span className="text-[#ff6b35] font-extrabold text-xl sm:text-2xl block">0%</span>
-              <span className="text-white/50 text-[11px] sm:text-xs">Personal Income Tax</span>
-            </div>
-            <div className="border-x border-white/10">
-              <span className="font-instrument italic text-[#ff6b35] font-extrabold text-xl sm:text-2xl block">$2.47M</span>
-              <span className="text-white/50 text-[11px] sm:text-xs">Franchise Exemption</span>
-            </div>
-            <div>
-              <span className="text-white font-extrabold text-xl sm:text-2xl block">25+</span>
-              <span className="text-white/50 text-[11px] sm:text-xs">Amazon FBA Hubs</span>
-            </div>
-          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

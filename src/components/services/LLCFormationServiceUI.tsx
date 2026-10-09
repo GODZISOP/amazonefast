@@ -61,8 +61,8 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
       badgeColor: "bg-[#ff6b35] text-black",
       border: "border-white/10 hover:border-[#ff6b35]/60",
       accent: "text-[#ff6b35]",
-      desc: "Establish your firm in the #2 economy in the US. $2.47M franchise tax exemption and central logistics across 25+ Amazon fulfillment centers.",
-      highlights: ["Includes $300 SOS State Fee", "$2.47M Franchise Exemption", "0% Personal Income Tax", "Tier-1 Physical Bank Weight"]
+      desc: "Establish your firm in the #2 economy in the US with top-tier corporate status and central logistics across major Amazon fulfillment centers.",
+      highlights: ["Includes $300 SOS State Fee", "0% Personal Income Tax", "Top Corporate Prestige", "Tier-1 Physical Bank Weight"]
     }
   ];
 
