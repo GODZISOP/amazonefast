@@ -67,13 +67,10 @@ export default function Navbar() {
           
           <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
             <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[760px] max-w-[calc(100vw-48px)] shadow-2xl">
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2">
 
-                {/* Column 1: Store Setup & Growth */}
+                {/* Column 1: Items 1 to 4 */}
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35] px-3 py-1">
-                    Store Setup & Growth
-                  </span>
                   <Link 
                     href="/services/amazon-account-creation" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
@@ -104,11 +101,11 @@ export default function Navbar() {
                   </Link>
                 </div>
 
-                {/* Column 2: Content & Protection */}
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35] px-3 py-1">
-                    Content & Protection
-                  </span>
+                {/* Column 2: Items 5 to 8 */}
+                <div 
+                  className="flex flex-col gap-0.5"
+                  onMouseLeave={() => setDesktopActiveDropdown(null)}
+                >
                   <Link 
                     href="/services/a-content-ebc" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
@@ -123,32 +120,50 @@ export default function Navbar() {
                     <span>Listing SEO & Optimization</span>
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
-                  <Link 
-                    href="/services/brand-approvals" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Brand Approvals & Ungating</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                  <Link 
-                    href="/services/trademark-brand-registry" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Trademark & Brand Registry</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                </div>
 
-                {/* Column 3: Corporate & Scaling with Dropdown Submenus */}
-                <div 
-                  className="flex flex-col gap-0.5"
-                  onMouseLeave={() => setDesktopActiveDropdown(null)}
-                >
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35] px-3 py-1">
-                    Corporate & Scaling
-                  </span>
+                  {/* 7. LLC Formation Dropdown */}
+                  <div 
+                    className="relative"
+                    onMouseEnter={() => setDesktopActiveDropdown("llc")}
+                  >
+                    <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "llc" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
+                      <Link href="/services/llc-formation" className="flex-1">
+                        LLC Formation
+                      </Link>
+                      <button 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setDesktopActiveDropdown(desktopActiveDropdown === "llc" ? null : "llc");
+                        }}
+                        className="p-0.5 hover:text-[#ff6b35] transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${desktopActiveDropdown === "llc" ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                    </div>
 
-                  {/* 1. Bank Account Creation Dropdown */}
+                    {desktopActiveDropdown === "llc" && (
+                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
+                        <Link href="/services/llc-formation" className="text-[#ff6b35] hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center justify-between group/sub">
+                          <span>Overview & All States</span>
+                          <ArrowUpRight size={12} className="opacity-100 text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/wyoming-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Wyoming LLC</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/florida-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Florida LLC</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/texas-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Texas LLC</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 8. Bank Account Creation Dropdown */}
                   <div 
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("bank")}
@@ -198,50 +213,14 @@ export default function Navbar() {
                       </div>
                     )}
                   </div>
+                </div>
 
-                  {/* 2. US LLC Formation Dropdown */}
-                  <div 
-                    className="relative"
-                    onMouseEnter={() => setDesktopActiveDropdown("llc")}
-                  >
-                    <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "llc" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
-                      <Link href="/services/llc-formation" className="flex-1">
-                        US LLC Formation
-                      </Link>
-                      <button 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setDesktopActiveDropdown(desktopActiveDropdown === "llc" ? null : "llc");
-                        }}
-                        className="p-0.5 hover:text-[#ff6b35] transition-colors"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${desktopActiveDropdown === "llc" ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
-                      </button>
-                    </div>
-
-                    {desktopActiveDropdown === "llc" && (
-                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                        <Link href="/services/llc-formation" className="text-[#ff6b35] hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center justify-between group/sub">
-                          <span>Overview & All States</span>
-                          <ArrowUpRight size={12} className="opacity-100 text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/wyoming-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Wyoming LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/florida-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Florida LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/texas-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Texas LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* 3. Complete Wholesale & PL Dropdown */}
+                {/* Column 3: Items 9 to 11 */}
+                <div 
+                  className="flex flex-col gap-0.5"
+                  onMouseLeave={() => setDesktopActiveDropdown(null)}
+                >
+                  {/* 9. Complete Wholesale & PL Dropdown */}
                   <div 
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("wholesale")}
@@ -275,6 +254,23 @@ export default function Navbar() {
                     )}
                   </div>
 
+                  {/* 10. Brand Approvals */}
+                  <Link 
+                    href="/services/brand-approvals" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Brand Approvals & Ungating</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* 11. Trademark & Brand Registry */}
+                  <Link 
+                    href="/services/trademark-brand-registry" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Trademark & Brand Registry</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
                 </div>
 
               </div>
@@ -408,7 +404,38 @@ export default function Navbar() {
 
               <div className="w-full h-px bg-white/10 my-1"></div>
 
-              {/* 7. Mobile Bank Account Creation Dropdown */}
+              {/* 7. Mobile LLC Formation Dropdown */}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileLLCOpen(!isMobileLLCOpen);
+                }}
+                className="text-white/80 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1"
+              >
+                LLC Formation
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileLLCOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ 
+                  height: isMobileLLCOpen ? 'auto' : 0,
+                  opacity: isMobileLLCOpen ? 1 : 0,
+                  marginTop: isMobileLLCOpen ? 4 : 0
+                }}
+                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
+              >
+                <Link href="/services/llc-formation" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6b35] font-semibold text-sm transition-colors py-1">
+                  ★ Overview & All States
+                </Link>
+                {llcFormationList.map((service) => (
+                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
+                    {service.name}
+                  </Link>
+                ))}
+              </motion.div>
+
+              {/* 8. Mobile Bank Account Creation Dropdown */}
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
@@ -461,37 +488,6 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </motion.div>
-              </motion.div>
-
-              {/* 8. Mobile LLC Formation Dropdown */}
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsMobileLLCOpen(!isMobileLLCOpen);
-                }}
-                className="text-white/80 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1"
-              >
-                LLC Formation
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileLLCOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-              
-              <motion.div 
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ 
-                  height: isMobileLLCOpen ? 'auto' : 0,
-                  opacity: isMobileLLCOpen ? 1 : 0,
-                  marginTop: isMobileLLCOpen ? 4 : 0
-                }}
-                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
-              >
-                <Link href="/services/llc-formation" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6b35] font-semibold text-sm transition-colors py-1">
-                  ★ Overview & All States
-                </Link>
-                {llcFormationList.map((service) => (
-                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
-                    {service.name}
-                  </Link>
-                ))}
               </motion.div>
 
               {/* 9. Complete Wholesale & PL Dropdown */}
