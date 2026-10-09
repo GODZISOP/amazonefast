@@ -29,8 +29,7 @@ export const physicalBankList = [
 export const llcFormationList = [
   { name: "Wyoming LLC", slug: "wyoming-llc" },
   { name: "Florida LLC", slug: "florida-llc" },
-  { name: "Texas LLC", slug: "texas-llc" },
-  { name: "New York LLC", slug: "new-york-llc" }
+  { name: "Texas LLC", slug: "texas-llc" }
 ];
 
 export default function Navbar() {
