@@ -440,13 +440,14 @@ export default function Home() {
             ></motion.div>
 
             {[
-              { title: "Amazon FBA Automation", desc: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth." },
-              { title: "Amazon PPC Advertising", desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." },
-              { title: "Product Hunting & Sourcing", desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." },
-              { title: "Amazon Store Creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
-              { title: "A+ Content & EBC", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
-              { title: "Listing SEO & Optimization", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
-              { title: "Bank Account Creation", desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." }
+              { title: "Amazon FBA Automation", slug: "amazon-fba-automation", desc: "Completely hands-off FBA management, from product sourcing to fulfillment, ensuring passive income growth." },
+              { title: "Amazon PPC Advertising", slug: "amazon-ppc-advertising", desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." },
+              { title: "Product Hunting & Sourcing", slug: "product-hunting", desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." },
+              { title: "Amazon Store Creation", slug: "store-creation", desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." },
+              { title: "A+ Content & EBC", slug: "a-content-ebc", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
+              { title: "Listing SEO & Optimization", slug: "listing-seo", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
+              { title: "Bank Account Creation", slug: "payoneer-wallet", desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." },
+              { title: "US LLC Formation", slug: "llc-formation", desc: "Turnkey 100% remote US company registration (Wyoming, Florida, Texas, New York) with registered agent, US address, and IRS EIN." }
             ].map((service, idx) => (
               <motion.div
                 key={idx}
@@ -457,7 +458,7 @@ export default function Home() {
                   dim: { opacity: 0.5, scale: 0.98 },
                   glowing: { opacity: 1, scale: 1.03, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
-                className="relative flex items-center gap-4 sm:gap-8 mb-10 last:mb-0 cursor-pointer"
+                className="relative flex items-center gap-4 sm:gap-8 mb-10 last:mb-0 cursor-pointer group"
               >
                 {/* Number Circle with Glow */}
                 <motion.div
@@ -521,10 +522,33 @@ export default function Home() {
                       {service.title}
                     </motion.h3>
                   </div>
-                  <p className="text-white/50 text-base leading-relaxed relative z-10 pl-8">{service.desc}</p>
+                  
+                  <p className="text-white/50 text-base leading-relaxed relative z-10 pl-8 mb-4">{service.desc}</p>
+                  
+                  {/* Details Page Button for Every Service Card */}
+                  <div className="relative z-10 pl-8 flex items-center justify-between pt-3 border-t border-white/5">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 hover:bg-[#ff6b35] text-[#ff6b35] hover:text-black border border-[#ff6b35]/30 text-xs font-bold transition-all duration-200 group-hover:scale-105"
+                    >
+                      <span>View Details</span>
+                      <ArrowUpRight size={14} className="stroke-[2.5]" />
+                    </Link>
+                  </div>
                 </motion.div>
               </motion.div>
             ))}
+          </div>
+
+          {/* View All Services Button */}
+          <div className="mt-16 flex justify-center relative z-20">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
+            >
+              <span>View All Services & Pricing</span>
+              <ArrowUpRight size={18} className="stroke-[2.5]" />
+            </Link>
           </div>
         </div>
       </section>
