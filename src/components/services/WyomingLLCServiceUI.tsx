@@ -20,7 +20,7 @@ interface WyomingLLCServiceUIProps {
 
 export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to form my Wyoming LLC ($650 package). Please guide me through the next steps.";
+  const whatsappMessage = "Hi AmazonFast, I want to form my Wyoming LLC ($500 package). Please guide me through the next steps.";
   const questionsMessage = "Hi AmazonFast, I have some questions about forming a Wyoming LLC as a non-resident.";
 
   const features = [
@@ -62,7 +62,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
     { feature: "State Income Tax", wyoming: "0% None", delaware: "8.7% on income earned in DE" },
     { feature: "Privacy & Anonymity", wyoming: "Strong (Anonymous LLC)", delaware: "Moderate" },
     { feature: "Best For", wyoming: "Amazon FBA, E-Commerce, Non-Residents", delaware: "Startups seeking US Venture Capital" },
-    { feature: "Full All-Inclusive Package", wyoming: "$650 Complete", delaware: "$750+" }
+    { feature: "Full All-Inclusive Package", wyoming: "$500 Complete", delaware: "$750+" }
   ];
 
   const packageIncludes = [
@@ -91,8 +91,8 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
       a: "State registration is usually approved in 2 to 4 business days. After that, we apply for your EIN with the IRS, which typically takes 10 to 14 business days for non-residents."
     },
     {
-      q: "Are there any hidden fees beyond the $650 package?",
-      a: "No. The $650 package covers all state filing fees, registered agent for the first year, US address, EIN filing, BOI filing, and banking guidance. Ongoing maintenance begins in Year 2 with the annual report ($60 state fee) and registered agent renewal."
+      q: "Are there any hidden fees beyond the $500 package?",
+      a: "No. The $500 package covers all state filing fees, registered agent for the first year, US address, EIN filing, BOI filing, and banking guidance. Ongoing maintenance begins in Year 2 with the annual report ($60 state fee) and registered agent renewal."
     }
   ];
 
@@ -129,7 +129,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
           </h1>
 
           <p className="text-white/70 text-base sm:text-lg md:text-xl leading-relaxed mb-8 font-normal">
-            The most popular choice for international founders. Low fees, strong privacy, zero state income tax, and the fastest formation timeline. Full Package: <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl ml-1">$650</span>
+            The most popular choice for international founders. Low fees, strong privacy, zero state income tax, and the fastest formation timeline. Full Package: <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl ml-1">$500</span>
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -224,7 +224,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
         <div className="py-20 border-t border-white/10">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
-              What's Included in Your <span className="text-[#ff6b35]">$650</span> Wyoming Formation
+              What's Included in Your <span className="text-[#ff6b35]">$500</span> Wyoming Formation
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
               Zero hidden charges. Everything required to sell on Amazon US and open US bank accounts.
@@ -242,7 +242,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
                 <span className="text-[#ff6b35] text-xs font-semibold">100% Non-Resident Ready</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="font-instrument italic text-4xl sm:text-5xl font-extrabold text-white">$650</span>
+                <span className="font-instrument italic text-4xl sm:text-5xl font-extrabold text-white">$500</span>
                 <span className="text-white/50 text-xs">/ one-time</span>
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"
             >
-              Get Started on WhatsApp ($650)
+              Get Started on WhatsApp ($500)
               <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
             </Link>
           </div>
