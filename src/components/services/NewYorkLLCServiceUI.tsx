@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { 
-  ArrowRight, 
   ArrowUpRight, 
   Check, 
   Building2, 
@@ -75,25 +73,28 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
   ];
 
   return (
-    <div className="bg-[#09090b] min-h-screen text-white font-sans selection:bg-[#ff6b35]/30 overflow-x-hidden pt-28 pb-24">
+    <div className="bg-[#0a0400] min-h-screen text-white font-sans selection:bg-[#ff6b35]/30 overflow-x-hidden pt-28 pb-24 border-t border-white/5">
       
-      {/* Background platinum/gold glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[500px] bg-gradient-to-b from-stone-500/15 via-[#ff6b35]/10 to-transparent blur-[140px] pointer-events-none" />
+      {/* Background ambient glow matching theme */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[140px] pointer-events-none opacity-40"
+        style={{ background: "radial-gradient(circle, rgba(255,107,53,0.18) 0%, rgba(10,4,0,0) 70%)" }}
+      />
 
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-stone-400 mb-6">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
           <Link href="/" className="hover:text-white transition">Home</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-white transition">Services</Link>
+          <Link href="/services/llc-formation" className="hover:text-[#ff6b35] transition">LLC Formation</Link>
           <span>/</span>
-          <span className="text-white font-semibold">New York LLC</span>
+          <span className="text-[#ff6b35] font-semibold">New York LLC</span>
         </div>
 
         {/* Editorial Wall Street Hero */}
         <div className="text-center max-w-3xl mx-auto pt-6 pb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-800/80 border border-stone-700 text-stone-200 text-xs sm:text-sm font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 border border-[#ff6b35]/30 text-[#ff6b35] text-xs sm:text-sm font-semibold mb-6">
             <Building2 className="w-4 h-4 text-[#ff6b35]" />
             <span>Global Prestige & Financial Capital of the World</span>
           </div>
@@ -102,7 +103,7 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
             New York LLC Formation
           </h1>
 
-          <p className="text-stone-300 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
+          <p className="text-white/70 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
             Form an elite New York entity with full Section 206 publication compliance included. Supreme global credibility for high-volume trading, wholesale distribution, and global supplier contracts.
           </p>
 
@@ -120,10 +121,10 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
         </div>
 
         {/* Section 1: NY Core Highlights Grid */}
-        <div className="py-16 border-t border-stone-800">
+        <div className="py-16 border-t border-white/10">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">The New York Advantage</h2>
-            <p className="text-stone-400 text-sm">Recognized worldwide as the standard of corporate authority.</p>
+            <p className="text-white/60 text-sm">Recognized worldwide as the standard of corporate authority.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -132,13 +133,13 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
               return (
                 <div
                   key={idx}
-                  className="bg-[#121216] border border-stone-800 hover:border-[#ff6b35]/40 p-7 rounded-2xl transition-all shadow-md group"
+                  className="bg-[#120703]/90 border border-white/10 hover:border-[#ff6b35]/40 p-7 rounded-2xl transition-all shadow-md group"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#ff6b35] mb-5 group-hover:scale-110 transition-transform">
+                  <div className="w-11 h-11 rounded-xl bg-[#ff6b35]/10 border border-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] mb-5 group-hover:scale-110 transition-transform">
                     <IconComp className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-stone-400 text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
@@ -146,16 +147,16 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
         </div>
 
         {/* Section 2: Complete Package Breakdown Card */}
-        <div className="py-16 border-t border-stone-800">
-          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#18181f] to-[#101014] border-2 border-stone-700 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+        <div className="py-16 border-t border-white/10">
+          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">Full NY Turnkey Package</h3>
-                <span className="text-stone-400 text-xs font-semibold">Includes Section 206 Publication & State Fees</span>
+                <span className="text-[#ff6b35] text-xs font-semibold">Includes Section 206 Publication & State Fees</span>
               </div>
             </div>
 
-            <p className="text-stone-300 text-sm leading-relaxed mb-8">
+            <p className="text-white/70 text-sm leading-relaxed mb-8">
               Complete formation, newspaper notices in two county newspapers, official Certificate of Publication, federal EIN, and banking setup.
             </p>
 
@@ -165,7 +166,7 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
                   <div className="w-5 h-5 rounded-full bg-[#ff6b35]/20 border border-[#ff6b35]/40 flex items-center justify-center text-[#ff6b35] shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
-                  <span className="text-stone-200 text-sm leading-snug">{item}</span>
+                  <span className="text-white/90 text-sm leading-snug">{item}</span>
                 </div>
               ))}
             </div>
@@ -177,13 +178,13 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"
             >
               Get Started on WhatsApp
-              <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+              <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
           </div>
         </div>
 
         {/* Section 3: FAQs */}
-        <div className="py-12 border-t border-stone-800">
+        <div className="py-12 border-t border-white/10">
           <div className="max-w-xl mx-auto text-center mb-8">
             <h2 className="text-2xl font-bold text-white mb-2">New York LLC FAQs</h2>
           </div>
@@ -191,16 +192,16 @@ export default function NewYorkLLCServiceUI({ data }: NewYorkLLCServiceUIProps) 
             {faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
-                <div key={idx} className="bg-[#121216] border border-stone-800 rounded-xl overflow-hidden">
+                <div key={idx} className="bg-[#120703] border border-white/10 rounded-xl overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
                     className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 text-white font-semibold text-sm hover:text-[#ff6b35] transition-colors"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-4 h-4 text-[#ff6b35] transition-transform ${isOpen ? "rotate-180" : ""}`} />
                   </button>
                   {isOpen && (
-                    <div className="px-5 pb-5 text-stone-400 text-sm leading-relaxed border-t border-stone-800/60 pt-3">
+                    <div className="px-5 pb-5 text-white/70 text-sm leading-relaxed border-t border-white/5 pt-3">
                       {faq.a}
                     </div>
                   )}
