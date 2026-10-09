@@ -31,7 +31,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
     {
       name: "Wyoming LLC",
       slug: "wyoming-llc",
-      price: "$650",
+      price: "$500",
       tagline: "#1 Choice for Non-Residents",
       badge: "Most Popular",
       badgeColor: "bg-[#ff6b35] text-black",
@@ -63,18 +63,6 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
       accent: "text-[#ff6b35]",
       desc: "Establish your firm in the #2 economy in the US. $2.47M franchise tax exemption and central logistics across 25+ Amazon fulfillment centers.",
       highlights: ["Includes $300 SOS State Fee", "$2.47M Franchise Exemption", "0% Personal Income Tax", "Tier-1 Physical Bank Weight"]
-    },
-    {
-      name: "New York LLC",
-      slug: "new-york-llc",
-      price: "Turnkey",
-      tagline: "Global Corporate & Financial Prestige",
-      badge: "Enterprise",
-      badgeColor: "bg-[#ff6b35] text-black",
-      border: "border-white/10 hover:border-[#ff6b35]/60",
-      accent: "text-[#ff6b35]",
-      desc: "Maximum corporate authority for global contracts and enterprise brands. Full Section 206 6-week publication requirement included.",
-      highlights: ["Section 206 Publication Included", "Certificate of Publication", "Wall Street Market Status", "Premier Supplier Access"]
     }
   ];
 
