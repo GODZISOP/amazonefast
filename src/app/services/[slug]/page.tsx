@@ -12,7 +12,6 @@ import ChaseBankServiceUI from "@/components/services/ChaseBankServiceUI";
 import WyomingLLCServiceUI from "@/components/services/WyomingLLCServiceUI";
 import FloridaLLCServiceUI from "@/components/services/FloridaLLCServiceUI";
 import TexasLLCServiceUI from "@/components/services/TexasLLCServiceUI";
-import NewYorkLLCServiceUI from "@/components/services/NewYorkLLCServiceUI";
 import LLCFormationServiceUI from "@/components/services/LLCFormationServiceUI";
 
 // Service Data
@@ -214,7 +213,7 @@ const serviceDetails: Record<string, any> = {
   },
   "wyoming-llc": {
     title: "Wyoming LLC Formation",
-    tagline: "Most Popular for Non-Residents ($650)",
+    tagline: "Most Popular for Non-Residents ($500)",
     description: "Wyoming LLC formation for international founders. Low fees, strong privacy, zero state income tax, and fastest formation timeline.",
     image: "/srv_account_reinstatement.png",
     benefits: [
@@ -250,19 +249,6 @@ const serviceDetails: Record<string, any> = {
       "1 Year Registered Agent & Commercial Address",
       "IRS EIN & Tier-1 Bank Readiness"
     ]
-  },
-  "new-york-llc": {
-    title: "New York LLC Formation",
-    tagline: "Wall Street & Global Enterprise Prestige",
-    description: "Form an elite New York LLC with full Section 206 newspaper publication compliance and Certificate of Publication included.",
-    image: "/srv_account_reinstatement.png",
-    benefits: [
-      "Full Section 206 Publication in 2 Newspapers Included",
-      "Official Certificate of Publication from NY DOS",
-      "1 Year Registered Agent & NY Address",
-      "IRS Federal EIN for Non-Residents",
-      "Global Wholesale & Supplier Credibility"
-    ]
   }
 };
 
@@ -295,10 +281,6 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
   if (params.slug === "texas-llc") {
     return <TexasLLCServiceUI data={data} />;
-  }
-
-  if (params.slug === "new-york-llc") {
-    return <NewYorkLLCServiceUI data={data} />;
   }
 
   if (params.slug === "payoneer-wallet") {

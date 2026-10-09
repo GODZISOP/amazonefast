@@ -402,13 +402,13 @@ export default function Home() {
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
             >
               <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-bold tracking-tight mb-6 leading-[1.1] flex flex-wrap">
-                {["Elevate", "Your"].map((word, i) => (
+                {["Scale", "Your"].map((word, i) => (
                   <motion.span key={`h1-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 0.5 } } }} className="mr-4">
                     {word}
                   </motion.span>
                 ))}
                 <div className="w-full h-0"></div>
-                {["eCommerce", "Game"].map((word, i) => (
+                {["Amazon", "Empire"].map((word, i) => (
                   <motion.span key={`h2-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 0.5 } } }} className="mr-4">
                     {word}
                   </motion.span>
@@ -416,17 +416,13 @@ export default function Home() {
               </h2>
 
               <p className="text-lg md:text-xl max-w-2xl leading-relaxed flex flex-wrap">
-                {"Utilize Amazon Fast Service to revolutionize your online store. Our state-of-the-art solutions help you focus on what really matters—building your brand.".split(" ").map((word, i) => (
+                {"Partner with AmazonFast for end-to-end store automation, performance PPC management, and turnkey US legal corporate formation tailored for global entrepreneurs.".split(" ").map((word, i) => (
                   <motion.span key={`p-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 0.6)", transition: { duration: 0.5 } } }} className="mr-1.5">
                     {word}
                   </motion.span>
                 ))}
               </p>
             </motion.div>
-            <Link href="/services" className="flex items-center gap-4 px-8 py-4 rounded-full bg-white text-black hover:bg-[#ff6b35] hover:text-white transition-colors duration-300 w-fit group">
-              <span className="font-semibold">View All Services</span>
-              <ArrowUpRight size={20} className="group-hover:rotate-45 transition-transform" />
-            </Link>
           </div>
 
           <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
@@ -447,7 +443,7 @@ export default function Home() {
               { title: "A+ Content & EBC", slug: "a-content-ebc", desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." },
               { title: "Listing SEO & Optimization", slug: "listing-seo", desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." },
               { title: "Bank Account Creation", slug: "payoneer-wallet", desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." },
-              { title: "US LLC Formation", slug: "llc-formation", desc: "Turnkey 100% remote US company registration (Wyoming, Florida, Texas, New York) with registered agent, US address, and IRS EIN." }
+              { title: "US LLC Formation", slug: "llc-formation", desc: "Turnkey 100% remote US company registration (Wyoming, Florida, Texas) with registered agent, US address, and IRS EIN." }
             ].map((service, idx) => (
               <motion.div
                 key={idx}

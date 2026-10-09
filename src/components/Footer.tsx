@@ -35,6 +35,7 @@ export default function Footer() {
             <Link href="/services/amazon-ppc-advertising" className="text-white/60 hover:text-white transition text-sm">PPC Advertising</Link>
             <Link href="/services/product-hunting" className="text-white/60 hover:text-white transition text-sm">Product Hunting</Link>
             <Link href="/services/store-creation" className="text-white/60 hover:text-white transition text-sm">Store Creation</Link>
+            <Link href="/services/llc-formation" className="text-white/60 hover:text-white transition text-sm">US LLC Formation</Link>
             <Link href="/services/payoneer-wallet" className="text-white/60 hover:text-white transition text-sm">Bank Account Creation</Link>
           </div>
 
