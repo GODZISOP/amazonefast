@@ -93,7 +93,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
     {
       num: "01",
       title: "State & Name Selection",
-      desc: "Pick your ideal state (Wyoming, Texas, Florida, NY) and provide company name options with passport copy."
+      desc: "Pick your ideal state (Wyoming, Florida, or Texas) and provide company name options with passport copy."
     },
     {
       num: "02",
@@ -190,7 +190,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {states.map((st) => (
               <div
                 key={st.slug}
