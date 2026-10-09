@@ -18,16 +18,30 @@ export const bankAccountsList = [
   { name: "Payoneer Setup", slug: "payoneer-wallet" },
   { name: "Wise Setup", slug: "wise-wallet" },
   { name: "Airwallex Setup", slug: "airwallex-wallet" },
-  { name: "Stripe Setup", slug: "stripe-setup" },
+  { name: "Stripe Setup", slug: "stripe-setup" }
+];
+
+export const physicalBankList = [
   { name: "Chase Bank", slug: "chase-bank" },
   { name: "Bank of America", slug: "bank-of-america" }
+];
+
+export const llcFormationList = [
+  { name: "Wyoming LLC", slug: "wyoming-llc" },
+  { name: "Florida LLC", slug: "florida-llc" },
+  { name: "Texas LLC", slug: "texas-llc" },
+  { name: "New York LLC", slug: "new-york-llc" }
 ];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileBankCreationOpen, setIsMobileBankCreationOpen] = useState(false);
+  const [isMobilePhysicalBankOpen, setIsMobilePhysicalBankOpen] = useState(false);
+  const [isMobileLLCOpen, setIsMobileLLCOpen] = useState(false);
   const [isDesktopNestedOpen, setIsDesktopNestedOpen] = useState(false);
+  const [isDesktopPhysicalBankOpen, setIsDesktopPhysicalBankOpen] = useState(false);
+  const [isDesktopLLCOpen, setIsDesktopLLCOpen] = useState(false);
 
   return (
     <header className="fixed z-50 w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
@@ -60,6 +74,38 @@ export default function Navbar() {
 
               <div className="w-full h-px bg-white/10 my-1"></div>
 
+              {/* Nested Dropdown for LLC Formation */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsDesktopLLCOpen(true)}
+                onMouseLeave={() => setIsDesktopLLCOpen(false)}
+              >
+                <div className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${isDesktopLLCOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}>
+                  <Link href="/services/llc-formation" className="flex-1">
+                    LLC Formation
+                  </Link>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-70 transition-transform duration-200 ${isDesktopLLCOpen ? '-rotate-90 text-[#ff6b35]' : '-rotate-90'}`}><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+                
+                {/* Sub Menu appearing on the right */}
+                <div 
+                  className={`absolute top-0 left-[105%] transition-all duration-300 ${isDesktopLLCOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-4'}`}
+                >
+                  <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 w-56 shadow-2xl flex flex-col gap-0.5">
+                    <Link href="/services/llc-formation" className="text-[#ff6b35] hover:bg-white/10 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-between border-b border-white/10 mb-1">
+                      Overview & All States
+                      <ArrowUpRight size={14} />
+                    </Link>
+                    {llcFormationList.map((service) => (
+                      <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/linkLlc">
+                        {service.name}
+                        <ArrowUpRight size={14} className="opacity-0 group-hover/linkLlc:opacity-100 transition-opacity text-[#ff6b35]" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               {/* Nested Dropdown for Bank Account Creation */}
               <div 
                 className="relative"
@@ -82,6 +128,31 @@ export default function Navbar() {
                         <ArrowUpRight size={14} className="opacity-0 group-hover/link2:opacity-100 transition-opacity text-[#ff6b35]" />
                       </Link>
                     ))}
+                    
+                    <div className="w-full h-px bg-white/10 my-1"></div>
+
+                    {/* Third level nested dropdown for Physical Bank */}
+                    <div 
+                      className="relative"
+                      onMouseEnter={() => setIsDesktopPhysicalBankOpen(true)}
+                      onMouseLeave={() => setIsDesktopPhysicalBankOpen(false)}
+                    >
+                      <button className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${isDesktopPhysicalBankOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}>
+                        Physical Bank
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-70 transition-transform duration-200 ${isDesktopPhysicalBankOpen ? '-rotate-90 text-[#ff6b35]' : '-rotate-90'}`}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                      
+                      <div className={`absolute top-0 left-[105%] transition-all duration-300 ${isDesktopPhysicalBankOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible -translate-x-4'}`}>
+                        <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 w-48 shadow-2xl flex flex-col gap-0.5">
+                          {physicalBankList.map((service) => (
+                            <Link key={service.slug} href={`/services/${service.slug}`} className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link3">
+                              {service.name}
+                              <ArrowUpRight size={14} className="opacity-0 group-hover/link3:opacity-100 transition-opacity text-[#ff6b35]" />
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -160,6 +231,37 @@ export default function Navbar() {
                 </Link>
               ))}
 
+              {/* Mobile LLC Formation Dropdown */}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileLLCOpen(!isMobileLLCOpen);
+                }}
+                className="text-white/60 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1 mt-1 border-t border-white/10 pt-3"
+              >
+                LLC Formation
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileLLCOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ 
+                  height: isMobileLLCOpen ? 'auto' : 0,
+                  opacity: isMobileLLCOpen ? 1 : 0,
+                  marginTop: isMobileLLCOpen ? 4 : 0
+                }}
+                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
+              >
+                <Link href="/services/llc-formation" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6b35] font-semibold text-sm transition-colors py-1">
+                  ★ Overview & All States
+                </Link>
+                {llcFormationList.map((service) => (
+                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/40 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
+                    {service.name}
+                  </Link>
+                ))}
+              </motion.div>
+
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
@@ -185,6 +287,33 @@ export default function Navbar() {
                     {service.name}
                   </Link>
                 ))}
+
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMobilePhysicalBankOpen(!isMobilePhysicalBankOpen);
+                  }}
+                  className="text-white/60 hover:text-white text-sm font-medium transition-colors flex items-center justify-between text-left py-1 mt-1 border-t border-white/10 pt-2"
+                >
+                  Physical Bank
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobilePhysicalBankOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: isMobilePhysicalBankOpen ? 'auto' : 0,
+                    opacity: isMobilePhysicalBankOpen ? 1 : 0,
+                    marginTop: isMobilePhysicalBankOpen ? 4 : 0
+                  }}
+                  className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
+                >
+                  {physicalBankList.map((service) => (
+                    <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/40 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
+                      {service.name}
+                    </Link>
+                  ))}
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>

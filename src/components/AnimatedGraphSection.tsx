@@ -1,243 +1,271 @@
 "use client";
 
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Cloud, Code, Bot, Shield, TrendingUp } from "lucide-react";
+import { 
+  ArrowUpRight, 
+  TrendingUp, 
+  Sparkles, 
+  Zap, 
+  Target, 
+  Search, 
+  Store, 
+  Palette, 
+  Landmark 
+} from "lucide-react";
 
 export default function AnimatedGraphSection() {
-  const hexClipPath = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
+  const servicePills = [
+    { name: "Amazon FBA Automation", slug: "amazon-fba-automation", icon: Zap },
+    { name: "Amazon PPC Advertising", slug: "amazon-ppc-advertising", icon: Target },
+    { name: "Product Hunting & Sourcing", slug: "product-hunting", icon: Search },
+    { name: "Store Creation & Brand Registry", slug: "store-creation", icon: Store },
+    { name: "A+ Content & EBC Design", slug: "a-content-ebc", icon: Palette },
+    { name: "Global Bank & Stripe Setup", slug: "stripe-setup", icon: Landmark },
+  ];
 
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[#0a0400] flex flex-col justify-center items-center overflow-hidden border-t border-white/5">
-      
-      {/* Background glow - Optimized with radial gradient instead of expensive CSS blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(255,107,53,0.15) 0%, rgba(0,0,0,0) 70%)' }}></div>
-      
-      {/* Top Text Section */}
-      <div className="w-full flex flex-col items-center text-center mb-16 md:mb-20 px-6 relative z-20">
-        <motion.h2 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-6xl lg:text-[72px] font-bold text-white tracking-tight leading-[1.1] mb-6 uppercase"
-        >
-          Scaling <TrendingUp className="inline-block w-8 h-8 md:w-14 md:h-14 text-[#ff6b35] mx-1 md:mx-3 -mt-2 md:-mt-4" strokeWidth={3} /> Your Brand<br />
-          Through <span className="text-[#ff6b35]">Amazon FBA</span>
-        </motion.h2>
+    <section className="relative w-full py-20 sm:py-28 md:py-36 bg-[#0a0400] text-white overflow-hidden border-t border-white/5">
+      {/* Background ambient glow */}
+      <div 
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[500px] rounded-full pointer-events-none opacity-40"
+        style={{ background: "radial-gradient(circle, rgba(255,107,53,0.18) 0%, rgba(10,4,0,0) 70%)" }}
+      />
+
+      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 w-full">
         
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+        {/* Top Editorial Statement (Grounded & Realistic) */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "100px" }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-white/60 text-base md:text-xl max-w-3xl font-medium leading-relaxed"
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-4xl mb-14 sm:mb-20"
         >
-          We build intelligent, scalable, and optimized product listings to<br className="hidden md:block"/>
-          drive international growth and transform your store into a market leader.
-        </motion.p>
-      </div>
-      
-      {/* Container for the graph (Responsive aspect ratio space) */}
-      <div className="relative w-full max-w-[1400px] min-h-[500px] lg:h-[750px] flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-0 px-4">
-        
-        {/* SVG Circuit Lines (Desktop / Tablet) */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
+          <h2 className="text-2xl sm:text-3xl md:text-[2.6rem] lg:text-[2.9rem] font-medium leading-[1.3] sm:leading-[1.28] tracking-tight text-white">
+            <span className="font-bold text-white">Amazon Fast Service</span>{" "}
+            <span className="inline-flex items-center justify-center align-middle mx-1 sm:mx-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#ff6b35] text-black shadow-[0_0_15px_rgba(255,107,53,0.6)]">
+              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+            </span>{" "}
+            <span className="text-white font-medium">
+              is a dedicated Amazon FBA management and store growth partner built to launch, manage, and scale your brand.
+            </span>{" "}
+            <span className="text-white/40 font-normal">
+              From daily inventory replenishment and focused PPC ad campaigns to verified international bank account setup, we handle the technical heavy lifting so your store runs consistently.
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* 3 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-12">
           
-          <defs>
-            <linearGradient id="lineGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ff6b35" stopOpacity="0.1" />
-              <stop offset="50%" stopColor="#ff6b35" stopOpacity="1" />
-              <stop offset="100%" stopColor="#ff6b35" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-
-          {/* Lines to Top Left (Cloud) */}
-          <g>
-            <motion.path d="M 600 350 L 500 350 L 400 250 L 400 200" stroke="url(#lineGlow)" strokeWidth="3" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.8 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }} />
-            <motion.path d="M 600 340 L 520 340 L 420 240 L 420 200" stroke="url(#lineGlow)" strokeWidth="1.5" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.5 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }} />
-          </g>
-
-          {/* Lines to Bottom Left (AI) */}
-          <g>
-            <motion.path d="M 600 350 L 500 350 L 400 450 L 400 500" stroke="url(#lineGlow)" strokeWidth="3" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.8 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }} />
-            <motion.path d="M 600 360 L 520 360 L 420 460 L 420 500" stroke="url(#lineGlow)" strokeWidth="1.5" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.5 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }} />
-          </g>
-
-          {/* Lines to Top Right (Code) */}
-          <g>
-            <motion.path d="M 600 350 L 700 350 L 800 250 L 800 200" stroke="url(#lineGlow)" strokeWidth="3" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.8 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }} />
-            <motion.path d="M 600 340 L 680 340 L 780 240 L 780 200" stroke="url(#lineGlow)" strokeWidth="1.5" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.5 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }} />
-          </g>
-
-          {/* Lines to Bottom Right (Shield) */}
-          <g>
-            <motion.path d="M 600 350 L 700 350 L 800 450 L 800 500" stroke="url(#lineGlow)" strokeWidth="3" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.8 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }} />
-            <motion.path d="M 600 360 L 680 360 L 780 460 L 780 500" stroke="url(#lineGlow)" strokeWidth="1.5" fill="none"
-              initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.5 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }} />
-          </g>
-        </svg>
-
-        {/* Central & Outer Hexagon Visual Area */}
-        <div className="relative w-full h-[320px] sm:h-[400px] lg:h-full flex justify-center items-center my-4 lg:my-0">
-          {/* Central Hexagon */}
-          <motion.div 
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="absolute z-30 flex flex-col items-center justify-center w-32 h-32 sm:w-40 sm:h-40 bg-[#0a0400] border-2 border-[#ff6b35] shadow-[0_0_60px_rgba(255,107,53,0.5)]" 
-            style={{ clipPath: hexClipPath }}
+          {/* Card 1: Desi Seller Photo + Grounded Store Metric */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="group relative h-[460px] sm:h-[490px] rounded-[2.2rem] overflow-hidden border border-white/10 shadow-2xl flex flex-col justify-end p-4 sm:p-5"
           >
-            <div className="absolute inset-0 bg-[#ff6b35]/20 animate-pulse"></div>
-            <span className="text-[#ff6b35] text-4xl sm:text-5xl font-bold font-sans tracking-tighter">AFS</span>
-            <span className="text-white text-[8px] sm:text-[9px] font-bold tracking-widest mt-1 text-center px-1">AMAZON FAST SERVICE</span>
+            {/* Real Desi Human Photo */}
+            <div className="absolute inset-0 z-0">
+              <Image 
+                src="/desi-man-1.png" 
+                alt="Amazon Store Partner" 
+                fill 
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                priority
+              />
+              {/* Subtle dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
+            </div>
+
+            {/* Bottom Overlay Card */}
+            <div className="relative z-10 w-full bg-[#120702]/95 backdrop-blur-xl border border-white/10 p-5 sm:p-6 rounded-[1.8rem] shadow-[0_15px_35px_rgba(0,0,0,0.6)] group-hover:border-[#ff6b35]/40 transition-colors">
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight">
+                  30+
+                </span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#ff6b35] bg-[#ff6b35]/10 px-2 py-0.5 rounded-full border border-[#ff6b35]/20">
+                  US & UK Stores
+                </span>
+              </div>
+              <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal">
+                Active stores launched, managed, and optimized across US & UK Amazon marketplaces with dedicated account managers.
+              </p>
+            </div>
           </motion.div>
 
-          {/* Outer Hexagons */}
-          {/* Top Left - Cloud */}
-          <motion.div 
-            initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: false, amount: 0.5 }} transition={{ type: "spring", delay: 0.1 }}
-            className="absolute top-[10%] sm:top-[18%] left-[15%] sm:left-[28%] z-20 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-[#0a0400] border border-[#ff6b35]/50 shadow-[0_0_25px_rgba(255,107,53,0.3)]" 
-            style={{ clipPath: hexClipPath }}
+          {/* Card 2: Client Retention & Real Testimonial Quote */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all"
           >
-            <Cloud className="text-[#ff6b35] w-6 h-6 sm:w-8 sm:h-8" />
-          </motion.div>
-          
-          {/* Top Right - Code */}
-          <motion.div 
-            initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: false, amount: 0.5 }} transition={{ type: "spring", delay: 0.1 }}
-            className="absolute top-[10%] sm:top-[18%] right-[15%] sm:right-[28%] z-20 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-[#0a0400] border border-[#ff6b35]/50 shadow-[0_0_25px_rgba(255,107,53,0.3)]" 
-            style={{ clipPath: hexClipPath }}
-          >
-            <Code className="text-[#ff6b35] w-6 h-6 sm:w-8 sm:h-8" />
+            {/* Top Stat */}
+            <div>
+              <span className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1">
+                Client Retention Rate
+              </span>
+              <div className="text-4xl sm:text-5xl font-bold text-white tracking-tight flex items-center gap-2">
+                98.2%
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#ff6b35]" />
+              </div>
+
+              {/* Overlapping Desi Avatars */}
+              <div className="flex items-center -space-x-2.5 mt-5">
+                <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#110702] ring-1 ring-[#ff6b35]/40">
+                  <Image src="/desi-man-1.png" alt="Client 1" fill className="object-cover" />
+                </div>
+                <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#110702] ring-1 ring-[#ff6b35]/40">
+                  <Image src="/desi-woman.png" alt="Client 2" fill className="object-cover" />
+                </div>
+                <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#110702] ring-1 ring-[#ff6b35]/40">
+                  <Image src="/desi-man-2.png" alt="Client 3" fill className="object-cover" />
+                </div>
+                <span className="pl-4 text-xs font-medium text-white/50">
+                  Active Brand Partners
+                </span>
+              </div>
+            </div>
+
+            {/* Testimonial Quote */}
+            <div className="pt-6 border-t border-white/5">
+              <p className="text-lg sm:text-xl font-light text-white leading-snug">
+                “Having our product sourcing, PPC ads, and bank accounts handled by{" "}
+                <span className="font-instrument italic text-[#ff6b35] text-2xl font-medium">
+                  one team
+                </span>{" "}
+                keeps our store{" "}
+                <span className="font-instrument italic text-white text-2xl font-medium">
+                  profitable and
+                </span>{" "}
+                stress-free.”
+              </p>
+              <div className="mt-4 flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b35]" />
+                <span className="text-white/40 text-xs font-medium uppercase tracking-wider">
+                  Verified Amazon FBA Seller
+                </span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Bottom Left - AI */}
-          <motion.div 
-            initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: false, amount: 0.5 }} transition={{ type: "spring", delay: 0.2 }}
-            className="absolute bottom-[10%] sm:bottom-[18%] left-[15%] sm:left-[28%] z-20 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-[#0a0400] border border-[#ff6b35]/50 shadow-[0_0_25px_rgba(255,107,53,0.3)]" 
-            style={{ clipPath: hexClipPath }}
+          {/* Card 3: Full-Service Store Operations & Account Health */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all overflow-hidden"
           >
-            <Bot className="text-[#ff6b35] w-6 h-6 sm:w-8 sm:h-8" />
+            {/* Header: Brand Name + Action Link */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-bold tracking-tight text-white">
+                  Amazon Fast Service
+                </span>
+              </div>
+              <Link
+                href="/services"
+                className="w-9 h-9 rounded-xl bg-white/5 hover:bg-[#ff6b35] hover:text-black text-white/80 border border-white/10 flex items-center justify-center transition-all duration-200 group-hover:border-[#ff6b35]"
+                aria-label="Explore services"
+              >
+                <ArrowUpRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            {/* Middle: Full-Service Store Operations & Checklist */}
+            <div className="relative my-auto py-2">
+              <span className="text-white/50 text-xs font-semibold uppercase tracking-wider block">
+                Full-Service Operations
+              </span>
+              <div className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight mt-1 mb-4">
+                24/7 Managed
+              </div>
+
+              {/* Operational Feature List */}
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-2.5 text-xs text-white/85">
+                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
+                  <span>Daily Inventory & Shipment Sync</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-white/85">
+                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
+                  <span>Active PPC Bid & Keyword Control</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-white/85">
+                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
+                  <span>Account Health & Buy-Box Defense</span>
+                </div>
+              </div>
+
+              {/* Status Badge */}
+              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span className="text-[11px] text-white/50 font-medium">Account Health Score</span>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Excellent (100%)
+                </span>
+              </div>
+            </div>
+
+            {/* Bottom Dedicated Manager Strip */}
+            <div className="w-full bg-black/60 border border-white/10 rounded-2xl p-2.5 pl-4 sm:pl-5 flex items-center justify-between shadow-inner">
+              <div>
+                <span className="font-instrument italic text-lg sm:text-xl font-bold text-white block leading-none">
+                  Dedicated Account Pod
+                </span>
+                <span className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">
+                  Direct 1-on-1 Support
+                </span>
+              </div>
+
+              <Link
+                href="/services"
+                className="bg-[#ff6b35] hover:bg-[#ff824d] text-black font-semibold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition-all shadow-[0_0_20px_rgba(255,107,53,0.35)] hover:scale-105"
+              >
+                Explore Services
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </Link>
+            </div>
           </motion.div>
 
-          {/* Bottom Right - Shield */}
-          <motion.div 
-            initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: false, amount: 0.5 }} transition={{ type: "spring", delay: 0.2 }}
-            className="absolute bottom-[10%] sm:bottom-[18%] right-[15%] sm:right-[28%] z-20 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-[#0a0400] border border-[#ff6b35]/50 shadow-[0_0_25px_rgba(255,107,53,0.3)]" 
-            style={{ clipPath: hexClipPath }}
-          >
-            <Shield className="text-[#ff6b35] w-6 h-6 sm:w-8 sm:h-8" />
-          </motion.div>
         </div>
 
-        {/* Responsive Cards Container for Mobile (stacked) & Desktop (absolute positioning) */}
-        <div className="w-full lg:contents flex flex-col md:flex-row gap-6 justify-center items-center z-30">
-          {/* Left Card: Bar Chart */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: false, margin: "50px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative lg:absolute lg:left-[2%] xl:left-[5%] lg:top-[50%] lg:-translate-y-1/2 bg-[#0c0400] border border-[#ff6b35]/30 p-5 sm:p-6 md:p-8 rounded-3xl w-full max-w-[340px] md:max-w-[350px] shadow-2xl"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h4 className="text-white/60 text-xs sm:text-sm md:text-base font-semibold uppercase tracking-wider mb-1">System Performance</h4>
-                <p className="text-white/50 text-xs md:text-sm mb-2">Uptime this month</p>
-                <p className="text-white text-2xl sm:text-3xl md:text-4xl font-bold">99.99% <span className="text-[#ff6b35] text-xs sm:text-base font-medium ml-1">+2.45%</span></p>
-              </div>
-              <TrendingUp className="text-[#ff6b35] w-6 h-6 md:w-8 md:h-8 mt-1 shrink-0" />
-            </div>
-            <div className="flex items-end justify-between h-20 sm:h-24 md:h-32 gap-2 md:gap-3 mt-6">
-               {[40, 70, 50, 90, 60, 80, 100].map((height, i) => (
-                 <motion.div 
-                   key={i}
-                   className="w-full bg-[#ff6b35] rounded-t-md opacity-90 hover:opacity-100 transition-opacity cursor-pointer"
-                   initial={{ height: 0 }}
-                   whileInView={{ height: `${height}%` }}
-                   viewport={{ once: false }}
-                   transition={{ duration: 0.6, delay: 0.2 + (i * 0.05), type: "spring", stiffness: 100 }}
-                 />
-               ))}
-            </div>
-            <div className="flex justify-between text-xs md:text-sm text-white/40 mt-4 font-medium px-1">
-              <span>May</span>
-              <span>Jun</span>
-              <span>Jul</span>
-              <span>Aug</span>
-              <span>Sep</span>
-              <span>Oct</span>
-            </div>
-          </motion.div>
+        {/* Bottom Services Strip with Real Lucide React Icons (No Emojis) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="w-full pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 sm:gap-4"
+        >
+          <span className="text-white/40 text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#ff6b35]" /> Core Scaling Solutions:
+          </span>
 
-          {/* Right Card: Line Chart */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: false, margin: "50px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative lg:absolute lg:right-[2%] xl:right-[5%] lg:top-[50%] lg:-translate-y-1/2 bg-[#0c0400] border border-[#ff6b35]/30 p-5 sm:p-6 md:p-8 rounded-3xl w-full max-w-[340px] md:max-w-[350px] shadow-2xl"
-          >
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h4 className="text-white/60 text-xs sm:text-sm md:text-base font-semibold uppercase tracking-wider mb-1">Active Users</h4>
-                <p className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mt-2">24,780 <span className="text-[#ff6b35] text-xs sm:text-base font-medium ml-1">+12.5%</span></p>
-              </div>
-              <TrendingUp className="text-[#ff6b35] w-6 h-6 md:w-8 md:h-8 mt-1 shrink-0" />
-            </div>
-            <div className="relative h-20 sm:h-24 md:h-32 mt-6 w-full">
-              <svg className="w-full h-full overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
-                <motion.path
-                  d="M 0 35 L 15 25 L 30 30 L 45 15 L 60 20 L 75 10 L 90 15 L 100 0"
-                  fill="none"
-                  stroke="#ff6b35"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: false }}
-                  transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
-                />
-                {[
-                  { cx: 15, cy: 25 },
-                  { cx: 30, cy: 30 },
-                  { cx: 45, cy: 15 },
-                  { cx: 60, cy: 20 },
-                  { cx: 75, cy: 10 },
-                  { cx: 90, cy: 15 },
-                  { cx: 100, cy: 0 }
-                ].map((point, i) => (
-                  <motion.circle 
-                    key={i} 
-                    cx={point.cx} cy={point.cy} r={i === 6 ? "3" : "2.5"} 
-                    fill={i === 6 ? "#fff" : "#ff6b35"} 
-                    initial={{ scale: 0 }} 
-                    whileInView={{ scale: 1 }} 
-                    viewport={{ once: false }}
-                    transition={{ delay: 0.4 + (i * 0.1) }} 
-                  />
-                ))}
-              </svg>
-            </div>
-            <div className="flex justify-between text-xs md:text-sm text-white/40 mt-4 font-medium">
-               <span>May</span>
-               <span>Jun</span>
-               <span>Jul</span>
-               <span>Aug</span>
-               <span>Sep</span>
-               <span>Oct</span>
-            </div>
-          </motion.div>
-        </div>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {servicePills.map((pill) => {
+              const IconComponent = pill.icon;
+              return (
+                <Link
+                  key={pill.slug}
+                  href={`/services/${pill.slug}`}
+                  className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/5 hover:bg-[#ff6b35]/15 border border-white/10 hover:border-[#ff6b35]/40 text-white/80 hover:text-white text-xs font-medium transition-all duration-200"
+                >
+                  <IconComponent className="w-3.5 h-3.5 text-[#ff6b35]" />
+                  <span>{pill.name}</span>
+                  <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#ff6b35] transition-colors" />
+                </Link>
+              );
+            })}
+          </div>
+        </motion.div>
 
       </div>
     </section>

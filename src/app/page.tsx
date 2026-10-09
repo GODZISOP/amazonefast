@@ -65,7 +65,7 @@ export default function Home() {
         email: contactData.email,
         message: contactData.subject ? `Subject: ${contactData.subject}\n\n${contactData.message}` : contactData.message
       };
-      
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ export default function Home() {
       setContactStatus('success');
       setContactData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setContactStatus('idle'), 3000);
-    } catch(err) {
+    } catch (err) {
       setContactStatus('error');
       setTimeout(() => setContactStatus('idle'), 3000);
     }
@@ -549,9 +549,9 @@ export default function Home() {
             ></motion.div>
 
             {[
-              { img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80", text: "Brand owners who want to scale without complex logistics.", active: false, name: "David M.", role: "Brand Owner" },
-              { img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, name: "Sarah J.", role: "Established Seller" },
-              { img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, name: "Michael C.", role: "eCommerce Director" }
+              { img: "/desi-man-1.png", text: "Brand owners who want to scale without complex logistics.", active: false, name: "David M.", role: "Brand Owner" },
+              { img: "/desi-woman.png", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, name: "Sarah J.", role: "Established Seller" },
+              { img: "/desi-man-2.png", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, name: "Michael C.", role: "eCommerce Director" }
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -578,14 +578,14 @@ export default function Home() {
                 {/* Quote Icon Background */}
                 <div className={`absolute top-6 left-6 opacity-20 ${item.active ? 'text-white' : 'text-[#ff6b35]'}`}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M14.017 21L16.44 14.282C16.666 13.567 16.515 12.784 16.035 12.193C15.556 11.603 14.814 11.282 14.017 11.282H10.741L11.531 8.525C11.678 8.01 12.138 7.641 12.671 7.641H16.017V3.535H12.671C10.518 3.535 8.653 5.03 8.058 7.108L4.629 19.066C4.422 19.789 4.962 20.535 5.723 20.535H14.017V21ZM22.585 21L25.008 14.282C25.234 13.567 25.083 12.784 24.603 12.193C24.124 11.603 23.382 11.282 22.585 11.282H19.309L20.099 8.525C20.246 8.01 20.706 7.641 21.239 7.641H24.585V3.535H21.239C19.086 3.535 17.221 5.03 16.626 7.108L13.197 19.066C12.99 19.789 13.53 20.535 14.291 20.535H22.585V21Z" transform="scale(0.8) translate(-2, 0)"/>
+                    <path d="M14.017 21L16.44 14.282C16.666 13.567 16.515 12.784 16.035 12.193C15.556 11.603 14.814 11.282 14.017 11.282H10.741L11.531 8.525C11.678 8.01 12.138 7.641 12.671 7.641H16.017V3.535H12.671C10.518 3.535 8.653 5.03 8.058 7.108L4.629 19.066C4.422 19.789 4.962 20.535 5.723 20.535H14.017V21ZM22.585 21L25.008 14.282C25.234 13.567 25.083 12.784 24.603 12.193C24.124 11.603 23.382 11.282 22.585 11.282H19.309L20.099 8.525C20.246 8.01 20.706 7.641 21.239 7.641H24.585V3.535H21.239C19.086 3.535 17.221 5.03 16.626 7.108L13.197 19.066C12.99 19.789 13.53 20.535 14.291 20.535H22.585V21Z" transform="scale(0.8) translate(-2, 0)" />
                   </svg>
                 </div>
 
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 border-4 border-black/20 relative z-10 shadow-lg">
                   <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 </div>
-                
+
                 {/* 5 Stars */}
                 <div className="flex gap-1 mb-4 relative z-10">
                   {[...Array(5)].map((_, i) => (
@@ -722,7 +722,7 @@ export default function Home() {
               {/* Secure Payment Gateways Tag */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-xs font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(0,255,136,0.1)]">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 Secure Payment Gateways
               </div>
@@ -803,44 +803,44 @@ export default function Home() {
               <h3 className="text-2xl font-semibold text-white mb-8">Chat With Our Strategists</h3>
               <form onSubmit={handleContactSubmit} className="flex flex-col gap-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     required
                     value={contactData.name}
-                    onChange={(e) => setContactData({...contactData, name: e.target.value})}
-                    placeholder="Your name" 
-                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                    onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
+                    placeholder="Your name"
+                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
                   />
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     required
                     value={contactData.email}
-                    onChange={(e) => setContactData({...contactData, email: e.target.value})}
-                    placeholder="Your email" 
-                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                    onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
+                    placeholder="Your email"
+                    className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
                   />
                 </div>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={contactData.subject}
-                  onChange={(e) => setContactData({...contactData, subject: e.target.value})}
-                  placeholder="Subject" 
-                  className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition" 
+                  onChange={(e) => setContactData({ ...contactData, subject: e.target.value })}
+                  placeholder="Subject"
+                  className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
                 />
-                <textarea 
+                <textarea
                   required
                   value={contactData.message}
-                  onChange={(e) => setContactData({...contactData, message: e.target.value})}
-                  placeholder="Your message" 
-                  rows={4} 
+                  onChange={(e) => setContactData({ ...contactData, message: e.target.value })}
+                  placeholder="Your message"
+                  rows={4}
                   className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition resize-none"
                 ></textarea>
-                
+
                 {contactStatus === 'success' && <p className="text-green-500 text-sm font-bold bg-green-500/10 p-3 rounded-lg border border-green-500/20">Message sent successfully!</p>}
                 {contactStatus === 'error' && <p className="text-red-500 text-sm font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">Failed to send message. Please try again.</p>}
-                
-                <button 
-                  type="submit" 
+
+                <button
+                  type="submit"
                   disabled={contactStatus === 'loading'}
                   className="mt-4 w-full bg-[#ff6b35] hover:bg-[#e85c2b] disabled:bg-[#ff6b35]/50 text-white font-semibold py-4 rounded-2xl transition flex justify-center items-center gap-2 disabled:cursor-not-allowed"
                 >
