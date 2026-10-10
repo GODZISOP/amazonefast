@@ -447,6 +447,7 @@ export const serviceDetails = {
     "image": "/srv_amazon_creation.png",
     "benefits": [
       "Guaranteed Approval Process",
+      "CNIC/Passport (PK), Aadhaar (IN), National ID (Other)",
       "Utility Bill & Identity Verification",
       "Tax Interview Completion (W8/W9)",
       "Bank Account Linking",
@@ -472,7 +473,7 @@ export const serviceDetails = {
     "steps": [
       {
         "title": "Document Collection",
-        "desc": "We gather and verify your LLC, ID, and utility bills."
+        "desc": "We gather and verify your ID (CNIC/Passport for Pakistan, Aadhaar for India, National ID for other countries), LLC, and utility bills."
       },
       {
         "title": "Application Submission",

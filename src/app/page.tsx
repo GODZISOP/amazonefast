@@ -439,7 +439,7 @@ export default function Home() {
               { 
                 title: "Amazon Account Creation", 
                 slug: "amazon-account-creation", 
-                desc: "Professional setup & identity verification for non-resident sellers with utility bill matching and zero rejection rate." 
+                desc: "Professional setup & identity verification (CNIC/Passport for Pakistan, Aadhaar Card for India, National ID for other countries) with utility bill matching and zero rejection rate." 
               },
               { 
                 title: "Amazon PPC Advertising", 

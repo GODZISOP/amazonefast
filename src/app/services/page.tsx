@@ -47,7 +47,7 @@ export const servicesData: ServiceItem[] = [
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Avoid instant Section 3 suspension. Guaranteed non-resident Seller Central registration with complete document pre-audit, utility bill match, and tax clearance.",
     icon: UserPlus,
-    highlights: ["Safe non-resident registration (10+ countries)", "Utility bill & bank statement pre-audit", "Zero initial rejection guarantee"]
+    highlights: ["CNIC/Passport (PK), Aadhaar (IN), National ID (Global)", "Utility bill & bank statement pre-audit", "Zero initial rejection guarantee"]
   },
 
   // 2. Amazon PPC Advertising

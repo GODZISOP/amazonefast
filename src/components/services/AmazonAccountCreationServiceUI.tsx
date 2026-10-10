@@ -45,9 +45,9 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
     {
       num: "03",
       icon: ShieldCheck,
-      title: "CNIC / Smart National Card / Passport",
+      title: "Government Identity Proof",
       badge: "Identity Verification",
-      desc: "High-resolution color scan of your valid Government National ID (CNIC/Smart ID) or Passport with at least 6 months validity. All four corners must be clearly visible with zero glare."
+      desc: "• Pakistan: CNIC (Smart ID) or Passport\n• India: Aadhaar Card or Passport\n• Other Countries: National Identity Card or Passport\n(High-resolution color scan with all 4 corners visible and min. 6 months validity)."
     },
     {
       num: "04",
@@ -66,23 +66,22 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
   ];
 
   const supportedCountries = [
-    { name: "United States (USA)", flag: "🇺🇸", marketplace: "Amazon.com (North America)", popular: true },
-    { name: "United Kingdom (UK)", flag: "🇬🇧", marketplace: "Amazon.co.uk (Europe)", popular: true },
-    { name: "Canada", flag: "🇨🇦", marketplace: "Amazon.ca (North America)", popular: true },
-    { name: "Dubai / UAE", flag: "🇦🇪", marketplace: "Amazon.ae (Middle East)", popular: true },
-    { name: "Saudi Arabia (KSA)", flag: "🇸🇦", marketplace: "Amazon.sa (Middle East)", popular: true },
-    { name: "Qatar", flag: "🇶🇦", marketplace: "Amazon Gulf Network", popular: false },
-    { name: "Oman", flag: "🇴🇲", marketplace: "Amazon Middle East Regional", popular: false },
-    { name: "Pakistan", flag: "🇵🇰", marketplace: "Global Selling Approved Country", popular: true },
-    { name: "India", flag: "🇮🇳", marketplace: "Amazon.in & Global Export", popular: true },
-    { name: "Worldwide (10+ Countries)", flag: "🌍", marketplace: "Europe, Australia, Asia & Global", popular: false }
+    { name: "Pakistan", flag: "🇵🇰", marketplace: "CNIC / Smart Card & Passport", popular: true },
+    { name: "India", flag: "🇮🇳", marketplace: "Aadhaar Card & Passport", popular: true },
+    { name: "Other Countries", flag: "🌍", marketplace: "National Identity Card / Passport", popular: true },
+    { name: "United States (USA)", flag: "🇺🇸", marketplace: "State ID / Driver's License / Passport", popular: true },
+    { name: "United Kingdom (UK)", flag: "🇬🇧", marketplace: "National ID / Passport", popular: true },
+    { name: "Dubai / UAE", flag: "🇦🇪", marketplace: "Emirates ID / Passport", popular: true },
+    { name: "Saudi Arabia (KSA)", flag: "🇸🇦", marketplace: "Iqama / National ID / Passport", popular: true },
+    { name: "Canada", flag: "🇨🇦", marketplace: "Amazon.ca (North America)", popular: false },
+    { name: "Qatar & Oman", flag: "🇶🇦", marketplace: "Amazon Gulf Network", popular: false }
   ];
 
   const processSteps = [
     {
       step: "01",
       title: "Document Pre-Audit & Vetting",
-      desc: "Our legal and account specialists inspect your ID, bank statement, and utility bill to ensure 100% character-by-character address and name matching before submission."
+      desc: "Our legal and account specialists inspect your ID (CNIC/Aadhaar/National ID), bank statement, and utility bill to ensure 100% character-by-character address and name matching before submission."
     },
     {
       step: "02",
@@ -107,8 +106,8 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
       a: "Most accounts are flagged under Section 3 due to minor discrepancies between the name and address on the bank statement, utility bill, and government ID, or using a previously compromised IP or card. We perform a pre-submission audit to guarantee zero mismatches."
     },
     {
-      q: "Can I open an Amazon US/UK account from Pakistan, India, or Gulf countries?",
-      a: "Yes! Pakistan, India, UAE, and Saudi Arabia are on Amazon's official list of approved countries for registration. You can register using your local passport or national ID card along with a compliant bank account."
+      q: "Can I open an Amazon US/UK account from Pakistan, India, or other countries?",
+      a: "Yes! Pakistan, India, UAE, Saudi Arabia, and other countries are fully approved by Amazon. For Pakistan: CNIC (Smart ID) or Passport. For India: Aadhaar Card or Passport. For other countries: Official National Identity Card or Passport. We pre-vet all documents with bank statements to ensure 100% approval."
     },
     {
       q: "What if the utility bill is not under my name?",
@@ -216,7 +215,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
                       {doc.title}
                     </h3>
 
-                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-4">
+                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-4 whitespace-pre-line">
                       {doc.desc}
                     </p>
                   </div>
