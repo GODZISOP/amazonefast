@@ -47,6 +47,34 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
     setUpdating(false);
   };
 
+  const handleDeleteClient = async (clientId: string, clientName: string) => {
+    const isConfirmed = window.confirm(`Are you sure you want to completely delete ${clientName || 'this client'} and all their documents? This cannot be undone.`);
+    if (!isConfirmed) return;
+    
+    setUpdating(true);
+    try {
+      const res = await fetch('/api/delete-client', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId })
+      });
+      if (!res.ok) {
+        alert("Failed to delete client! Server error or missing keys.");
+        setUpdating(false);
+        return;
+      }
+      setClients(prev => prev.filter(c => c.id !== clientId));
+      if (selectedClient?.id === clientId) {
+        setSelectedClient(null);
+      }
+    } catch (e) {
+      console.error(e);
+      alert("An error occurred while deleting the client.");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   // Auto-refresh the table every 5 seconds securely via API
   useEffect(() => {
     const fetchLatestData = async () => {
@@ -280,12 +308,21 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                       </div>
                     </td>
                     <td className="py-3 px-4 md:px-6 text-right">
-                      <button 
-                        onClick={() => setSelectedClient(client)}
-                        className="text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition border border-transparent whitespace-nowrap"
-                      >
-                        Review
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        <button 
+                          onClick={() => setSelectedClient(client)}
+                          className="text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition border border-transparent whitespace-nowrap"
+                        >
+                          Review
+                        </button>
+                        <button 
+                          onClick={() => handleDeleteClient(client.id, client.full_name)}
+                          disabled={updating}
+                          className="text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition border border-transparent whitespace-nowrap disabled:opacity-50"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
