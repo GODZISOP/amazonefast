@@ -40,7 +40,7 @@ export default function AnimatedGraphSection() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-4xl mb-14 sm:mb-20"
         >
@@ -65,7 +65,7 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] rounded-[2.2rem] overflow-hidden border border-white/10 shadow-2xl flex flex-col justify-end p-4 sm:p-5"
           >
@@ -103,7 +103,7 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all"
           >
@@ -160,7 +160,7 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all overflow-hidden"
           >
@@ -241,7 +241,7 @@ export default function AnimatedGraphSection() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="w-full pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 sm:gap-4"
         >

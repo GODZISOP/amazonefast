@@ -2,22 +2,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search } from "lucide-react";
+import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search, Store, FileText } from "lucide-react";
 import CardStack from "@/components/CardStack";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { RealEarth } from "../components/RealEarth";
+import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end center"]
-  });
-  const rawLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const lineHeight = useSpring(rawLineHeight, { stiffness: 60, damping: 20 });
 
   const { scrollYProgress: section2ScrollY } = useScroll({
     target: sectionRef,
@@ -27,25 +19,10 @@ export default function Home() {
   const sec2TextY = useTransform(section2ScrollY, [0.1, 0.4], [60, 0]);
   const sec2Opacity = useTransform(section2ScrollY, [0.1, 0.35], [0, 1]);
 
-  // Mouse Parallax Logic
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    const x = (clientX / innerWidth - 0.5) * 2;
-    const y = (clientY / innerHeight - 0.5) * 2;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const rotateX = useTransform(mouseY, [-1, 1], [15, -15]);
-  const rotateY = useTransform(mouseX, [-1, 1], [-15, 15]);
-
-  const springConfig = { damping: 30, stiffness: 100, mass: 1 };
-  const smoothRotateX = useSpring(rotateX, springConfig);
-  const smoothRotateY = useSpring(rotateY, springConfig);
+  const { scrollYProgress: timelineProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
 
   // Generate 40 random moving stars (White and Orange)
   const [stars, setStars] = useState<any[]>([]);
@@ -110,7 +87,6 @@ export default function Home() {
       {/* Hero Section Container */}
       <section
         className="relative w-full min-h-[100vh] flex flex-col overflow-hidden bg-black perspective-[1000px]"
-        onMouseMove={handleMouseMove}
       >
 
         {/* Starry Space Background */}
@@ -352,7 +328,7 @@ export default function Home() {
               <motion.h2
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, margin: "0px 0px -100px 0px" }}
+                viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
                 className="text-4xl sm:text-6xl lg:text-[4.8rem] font-bold leading-[1.05] tracking-[-0.04em] flex flex-wrap gap-x-3 gap-y-2 text-white"
               >
@@ -372,7 +348,7 @@ export default function Home() {
               <motion.p
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, margin: "0px 0px -50px 0px" }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.04, delayChildren: 0.2 } } }}
                 className="text-lg sm:text-2xl lg:text-[1.45rem] leading-relaxed font-medium flex flex-wrap gap-x-2 gap-y-1 text-white/90"
               >
@@ -420,18 +396,32 @@ export default function Home() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, margin: "0px 0px -100px 0px" }}
+              viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
             >
               <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-bold tracking-tight mb-6 leading-[1.1] flex flex-wrap">
                 {["Scale", "Your"].map((word, i) => (
-                  <motion.span key={`h1-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 0.5 } } }} className="mr-4">
+                  <motion.span
+                    key={`h1-${i}`}
+                    variants={{
+                      hidden: { color: "rgba(255, 255, 255, 0.2)" },
+                      visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 0.5 } }
+                    }}
+                    className="mr-4"
+                  >
                     {word}
                   </motion.span>
                 ))}
                 <div className="w-full h-0"></div>
                 {["Amazon", "Empire"].map((word, i) => (
-                  <motion.span key={`h2-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 1)", transition: { duration: 0.5 } } }} className="mr-4">
+                  <motion.span
+                    key={`h2-${i}`}
+                    variants={{
+                      hidden: { color: "rgba(255, 255, 255, 0.2)" },
+                      visible: { color: "#ff6b35", transition: { duration: 0.5 } }
+                    }}
+                    className="mr-4"
+                  >
                     {word}
                   </motion.span>
                 ))}
@@ -439,7 +429,14 @@ export default function Home() {
 
               <p className="text-lg md:text-xl max-w-2xl leading-relaxed flex flex-wrap">
                 {"Partner with AmazonFast for end-to-end store automation, performance PPC management, and turnkey US legal corporate formation tailored for global entrepreneurs.".split(" ").map((word, i) => (
-                  <motion.span key={`p-${i}`} variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(255, 255, 255, 0.6)", transition: { duration: 0.5 } } }} className="mr-1.5">
+                  <motion.span
+                    key={`p-${i}`}
+                    variants={{
+                      hidden: { color: "rgba(255, 255, 255, 0.2)" },
+                      visible: { color: "rgba(255, 255, 255, 0.7)", transition: { duration: 0.5 } }
+                    }}
+                    className="mr-1.5"
+                  >
                     {word}
                   </motion.span>
                 ))}
@@ -449,12 +446,12 @@ export default function Home() {
 
           <div ref={timelineRef} className="relative max-w-4xl mx-auto mt-16 md:mt-24 pl-2 sm:pl-0">
             {/* Static dim background line */}
-            <div className="absolute left-[30px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/10"></div>
+            <div className="absolute left-[30px] top-0 bottom-0 w-[2px] bg-[#ff6b35]/15"></div>
 
-            {/* Scroll-driven glowing orange line */}
+            {/* Scroll-driven glowing orange line (GPU accelerated scaleY, zero reflow!) */}
             <motion.div
-              style={{ height: lineHeight }}
-              className="absolute left-[30px] top-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top"
+              style={{ scaleY: timelineProgress, transformOrigin: "top" }}
+              className="absolute left-[30px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#ff6b35] via-[#ff6b35] to-transparent origin-top z-0"
             ></motion.div>
 
             {[
@@ -463,36 +460,6 @@ export default function Home() {
                 slug: "amazon-account-creation", 
                 icon: UserPlus,
                 desc: "Professional setup & identity verification (CNIC/Passport for Pakistan, Aadhaar Card for India, National ID for other countries) with utility bill matching and zero rejection rate." 
-              },
-              { 
-                title: "Bank Account Creation", 
-                slug: "payoneer-wallet", 
-                icon: Landmark,
-                desc: "Professional payment and bank account setup (Payoneer, Wise, Airwallex, Stripe & Physical Banks) to receive Amazon payouts securely." 
-              },
-              { 
-                title: "US LLC Formation", 
-                slug: "llc-formation", 
-                icon: Building2,
-                desc: "Complete US corporate structure for non-residents in Wyoming, Florida & Texas. State filing, Registered Agent, US physical address, and EIN." 
-              },
-              { 
-                title: "Complete Wholesale & PL", 
-                slug: "amazon-wholesale-fba", 
-                icon: Boxes,
-                desc: "Full FBA store management: direct brand purchasing, supplier sourcing, shipment plans, prep center labels, and daily BuyBox store operations." 
-              },
-              { 
-                title: "Brand Approvals & Ungating", 
-                slug: "brand-approvals", 
-                icon: ShieldCheck,
-                desc: "Official brand ungating and approvals with Letter of Authorization (LOA), authentic invoices, and full Seller Central category approval." 
-              },
-              { 
-                title: "Trademark & Brand Registry", 
-                slug: "trademark-brand-registry", 
-                icon: Award,
-                desc: "USPTO trademark filing with serial number in 2 to 3 days to unlock Amazon Brand Registry, A+ Content, and anti-counterfeit protection." 
               },
               { 
                 title: "Amazon PPC Advertising", 
@@ -505,33 +472,66 @@ export default function Home() {
                 slug: "product-hunting", 
                 icon: Search,
                 desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." 
+              },
+              { 
+                title: "Amazon Store Creation", 
+                slug: "store-creation", 
+                icon: Store,
+                desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." 
+              },
+              { 
+                title: "A+ Content & EBC", 
+                slug: "a-content-ebc", 
+                icon: Sparkles,
+                desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." 
+              },
+              { 
+                title: "Listing SEO & Optimization", 
+                slug: "listing-seo", 
+                icon: FileText,
+                desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." 
+              },
+              { 
+                title: "Bank Account Creation", 
+                slug: "payoneer-wallet", 
+                icon: Landmark,
+                desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." 
               }
             ].map((service, idx) => (
               <motion.div
                 key={idx}
                 initial="dim"
                 whileInView="glowing"
-                viewport={{ margin: "-40% 0px -40% 0px" }}
+                viewport={{ margin: "-25% 0px -25% 0px", amount: 0.2 }}
                 variants={{
-                  dim: { opacity: 0.5, scale: 0.98 },
-                  glowing: { opacity: 1, scale: 1.03, transition: { duration: 0.4, ease: "easeOut" } }
+                  dim: { opacity: 0.55, scale: 0.98 },
+                  glowing: { opacity: 1, scale: 1.02, transition: { duration: 0.35, ease: "easeOut" } }
                 }}
                 className="relative flex items-center gap-4 sm:gap-8 mb-10 last:mb-0 cursor-pointer group"
               >
                 {/* Number Circle with Glow */}
                 <motion.div
                   variants={{
-                    dim: { borderColor: "rgba(255,107,53,0.2)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
-                    glowing: { borderColor: "rgba(255,107,53,1)", boxShadow: "0 0 25px rgba(255,107,53,0.6)" }
+                    dim: { borderColor: "rgba(255,107,53,0.2)" },
+                    glowing: { borderColor: "rgba(255,107,53,1)", transition: { duration: 0.3 } }
                   }}
                   className="relative z-10 shrink-0 w-[60px] h-[60px] rounded-full bg-[#0a0a0a] border-[3px] flex items-center justify-center transition-colors duration-300"
                 >
+                  {/* High performance glow halo via opacity */}
+                  <motion.div
+                    variants={{
+                      dim: { opacity: 0 },
+                      glowing: { opacity: 1, transition: { duration: 0.3 } }
+                    }}
+                    className="absolute inset-0 rounded-full bg-[#ff6b35]/30 blur-md pointer-events-none"
+                  ></motion.div>
+
                   <motion.span
                     variants={{
                       dim: { color: "rgba(255,255,255,0.5)" },
-                      glowing: { color: "rgba(255,107,53,1)" }
+                      glowing: { color: "rgba(255,107,53,1)", transition: { duration: 0.3 } }
                     }}
-                    className="font-bold text-xl tracking-wide"
+                    className="font-bold text-xl tracking-wide relative z-10"
                   >
                     {String(idx + 1).padStart(2, '0')}
                   </motion.span>
@@ -541,53 +541,73 @@ export default function Home() {
                 <motion.div
                   variants={{
                     dim: { scaleX: 0, opacity: 0 },
-                    glowing: { scaleX: 1, opacity: 1 }
+                    glowing: { scaleX: 1, opacity: 1, transition: { duration: 0.35 } }
                   }}
                   style={{ transformOrigin: "left" }}
-                  className="hidden sm:block absolute left-[60px] w-8 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent"
+                  className="hidden sm:block absolute left-[60px] w-8 h-[2px] bg-gradient-to-r from-[#ff6b35] to-transparent z-10 pointer-events-none"
                 ></motion.div>
 
                 {/* Content Box */}
                 <motion.div
                   variants={{
-                    dim: { borderColor: "rgba(255,255,255,0.05)", boxShadow: "0 0 0px rgba(255,107,53,0)" },
-                    glowing: { borderColor: "rgba(255,107,53,0.6)", boxShadow: "0 0 40px rgba(255,107,53,0.15)" }
+                    dim: { borderColor: "rgba(255,255,255,0.06)" },
+                    glowing: { borderColor: "rgba(255,107,53,0.6)", transition: { duration: 0.35 } }
                   }}
-                  className="flex-1 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border-[1px] p-6 rounded-3xl relative overflow-hidden"
+                  className="flex-1 bg-gradient-to-br from-[#121212] via-[#0e0e0e] to-[#080808] border-[1px] p-6 rounded-3xl relative overflow-hidden transition-colors duration-300"
                 >
-                  {/* Subtle corner decorations like in the image */}
+                  {/* GPU-accelerated box ambient glow via opacity */}
                   <motion.div
-                    variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
+                    variants={{
+                      dim: { opacity: 0 },
+                      glowing: { opacity: 1, transition: { duration: 0.4 } }
+                    }}
+                    className="absolute inset-0 rounded-3xl bg-[#ff6b35]/[0.08] blur-xl pointer-events-none"
+                  ></motion.div>
+
+                  {/* Corner decorations */}
+                  <motion.div
+                    variants={{
+                      dim: { borderColor: "rgba(255,255,255,0.1)" },
+                      glowing: { borderColor: "rgba(255,107,53,1)", transition: { duration: 0.3 } }
+                    }}
                     className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 transition-colors duration-300"
                   ></motion.div>
                   <motion.div
-                    variants={{ dim: { borderColor: "rgba(255,255,255,0.1)" }, glowing: { borderColor: "rgba(255,107,53,1)" } }}
+                    variants={{
+                      dim: { borderColor: "rgba(255,255,255,0.1)" },
+                      glowing: { borderColor: "rgba(255,107,53,1)", transition: { duration: 0.3 } }
+                    }}
                     className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 transition-colors duration-300"
                   ></motion.div>
 
-                  {/* Orange ambient glow inside box when active */}
+                  {/* Orange ambient flare */}
                   <motion.div
-                    variants={{ dim: { opacity: 0 }, glowing: { opacity: 1 } }}
-                    className="absolute -right-20 -bottom-20 w-40 h-40 bg-[#ff6b35]/20 blur-[50px] rounded-full pointer-events-none"
+                    variants={{ dim: { opacity: 0 }, glowing: { opacity: 1, transition: { duration: 0.4 } } }}
+                    className="absolute -right-20 -bottom-20 w-44 h-44 bg-[#ff6b35]/25 blur-[50px] rounded-full pointer-events-none"
                   ></motion.div>
 
                   <div className="flex items-center gap-3 mb-2 relative z-10">
-                    {React.createElement(service.icon, { className: "text-[#ff6b35]", size: 22 })}
+                    <div className="w-8 h-8 rounded-lg bg-[#ff6b35]/10 border border-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0">
+                      <service.icon size={18} />
+                    </div>
                     <motion.h3
-                      variants={{ dim: { color: "#ffffff" }, glowing: { color: "#ff6b35" } }}
+                      variants={{
+                        dim: { color: "#ffffff" },
+                        glowing: { color: "#ff6b35", transition: { duration: 0.3 } }
+                      }}
                       className="text-xl sm:text-2xl font-bold uppercase tracking-wide transition-colors duration-300"
                     >
                       {service.title}
                     </motion.h3>
                   </div>
                   
-                  <p className="text-white/50 text-base leading-relaxed relative z-10 pl-8 mb-4">{service.desc}</p>
+                  <p className="text-white/60 text-base leading-relaxed relative z-10 pl-11 mb-4">{service.desc}</p>
                   
-                  {/* Details Page Button for Every Service Card */}
-                  <div className="relative z-10 pl-8 flex items-center justify-between pt-3 border-t border-white/5">
+                  {/* Details Page Button */}
+                  <div className="relative z-10 pl-11 flex items-center justify-between pt-3 border-t border-white/5">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 hover:bg-[#ff6b35] text-[#ff6b35] hover:text-black border border-[#ff6b35]/30 text-xs font-bold transition-all duration-200 group-hover:scale-105"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 hover:bg-[#ff6b35] text-[#ff6b35] hover:text-black border border-[#ff6b35]/30 hover:border-[#ff6b35] text-xs font-bold transition-all duration-200 group-hover:scale-105"
                     >
                       <span>View Details</span>
                       <ArrowUpRight size={14} className="stroke-[2.5]" />
@@ -600,15 +620,15 @@ export default function Home() {
 
           {/* View All Services Button */}
           <motion.div 
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="mt-16 flex justify-center relative z-20"
           >
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105 active:scale-95"
             >
               <span>View All Services & Pricing</span>
               <ArrowUpRight size={18} className="stroke-[2.5]" />
@@ -625,7 +645,7 @@ export default function Home() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-50px", amount: 0.1 }}
+            viewport={{ once: true, margin: "-50px", amount: 0.1 }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2 } } }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32 relative"
           >
@@ -650,7 +670,7 @@ export default function Home() {
                   delay: item.active ? 0 : 0.2,
                   ease: "easeOut"
                 }}
-                viewport={{ once: false, margin: '-20px' }}
+                viewport={{ once: true, margin: '-20px' }}
                 className={`relative z-10 rounded-[2rem] overflow-hidden group ${item.active ? 'bg-[#ff6b35]' : 'bg-[#0a0a0a] border border-white/[0.05]'} p-8 flex flex-col items-center text-center transition-transform duration-500 hover:-translate-y-2 shadow-2xl`}
               >
                 {/* Sliding shine for active card */}
@@ -701,7 +721,7 @@ export default function Home() {
             <motion.div 
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="w-full lg:w-1/2"
           >
@@ -729,7 +749,7 @@ export default function Home() {
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500"
               >
@@ -752,7 +772,7 @@ export default function Home() {
                   opacity: 1,
                   boxShadow: ["0px 0px 0px rgba(255,107,53,0)", "0px 30px 100px rgba(255,107,53,0.4)", "0px 10px 40px rgba(255,107,53,0.1)"]
                 }}
-                viewport={{ once: false, margin: "50px" }}
+                viewport={{ once: true, margin: "50px" }}
                 transition={{
                   duration: 0.7,
                   ease: "easeOut",
@@ -775,7 +795,7 @@ export default function Home() {
                       key={i}
                       initial={{ height: 0 }}
                       whileInView={{ height: `${h}%` }}
-                      viewport={{ once: false, margin: "50px" }}
+                      viewport={{ once: true, margin: "50px" }}
                       transition={{ duration: 0.6, delay: 0.1 + (i * 0.05), ease: [0.22, 1, 0.36, 1] }}
                       className="w-full bg-gradient-to-t from-[#ff6b35]/20 to-[#ff6b35] rounded-t-md relative group cursor-pointer"
                     >
@@ -790,7 +810,7 @@ export default function Home() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.5, y: 20 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
                   className="absolute top-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl text-white text-sm font-semibold flex items-center gap-2 shadow-xl"
                 >
@@ -815,7 +835,7 @@ export default function Home() {
             <motion.div
               initial={{ x: 120, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="w-full lg:w-1/2 lg:pl-8"
             >
@@ -899,7 +919,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full lg:w-1/2"
           >

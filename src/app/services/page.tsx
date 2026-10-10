@@ -3,18 +3,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { 
-  ArrowUpRight, 
-  Sparkles, 
-  TrendingUp, 
-  Search, 
-  ShoppingBag, 
-  PenTool, 
-  UserPlus, 
-  Building2, 
-  ShieldCheck, 
-  Globe2, 
-  Landmark, 
+import {
+  ArrowUpRight,
+  Sparkles,
+  TrendingUp,
+  Search,
+  ShoppingBag,
+  PenTool,
+  UserPlus,
+  Building2,
+  ShieldCheck,
+  Globe2,
+  Landmark,
   Check,
   ArrowRight,
   Award,
@@ -182,20 +182,20 @@ const cardVariants = {
 export default function ServicesPage() {
   const [activeTab, setActiveTab] = useState<"all" | "amazon" | "llc" | "banking">("all");
 
-  const filteredServices = activeTab === "all" 
-    ? servicesData 
+  const filteredServices = activeTab === "all"
+    ? servicesData
     : servicesData.filter(s => s.category === activeTab);
 
   const whatsappMessage = "Hi AmazonFast, I would like to consult about your services and pricing.";
 
   return (
     <div className="relative font-sans bg-[#080503] text-white pt-32 pb-24 min-h-screen overflow-hidden selection:bg-[#ff6b35]/30">
-      
+
       {/* Background ambient glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#ff6b35]/15 via-[#f97316]/5 to-transparent blur-[160px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10">
-        
+
         {/* Breadcrumb */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -219,7 +219,7 @@ export default function ServicesPage() {
             <Sparkles className="w-4 h-4" />
             <span>Full-Spectrum E-Commerce & Corporate Solutions</span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -260,11 +260,10 @@ export default function ServicesPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                  isActive 
-                    ? "bg-[#ff6b35] text-black shadow-[0_0_20px_rgba(255,107,53,0.35)] scale-105" 
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${isActive
+                    ? "bg-[#ff6b35] text-black shadow-[0_0_20px_rgba(255,107,53,0.35)] scale-105"
                     : "bg-[#120703]/80 text-white/70 hover:text-white border border-white/10 hover:border-white/20"
-                }`}
+                  }`}
               >
                 <span>{tab.label}</span>
                 <span className={`text-[11px] px-2 py-0.5 rounded-full ${isActive ? "bg-black/20 text-black font-bold" : "bg-white/10 text-white/50"}`}>
@@ -305,11 +304,11 @@ export default function ServicesPage() {
                   <div className="mb-5 bg-[#ff6b35]/10 w-14 h-14 flex items-center justify-center rounded-2xl border border-[#ff6b35]/20 group-hover:border-[#ff6b35]/50 group-hover:scale-110 transition-all duration-300">
                     <IconComponent className="text-[#ff6b35] w-7 h-7" />
                   </div>
-                  
+
                   <h3 className="text-xl sm:text-2xl font-bold mb-3 text-white tracking-tight group-hover:text-[#ff6b35] transition-colors">
                     {service.name}
                   </h3>
-                  
+
                   <p className="text-white/65 text-sm leading-relaxed mb-6 font-normal">
                     {service.description}
                   </p>
