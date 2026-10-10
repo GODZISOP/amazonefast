@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sparkles, Wifi, Menu, X } from "lucide-react";
+import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search } from "lucide-react";
 import CardStack from "@/components/CardStack";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { RealEarth } from "../components/RealEarth";
@@ -18,6 +18,14 @@ export default function Home() {
   });
   const rawLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const lineHeight = useSpring(rawLineHeight, { stiffness: 60, damping: 20 });
+
+  const { scrollYProgress: section2ScrollY } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  const sec2BgScale = useTransform(section2ScrollY, [0, 0.5, 1], [1, 1.08, 1.15]);
+  const sec2TextY = useTransform(section2ScrollY, [0.1, 0.4], [60, 0]);
+  const sec2Opacity = useTransform(section2ScrollY, [0.1, 0.35], [0, 1]);
 
   // Mouse Parallax Logic
   const mouseX = useMotionValue(0);
@@ -207,7 +215,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="hidden lg:block absolute left-[-5%] xl:left-[-15%] top-[65%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute left-[-5%] xl:left-[-15%] top-[65%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
           >
             <h4 className="text-white font-bold mb-2">Automated PPC Optimization</h4>
             <p className="text-white/70 text-sm leading-relaxed">
@@ -220,7 +228,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-            className="hidden lg:block absolute right-[-5%] xl:right-[-15%] top-[70%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl"
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute right-[-5%] xl:right-[-15%] top-[70%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
           >
             <h4 className="text-white font-bold mb-2">Global Market Access</h4>
             <p className="text-white/70 text-sm leading-relaxed">
@@ -310,31 +318,48 @@ export default function Home() {
       {/* New Animated Graph Section (Matching provided image with Orange theme) */}
       <AnimatedGraphSection />
 
-      {/* Second Section: Perfect Full Cover Image with Scroll Text */}
+            {/* Second Section: Perfect Full Cover Image with Scroll Text */}
       <section
         ref={sectionRef}
-        className="relative w-full h-[85vh] md:h-screen flex justify-center items-center overflow-hidden bg-cover bg-bottom bg-no-repeat"
-        style={{ backgroundImage: "url('/section2-highres.jpg')" }}
+        className="relative w-full min-h-[85vh] md:min-h-screen flex justify-center items-center overflow-hidden bg-black"
       >
-        {/* Typography & Scroll Reveal Container */}
-        <div className="relative z-20 max-w-[1600px] mx-auto w-full px-6 sm:px-12 pointer-events-none -mt-24 lg:-mt-40">
+        {/* Animated Background Image with Scroll Scale */}
+        <motion.div 
+          style={{ scale: sec2BgScale }}
+          className="absolute inset-0 z-0 transition-transform duration-75 origin-center"
+        >
+          <Image
+            src="/section2-highres.jpg"
+            alt="Amazon Scaling Feature"
+            fill
+            className="object-cover object-bottom"
+            priority
+            quality={95}
+          />
+          
+        </motion.div>
 
+        {/* Typography & Scroll Reveal Container */}
+        <motion.div 
+          style={{ y: sec2TextY, opacity: sec2Opacity }}
+          className="relative z-20 max-w-[1500px] mx-auto w-full px-6 sm:px-12 pointer-events-none py-16"
+        >
           {/* Top Section (Huge Headline & Paragraph) */}
-          <div className="flex flex-col md:flex-row justify-between items-start pt-6 sm:pt-20 gap-4 sm:gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-12">
 
             {/* Top Left: Massive Bold Headline */}
-            <div className="w-full md:w-[45%] lg:w-[40%]">
+            <div className="w-full md:w-[50%] lg:w-[45%]">
               <motion.h2
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, margin: "0px 0px -100px 0px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-                className="text-4xl sm:text-6xl lg:text-[5.5rem] font-bold leading-[1] tracking-[-0.04em] flex flex-wrap gap-x-2 sm:gap-x-[14px] gap-y-1 sm:gap-y-2"
+                variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+                className="text-4xl sm:text-6xl lg:text-[4.8rem] font-bold leading-[1.05] tracking-[-0.04em] flex flex-wrap gap-x-3 gap-y-2 text-white"
               >
-                {"The future of seamless Amazon scaling".split(" ").map((word, i) => (
+                {"Automate & Scale Your Global Amazon Brand".split(" ").map((word, i) => (
                   <motion.span
                     key={i}
-                    variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(245, 245, 245, 1)", transition: { duration: 0.4 } } }}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
                   >
                     {word}
                   </motion.span>
@@ -343,18 +368,18 @@ export default function Home() {
             </div>
 
             {/* Top Right: Medium Description */}
-            <div className="w-full md:w-[35%] lg:w-[30%] pt-2 md:pt-4">
+            <div className="w-full md:w-[40%] lg:w-[35%] pt-2 md:pt-4">
               <motion.p
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, margin: "0px 0px -50px 0px" }}
-                variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.4 } } }}
-                className="text-lg sm:text-2xl lg:text-[1.65rem] leading-snug font-medium flex flex-wrap gap-x-1 sm:gap-x-2 gap-y-1"
+                variants={{ visible: { transition: { staggerChildren: 0.04, delayChildren: 0.2 } } }}
+                className="text-lg sm:text-2xl lg:text-[1.45rem] leading-relaxed font-medium flex flex-wrap gap-x-2 gap-y-1 text-white/90"
               >
                 {"Redefines what Amazon scaling can be—transforming passive sales into exponential, automated growth.".split(" ").map((word, i) => (
                   <motion.span
                     key={i}
-                    variants={{ hidden: { color: "rgba(255, 255, 255, 0.2)" }, visible: { color: "rgba(229, 229, 229, 1)", transition: { duration: 0.4 } } }}
+                    variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
                   >
                     {word}
                   </motion.span>
@@ -364,31 +389,28 @@ export default function Home() {
 
           </div>
 
-          {/* Scattered Meta Details (Desktop Only - Just like the reference) */}
-          <div className="absolute top-[45%] left-12 hidden lg:block">
-            <p className="text-[13px] font-medium text-white/50 mb-1 leading-tight tracking-wide">Project Type:</p>
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-tight tracking-wide">E-Commerce</p>
+          {/* Scattered Meta Details (Desktop Only - Cleaned up to avoid overlap) */}
+          <div className="mt-12 hidden lg:flex items-center justify-between pointer-events-auto">
+            <div className="flex flex-col gap-1 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-xl">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35]">Core Focus</span>
+              <span className="text-xs font-semibold text-white/90">E-Commerce & Amazon Growth</span>
+            </div>
+
+            <div className="flex flex-col gap-1 text-right bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-xl">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35]">Active Services</span>
+              <div className="flex gap-3 text-xs font-semibold text-white/80">
+                <span>Account Setup</span>
+                <span>•</span>
+                <span>PPC Ads</span>
+                <span>•</span>
+                <span>Wholesale & PL</span>
+                <span>•</span>
+                <span>US LLC & Banking</span>
+              </div>
+            </div>
           </div>
 
-          <div className="absolute top-[35%] right-12 hidden lg:block text-right">
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-tight tracking-wide">Oct 05</p>
-            <p className="text-[13px] font-medium text-white/50 leading-tight tracking-wide">2026</p>
-          </div>
-
-          <div className="absolute bottom-[20%] right-12 hidden lg:block text-right">
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">PPC Strategy</p>
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">FBA Logistics</p>
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">Brand Design</p>
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-[1.6] tracking-wide">Listing SEO</p>
-          </div>
-
-          <div className="absolute bottom-[10%] left-12 hidden lg:block">
-            <p className="text-[13px] font-medium text-white/50 mb-1 leading-tight tracking-wide">Location:</p>
-            <p className="text-[13px] font-medium text-[#e5e5e5] leading-tight tracking-wide">Global, USA</p>
-          </div>
-
-        </div>
-
+        </motion.div>
       </section>
 
       {/* Services Section */}
@@ -439,37 +461,50 @@ export default function Home() {
               { 
                 title: "Amazon Account Creation", 
                 slug: "amazon-account-creation", 
+                icon: UserPlus,
                 desc: "Professional setup & identity verification (CNIC/Passport for Pakistan, Aadhaar Card for India, National ID for other countries) with utility bill matching and zero rejection rate." 
+              },
+              { 
+                title: "Bank Account Creation", 
+                slug: "payoneer-wallet", 
+                icon: Landmark,
+                desc: "Professional payment and bank account setup (Payoneer, Wise, Airwallex, Stripe & Physical Banks) to receive Amazon payouts securely." 
+              },
+              { 
+                title: "US LLC Formation", 
+                slug: "llc-formation", 
+                icon: Building2,
+                desc: "Complete US corporate structure for non-residents in Wyoming, Florida & Texas. State filing, Registered Agent, US physical address, and EIN." 
+              },
+              { 
+                title: "Complete Wholesale & PL", 
+                slug: "amazon-wholesale-fba", 
+                icon: Boxes,
+                desc: "Full FBA store management: direct brand purchasing, supplier sourcing, shipment plans, prep center labels, and daily BuyBox store operations." 
+              },
+              { 
+                title: "Brand Approvals & Ungating", 
+                slug: "brand-approvals", 
+                icon: ShieldCheck,
+                desc: "Official brand ungating and approvals with Letter of Authorization (LOA), authentic invoices, and full Seller Central category approval." 
+              },
+              { 
+                title: "Trademark & Brand Registry", 
+                slug: "trademark-brand-registry", 
+                icon: Award,
+                desc: "USPTO trademark filing with serial number in 2 to 3 days to unlock Amazon Brand Registry, A+ Content, and anti-counterfeit protection." 
               },
               { 
                 title: "Amazon PPC Advertising", 
                 slug: "amazon-ppc-advertising", 
+                icon: TrendingUp,
                 desc: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity." 
               },
               { 
                 title: "Product Hunting & Sourcing", 
                 slug: "product-hunting", 
+                icon: Search,
                 desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." 
-              },
-              { 
-                title: "Amazon Store Creation", 
-                slug: "store-creation", 
-                desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." 
-              },
-              { 
-                title: "A+ Content & EBC", 
-                slug: "a-content-ebc", 
-                desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." 
-              },
-              { 
-                title: "Listing SEO & Optimization", 
-                slug: "listing-seo", 
-                desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." 
-              },
-              { 
-                title: "Bank Account Creation", 
-                slug: "payoneer-wallet", 
-                desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." 
               }
             ].map((service, idx) => (
               <motion.div
@@ -537,7 +572,7 @@ export default function Home() {
                   ></motion.div>
 
                   <div className="flex items-center gap-3 mb-2 relative z-10">
-                    <Sparkles className="text-[#ff6b35]" size={20} />
+                    {React.createElement(service.icon, { className: "text-[#ff6b35]", size: 22 })}
                     <motion.h3
                       variants={{ dim: { color: "#ffffff" }, glowing: { color: "#ff6b35" } }}
                       className="text-xl sm:text-2xl font-bold uppercase tracking-wide transition-colors duration-300"
@@ -564,7 +599,13 @@ export default function Home() {
           </div>
 
           {/* View All Services Button */}
-          <div className="mt-16 flex justify-center relative z-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mt-16 flex justify-center relative z-20"
+          >
             <Link
               href="/services"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
@@ -572,7 +613,7 @@ export default function Home() {
               <span>View All Services & Pricing</span>
               <ArrowUpRight size={18} className="stroke-[2.5]" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -657,7 +698,13 @@ export default function Home() {
 
           {/* Middle Row (Community & Graphic) */}
           <div className="flex flex-col lg:flex-row gap-16 items-center mb-32">
-            <div className="w-full lg:w-1/2">
+            <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.6 }}
+            className="w-full lg:w-1/2"
+          >
               <div className="mb-8">
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
@@ -679,7 +726,13 @@ export default function Home() {
                 </motion.p>
               </div>
 
-              <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#ff6b35] flex items-center justify-center shrink-0 shadow-lg shadow-[#ff6b35]/20">
                   <Sparkles size={20} className="text-white" />
                 </div>
@@ -687,8 +740,8 @@ export default function Home() {
                   <h4 className="text-white font-semibold mb-2">Partner Program</h4>
                   <p className="text-white/50 text-sm leading-relaxed">Invite other sellers and earn up to 5% of their initial project volume in real-time.</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right: Glowing Animated Graph (Moved here from above) */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end py-8">
@@ -843,7 +896,13 @@ export default function Home() {
           </div>
 
           {/* Right Form */}
-          <div className="w-full lg:w-1/2">
+          <motion.div 
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="w-full lg:w-1/2"
+          >
             <div className="bg-[#111111] border border-white/[0.05] p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff6b35]/10 blur-[80px] rounded-full pointer-events-none"></div>
 
@@ -896,7 +955,7 @@ export default function Home() {
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>

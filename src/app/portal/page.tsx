@@ -11,7 +11,7 @@ export default function ClientPortal() {
   const [clientName, setClientName] = useState<string>('');
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<string | false>(false);
   
   const [gmailAddress, setGmailAddress] = useState('');
   const [gmailPassword, setGmailPassword] = useState('');
@@ -78,7 +78,7 @@ export default function ClientPortal() {
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, docType: string) => {
     try {
       if (!e.target.files || e.target.files.length === 0) return;
-      setUploading(true);
+      setUploading(docType);
       
       for (let i = 0; i < e.target.files.length; i++) {
         const file = e.target.files[i];
@@ -217,6 +217,24 @@ export default function ClientPortal() {
 
   return (
     <div className="min-h-screen bg-[#f9fafb] text-[#111] pt-24 pb-20 px-4 md:px-8 font-sans selection:bg-[#ff6b35] selection:text-white">
+      <style>{`
+        @keyframes portalScanBeam {
+          0%   { top: 0%; }
+          100% { top: 100%; }
+        }
+        @keyframes portalProgress {
+          0%   { width: 0%; }
+          40%  { width: 55%; }
+          70%  { width: 78%; }
+          90%  { width: 92%; }
+          100% { width: 97%; }
+        }
+        @keyframes portalDot {
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+      `}</style>
+
       <header className="fixed top-0 left-0 w-full h-16 border-b border-gray-200 bg-white/90 backdrop-blur-lg flex items-center justify-between px-6 md:px-12 z-50 shadow-sm">
         <div className="flex items-center gap-3">
           <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={120} height={40} style={{ height: '40px', width: 'auto' }} className="object-contain" priority />
@@ -468,10 +486,20 @@ export default function ClientPortal() {
                         {frontDoc.status}
                       </div>
                     </div>
+                  ) : uploading === 'ID Card (Front)' ? (
+                    <div className="relative rounded-lg overflow-hidden h-full min-h-[120px] flex flex-col items-center justify-center" style={{background:'#ffffff',border:'1.5px solid rgba(37,99,235,0.4)'}}>
+                      {/* Laser beam */}
+                      <div className="absolute left-0 right-0 h-[2px] pointer-events-none" style={{animation:'portalScanBeam 1.4s linear infinite',background:'linear-gradient(90deg,transparent,#3b82f6,transparent)',boxShadow:'0 0 12px 4px rgba(59,130,246,0.7)'}} />
+                      <div className="relative z-10 flex flex-col items-center gap-2 px-4">
+                        <div className="flex gap-1.5">{[0,0.3,0.6].map((d,i)=><div key={i} className="w-1.5 h-1.5 rounded-full bg-blue-500" style={{animation:`portalDot 1s ease-in-out ${d}s infinite`}}/>)}</div>
+                        <p className="text-[11px] font-bold text-blue-600 tracking-widest uppercase">Scanning...</p>
+                        <div className="w-24 h-1 rounded-full overflow-hidden mt-1" style={{background:'rgba(59,130,246,0.1)'}}><div className="h-full rounded-full" style={{background:'linear-gradient(90deg,#2563eb,#60a5fa)',animation:'portalProgress 3s ease-out forwards'}}/></div>
+                      </div>
+                    </div>
                   ) : (
                     <div className="relative border-2 border-dashed border-red-200 rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-red-50/50 hover:bg-red-50 transition-colors group-hover:border-red-400 h-full min-h-[120px]">
-                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'ID Card (Front)')} disabled={uploading} />
-                      {uploading ? <Loader2 className="animate-spin text-red-500 mb-2" /> : <UploadCloud size={20} className="text-red-500 mb-2" strokeWidth={2} />}
+                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'ID Card (Front)')} disabled={!!uploading} />
+                      <UploadCloud size={20} className="text-red-500 mb-2" strokeWidth={2} />
                       <p className="text-xs font-bold text-gray-800">Upload Front Side</p>
                     </div>
                   )}
@@ -498,10 +526,19 @@ export default function ClientPortal() {
                         {backDoc.status}
                       </div>
                     </div>
+                  ) : uploading === 'ID Card (Back)' ? (
+                    <div className="relative rounded-lg overflow-hidden h-full min-h-[120px] flex flex-col items-center justify-center" style={{background:'#ffffff',border:'1.5px solid rgba(37,99,235,0.4)'}}>
+                      <div className="absolute left-0 right-0 h-[2px] pointer-events-none" style={{animation:'portalScanBeam 1.4s linear infinite',background:'linear-gradient(90deg,transparent,#3b82f6,transparent)',boxShadow:'0 0 12px 4px rgba(59,130,246,0.7)'}} />
+                      <div className="relative z-10 flex flex-col items-center gap-2 px-4">
+                        <div className="flex gap-1.5">{[0,0.3,0.6].map((d,i)=><div key={i} className="w-1.5 h-1.5 rounded-full bg-blue-500" style={{animation:`portalDot 1s ease-in-out ${d}s infinite`}}/>)}</div>
+                        <p className="text-[11px] font-bold text-blue-600 tracking-widest uppercase">Scanning...</p>
+                        <div className="w-24 h-1 rounded-full overflow-hidden mt-1" style={{background:'rgba(59,130,246,0.1)'}}><div className="h-full rounded-full" style={{background:'linear-gradient(90deg,#2563eb,#60a5fa)',animation:'portalProgress 3s ease-out forwards'}}/></div>
+                      </div>
+                    </div>
                   ) : (
                     <div className="relative border-2 border-dashed border-red-200 rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-red-50/50 hover:bg-red-50 transition-colors group-hover:border-red-400 h-full min-h-[120px]">
-                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'ID Card (Back)')} disabled={uploading} />
-                      {uploading ? <Loader2 className="animate-spin text-red-500 mb-2" /> : <UploadCloud size={20} className="text-red-500 mb-2" strokeWidth={2} />}
+                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, 'ID Card (Back)')} disabled={!!uploading} />
+                      <UploadCloud size={20} className="text-red-500 mb-2" strokeWidth={2} />
                       <p className="text-xs font-bold text-gray-800">Upload Back Side</p>
                     </div>
                   )}
@@ -572,10 +609,10 @@ export default function ClientPortal() {
             >
               <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                 <span className="text-sm font-bold text-gray-800">
-                  {previewImage.includes('front') ? 'Passport — Page 1 (Bio-Data & Details)' 
-                   : previewImage.includes('back') ? 'Passport — Pages 2 & 3 (Signature & Endorsement)' 
-                   : previewImage.includes('cnic') ? 'CNIC — Pakistan National Identity Card'
-                   : previewImage.includes('utility') ? 'Utility Bill — Example Format'
+                  {previewImage.includes('front') ? 'Passport ΓÇö Page 1 (Bio-Data & Details)' 
+                   : previewImage.includes('back') ? 'Passport ΓÇö Pages 2 & 3 (Signature & Endorsement)' 
+                   : previewImage.includes('cnic') ? 'CNIC ΓÇö Pakistan National Identity Card'
+                   : previewImage.includes('utility') ? 'Utility Bill ΓÇö Example Format'
                    : 'Example Document'}
                 </span>
                 <button
@@ -692,12 +729,32 @@ function DocumentCard({ docs, title, desc, type, handleFileUpload, uploading, ha
       )}
 
       {(!isUploaded || multiple) && (
-        <div className="mt-auto relative border-2 border-dashed border-red-200 rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-red-50/50 hover:bg-red-50 transition-colors group-hover:border-red-400">
-          <input type="file" multiple={multiple} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, type)} disabled={uploading} />
-          {uploading ? <Loader2 className="animate-spin text-red-500 mb-2" /> : <UploadCloud size={24} className="text-red-500 mb-2" strokeWidth={2} />}
-          <p className="text-sm font-bold text-gray-800">{uploading ? 'Uploading...' : (isUploaded ? 'Click to add another file' : 'Click to browse or drag file')}</p>
-          <p className="text-xs text-gray-400 mt-1 font-medium">PDF, JPG, PNG {multiple && '(Select multiple if needed)'}</p>
-        </div>
+        uploading === type ? (
+          <div className="mt-auto relative rounded-xl overflow-hidden flex flex-col items-center justify-center min-h-[120px]" style={{background:'#ffffff',border:'1.5px solid rgba(37,99,235,0.4)'}}>
+            {/* Sweeping laser */}
+            <div className="absolute left-0 right-0 h-[2px] pointer-events-none" style={{animation:'portalScanBeam 1.4s linear infinite',background:'linear-gradient(90deg,transparent,#3b82f6,transparent)',boxShadow:'0 0 14px 5px rgba(59,130,246,0.65)'}} />
+            {/* HUD corners */}
+            <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-blue-500 rounded-tl opacity-70" />
+            <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-blue-500 rounded-tr opacity-70" />
+            <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-blue-500 rounded-bl opacity-70" />
+            <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-blue-500 rounded-br opacity-70" />
+            <div className="relative z-10 flex flex-col items-center gap-2.5 px-6">
+              <div className="flex gap-2">{[0,0.25,0.5].map((d,i)=><div key={i} className="w-2 h-2 rounded-full bg-blue-500" style={{animation:`portalDot 0.9s ease-in-out ${d}s infinite`}}/>)}</div>
+              <p className="text-xs font-bold text-blue-600 tracking-[0.2em] uppercase">Scanning & Encrypting</p>
+              <p className="text-[11px] text-blue-400/70 font-medium">{type}</p>
+              <div className="w-32 h-1.5 rounded-full overflow-hidden" style={{background:'rgba(59,130,246,0.08)'}}>
+                <div className="h-full rounded-full" style={{background:'linear-gradient(90deg,#2563eb,#60a5fa)',animation:'portalProgress 3s ease-out forwards',boxShadow:'0 0 8px rgba(59,130,246,0.6)'}}/>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-auto relative border-2 border-dashed border-red-200 rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer bg-red-50/50 hover:bg-red-50 transition-colors group-hover:border-red-400">
+            <input type="file" multiple={multiple} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf" onChange={(e) => handleFileUpload(e, type)} disabled={!!uploading} />
+            <UploadCloud size={24} className="text-red-500 mb-2" strokeWidth={2} />
+            <p className="text-sm font-bold text-gray-800">{isUploaded ? 'Click to add another file' : 'Click to browse or drag file'}</p>
+            <p className="text-xs text-gray-400 mt-1 font-medium">PDF, JPG, PNG {multiple && '(Select multiple if needed)'}</p>
+          </div>
+        )
       )}
     </div>
   );

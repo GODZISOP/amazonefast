@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
@@ -8,10 +8,7 @@ import { motion } from "framer-motion";
 export const servicesList = [
   { name: "Amazon Account Creation", slug: "amazon-account-creation" },
   { name: "Amazon PPC Advertising", slug: "amazon-ppc-advertising" },
-  { name: "Product Hunting & Sourcing", slug: "product-hunting" },
-  { name: "Amazon Store Creation", slug: "store-creation" },
-  { name: "A+ Content & EBC", slug: "a-content-ebc" },
-  { name: "Listing SEO & Optimization", slug: "listing-seo" }
+  { name: "Product Hunting & Sourcing", slug: "product-hunting" }
 ];
 
 export const bankAccountsList = [
@@ -47,22 +44,18 @@ export default function Navbar() {
   const [desktopActiveDropdown, setDesktopActiveDropdown] = useState<"bank" | "llc" | "wholesale" | null>(null);
   const [isDesktopPhysicalBankOpen, setIsDesktopPhysicalBankOpen] = useState(false);
   const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
-  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const servicesMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleServicesEnter = () => {
-    if (servicesTimeoutRef.current) {
-      clearTimeout(servicesTimeoutRef.current);
-      servicesTimeoutRef.current = null;
-    }
-    setIsDesktopServicesOpen(true);
-  };
-
-  const handleServicesLeave = () => {
-    servicesTimeoutRef.current = setTimeout(() => {
-      setIsDesktopServicesOpen(false);
-      setDesktopActiveDropdown(null);
-    }, 400);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (servicesMenuRef.current && !servicesMenuRef.current.contains(event.target as Node)) {
+        setIsDesktopServicesOpen(false);
+        setDesktopActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="fixed z-50 w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
@@ -78,13 +71,15 @@ export default function Navbar() {
         
         {/* Services Dropdown */}
         <div 
-          className="relative group"
-          onMouseEnter={handleServicesEnter}
-          onMouseLeave={handleServicesLeave}
+          ref={servicesMenuRef}
+          className="relative"
         >
           <button 
-            onClick={() => setIsDesktopServicesOpen(!isDesktopServicesOpen)}
-            className={`flex items-center gap-1.5 px-6 py-2 rounded-full text-sm font-medium transition ${isDesktopServicesOpen ? "text-white bg-white/10" : "text-white/80 hover:text-white"}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsDesktopServicesOpen(!isDesktopServicesOpen);
+            }}
+            className={`flex items-center gap-1.5 px-6 py-2 rounded-full text-sm font-medium transition cursor-pointer ${isDesktopServicesOpen ? "text-white bg-white/10" : "text-white/80 hover:text-white"}`}
           >
             Services
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopServicesOpen ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
@@ -92,17 +87,15 @@ export default function Navbar() {
           
           <div 
             className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 ${isDesktopServicesOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
-            onMouseEnter={handleServicesEnter}
-            onMouseLeave={handleServicesLeave}
           >
             {/* Invisible Hover Bridge connecting navbar pill to dropdown */}
-            <div className="absolute -top-4 -left-10 -right-10 h-8 pointer-events-auto" />
+            <div className="absolute -top-4 left-0 right-0 h-5 pointer-events-auto" />
 
             <div 
-              className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[720px] max-w-[calc(100vw-48px)] min-h-[360px] shadow-2xl relative"
+              className="bg-[#111111]/98 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[620px] max-w-[calc(100vw-48px)] shadow-2xl relative"
             >
               <div 
-                className="grid grid-cols-3 gap-2"
+                className="grid grid-cols-2 gap-4"
               >
 
                 {/* Column 1: Items 1 to 4 */}
@@ -272,8 +265,8 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* Column 2: Items 5 to 8 */}
-                <div className="flex flex-col gap-0.5">
+                {/* Column 2: Standalone Services */}
+                <div className="flex flex-col gap-0.5" >
                   {/* 5. Brand Approvals */}
                   <Link 
                     href="/services/brand-approvals" 
@@ -289,6 +282,15 @@ export default function Navbar() {
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
                   >
                     <span>Trademark & Brand Registry</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* A+ Content & EBC */}
+                  <Link 
+                    href="/services/a-content-ebc" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>A+ Content & EBC</span>
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
 
@@ -310,37 +312,6 @@ export default function Navbar() {
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
                 </div>
-
-                {/* Column 3: Items 9 to 11 */}
-                <div className="flex flex-col gap-0.5">
-                  {/* 9. Amazon Store Creation */}
-                  <Link 
-                    href="/services/store-creation" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Amazon Store Creation</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-
-                  {/* 10. A+ Content & EBC */}
-                  <Link 
-                    href="/services/a-content-ebc" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>A+ Content & EBC</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-
-                  {/* 11. Listing SEO & Optimization */}
-                  <Link 
-                    href="/services/listing-seo" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Listing SEO & Optimization</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                </div>
-
               </div>
             </div>
           </div>
@@ -577,36 +548,7 @@ export default function Navbar() {
                 <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
               </Link>
 
-              {/* 9. Amazon Store Creation */}
-              <Link 
-                href="/services/store-creation" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
-              >
-                <span>Amazon Store Creation</span>
-                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
-              </Link>
-
-              {/* 10. A+ Content & EBC */}
-              <Link 
-                href="/services/a-content-ebc" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
-              >
-                <span>A+ Content & EBC</span>
-                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
-              </Link>
-
-              {/* 11. Listing SEO & Optimization */}
-              <Link 
-                href="/services/listing-seo" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
-              >
-                <span>Listing SEO & Optimization</span>
-                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
-              </Link>
-            </motion.div>
+              </motion.div>
           </motion.div>
 
           <motion.div

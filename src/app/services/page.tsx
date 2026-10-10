@@ -21,7 +21,9 @@ import {
   Check,
   Building,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Award,
+  Boxes
 } from "lucide-react";
 
 export interface ServiceItem {
@@ -37,6 +39,17 @@ export interface ServiceItem {
 }
 
 export const servicesData: ServiceItem[] = [
+  // 5. A+ Content & EBC
+  {
+    name: "A+ Content & EBC",
+    slug: "a-content-ebc",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "Conversion Booster",
+    description: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust.",
+    icon: PenTool,
+    highlights: ["High-resolution visual storytelling", "Competitor comparison tables", "Boosts conversion by up to 20%"]
+  },
   // 1. Amazon Account Creation
   {
     name: "Amazon Account Creation",
@@ -58,7 +71,7 @@ export const servicesData: ServiceItem[] = [
     categoryLabel: "Amazon Growth",
     tag: "ROAS Focused",
     description: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity.",
-    icon: Search,
+    icon: TrendingUp,
     highlights: ["Advanced keyword isolation", "Targeted 18%–24% ACoS", "Dayparting & bid optimization"]
   },
 
@@ -70,44 +83,8 @@ export const servicesData: ServiceItem[] = [
     categoryLabel: "Amazon Growth",
     tag: "High Margin",
     description: "Extensive market research to identify winning, high-margin products with low competition for your brand.",
-    icon: ShoppingBag,
+    icon: Search,
     highlights: ["High-demand niche analysis", "Direct factory price negotiation", "Sample inspection & quality checks"]
-  },
-
-  // 4. Amazon Store Creation
-  {
-    name: "Amazon Store Creation",
-    slug: "store-creation",
-    category: "amazon",
-    categoryLabel: "Amazon Growth",
-    tag: "Brand Identity",
-    description: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon.",
-    icon: Layout,
-    highlights: ["Custom brand storefronts", "Mobile-optimized UX design", "Higher organic basket size"]
-  },
-
-  // 5. A+ Content & EBC
-  {
-    name: "A+ Content & EBC",
-    slug: "a-content-ebc",
-    category: "amazon",
-    categoryLabel: "Amazon Growth",
-    tag: "Conversion Booster",
-    description: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust.",
-    icon: PenTool,
-    highlights: ["High-resolution visual storytelling", "Competitor comparison tables", "Boosts conversion by up to 20%"]
-  },
-
-  // 6. Listing SEO & Optimization
-  {
-    name: "Listing SEO & Optimization",
-    slug: "listing-seo",
-    category: "amazon",
-    categoryLabel: "Amazon Growth",
-    tag: "Search Ranking",
-    description: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search.",
-    icon: Sparkles,
-    highlights: ["Top-tier search indexing", "Persuasive sales copywriting", "Backend search term maximization"]
   },
 
   // 7. Bank Account Creation & Wallets
@@ -227,7 +204,7 @@ export const servicesData: ServiceItem[] = [
     tag: "$300 M1 & M2 · Profit %",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Complete wholesale operations: direct brand purchasing, Send-to-Amazon shipment plans, prep center labels, and daily BuyBox store management.",
-    icon: Building2,
+    icon: Boxes,
     highlights: ["Brand approvals & real invoices", "Send-to-Amazon (STA) shipment plans", "$300 M1 & M2, then profit percentage"]
   },
 
@@ -266,7 +243,7 @@ export const servicesData: ServiceItem[] = [
     tag: "Logo $600 · Word $700",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Official USPTO trademark filing. Get your serial number in 2 to 3 days to unlock Amazon Brand Registry, A+ Content, video ads, and protect against copycats.",
-    icon: Sparkles,
+    icon: Award,
     highlights: ["Logo ($600) & Wordmark ($700)", "Serial number in 2 to 3 days", "Instant Amazon Brand Registry access"]
   }
 ];
