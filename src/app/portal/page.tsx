@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User } from 'lucide-react';
+import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X } from 'lucide-react';
 import Image from 'next/image';
 
 export default function ClientPortal() {
@@ -17,6 +17,8 @@ export default function ClientPortal() {
   const [gmailPassword, setGmailPassword] = useState('');
   const [submittingGmail, setSubmittingGmail] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [showPassportSample, setShowPassportSample] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const router = useRouter();
   const supabase = createClient();
@@ -342,13 +344,109 @@ export default function ClientPortal() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Custom Dual-Zone ID Card Component */}
           <div className="md:col-span-2 relative p-8 rounded-[24px] border border-gray-200 bg-white shadow-sm flex flex-col">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-sm border bg-gray-100 text-gray-400 border-gray-200">
-              <FileText size={20} strokeWidth={2.5} />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm border bg-gray-100 text-gray-400 border-gray-200">
+                  <FileText size={20} strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">ID Card / Passport</h3>
+                  <p className="text-xs text-gray-500 font-medium">Clear scanned copy of your valid Passport or National ID (Front & Back)</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPassportSample(prev => !prev)}
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold text-[#ff6b35] bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-xl transition shadow-sm w-fit"
+              >
+                <Eye size={15} />
+                {showPassportSample ? 'Hide Example Passport' : 'View Example Passport Format'}
+              </button>
             </div>
-            
-            <h3 className="text-xl font-bold mb-2 text-gray-900">ID Card / Passport</h3>
-            <p className="text-sm text-gray-500 mb-8 leading-relaxed font-medium">A clear scanned copy of your valid Passport or National ID. Please upload both front and back sides below.</p>
-            
+
+            {/* Passport Example Visual Section */}
+            {showPassportSample && (
+              <div className="mb-6 p-4 sm:p-5 bg-gradient-to-br from-amber-50/70 to-orange-50/50 border border-orange-200/90 rounded-2xl">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-2 w-2 rounded-full bg-[#ff6b35]" />
+                    <h4 className="text-xs sm:text-sm font-bold text-gray-900">Example Passport Submission Format</h4>
+                  </div>
+                  <span className="text-[11px] font-semibold text-gray-500">Click image to enlarge</span>
+                </div>
+                <p className="text-xs text-gray-600 mb-4 font-medium">
+                  Please upload high-quality color scans or photos as shown. Ensure all 4 borders/corners are clearly visible with no cutoffs or flash glare.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {/* Front Side (Page 1: Bio-Data) */}
+                  <div
+                    onClick={() => setPreviewImage('/passport-sample-front.png')}
+                    className="cursor-pointer group bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md hover:border-[#ff6b35] transition flex flex-col items-center"
+                  >
+                    <div className="w-full flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold text-gray-800">Passport (Front)</span>
+                      <span className="text-[10px] font-bold text-[#ff6b35] bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100 flex items-center gap-1">
+                        <Eye size={10} /> Enlarge
+                      </span>
+                    </div>
+                    <div className="relative w-full h-40 bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
+                      <Image
+                        src="/passport-sample-front.png"
+                        alt="Example Passport Front (Bio-Data Page)"
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <p className="text-[11px] text-gray-500 font-medium mt-2 text-center">Bio-data page with details & MRZ</p>
+                  </div>
+
+                  {/* Back Side (Pages 2 & 3: Signature Page) */}
+                  <div
+                    onClick={() => setPreviewImage('/passport-sample-back.png')}
+                    className="cursor-pointer group bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md hover:border-[#ff6b35] transition flex flex-col items-center"
+                  >
+                    <div className="w-full flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold text-gray-800">Passport (Back)</span>
+                      <span className="text-[10px] font-bold text-[#ff6b35] bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100 flex items-center gap-1">
+                        <Eye size={10} /> Enlarge
+                      </span>
+                    </div>
+                    <div className="relative w-full h-40 bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
+                      <Image
+                        src="/passport-sample-back.png"
+                        alt="Example Passport Back (Signature Page)"
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <p className="text-[11px] text-gray-500 font-medium mt-2 text-center">Signature & endorsement pages</p>
+                  </div>
+
+                  {/* CNIC Sample */}
+                  <div
+                    onClick={() => setPreviewImage('/cnic-sample.png')}
+                    className="cursor-pointer group bg-white border border-gray-200 rounded-xl p-3 shadow-sm hover:shadow-md hover:border-[#ff6b35] transition flex flex-col items-center"
+                  >
+                    <div className="w-full flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold text-gray-800">CNIC (Pakistan)</span>
+                      <span className="text-[10px] font-bold text-[#ff6b35] bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100 flex items-center gap-1">
+                        <Eye size={10} /> Enlarge
+                      </span>
+                    </div>
+                    <div className="relative w-full h-40 bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
+                      <Image
+                        src="/cnic-sample.png"
+                        alt="Example CNIC (Pakistan National Identity Card)"
+                        fill
+                        className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <p className="text-[11px] text-gray-500 font-medium mt-2 text-center">Both sides, flat & high-res</p>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-auto">
               {/* Front Side Zone */}
               <div className="flex flex-col h-full border border-gray-200 rounded-xl overflow-hidden">
@@ -412,7 +510,7 @@ export default function ClientPortal() {
             </div>
           </div>
 
-          <DocumentCard docs={utilityDocs} title="Utility Bill" desc="A recent utility bill matching your registration address. Used for verification." type="Utility Bill" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} />
+          <DocumentCard docs={utilityDocs} title="Utility Bill" desc="A recent utility bill matching your registration address. Used for verification." type="Utility Bill" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} sampleImage="/utility-bill-sample.png" sampleLabel="Example KE / Utility Bill Format" setPreviewImage={setPreviewImage} />
           <DocumentCard docs={bankDocs} title="Bank Statement" desc="A recent bank statement matching your address and details." type="Bank Statement" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} />
         </div>
 
@@ -465,10 +563,47 @@ export default function ClientPortal() {
       </div>
     </div>
   )
+
+      {/* Lightbox Preview Modal for Passport Samples */}
+      {previewImage && (
+        <div
+          onClick={() => setPreviewImage(null)}
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4 flex flex-col"
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+              <span className="text-sm font-bold text-gray-800">
+                {previewImage.includes('front') ? 'Passport Page 1 (Bio-Data & Details)' : 'Passport Pages 2 & 3 (Signature & Endorsement)'}
+              </span>
+              <button
+                onClick={() => setPreviewImage(null)}
+                className="p-1 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="relative w-full h-[70vh] my-2 bg-gray-50 rounded-xl overflow-hidden">
+              <Image
+                src={previewImage}
+                alt="Passport Sample Preview"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="text-center pt-2 border-t border-gray-100">
+              <p className="text-xs text-gray-500 font-medium">Amazon Verification Requirement: High resolution, flat surface, no cut-off edges.</p>
+            </div>
+          </div>
+        </div>
+      )}
 }
 
-function DocumentCard({ docs, title, desc, type, handleFileUpload, uploading, handleDeleteDocument, multiple }: any) {
+function DocumentCard({ docs, title, desc, type, handleFileUpload, uploading, handleDeleteDocument, multiple, sampleImage, sampleLabel, setPreviewImage }: any) {
   const isUploaded = docs && docs.length > 0;
+  const [showSample, setShowSample] = useState(false);
   
   // We can just use the status of the first doc as the overall status, or calculate it.
   const status = isUploaded ? docs[0].status : 'Action Required';
@@ -495,12 +630,45 @@ function DocumentCard({ docs, title, desc, type, handleFileUpload, uploading, ha
         </div>
       )}
       
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-sm border ${isUploaded ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-red-50 text-red-500 border-red-100'}`}>
+      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-sm border ${isUploaded ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-red-50 text-red-500 border-red-100'}`}>
         <FileText size={20} strokeWidth={2.5} />
       </div>
       
-      <h3 className="text-xl font-bold mb-2 text-gray-900">{title}</h3>
-      <p className="text-sm text-gray-500 mb-8 leading-relaxed font-medium">{desc}</p>
+      <h3 className="text-xl font-bold mb-1 text-gray-900">{title}</h3>
+      <p className="text-sm text-gray-500 mb-4 leading-relaxed font-medium">{desc}</p>
+
+      {/* Sample Image Preview */}
+      {sampleImage && (
+        <div className="mb-5">
+          <button
+            type="button"
+            onClick={() => setShowSample((p: boolean) => !p)}
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-[#ff6b35] bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-xl transition mb-3"
+          >
+            <Eye size={13} />
+            {showSample ? 'Hide Example' : 'View Example Format'}
+          </button>
+          {showSample && (
+            <div
+              onClick={() => setPreviewImage && setPreviewImage(sampleImage)}
+              className="cursor-pointer group bg-gray-50 border border-gray-200 hover:border-[#ff6b35] rounded-xl overflow-hidden transition shadow-sm"
+            >
+              <div className="relative w-full h-36">
+                <Image
+                  src={sampleImage}
+                  alt={sampleLabel || 'Sample Document'}
+                  fill
+                  className="object-contain group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="px-3 py-2 bg-white border-t border-gray-100 flex items-center justify-between">
+                <span className="text-[11px] font-semibold text-gray-600">{sampleLabel || 'Example format'}</span>
+                <span className="text-[10px] font-bold text-[#ff6b35] flex items-center gap-1"><Eye size={10} /> Enlarge</span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
       
       {isUploaded && (
         <div className="mt-auto space-y-2 mb-4">
