@@ -229,14 +229,14 @@ export default function Navbar() {
                     )}
                   </div>
 
-                  {/* 4. Complete Wholesale & PL Dropdown */}
+                  {/* 4. Complete Account Management and PL Dropdown */}
                   <div 
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("wholesale")}
                   >
                     <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "wholesale" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
                       <Link href="/services/amazon-wholesale-fba" className="flex-1">
-                        Complete Wholesale & PL
+                        Complete Account Management and PL
                       </Link>
                       <button 
                         onClick={(e) => {
