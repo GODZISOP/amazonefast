@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const servicesList = [
@@ -45,6 +45,24 @@ export default function Navbar() {
   const [isMobileLLCOpen, setIsMobileLLCOpen] = useState(false);
   const [isMobileWholesaleOpen, setIsMobileWholesaleOpen] = useState(false);
   const [desktopActiveDropdown, setDesktopActiveDropdown] = useState<"bank" | "llc" | "wholesale" | null>(null);
+  const [isDesktopPhysicalBankOpen, setIsDesktopPhysicalBankOpen] = useState(false);
+  const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleServicesEnter = () => {
+    if (servicesTimeoutRef.current) {
+      clearTimeout(servicesTimeoutRef.current);
+      servicesTimeoutRef.current = null;
+    }
+    setIsDesktopServicesOpen(true);
+  };
+
+  const handleServicesLeave = () => {
+    servicesTimeoutRef.current = setTimeout(() => {
+      setIsDesktopServicesOpen(false);
+      setDesktopActiveDropdown(null);
+    }, 400);
+  };
 
   return (
     <header className="fixed z-50 w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
@@ -59,18 +77,37 @@ export default function Navbar() {
         <Link href="/about" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">About Us</Link>
         
         {/* Services Dropdown */}
-        <div className="relative group">
-          <button className="flex items-center gap-1.5 text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">
+        <div 
+          className="relative group"
+          onMouseEnter={handleServicesEnter}
+          onMouseLeave={handleServicesLeave}
+        >
+          <button 
+            onClick={() => setIsDesktopServicesOpen(!isDesktopServicesOpen)}
+            className={`flex items-center gap-1.5 px-6 py-2 rounded-full text-sm font-medium transition ${isDesktopServicesOpen ? "text-white bg-white/10" : "text-white/80 hover:text-white"}`}
+          >
             Services
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:rotate-180 transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopServicesOpen ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
           </button>
           
-          <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-            <div className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[760px] max-w-[calc(100vw-48px)] shadow-2xl">
-              <div className="grid grid-cols-3 gap-2">
+          <div 
+            className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 ${isDesktopServicesOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
+            onMouseEnter={handleServicesEnter}
+            onMouseLeave={handleServicesLeave}
+          >
+            {/* Invisible Hover Bridge connecting navbar pill to dropdown */}
+            <div className="absolute -top-4 -left-10 -right-10 h-8 pointer-events-auto" />
+
+            <div 
+              className="bg-[#111111]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[720px] max-w-[calc(100vw-48px)] min-h-[360px] shadow-2xl relative"
+            >
+              <div 
+                className="grid grid-cols-3 gap-2"
+              >
 
                 {/* Column 1: Items 1 to 4 */}
                 <div className="flex flex-col gap-0.5">
+                  {/* 1. Amazon Account Creation */}
                   <Link 
                     href="/services/amazon-account-creation" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
@@ -78,50 +115,85 @@ export default function Navbar() {
                     <span>Amazon Account Creation</span>
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
-                  <Link 
-                    href="/services/amazon-ppc-advertising" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Amazon PPC Advertising</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                  <Link 
-                    href="/services/product-hunting" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Product Hunting & Sourcing</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                  <Link 
-                    href="/services/store-creation" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Amazon Store Creation</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                </div>
 
-                {/* Column 2: Items 5 to 8 */}
-                <div 
-                  className="flex flex-col gap-0.5"
-                  onMouseLeave={() => setDesktopActiveDropdown(null)}
-                >
-                  <Link 
-                    href="/services/a-content-ebc" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  {/* 2. Bank Account Creation Dropdown */}
+                  <div 
+                    className="relative"
+                    onMouseEnter={() => setDesktopActiveDropdown("bank")}
                   >
-                    <span>A+ Content & EBC</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
-                  <Link 
-                    href="/services/listing-seo" 
-                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
-                  >
-                    <span>Listing SEO & Optimization</span>
-                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
-                  </Link>
+                    <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "bank" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
+                      <Link href="/services/payoneer-wallet" className="flex-1">
+                        Bank Account Creation
+                      </Link>
+                      <button 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setDesktopActiveDropdown(desktopActiveDropdown === "bank" ? null : "bank");
+                        }}
+                        className="p-0.5 hover:text-[#ff6b35] transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${desktopActiveDropdown === "bank" ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
+                      </button>
+                    </div>
 
-                  {/* 7. LLC Formation Dropdown */}
+                    {desktopActiveDropdown === "bank" && (
+                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
+                        <Link href="/services/payoneer-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Payoneer Setup</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/wise-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Wise Setup</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/airwallex-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Airwallex Setup</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        <Link href="/services/stripe-setup" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                          <span>Stripe Setup</span>
+                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                        </Link>
+                        
+                        <div className="w-full h-px bg-white/10 my-0.5"></div>
+
+                        {/* Physical Bank Dropdown inside Bank Account Creation */}
+                        <div 
+                          className="relative"
+                          onMouseEnter={() => setIsDesktopPhysicalBankOpen(true)}
+                          onMouseLeave={() => setIsDesktopPhysicalBankOpen(false)}
+                        >
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setIsDesktopPhysicalBankOpen(!isDesktopPhysicalBankOpen);
+                            }}
+                            className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between ${isDesktopPhysicalBankOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
+                          >
+                            <span>Physical Bank</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopPhysicalBankOpen ? 'rotate-180 text-[#ff6b35]' : 'opacity-70'}`}><path d="m6 9 6 6 6-6"/></svg>
+                          </button>
+
+                          {isDesktopPhysicalBankOpen && (
+                            <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
+                              <Link href="/services/chase-bank" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
+                                <span>Chase Bank</span>
+                                <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
+                              </Link>
+                              <Link href="/services/bank-of-america" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
+                                <span>Bank of America</span>
+                                <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 3. LLC Formation Dropdown */}
                   <div 
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("llc")}
@@ -133,6 +205,7 @@ export default function Navbar() {
                       <button 
                         onClick={(e) => {
                           e.preventDefault();
+                          e.stopPropagation();
                           setDesktopActiveDropdown(desktopActiveDropdown === "llc" ? null : "llc");
                         }}
                         className="p-0.5 hover:text-[#ff6b35] transition-colors"
@@ -163,64 +236,7 @@ export default function Navbar() {
                     )}
                   </div>
 
-                  {/* 8. Bank Account Creation Dropdown */}
-                  <div 
-                    className="relative"
-                    onMouseEnter={() => setDesktopActiveDropdown("bank")}
-                  >
-                    <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "bank" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
-                      <Link href="/services/payoneer-wallet" className="flex-1">
-                        Bank Account Creation
-                      </Link>
-                      <button 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setDesktopActiveDropdown(desktopActiveDropdown === "bank" ? null : "bank");
-                        }}
-                        className="p-0.5 hover:text-[#ff6b35] transition-colors"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${desktopActiveDropdown === "bank" ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
-                      </button>
-                    </div>
-
-                    {desktopActiveDropdown === "bank" && (
-                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                        <Link href="/services/payoneer-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Payoneer Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/wise-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Wise Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/airwallex-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Airwallex Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/stripe-setup" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Stripe Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <div className="w-full h-px bg-white/10 my-0.5"></div>
-                        <Link href="/services/chase-bank" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Chase Bank</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/bank-of-america" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Bank of America</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Column 3: Items 9 to 11 */}
-                <div 
-                  className="flex flex-col gap-0.5"
-                  onMouseLeave={() => setDesktopActiveDropdown(null)}
-                >
-                  {/* 9. Complete Wholesale & PL Dropdown */}
+                  {/* 4. Complete Wholesale & PL Dropdown */}
                   <div 
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("wholesale")}
@@ -232,6 +248,7 @@ export default function Navbar() {
                       <button 
                         onClick={(e) => {
                           e.preventDefault();
+                          e.stopPropagation();
                           setDesktopActiveDropdown(desktopActiveDropdown === "wholesale" ? null : "wholesale");
                         }}
                         className="p-0.5 hover:text-[#ff6b35] transition-colors"
@@ -253,8 +270,11 @@ export default function Navbar() {
                       </div>
                     )}
                   </div>
+                </div>
 
-                  {/* 10. Brand Approvals */}
+                {/* Column 2: Items 5 to 8 */}
+                <div className="flex flex-col gap-0.5">
+                  {/* 5. Brand Approvals */}
                   <Link 
                     href="/services/brand-approvals" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
@@ -263,12 +283,60 @@ export default function Navbar() {
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
 
-                  {/* 11. Trademark & Brand Registry */}
+                  {/* 6. Trademark & Brand Registry */}
                   <Link 
                     href="/services/trademark-brand-registry" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
                   >
                     <span>Trademark & Brand Registry</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* 7. Amazon PPC Advertising */}
+                  <Link 
+                    href="/services/amazon-ppc-advertising" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Amazon PPC Advertising</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* 8. Product Hunting & Sourcing */}
+                  <Link 
+                    href="/services/product-hunting" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Product Hunting & Sourcing</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+                </div>
+
+                {/* Column 3: Items 9 to 11 */}
+                <div className="flex flex-col gap-0.5">
+                  {/* 9. Amazon Store Creation */}
+                  <Link 
+                    href="/services/store-creation" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Amazon Store Creation</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* 10. A+ Content & EBC */}
+                  <Link 
+                    href="/services/a-content-ebc" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>A+ Content & EBC</span>
+                    <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
+                  </Link>
+
+                  {/* 11. Listing SEO & Optimization */}
+                  <Link 
+                    href="/services/listing-seo" 
+                    className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
+                  >
+                    <span>Listing SEO & Optimization</span>
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
                 </div>
@@ -346,104 +414,21 @@ export default function Navbar() {
               <Link 
                 href="/services/amazon-account-creation" 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between"
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
               >
-                Amazon Account Creation
-                <ArrowUpRight size={16} className="text-[#ff6b35]" />
+                <span>Amazon Account Creation</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
               </Link>
 
-              {/* 2. Amazon PPC Advertising */}
-              <Link 
-                href="/services/amazon-ppc-advertising" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-1 flex items-center justify-between"
-              >
-                Amazon PPC Advertising
-                <ArrowUpRight size={14} className="text-white/30" />
-              </Link>
-
-              {/* 3. Product Hunting & Sourcing */}
-              <Link 
-                href="/services/product-hunting" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-1 flex items-center justify-between"
-              >
-                Product Hunting & Sourcing
-                <ArrowUpRight size={14} className="text-white/30" />
-              </Link>
-
-              {/* 4. Amazon Store Creation */}
-              <Link 
-                href="/services/store-creation" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-1 flex items-center justify-between"
-              >
-                Amazon Store Creation
-                <ArrowUpRight size={14} className="text-white/30" />
-              </Link>
-
-              {/* 5. A+ Content & EBC */}
-              <Link 
-                href="/services/a-content-ebc" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-1 flex items-center justify-between"
-              >
-                A+ Content & EBC
-                <ArrowUpRight size={14} className="text-white/30" />
-              </Link>
-
-              {/* 6. Listing SEO & Optimization */}
-              <Link 
-                href="/services/listing-seo" 
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white/70 hover:text-white text-base font-medium transition-colors py-1 flex items-center justify-between"
-              >
-                Listing SEO & Optimization
-                <ArrowUpRight size={14} className="text-white/30" />
-              </Link>
-
-              <div className="w-full h-px bg-white/10 my-1"></div>
-
-              {/* 7. Mobile LLC Formation Dropdown */}
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsMobileLLCOpen(!isMobileLLCOpen);
-                }}
-                className="text-white/80 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1"
-              >
-                LLC Formation
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileLLCOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-              
-              <motion.div 
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ 
-                  height: isMobileLLCOpen ? 'auto' : 0,
-                  opacity: isMobileLLCOpen ? 1 : 0,
-                  marginTop: isMobileLLCOpen ? 4 : 0
-                }}
-                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
-              >
-                <Link href="/services/llc-formation" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6b35] font-semibold text-sm transition-colors py-1">
-                  ★ Overview & All States
-                </Link>
-                {llcFormationList.map((service) => (
-                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
-                    {service.name}
-                  </Link>
-                ))}
-              </motion.div>
-
-              {/* 8. Mobile Bank Account Creation Dropdown */}
+              {/* 2. Mobile Bank Account Creation Dropdown */}
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsMobileBankCreationOpen(!isMobileBankCreationOpen);
                 }}
-                className="text-white/80 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1"
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors flex items-center justify-between text-left py-1"
               >
-                Bank Account Creation
+                <span>Bank Account Creation</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileBankCreationOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
               </button>
               
@@ -490,15 +475,46 @@ export default function Navbar() {
                 </motion.div>
               </motion.div>
 
-              {/* 9. Complete Wholesale & PL Dropdown */}
+              {/* 3. Mobile LLC Formation Dropdown */}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileLLCOpen(!isMobileLLCOpen);
+                }}
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors flex items-center justify-between text-left py-1"
+              >
+                <span>LLC Formation</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileLLCOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ 
+                  height: isMobileLLCOpen ? 'auto' : 0,
+                  opacity: isMobileLLCOpen ? 1 : 0,
+                  marginTop: isMobileLLCOpen ? 4 : 0
+                }}
+                className="overflow-hidden flex flex-col gap-2 pl-3 border-l border-white/10"
+              >
+                <Link href="/services/llc-formation" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6b35] font-semibold text-sm transition-colors py-1">
+                  ★ Overview & All States
+                </Link>
+                {llcFormationList.map((service) => (
+                  <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setIsMobileMenuOpen(false)} className="text-white/60 hover:text-[#ff6b35] text-sm font-medium transition-colors py-1">
+                    {service.name}
+                  </Link>
+                ))}
+              </motion.div>
+
+              {/* 4. Complete Wholesale & PL Dropdown */}
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsMobileWholesaleOpen(!isMobileWholesaleOpen);
                 }}
-                className="text-white/80 hover:text-white text-base font-medium transition-colors flex items-center justify-between text-left py-1"
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors flex items-center justify-between text-left py-1"
               >
-                Complete Wholesale & PL
+                <span>Complete Wholesale & PL</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileWholesaleOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
               </button>
               
@@ -519,24 +535,76 @@ export default function Navbar() {
                 ))}
               </motion.div>
 
-              {/* 10. Brand Approvals */}
+              {/* 5. Brand Approvals */}
               <Link 
                 href="/services/brand-approvals" 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between"
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
               >
                 <span>Brand Approvals</span>
-                <ArrowUpRight size={14} className="text-[#ff6b35]" />
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
               </Link>
 
-              {/* 11. Trademark & Brand Registry */}
+              {/* 6. Trademark & Brand Registry */}
               <Link 
                 href="/services/trademark-brand-registry" 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="text-white hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between"
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
               >
                 <span>Trademark & Brand Registry</span>
-                <ArrowUpRight size={14} className="text-[#ff6b35]" />
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
+              </Link>
+
+              <div className="w-full h-px bg-white/10 my-1"></div>
+
+              {/* 7. Amazon PPC Advertising */}
+              <Link 
+                href="/services/amazon-ppc-advertising" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
+              >
+                <span>Amazon PPC Advertising</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
+              </Link>
+
+              {/* 8. Product Hunting & Sourcing */}
+              <Link 
+                href="/services/product-hunting" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
+              >
+                <span>Product Hunting & Sourcing</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
+              </Link>
+
+              {/* 9. Amazon Store Creation */}
+              <Link 
+                href="/services/store-creation" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
+              >
+                <span>Amazon Store Creation</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
+              </Link>
+
+              {/* 10. A+ Content & EBC */}
+              <Link 
+                href="/services/a-content-ebc" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
+              >
+                <span>A+ Content & EBC</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
+              </Link>
+
+              {/* 11. Listing SEO & Optimization */}
+              <Link 
+                href="/services/listing-seo" 
+                onClick={() => setIsMobileMenuOpen(false)} 
+                className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
+              >
+                <span>Listing SEO & Optimization</span>
+                <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
               </Link>
             </motion.div>
           </motion.div>
