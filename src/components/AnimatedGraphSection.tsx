@@ -38,23 +38,40 @@ export default function AnimatedGraphSection() {
         
         {/* Top Editorial Statement (Grounded & Realistic) */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.02 } } }}
           className="max-w-4xl mb-14 sm:mb-20"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-[2.6rem] lg:text-[2.9rem] font-medium leading-[1.3] sm:leading-[1.28] tracking-tight text-white">
-            <span className="font-bold text-white">Amazon Fast Service</span>{" "}
-            <span className="inline-flex items-center justify-center align-middle mx-1 sm:mx-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#ff6b35] text-black shadow-[0_0_15px_rgba(255,107,53,0.6)]">
-              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-            </span>{" "}
-            <span className="text-white font-medium">
-              is a dedicated Amazon FBA management and store growth partner built to launch, manage, and scale your brand.
-            </span>{" "}
-            <span className="text-white/40 font-normal">
-              From daily inventory replenishment and focused PPC ad campaigns to verified international bank account setup, we handle the technical heavy lifting so your store runs consistently.
-            </span>
+          <h2 className="text-2xl sm:text-3xl md:text-[2.6rem] lg:text-[2.9rem] font-medium leading-[1.3] sm:leading-[1.28] tracking-tight text-white flex flex-wrap gap-x-2 gap-y-1 items-baseline">
+            <motion.span
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+              className="font-bold text-white inline-flex items-center gap-1.5 mr-1"
+            >
+              <span>Amazon Fast Service</span>
+              <span className="inline-flex items-center justify-center align-middle w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#ff6b35] text-black shadow-[0_0_15px_rgba(255,107,53,0.6)] ml-1">
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
+              </span>
+            </motion.span>
+            {"is a dedicated Amazon FBA management and store growth partner built to launch, manage, and scale your brand.".split(" ").map((word, i) => (
+              <motion.span
+                key={`p1-${i}`}
+                variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                className="text-white font-medium"
+              >
+                {word}
+              </motion.span>
+            ))}
+            {"From daily inventory replenishment and focused PPC ad campaigns to verified international bank account setup, we handle the technical heavy lifting so your store runs consistently.".split(" ").map((word, i) => (
+              <motion.span
+                key={`p2-${i}`}
+                variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                className="text-white/40 font-normal"
+              >
+                {word}
+              </motion.span>
+            ))}
           </h2>
         </motion.div>
 
@@ -65,7 +82,7 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] rounded-[2.2rem] overflow-hidden border border-white/10 shadow-2xl flex flex-col justify-end p-4 sm:p-5"
           >
@@ -85,17 +102,42 @@ export default function AnimatedGraphSection() {
 
             {/* Bottom Overlay Card */}
             <div className="relative z-10 w-full bg-[#120702]/95 backdrop-blur-xl border border-white/10 p-5 sm:p-6 rounded-[1.8rem] shadow-[0_15px_35px_rgba(0,0,0,0.6)] group-hover:border-[#ff6b35]/40 transition-colors">
-              <div className="flex items-baseline gap-2 mb-2">
-                <span className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+                className="flex items-baseline gap-2 mb-2"
+              >
+                <motion.span 
+                  variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } } }}
+                  className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight"
+                >
                   30+
-                </span>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#ff6b35] bg-[#ff6b35]/10 px-2 py-0.5 rounded-full border border-[#ff6b35]/20">
+                </motion.span>
+                <motion.span 
+                  variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                  className="text-xs font-semibold uppercase tracking-wider text-[#ff6b35] bg-[#ff6b35]/10 px-2 py-0.5 rounded-full border border-[#ff6b35]/20"
+                >
                   US & UK Stores
-                </span>
-              </div>
-              <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal">
-                Active stores launched, managed, and optimized across US & UK Amazon marketplaces with dedicated account managers.
-              </p>
+                </motion.span>
+              </motion.div>
+              <motion.p
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                variants={{ visible: { transition: { staggerChildren: 0.02 } } }}
+                className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal flex flex-wrap gap-x-1"
+              >
+                {"Active stores launched, managed, and optimized across US & UK Amazon marketplaces with dedicated account managers.".split(" ").map((w, i) => (
+                  <motion.span
+                    key={i}
+                    variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } }}
+                  >
+                    {w}
+                  </motion.span>
+                ))}
+              </motion.p>
             </div>
           </motion.div>
 
@@ -103,22 +145,36 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all"
           >
             {/* Top Stat */}
-            <div>
-              <span className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+            >
+              <motion.span 
+                variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1"
+              >
                 Client Retention Rate
-              </span>
-              <div className="text-4xl sm:text-5xl font-bold text-white tracking-tight flex items-center gap-2">
+              </motion.span>
+              <motion.div 
+                variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } } }}
+                className="text-4xl sm:text-5xl font-bold text-white tracking-tight flex items-center gap-2"
+              >
                 98.2%
                 <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#ff6b35]" />
-              </div>
+              </motion.div>
 
               {/* Overlapping Desi Avatars */}
-              <div className="flex items-center -space-x-2.5 mt-5">
+              <motion.div 
+                variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0, transition: { duration: 0.4 } } }}
+                className="flex items-center -space-x-2.5 mt-5"
+              >
                 <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#110702] ring-1 ring-[#ff6b35]/40">
                   <Image src="/desi-man-1.png" alt="Client 1" fill className="object-cover" />
                 </div>
@@ -131,28 +187,69 @@ export default function AnimatedGraphSection() {
                 <span className="pl-4 text-xs font-medium text-white/50">
                   Active Brand Partners
                 </span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            {/* Testimonial Quote */}
+            {/* Testimonial Quote with Word-by-Word Reveal */}
             <div className="pt-6 border-t border-white/5">
-              <p className="text-lg sm:text-xl font-light text-white leading-snug">
-                “Having our product sourcing, PPC ads, and bank accounts handled by{" "}
-                <span className="font-instrument italic text-[#ff6b35] text-2xl font-medium">
-                  one team
-                </span>{" "}
-                keeps our store{" "}
-                <span className="font-instrument italic text-white text-2xl font-medium">
-                  profitable and
-                </span>{" "}
-                stress-free.”
-              </p>
-              <div className="mt-4 flex items-center gap-2">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                variants={{ visible: { transition: { staggerChildren: 0.025 } } }}
+                className="text-lg sm:text-xl font-light text-white leading-snug flex flex-wrap gap-x-1.5 items-baseline"
+              >
+                {[
+                  { text: "“Having", highlight: false },
+                  { text: "our", highlight: false },
+                  { text: "product", highlight: false },
+                  { text: "sourcing,", highlight: false },
+                  { text: "PPC", highlight: false },
+                  { text: "ads,", highlight: false },
+                  { text: "and", highlight: false },
+                  { text: "bank", highlight: false },
+                  { text: "accounts", highlight: false },
+                  { text: "handled", highlight: false },
+                  { text: "by", highlight: false },
+                  { text: "one", highlight: "orange" },
+                  { text: "team", highlight: "orange" },
+                  { text: "keeps", highlight: false },
+                  { text: "our", highlight: false },
+                  { text: "store", highlight: false },
+                  { text: "profitable", highlight: "white-italic" },
+                  { text: "and", highlight: "white-italic" },
+                  { text: "stress-free.”", highlight: false },
+                ].map((item, idx) => (
+                  <motion.span
+                    key={idx}
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.35 } }
+                    }}
+                    className={
+                      item.highlight === "orange"
+                        ? "font-instrument italic text-[#ff6b35] text-2xl font-medium inline-block"
+                        : item.highlight === "white-italic"
+                        ? "font-instrument italic text-white text-2xl font-medium inline-block"
+                        : "text-white inline-block"
+                    }
+                  >
+                    {item.text}
+                  </motion.span>
+                ))}
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="mt-4 flex items-center gap-2"
+              >
                 <div className="w-1.5 h-1.5 rounded-full bg-[#ff6b35]" />
                 <span className="text-white/40 text-xs font-medium uppercase tracking-wider">
                   Verified Amazon FBA Seller
                 </span>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -160,15 +257,28 @@ export default function AnimatedGraphSection() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="group relative h-[460px] sm:h-[490px] bg-[#110702] border border-white/10 rounded-[2.2rem] p-6 sm:p-8 flex flex-col justify-between shadow-2xl hover:border-[#ff6b35]/40 transition-all overflow-hidden"
           >
             {/* Header: Brand Name + Action Link */}
-            <div className="flex items-center justify-between">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+              className="flex items-center justify-between"
+            >
               <div className="flex items-center gap-2">
-                <span className="text-xl font-bold tracking-tight text-white">
-                  Amazon Fast Service
+                <span className="text-xl font-bold tracking-tight text-white flex flex-wrap gap-x-1.5">
+                  {"Amazon Fast Service".split(" ").map((w, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } }}
+                    >
+                      {w}
+                    </motion.span>
+                  ))}
                 </span>
               </div>
               <Link
@@ -178,44 +288,79 @@ export default function AnimatedGraphSection() {
               >
                 <ArrowUpRight className="w-5 h-5" />
               </Link>
-            </div>
+            </motion.div>
 
             {/* Middle: Full-Service Store Operations & Checklist */}
             <div className="relative my-auto py-2">
-              <span className="text-white/50 text-xs font-semibold uppercase tracking-wider block">
+              <motion.span 
+                initial={{ opacity: 0, y: 6 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.35 }}
+                className="text-white/50 text-xs font-semibold uppercase tracking-wider block"
+              >
                 Full-Service Operations
-              </span>
-              <div className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight mt-1 mb-4">
+              </motion.span>
+              <motion.div 
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="font-instrument italic text-4xl sm:text-5xl font-bold text-white tracking-tight mt-1 mb-4"
+              >
                 24/7 Managed
-              </div>
+              </motion.div>
 
-              {/* Operational Feature List */}
-              <div className="space-y-2.5">
-                <div className="flex items-center gap-2.5 text-xs text-white/85">
-                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
-                  <span>Daily Inventory & Shipment Sync</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs text-white/85">
-                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
-                  <span>Active PPC Bid & Keyword Control</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-xs text-white/85">
-                  <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
-                  <span>Account Health & Buy-Box Defense</span>
-                </div>
-              </div>
+              {/* Operational Feature List with Staggered Entrance */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+                className="space-y-2.5"
+              >
+                {[
+                  "Daily Inventory & Shipment Sync",
+                  "Active PPC Bid & Keyword Control",
+                  "Account Health & Buy-Box Defense",
+                ].map((text, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={{
+                      hidden: { opacity: 0, x: -12 },
+                      visible: { opacity: 1, x: 0, transition: { duration: 0.35 } }
+                    }}
+                    className="flex items-center gap-2.5 text-xs text-white/85"
+                  >
+                    <div className="w-4 h-4 rounded-full bg-[#ff6b35]/20 flex items-center justify-center text-[#ff6b35] shrink-0 font-bold">✓</div>
+                    <span>{text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
 
               {/* Status Badge */}
-              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+              <motion.div 
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between"
+              >
                 <span className="text-[11px] text-white/50 font-medium">Account Health Score</span>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Excellent (100%)
                 </span>
-              </div>
+              </motion.div>
             </div>
 
             {/* Bottom Dedicated Manager Strip */}
-            <div className="w-full bg-black/60 border border-white/10 rounded-2xl p-2.5 pl-4 sm:pl-5 flex items-center justify-between shadow-inner">
+            <motion.div 
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="w-full bg-black/60 border border-white/10 rounded-2xl p-2.5 pl-4 sm:pl-5 flex items-center justify-between shadow-inner"
+            >
               <div>
                 <span className="font-instrument italic text-lg sm:text-xl font-bold text-white block leading-none">
                   Dedicated Account Pod
@@ -232,39 +377,52 @@ export default function AnimatedGraphSection() {
                 Explore Services
                 <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>
 
         {/* Bottom Services Strip with Real Lucide React Icons (No Emojis) */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
           className="w-full pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 sm:gap-4"
         >
-          <span className="text-white/40 text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+          <motion.span 
+            variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0, transition: { duration: 0.35 } } }}
+            className="text-white/40 text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5"
+          >
             <Sparkles className="w-3.5 h-3.5 text-[#ff6b35]" /> Core Scaling Solutions:
-          </span>
+          </motion.span>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <motion.div 
+            variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+            className="flex flex-wrap items-center gap-2 sm:gap-3"
+          >
             {servicePills.map((pill) => {
               const IconComponent = pill.icon;
               return (
-                <Link
+                <motion.div
                   key={pill.slug}
-                  href={`/services/${pill.slug}`}
-                  className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/5 hover:bg-[#ff6b35]/15 border border-white/10 hover:border-[#ff6b35]/40 text-white/80 hover:text-white text-xs font-medium transition-all duration-200"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.35 } }
+                  }}
                 >
-                  <IconComponent className="w-3.5 h-3.5 text-[#ff6b35]" />
-                  <span>{pill.name}</span>
-                  <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#ff6b35] transition-colors" />
-                </Link>
+                  <Link
+                    href={`/services/${pill.slug}`}
+                    className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/5 hover:bg-[#ff6b35]/15 border border-white/10 hover:border-[#ff6b35]/40 text-white/80 hover:text-white text-xs font-medium transition-all duration-200"
+                  >
+                    <IconComponent className="w-3.5 h-3.5 text-[#ff6b35]" />
+                    <span>{pill.name}</span>
+                    <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-[#ff6b35] transition-colors" />
+                  </Link>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </motion.div>
 
       </div>
