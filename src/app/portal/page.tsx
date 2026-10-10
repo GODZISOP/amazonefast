@@ -313,7 +313,7 @@ export default function ClientPortal() {
                       <span className="text-[10px] text-white font-bold uppercase tracking-wider">Update</span>
                     </>
                   )}
-                  <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'Profile Image')} disabled={uploading} />
+                  <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'Profile Image')} disabled={!!uploading} />
                 </label>
               </div>
               {profileImageDoc && (

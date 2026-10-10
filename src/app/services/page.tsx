@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { 
   ArrowUpRight, 
   Sparkles, 
@@ -9,18 +10,12 @@ import {
   Search, 
   ShoppingBag, 
   PenTool, 
-  Layout, 
   UserPlus, 
   Building2, 
   ShieldCheck, 
   Globe2, 
   Landmark, 
-  Wallet, 
-  CreditCard, 
-  Banknote,
   Check,
-  Building,
-  Layers,
   ArrowRight,
   Award,
   Boxes
@@ -39,7 +34,6 @@ export interface ServiceItem {
 }
 
 export const servicesData: ServiceItem[] = [
-  // 5. A+ Content & EBC
   {
     name: "A+ Content & EBC",
     slug: "a-content-ebc",
@@ -50,7 +44,6 @@ export const servicesData: ServiceItem[] = [
     icon: PenTool,
     highlights: ["High-resolution visual storytelling", "Competitor comparison tables", "Boosts conversion by up to 20%"]
   },
-  // 1. Amazon Account Creation
   {
     name: "Amazon Account Creation",
     slug: "amazon-account-creation",
@@ -58,119 +51,52 @@ export const servicesData: ServiceItem[] = [
     categoryLabel: "Amazon Growth",
     tag: "Guaranteed Setup",
     tagColor: "bg-[#ff6b35] text-black font-bold",
-    description: "Avoid instant Section 3 suspension. Guaranteed non-resident Seller Central registration with complete document pre-audit, utility bill match, and tax clearance.",
+    description: "End-to-end US Amazon Seller Central setup with verified business credentials, tax ID integration, and full account health optimization.",
     icon: UserPlus,
-    highlights: ["CNIC/Passport (PK), Aadhaar (IN), National ID (Global)", "Utility bill & bank statement pre-audit", "Zero initial rejection guarantee"]
+    highlights: ["US-based business entity setup", "Tax ID & EIN registration", "Full account health from day one"]
   },
-
-  // 2. Amazon PPC Advertising
   {
-    name: "Amazon PPC Advertising",
-    slug: "amazon-ppc-advertising",
+    name: "Amazon PPC Management",
+    slug: "amazon-ppc-management",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "ROAS Focused",
-    description: "Data-driven ad campaigns designed to minimize ACoS and maximize your revenue potential and sales velocity.",
-    icon: TrendingUp,
-    highlights: ["Advanced keyword isolation", "Targeted 18%–24% ACoS", "Dayparting & bid optimization"]
-  },
-
-  // 3. Product Hunting & Sourcing
-  {
-    name: "Product Hunting & Sourcing",
-    slug: "product-hunting",
-    category: "amazon",
-    categoryLabel: "Amazon Growth",
-    tag: "High Margin",
-    description: "Extensive market research to identify winning, high-margin products with low competition for your brand.",
-    icon: Search,
-    highlights: ["High-demand niche analysis", "Direct factory price negotiation", "Sample inspection & quality checks"]
-  },
-
-  // 7. Bank Account Creation & Wallets
-  {
-    name: "Bank Account Creation",
-    slug: "payoneer-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Multi-Currency",
-    description: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds.",
-    icon: Wallet,
-    highlights: ["Direct Amazon disbursements", "USD, EUR, GBP virtual receiving", "Low withdrawal fees to local banks"]
-  },
-  {
-    name: "Wise Business Account",
-    slug: "wise-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Global Treasury",
-    description: "Multi-currency borderless banking for international supplier payments with real mid-market exchange rates.",
-    icon: CreditCard,
-    highlights: ["Real mid-market FX rates", "Fast supplier international wires", "Debit card & multi-currency wallets"]
-  },
-  {
-    name: "Airwallex Setup",
-    slug: "airwallex-wallet",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "Fintech Scale",
-    description: "Global treasury and cross-border payment platform with corporate virtual cards and zero foreign transaction fees.",
-    icon: Layers,
-    highlights: ["Virtual corporate Visa cards", "Zero international transaction fees", "Fast batch supplier payouts"]
-  },
-  {
-    name: "Stripe Payment Gateway",
-    slug: "stripe-setup",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$100 Setup",
-    description: "Professional Stripe account setup to process global payments, manage cash flow, and integrate with Shopify.",
-    icon: Banknote,
-    highlights: ["Accept global credit cards", "Direct Shopify & web integration", "Instant payout support"]
-  },
-  {
-    name: "Chase Bank Setup",
-    slug: "chase-bank",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$1,500 Physical",
-    description: "Get a legitimate physical US bank account with Chase Bank for ultimate credibility and financial flexibility.",
-    icon: Building,
-    highlights: ["Premier Wall Street banking entity", "High-limit business credit cards", "Dedicated commercial banker support"]
-  },
-  {
-    name: "Bank of America Setup",
-    slug: "bank-of-america",
-    category: "banking",
-    categoryLabel: "Banking & Wallets",
-    tag: "$1,500 Physical",
-    description: "Establish a strong financial foundation with a Bank of America physical business account for Amazon sellers.",
-    icon: Landmark,
-    highlights: ["Top-tier US physical bank branch", "High-limit corporate checking", "Maximum Amazon trust status"]
-  },
-
-  // 8. US LLC Formation
-  {
-    name: "US LLC Formation",
-    slug: "llc-formation",
-    category: "llc",
-    categoryLabel: "US Corporate",
-    tag: "Turnkey Hub",
+    tag: "3x–8x ROAS",
     tagColor: "bg-[#ff6b35] text-black font-bold",
-    description: "Complete US corporate structure for non-residents. State filing, Registered Agent, US physical address, and FinCEN BOI filing.",
-    icon: Building2,
-    highlights: ["Wyoming, Florida & Texas options", "100% remote non-resident setup", "Registered Agent, US Address & EIN"]
+    description: "Data-driven sponsored ads management with aggressive bid optimization, negative keyword pruning, and weekly A/B testing for maximum ROAS.",
+    icon: TrendingUp,
+    highlights: ["Sponsored Products, Brands & Display", "Daily bid & budget optimization", "Transparent weekly reporting"]
+  },
+  {
+    name: "FBA Store Automation",
+    slug: "fba-store-automation",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "$300 M1 & M2 · Profit %",
+    tagColor: "bg-[#ff6b35] text-black font-bold",
+    description: "Completely hands-free Amazon FBA store: product research, sourcing, inventory, shipments, and daily account management — all done for you.",
+    icon: Boxes,
+    highlights: ["End-to-end hands-free operation", "Daily store management & health checks", "$300 M1 & M2, then profit percentage"]
+  },
+  {
+    name: "Amazon Product Hunting",
+    slug: "amazon-product-hunting",
+    category: "amazon",
+    categoryLabel: "Amazon Growth",
+    tag: "Winning Products",
+    description: "Advanced Helium 10 & Jungle Scout product research identifying low-competition, high-demand products with proven margin potential.",
+    icon: Search,
+    highlights: ["Helium 10 & Jungle Scout powered", "Competitor & supplier analysis", "Margin & demand validation"]
   },
   {
     name: "Wyoming LLC Formation",
     slug: "wyoming-llc",
     category: "llc",
     categoryLabel: "US Corporate",
-    tag: "$500 Complete",
+    tag: "$350 Complete",
     tagColor: "bg-[#ff6b35] text-black font-bold",
-    description: "Most popular choice for global sellers. Complete member anonymity, 0% state income tax, and lowest $60 annual compliance fee.",
-    icon: ShieldCheck,
-    highlights: ["#1 Non-resident seller choice", "Full member anonymity & privacy", "Lowest $60 annual report fee"]
+    description: "The gold standard privacy-first LLC. Zero state income tax, anonymous ownership, and the strongest asset protection laws in the US.",
+    icon: Building2,
+    highlights: ["Includes $100 Wyoming state fee", "Anonymous ownership available", "Zero state income tax"]
   },
   {
     name: "Florida LLC Formation",
@@ -194,8 +120,6 @@ export const servicesData: ServiceItem[] = [
     icon: Landmark,
     highlights: ["Includes $300 Texas SOS fee", "No Personal State Income Tax", "Tier-1 US Commercial Banking Weight"]
   },
-
-  // 9. Wholesale Account Management
   {
     name: "Wholesale Account Management",
     slug: "amazon-wholesale-fba",
@@ -207,8 +131,6 @@ export const servicesData: ServiceItem[] = [
     icon: Boxes,
     highlights: ["Brand approvals & real invoices", "Send-to-Amazon (STA) shipment plans", "$300 M1 & M2, then profit percentage"]
   },
-
-  // 10. Private Label Management
   {
     name: "Private Label Account Management",
     slug: "amazon-private-label",
@@ -220,10 +142,8 @@ export const servicesData: ServiceItem[] = [
     icon: ShoppingBag,
     highlights: ["Complete launch from scratch", "Sourcing, testing & patent clearance", "$500/mo for 6 months, then 60/40 profit share"]
   },
-
-  // 11. Brand Approvals & Ungating
   {
-    name: "Brand Approvals & Ungating",
+    name: "Brand Approvals",
     slug: "brand-approvals",
     category: "amazon",
     categoryLabel: "Amazon Growth",
@@ -233,8 +153,6 @@ export const servicesData: ServiceItem[] = [
     icon: ShieldCheck,
     highlights: ["20% to 70% Profit Margin Brands", "Letter of Authorization (LOA) & invoices", "Full ungating setup in Seller Central"]
   },
-
-  // 12. Trademark & Brand Registry
   {
     name: "Trademark & Brand Registry",
     slug: "trademark-brand-registry",
@@ -247,6 +165,19 @@ export const servicesData: ServiceItem[] = [
     highlights: ["Logo ($600) & Wordmark ($700)", "Serial number in 2 to 3 days", "Instant Amazon Brand Registry access"]
   }
 ];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay: i * 0.08,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number]
+    }
+  })
+};
 
 export default function ServicesPage() {
   const [activeTab, setActiveTab] = useState<"all" | "amazon" | "llc" | "banking">("all");
@@ -266,33 +197,58 @@ export default function ServicesPage() {
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6"
+        >
           <Link href="/" className="hover:text-white transition">Home</Link>
           <span>/</span>
           <span className="text-[#ff6b35] font-semibold">All Services</span>
-        </div>
+        </motion.div>
 
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-14 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 border border-[#ff6b35]/30 text-[#ff6b35] text-xs sm:text-sm font-semibold mb-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ff6b35]/15 border border-[#ff6b35]/30 text-[#ff6b35] text-xs sm:text-sm font-semibold mb-6"
+          >
             <Sparkles className="w-4 h-4" />
             <span>Full-Spectrum E-Commerce & Corporate Solutions</span>
-          </div>
+          </motion.div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-6 leading-[1.1]">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-6 leading-[1.1]"
+          >
             Services Built To <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#ff6b35]">
               Scale Global Brands
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-white/70 text-base sm:text-lg leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.22 }}
+            className="text-white/70 text-base sm:text-lg leading-relaxed"
+          >
             From hands-free FBA store automation and high-ROAS PPC advertising to turnkey US LLC formation and business banking for international founders.
-          </p>
+          </motion.p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12"
+        >
           {[
             { id: "all", label: "All Services", count: servicesData.length },
             { id: "amazon", label: "Amazon Growth", count: servicesData.filter(s => s.category === "amazon").length },
@@ -317,22 +273,26 @@ export default function ServicesPage() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
-        {/* Services Grid */}
+        {/* Services Grid — staggered whileInView */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredServices.map((service, idx) => {
             const IconComponent = service.icon;
             return (
-              <div 
-                key={idx}
+              <motion.div
+                key={service.slug}
+                custom={idx % 3}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={cardVariants}
                 className="group bg-[#120703]/90 backdrop-blur-xl border border-white/10 hover:border-[#ff6b35]/50 rounded-3xl p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(255,107,53,0.15)] relative overflow-hidden flex flex-col justify-between"
               >
-                {/* Subtle orange hover glow in background */}
+                {/* Subtle orange hover glow */}
                 <div className="absolute top-0 right-0 w-36 h-36 bg-[#ff6b35]/15 blur-[55px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div>
-                  {/* Category Pill + Price/Feature Tag */}
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 px-2.5 py-1 rounded-md bg-white/5 border border-white/10">
                       {service.categoryLabel}
@@ -342,12 +302,10 @@ export default function ServicesPage() {
                     </span>
                   </div>
 
-                  {/* Icon */}
                   <div className="mb-5 bg-[#ff6b35]/10 w-14 h-14 flex items-center justify-center rounded-2xl border border-[#ff6b35]/20 group-hover:border-[#ff6b35]/50 group-hover:scale-110 transition-all duration-300">
                     <IconComponent className="text-[#ff6b35] w-7 h-7" />
                   </div>
                   
-                  {/* Title & Description */}
                   <h3 className="text-xl sm:text-2xl font-bold mb-3 text-white tracking-tight group-hover:text-[#ff6b35] transition-colors">
                     {service.name}
                   </h3>
@@ -356,7 +314,6 @@ export default function ServicesPage() {
                     {service.description}
                   </p>
 
-                  {/* Highlights Bullet Points */}
                   <div className="space-y-2 mb-6 border-t border-white/10 pt-4">
                     {service.highlights.map((h, hIdx) => (
                       <div key={hIdx} className="flex items-center gap-2 text-xs text-white/80">
@@ -367,7 +324,6 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Permanent Prominent View Details Button */}
                 <Link
                   href={`/services/${service.slug}`}
                   className="w-full mt-2 py-3 px-4 rounded-xl bg-white/5 hover:bg-[#ff6b35] text-white hover:text-black font-bold text-sm flex items-center justify-center gap-2 border border-white/15 hover:border-[#ff6b35] transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(255,107,53,0.3)]"
@@ -375,30 +331,36 @@ export default function ServicesPage() {
                   <span>View Details</span>
                   <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                 </Link>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Bottom Consultation Banner */}
-        <div className="mt-20 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#170a04] via-[#120703] to-[#170a04] border border-[#ff6b35]/30 text-center relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-20 p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#170a04] via-[#120703] to-[#170a04] border border-[#ff6b35]/30 text-center relative overflow-hidden"
+        >
           <div className="absolute inset-0 bg-[#ff6b35]/5 blur-3xl pointer-events-none" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-3 relative">
             Need a Custom Package or Strategy?
           </h2>
-          <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mb-6">
+          <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mb-6 relative">
             Speak directly with our senior Amazon and US corporate specialists to design a tailor-made roadmap for your brand.
           </p>
           <Link
             href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105 relative"
           >
             Consult Free on WhatsApp
             <ArrowRight className="w-4 h-4 stroke-[2.5]" />
           </Link>
-        </div>
+        </motion.div>
 
       </div>
     </div>
