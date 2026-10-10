@@ -560,45 +560,48 @@ export default function ClientPortal() {
           )}
         </div>
 
+        {/* Lightbox Preview Modal */}
+        {previewImage && (
+          <div
+            onClick={() => setPreviewImage(null)}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4 flex flex-col"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                <span className="text-sm font-bold text-gray-800">
+                  {previewImage.includes('front') ? 'Passport — Page 1 (Bio-Data & Details)' 
+                   : previewImage.includes('back') ? 'Passport — Pages 2 & 3 (Signature & Endorsement)' 
+                   : previewImage.includes('cnic') ? 'CNIC — Pakistan National Identity Card'
+                   : previewImage.includes('utility') ? 'Utility Bill — Example Format'
+                   : 'Example Document'}
+                </span>
+                <button
+                  onClick={() => setPreviewImage(null)}
+                  className="p-1 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="relative w-full h-[70vh] my-2 bg-gray-50 rounded-xl overflow-hidden">
+                <Image
+                  src={previewImage}
+                  alt="Document Sample Preview"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="text-center pt-2 border-t border-gray-100">
+                <p className="text-xs text-gray-500 font-medium">Verification Requirement: High resolution, flat surface, no cut-off edges.</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
-
-      {/* Lightbox Preview Modal for Passport Samples */}
-      {previewImage && (
-        <div
-          onClick={() => setPreviewImage(null)}
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4 flex flex-col"
-          >
-            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-              <span className="text-sm font-bold text-gray-800">
-                {previewImage.includes('front') ? 'Passport Page 1 (Bio-Data & Details)' : 'Passport Pages 2 & 3 (Signature & Endorsement)'}
-              </span>
-              <button
-                onClick={() => setPreviewImage(null)}
-                className="p-1 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="relative w-full h-[70vh] my-2 bg-gray-50 rounded-xl overflow-hidden">
-              <Image
-                src={previewImage}
-                alt="Passport Sample Preview"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="text-center pt-2 border-t border-gray-100">
-              <p className="text-xs text-gray-500 font-medium">Amazon Verification Requirement: High resolution, flat surface, no cut-off edges.</p>
-            </div>
-          </div>
-        </div>
-      )}
 }
 
 function DocumentCard({ docs, title, desc, type, handleFileUpload, uploading, handleDeleteDocument, multiple, sampleImage, sampleLabel, setPreviewImage }: any) {
