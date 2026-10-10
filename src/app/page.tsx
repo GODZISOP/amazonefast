@@ -328,7 +328,7 @@ export default function Home() {
               <motion.h2
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+                viewport={{ once: false, margin: "0px 0px -100px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
                 className="text-4xl sm:text-6xl lg:text-[4.8rem] font-bold leading-[1.05] tracking-[-0.04em] flex flex-wrap gap-x-3 gap-y-2 text-white"
               >
@@ -348,7 +348,7 @@ export default function Home() {
               <motion.p
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                viewport={{ once: false, margin: "0px 0px -50px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.04, delayChildren: 0.2 } } }}
                 className="text-lg sm:text-2xl lg:text-[1.45rem] leading-relaxed font-medium flex flex-wrap gap-x-2 gap-y-1 text-white/90"
               >
@@ -366,7 +366,13 @@ export default function Home() {
           </div>
 
           {/* Scattered Meta Details (Desktop Only - Cleaned up to avoid overlap) */}
-          <div className="mt-12 hidden lg:flex items-center justify-between pointer-events-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-12 hidden lg:flex items-center justify-between pointer-events-auto"
+          >
             <div className="flex flex-col gap-1 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2.5 rounded-xl">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff6b35]">Core Focus</span>
               <span className="text-xs font-semibold text-white/90">E-Commerce & Amazon Growth</span>
@@ -384,7 +390,7 @@ export default function Home() {
                 <span>US LLC & Banking</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </motion.div>
       </section>
@@ -727,22 +733,38 @@ export default function Home() {
           >
               <div className="mb-8">
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+                  variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] flex flex-wrap gap-x-3 gap-y-1"
                 >
-                  Join the Trusted<br />AmazonFast Community
+                  {"Join the Trusted AmazonFast Community".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </motion.h2>
               </div>
               <div className="mb-10 max-w-md">
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-white/60 text-lg leading-relaxed"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "0px 0px -40px 0px" }}
+                  variants={{ visible: { transition: { staggerChildren: 0.025, delayChildren: 0.15 } } }}
+                  className="text-white/60 text-lg leading-relaxed flex flex-wrap gap-x-1.5 gap-y-0.5"
                 >
-                  We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.
+                  {"We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </motion.p>
               </div>
 
@@ -850,22 +872,38 @@ export default function Home() {
               {/* Animated Text */}
               <div className="mb-6">
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+                  variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+                  className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight flex flex-wrap gap-x-3 gap-y-1"
                 >
-                  Your Brand Deserves<br />Safe and Simple Scaling
+                  {"Your Brand Deserves Safe and Simple Scaling".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </motion.h2>
               </div>
               <div className="mb-10 max-w-md">
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-white/60 text-lg leading-relaxed"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "0px 0px -40px 0px" }}
+                  variants={{ visible: { transition: { staggerChildren: 0.025, delayChildren: 0.15 } } }}
+                  className="text-white/60 text-lg leading-relaxed flex flex-wrap gap-x-1.5 gap-y-0.5"
                 >
-                  Don't put financial freedom on hold. Partner with AmazonFast and start scaling your eCommerce empire today.
+                  {"Don't put financial freedom on hold. Partner with AmazonFast and start scaling your eCommerce empire today.".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </motion.p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -890,18 +928,42 @@ export default function Home() {
 
           {/* Left Text */}
           <div className="w-full lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+              variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
               className="mb-6 flex flex-wrap gap-x-4 items-center"
             >
-              <span className="text-[clamp(3rem,6vw,4rem)] font-bold text-white leading-tight">Become a</span>
-              <span className="text-[clamp(3rem,6vw,4rem)] font-bold text-[#ff6b35] leading-tight">Best Seller</span>
-            </motion.div>
-            <p className="text-white/60 text-lg md:text-xl mb-12 max-w-lg leading-relaxed">
-              With a professional set of eyes, your store will work wonders! Connect with our strategists now and make your brand a best-seller.
-            </p>
+              <motion.span
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                className="text-[clamp(3rem,6vw,4rem)] font-bold text-white leading-tight"
+              >
+                Become a
+              </motion.span>
+              <motion.span
+                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                className="text-[clamp(3rem,6vw,4rem)] font-bold text-[#ff6b35] leading-tight"
+              >
+                Best Seller
+              </motion.span>
+            </motion.h2>
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "0px 0px -40px 0px" }}
+              variants={{ visible: { transition: { staggerChildren: 0.025, delayChildren: 0.15 } } }}
+              className="text-white/60 text-lg md:text-xl mb-12 max-w-lg leading-relaxed flex flex-wrap gap-x-1.5 gap-y-1"
+            >
+              {"With a professional set of eyes, your store will work wonders! Connect with our strategists now and make your brand a best-seller.".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
             <div className="flex flex-col sm:flex-row gap-10 mb-8">
               <div>
                 <p className="text-white/40 text-xs mb-2 uppercase tracking-widest font-semibold">Call Us</p>
@@ -1032,20 +1094,39 @@ function FAQSection() {
     <section className="relative py-28 overflow-hidden bg-[#0a0a0a]">
       <div className="max-w-[1300px] mx-auto px-6 sm:px-12 relative z-10">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 mb-5">
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.4 }}
+            className="inline-block px-4 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 mb-5"
+          >
             <span className="text-[#ff6b35] text-sm font-semibold tracking-wide">FAQ</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight">
-            Frequently Asked<br />
-            <span className="text-[#ff6b35]">Questions</span>
-          </h2>
-        </motion.div>
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+            variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+            className="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight flex flex-wrap justify-center gap-x-3.5"
+          >
+            {["Frequently", "Asked"].map((word, i) => (
+              <motion.span
+                key={`faq-${i}`}
+                variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+              >
+                {word}
+              </motion.span>
+            ))}
+            <motion.span
+              variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+              className="text-[#ff6b35] w-full block mt-1"
+            >
+              Questions
+            </motion.span>
+          </motion.h2>
+        </div>
 
         {/* Vertical beam section wrapper */}
         <div className="relative pt-20">
