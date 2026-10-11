@@ -62,7 +62,7 @@ const serviceDetails: Record<string, any> = {
     ]
   },
   "brand-approvals": {
-    title: "Amazon Brand Approvals & Ungating",
+    title: "Brand Approval",
     tagline: "Guaranteed Approvals ($3,000 – $10,000)",
     description: "Get official approvals to sell big brands on Amazon. Official Letter of Authorization (LOA), Brand Registry approval, Proforma Invoices, Paid Invoices, and complete Seller Central setup.",
     image: "/srv_product_hunting_v2_1791215473466.jpg",
@@ -92,7 +92,7 @@ const serviceDetails: Record<string, any> = {
     ]
   },
   "amazon-wholesale-fba": {
-    title: "Complete Amazon Wholesale FBA",
+    title: "Complete Account Management and PL",
     tagline: "Turnkey Brand Approvals & Scaled Operations",
     description: "End-to-end wholesale operations: direct brand approvals, distributor invoice procurement, FBA prep & shipment planning, and daily BuyBox store management. Month 1: $300, Month 2: $300, Month 3+: Profit Share %.",
     image: "/srv_fba_automation_new.jpg",

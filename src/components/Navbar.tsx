@@ -272,7 +272,7 @@ export default function Navbar() {
                     href="/services/brand-approvals" 
                     className="text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-between group/link"
                   >
-                    <span>Brand Approvals & Ungating</span>
+                    <span>Brand Approval</span>
                     <ArrowUpRight size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity text-[#ff6b35]" />
                   </Link>
 
@@ -477,7 +477,7 @@ export default function Navbar() {
                 ))}
               </motion.div>
 
-              {/* 4. Complete Wholesale & PL Dropdown */}
+              {/* 4. Complete Account Management and PL Dropdown */}
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
@@ -485,7 +485,7 @@ export default function Navbar() {
                 }}
                 className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors flex items-center justify-between text-left py-1"
               >
-                <span>Complete Wholesale & PL</span>
+                <span>Complete Account Management and PL</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileWholesaleOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
               </button>
               
@@ -506,13 +506,13 @@ export default function Navbar() {
                 ))}
               </motion.div>
 
-              {/* 5. Brand Approvals */}
+              {/* 5. Brand Approval */}
               <Link 
                 href="/services/brand-approvals" 
                 onClick={() => setIsMobileMenuOpen(false)} 
                 className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors py-1 flex items-center justify-between group"
               >
-                <span>Brand Approvals</span>
+                <span>Brand Approval</span>
                 <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#ff6b35] transition-colors" />
               </Link>
 
