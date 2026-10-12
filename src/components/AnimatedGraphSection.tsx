@@ -363,7 +363,7 @@ export default function AnimatedGraphSection() {
             >
               <div>
                 <span className="font-instrument italic text-lg sm:text-xl font-bold text-white block leading-none">
-                  Dedicated Account Pod
+                  Dedicated Amazon Specialist
                 </span>
                 <span className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">
                   Direct 1-on-1 Support
