@@ -110,19 +110,23 @@ export default function Navbar() {
                   </Link>
 
                   {/* 2. Bank Account Creation Dropdown */}
-                  <div 
+                  <div
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("bank")}
+                    onMouseLeave={() => {
+                      setDesktopActiveDropdown(null);
+                      setIsDesktopPhysicalBankOpen(false);
+                    }}
                   >
                     <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "bank" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
                       <Link href="/services/payoneer-wallet" className="flex-1">
                         Bank Account Creation
                       </Link>
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setDesktopActiveDropdown(desktopActiveDropdown === "bank" ? null : "bank");
+                          setDesktopActiveDropdown("bank");
                         }}
                         className="p-0.5 hover:text-[#ff6b35] transition-colors"
                       >
@@ -131,75 +135,78 @@ export default function Navbar() {
                     </div>
 
                     {desktopActiveDropdown === "bank" && (
-                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                        <Link href="/services/payoneer-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Payoneer Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/wise-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Wise Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/airwallex-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Airwallex Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/stripe-setup" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Stripe Setup</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        
-                        <div className="w-full h-px bg-white/10 my-0.5"></div>
+                      <div className="absolute left-0 top-full w-full pt-1 z-[60]">
+                        <div className="bg-[#161616] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 shadow-2xl">
+                          <Link href="/services/payoneer-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Payoneer Setup</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/wise-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Wise Setup</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/airwallex-wallet" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Airwallex Setup</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/stripe-setup" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Stripe Setup</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
 
-                        {/* Physical Bank Dropdown inside Bank Account Creation */}
-                        <div 
-                          className="relative"
-                          onMouseEnter={() => setIsDesktopPhysicalBankOpen(true)}
-                          onMouseLeave={() => setIsDesktopPhysicalBankOpen(false)}
-                        >
-                          <button 
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsDesktopPhysicalBankOpen(!isDesktopPhysicalBankOpen);
-                            }}
-                            className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between ${isDesktopPhysicalBankOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
+                          <div className="w-full h-px bg-white/10 my-0.5"></div>
+
+                          {/* Physical Bank */}
+                          <div
+                            className="relative"
+                            onMouseEnter={() => setIsDesktopPhysicalBankOpen(true)}
+                            onMouseLeave={() => setIsDesktopPhysicalBankOpen(false)}
                           >
-                            <span>Physical Bank</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopPhysicalBankOpen ? 'rotate-180 text-[#ff6b35]' : 'opacity-70'}`}><path d="m6 9 6 6 6-6"/></svg>
-                          </button>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setIsDesktopPhysicalBankOpen(true);
+                              }}
+                              className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between ${isDesktopPhysicalBankOpen ? 'text-white bg-white/10' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
+                            >
+                              <span>Physical Bank</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopPhysicalBankOpen ? 'rotate-180 text-[#ff6b35]' : 'opacity-70'}`}><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
 
-                          {isDesktopPhysicalBankOpen && (
-                            <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                              <Link href="/services/chase-bank" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
-                                <span>Chase Bank</span>
-                                <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
-                              </Link>
-                              <Link href="/services/bank-of-america" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
-                                <span>Bank of America</span>
-                                <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
-                              </Link>
-                            </div>
-                          )}
+                            {isDesktopPhysicalBankOpen && (
+                              <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
+                                <Link href="/services/chase-bank" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
+                                  <span>Chase Bank</span>
+                                  <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
+                                </Link>
+                                <Link href="/services/bank-of-america" className="text-white/70 hover:text-white hover:bg-white/10 px-2 py-1 rounded-md text-[11px] font-medium transition-colors flex items-center justify-between group/subPhys">
+                                  <span>Bank of America</span>
+                                  <ArrowUpRight size={11} className="opacity-0 group-hover/subPhys:opacity-100 transition-opacity text-[#ff6b35]" />
+                                </Link>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     )}
                   </div>
 
                   {/* 3. LLC Formation Dropdown */}
-                  <div 
+                  <div
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("llc")}
+                    onMouseLeave={() => setDesktopActiveDropdown(null)}
                   >
                     <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "llc" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
                       <Link href="/services/llc-formation" className="flex-1">
                         LLC Formation
                       </Link>
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setDesktopActiveDropdown(desktopActiveDropdown === "llc" ? null : "llc");
+                          setDesktopActiveDropdown("llc");
                         }}
                         className="p-0.5 hover:text-[#ff6b35] transition-colors"
                       >
@@ -208,41 +215,44 @@ export default function Navbar() {
                     </div>
 
                     {desktopActiveDropdown === "llc" && (
-                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                        <Link href="/services/llc-formation" className="text-[#ff6b35] hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center justify-between group/sub">
-                          <span>Overview & All States</span>
-                          <ArrowUpRight size={12} className="opacity-100 text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/wyoming-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Wyoming LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/florida-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Florida LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/texas-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Texas LLC</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
+                      <div className="absolute left-0 top-full w-full pt-1 z-[60]">
+                        <div className="bg-[#161616] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 shadow-2xl">
+                          <Link href="/services/llc-formation" className="text-[#ff6b35] hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center justify-between group/sub">
+                            <span>Overview & All States</span>
+                            <ArrowUpRight size={12} className="opacity-100 text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/wyoming-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Wyoming LLC</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/florida-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Florida LLC</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/texas-llc" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Texas LLC</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  {/* 4. Complete Account Management and PL Dropdown */}
-                  <div 
+                  {/* 4. Account Management Dropdown */}
+                  <div
                     className="relative"
                     onMouseEnter={() => setDesktopActiveDropdown("wholesale")}
+                    onMouseLeave={() => setDesktopActiveDropdown(null)}
                   >
                     <div className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-between ${desktopActiveDropdown === "wholesale" ? "text-white bg-white/10" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
                       <Link href="/services/amazon-wholesale-fba" className="flex-1">
-                        Complete Account Management and PL
+                        Account Management
                       </Link>
-                      <button 
+                      <button
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setDesktopActiveDropdown(desktopActiveDropdown === "wholesale" ? null : "wholesale");
+                          setDesktopActiveDropdown("wholesale");
                         }}
                         className="p-0.5 hover:text-[#ff6b35] transition-colors"
                       >
@@ -251,15 +261,17 @@ export default function Navbar() {
                     </div>
 
                     {desktopActiveDropdown === "wholesale" && (
-                      <div className="bg-white/[0.04] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 ml-2 mt-1 mb-1">
-                        <Link href="/services/amazon-wholesale-fba" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Wholesale Account Management</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
-                        <Link href="/services/amazon-private-label" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
-                          <span>Private Label Management</span>
-                          <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
-                        </Link>
+                      <div className="absolute left-0 top-full w-full pt-1 z-[60]">
+                        <div className="bg-[#161616] border border-white/10 rounded-xl p-1.5 flex flex-col gap-0.5 shadow-2xl">
+                          <Link href="/services/amazon-wholesale-fba" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Wholesale Account Management</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                          <Link href="/services/amazon-private-label" className="text-white/70 hover:text-white hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center justify-between group/sub">
+                            <span>Private Label Management</span>
+                            <ArrowUpRight size={12} className="opacity-0 group-hover/sub:opacity-100 transition-opacity text-[#ff6b35]" />
+                          </Link>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -477,7 +489,7 @@ export default function Navbar() {
                 ))}
               </motion.div>
 
-              {/* 4. Complete Account Management and PL Dropdown */}
+              {/* 4. Account Management Dropdown */}
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
@@ -485,7 +497,7 @@ export default function Navbar() {
                 }}
                 className="text-white/80 hover:text-[#ff6b35] text-base font-medium transition-colors flex items-center justify-between text-left py-1"
               >
-                <span>Complete Account Management and PL</span>
+                <span>Account Management</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isMobileWholesaleOpen ? 'rotate-180 text-[#ff6b35]' : ''}`}><path d="m6 9 6 6 6-6"/></svg>
               </button>
               

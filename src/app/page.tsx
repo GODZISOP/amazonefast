@@ -468,6 +468,42 @@ export default function Home() {
                 desc: "Professional setup & identity verification (CNIC/Passport for Pakistan, Aadhaar Card for India, National ID for other countries) with utility bill matching and zero rejection rate." 
               },
               { 
+                title: "Bank Account Creation", 
+                slug: "payoneer-wallet", 
+                icon: Landmark,
+                desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." 
+              },
+              { 
+                title: "LLC Formation", 
+                slug: "llc-formation", 
+                icon: Building2,
+                desc: "Complete US LLC/LTD company formation with EIN, registered agent, and all legal documentation to operate your Amazon business globally." 
+              },
+              { 
+                title: "Complete Account Management & PL", 
+                slug: "amazon-wholesale-fba", 
+                icon: Boxes,
+                desc: "End-to-end Amazon store management — inventory, FBA shipments, account health, and private label strategy handled by dedicated experts." 
+              },
+              { 
+                title: "Brand Approval", 
+                slug: "brand-approvals", 
+                icon: ShieldCheck,
+                desc: "Fast-track brand ungating and category approvals so you can list and sell restricted products on Amazon without delays." 
+              },
+              { 
+                title: "Trademark & Brand Registry", 
+                slug: "trademark-brand-registry", 
+                icon: Award,
+                desc: "USPTO trademark filing and Amazon Brand Registry enrollment to protect your brand, unlock A+ Content, and defend your listings." 
+              },
+              { 
+                title: "A+ Content & EBC", 
+                slug: "a-content-ebc", 
+                icon: Sparkles,
+                desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." 
+              },
+              { 
                 title: "Amazon PPC Advertising", 
                 slug: "amazon-ppc-advertising", 
                 icon: TrendingUp,
@@ -479,30 +515,6 @@ export default function Home() {
                 icon: Search,
                 desc: "Extensive market research to identify winning, high-margin products with low competition for your brand." 
               },
-              { 
-                title: "Amazon Store Creation", 
-                slug: "store-creation", 
-                icon: Store,
-                desc: "Expertly crafted, highly-converting storefront designs that establish a premium brand identity on Amazon." 
-              },
-              { 
-                title: "A+ Content & EBC", 
-                slug: "a-content-ebc", 
-                icon: Sparkles,
-                desc: "Premium, visually engaging Enhanced Brand Content that boosts conversion rates and builds customer trust." 
-              },
-              { 
-                title: "Listing SEO & Optimization", 
-                slug: "listing-seo", 
-                icon: FileText,
-                desc: "Strategic keyword placement and compelling copywriting to secure top organic rankings on Amazon search." 
-              },
-              { 
-                title: "Bank Account Creation", 
-                slug: "payoneer-wallet", 
-                icon: Landmark,
-                desc: "Professional payment and bank account setup to receive Amazon payouts securely and manage global business funds." 
-              }
             ].map((service, idx) => (
               <motion.div
                 key={idx}

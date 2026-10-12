@@ -4,11 +4,52 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, Users, Trophy, Target } from "lucide-react";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { LightRays } from "@/components/LightRays";
 
-gsap.registerPlugin(ScrollTrigger); import SplitText from "@/components/SplitText";
+gsap.registerPlugin(ScrollTrigger);
+
+// Framer Motion word-by-word scroll animation matching home page
+const AnimatedText = ({
+  text,
+  className = "",
+  tag = "h2",
+  stagger = 0.05,
+  y = 20,
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  tag?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
+  stagger?: number;
+  y?: number;
+  delay?: number;
+}) => {
+  const Component = motion[tag] as any;
+  return (
+    <Component
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, margin: "0px 0px -50px 0px" }}
+      variants={{ visible: { transition: { staggerChildren: stagger, delayChildren: delay } } }}
+      className={className}
+    >
+      {text.split(" ").map((word, i) => (
+        <motion.span
+          key={i}
+          className="inline-block whitespace-pre"
+          variants={{
+            hidden: { opacity: 0, y },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+          }}
+        >
+          {word}{" "}
+        </motion.span>
+      ))}
+    </Component>
+  );
+};
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -97,7 +138,7 @@ export default function AboutPage() {
           WebkitMaskImage: "radial-gradient(ellipse at top center, black 0%, transparent 80%)"
         }}
       >
-        <div className="absolute inset-0 bg-[#ff6b35]/20 mix-blend-color z-10" /> {/* Orange tint */}
+        <div className="absolute inset-0 bg-[#ff6b35]/20 mix-blend-color z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#ff6b35]/30 to-transparent mix-blend-overlay z-10" />
         <video 
           autoPlay 
@@ -122,35 +163,29 @@ export default function AboutPage() {
           </div>
 
           <div className="mb-6 flex flex-col items-center">
-            <SplitText
-              text="Pioneering Amazon"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
-              delay={40}
-              duration={0.8}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 30 }}
-              to={{ opacity: 1, y: 0 }}
-              textAlign="center"
+            <AnimatedText
+              text="Start & Grow Your"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-center"
               tag="h1"
+              stagger={0.06}
             />
-            <SplitText
-              text="Success Stories"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40"
-              delay={40}
-              duration={0.8}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 30 }}
-              to={{ opacity: 1, y: 0 }}
-              textAlign="center"
+            <AnimatedText
+              text="Amazon Business"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40 text-center"
               tag="h1"
+              stagger={0.06}
+              delay={0.1}
             />
           </div>
 
-          <p className="hero-desc text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed">
-            Amazon Fast Services is a top-tier e-commerce marketing agency dedicated to scaling brands, automating FBA businesses, and delivering unmatched ROAS.
-          </p>
+          <AnimatedText
+            text="Amazon Fast Services helps sellers start and grow on Amazon. From your seller account, bank and LLC to your brand, ads and daily account work, we handle it all so you can focus on selling."
+            className="hero-desc text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed text-center"
+            tag="p"
+            stagger={0.02}
+            y={12}
+            delay={0.2}
+          />
         </div>
 
         {/* Editorial Team Section */}
@@ -161,10 +196,19 @@ export default function AboutPage() {
 
           {/* Section Header */}
           <div className="relative z-10 mb-20">
-            <h2 className="text-6xl md:text-8xl font-normal tracking-tight uppercase mb-4">About Us</h2>
-            <p className="text-white/40 text-xs md:text-sm uppercase tracking-widest">
-              We joined forces to give people the start we wished we had at the beginning.
-            </p>
+            <AnimatedText
+              text="About Us"
+              className="text-6xl md:text-8xl font-normal tracking-tight uppercase mb-4"
+              tag="h2"
+              stagger={0.08}
+            />
+            <AnimatedText
+              text="We joined forces to give people the start we wished we had at the beginning."
+              className="text-white/40 text-xs md:text-sm uppercase tracking-widest"
+              tag="p"
+              stagger={0.03}
+              y={10}
+            />
           </div>
 
           {/* Service Block 1 - Left Image, Right Text */}
@@ -174,7 +218,7 @@ export default function AboutPage() {
               <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
                 <Image
                   src="/srv_store_creation.jpg"
-                  alt="Amazon FBA Wholesale"
+                  alt="Amazon account management"
                   fill
                   className="object-cover scale-image"
                 />
@@ -190,20 +234,23 @@ export default function AboutPage() {
 
             {/* Text Box */}
             <div className="w-full md:w-[50%] mt-12 md:mt-0 md:ml-auto flex flex-col items-start md:items-end text-left md:text-right">
-              <SplitText
-                text="FBA & WHOLESALE"
+              <AnimatedText
+                text="ACCOUNT MANAGEMENT"
                 className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1 text-white"
-                delay={20}
-                duration={0.8}
-                ease="power3.out"
-                splitType="chars"
                 tag="h3"
+                stagger={0.06}
               />
-              <p className="text-[#ff6b35] text-sm md:text-base mb-12 md:mb-40 font-medium tracking-wider">END-TO-END ACCOUNT MANAGEMENT & SCALING</p>
-
-              <p className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed">
-                We build sustainable, long-term wholesale and private label businesses. Our approach ensures stable supply chains, brand approvals, and consistent profitability without the usual roadblocks.
+              <p className="text-[#ff6b35] text-sm md:text-base mb-12 md:mb-40 font-medium tracking-wider">
+                WHOLESALE & PRIVATE LABEL, MANAGED FOR YOU
               </p>
+
+              <AnimatedText
+                text="We run your Amazon account day to day, including listings, orders and stock. We also find good products, create A+ Content and run PPC ads, so your sales grow slowly and safely."
+                className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed"
+                tag="p"
+                stagger={0.02}
+                y={12}
+              />
             </div>
           </div>
 
@@ -212,21 +259,24 @@ export default function AboutPage() {
             {/* Text Box */}
             <div className="w-full md:w-[50%] mb-12 md:mb-0 flex flex-col items-start text-left mt-12 md:mt-0">
               <div className="mb-12 md:mb-40">
-                <SplitText
-                  text="GLOBAL EXPANSION"
+                <AnimatedText
+                  text="SETUP & BRAND"
                   className="text-4xl md:text-5xl font-semibold uppercase tracking-wide mb-1 text-white"
-                  delay={20}
-                  duration={0.8}
-                  ease="power3.out"
-                  splitType="chars"
                   tag="h3"
+                  stagger={0.06}
                 />
-                <p className="text-[#ff6b35] text-sm md:text-base font-medium tracking-wider">USA LLC & UK LTD FORMATIONS</p>
+                <p className="text-[#ff6b35] text-sm md:text-base font-medium tracking-wider">
+                  ACCOUNT, LLC, BANK & BRAND PROTECTION
+                </p>
               </div>
 
-              <p className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed">
-                From company formation to global banking, we handle the complete legal and operational setup. We empower sellers globally to dominate international Amazon marketplaces seamlessly.
-              </p>
+              <AnimatedText
+                text="We help you start the right way. We create your Amazon account, form your USA LLC, and set up your bank or wallet like Payoneer, Wise, Stripe or Chase. We also get your brand approved and registered."
+                className="max-w-[350px] text-white/80 text-sm md:text-base leading-relaxed"
+                tag="p"
+                stagger={0.02}
+                y={12}
+              />
             </div>
 
             {/* Connecting Line (Desktop) */}
@@ -237,7 +287,7 @@ export default function AboutPage() {
               <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
                 <Image
                   src="/theme-gradient.png"
-                  alt="Global Expansion"
+                  alt="Account setup and brand registry"
                   fill
                   className="object-cover scale-image"
                 />
@@ -246,9 +296,9 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Cosmic Stats Section (Smaller Text, Placed Below Services) */}
+        {/* Cosmic Stats Section */}
         <div className="cosmic-stats relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] rounded-[30px] md:rounded-[40px] overflow-hidden mb-32 border border-[#ff3b30]/20 shadow-[0_0_80px_rgba(255,59,48,0.15)] bg-[#050000]">
-          {/* Background Image (Orbs) */}
+          {/* Background Image */}
           <Image
             src="/amazon-account-setup.png"
             alt="Amazon Fast Services Audience Stats"
@@ -256,41 +306,46 @@ export default function AboutPage() {
             className="object-cover opacity-90"
           />
 
-          {/* Top Left Text (Smaller) */}
+          {/* Top Left Text */}
           <div className="absolute top-10 left-6 md:top-14 md:left-10 max-w-[280px] md:max-w-[380px] z-20">
-            <h2 className="text-xl md:text-[26px] font-medium text-white/95 leading-snug tracking-wide">
-              Your brand will be seen by <br className="hidden md:block" /> an audience that is <span className="text-[#ff3b30] font-bold">ready to buy</span> even in tough times
-            </h2>
+            <AnimatedText
+              text="Get your products in front of people who are ready to buy"
+              className="text-xl md:text-[26px] font-medium text-white/95 leading-snug tracking-wide"
+              tag="h2"
+              stagger={0.04}
+            />
           </div>
 
-          {/* Bottom Left Glassmorphism Card (Smaller) */}
+          {/* Bottom Left Glassmorphism Card */}
           <div className="absolute bottom-8 left-6 md:bottom-10 md:left-10 z-20 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-5 max-w-[260px] md:max-w-[300px] shadow-2xl">
             <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mb-3 border border-white/5">
               <Users className="text-white/80 w-4 h-4" />
             </div>
-            <p className="text-white/70 text-[11px] md:text-xs leading-relaxed">
-              Our strategies ensure that the absolute majority of your audience are high-converting, premium buyers with strong purchasing power, rather than window shoppers.
-            </p>
+            <AnimatedText
+              text="With smart PPC ads and strong A+ Content, we bring buyers who really want to purchase, not just people who are looking around."
+              className="text-white/70 text-[11px] md:text-xs leading-relaxed"
+              tag="p"
+              stagger={0.02}
+              y={10}
+            />
           </div>
         </div>
+
         {/* Core Values */}
         <div className="mb-24">
           <div className="flex justify-center mb-12">
-            <SplitText
+            <AnimatedText
               text="Our Core Principles"
               className="text-3xl font-bold text-center"
-              delay={30}
-              duration={0.8}
-              ease="power3.out"
-              splitType="chars"
               tag="h3"
+              stagger={0.06}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { title: "Transparency", desc: "No hidden fees, no black-hat tactics. Just clear reporting and honest communication." },
-              { title: "Innovation", desc: "We stay ahead of Amazon's ever-changing policies and algorithm updates." },
-              { title: "Dedication", desc: "Your brand's success is our success. We treat your investment as our own." }
+              { title: "Transparency", desc: "No hidden fees. We tell you what we are doing and why, in simple words." },
+              { title: "Staying Updated", desc: "Amazon changes its rules often. We keep up with them so your account stays safe." },
+              { title: "Dedication", desc: "We treat your business like our own and work until you see results." }
             ].map((value, i) => (
               <div key={i} className="value-card bg-[#111] border border-white/5 p-8 rounded-3xl hover:bg-white/5 transition-colors">
                 <CheckCircle2 className="text-[#ff6b35] mb-6 w-10 h-10" />
@@ -309,10 +364,19 @@ export default function AboutPage() {
           <div className="absolute -bottom-[50%] -left-[20%] w-[80%] h-[150%] bg-gradient-to-tr from-[#661200]/60 to-transparent blur-[80px] rounded-full z-0 pointer-events-none transform -rotate-12"></div>
 
           <div className="relative z-10 flex flex-col items-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ready to Scale?</h2>
-            <p className="text-white/95 text-lg md:text-xl mb-8 max-w-xl drop-shadow-md font-medium">
-              Let's discuss how we can skyrocket your Amazon sales and automate your business operations.
-            </p>
+            <AnimatedText
+              text="Ready to Start?"
+              className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg text-center"
+              tag="h2"
+              stagger={0.06}
+            />
+            <AnimatedText
+              text="Tell us where you are right now. We will help you with the next step, from account setup to growing your sales."
+              className="text-white/95 text-lg md:text-xl mb-8 max-w-xl drop-shadow-md font-medium text-center"
+              tag="p"
+              stagger={0.02}
+              y={12}
+            />
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2">
                 Book a Call
