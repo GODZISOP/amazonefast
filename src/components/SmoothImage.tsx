@@ -32,7 +32,7 @@ export function SmoothImage({
         duration: 1.1,
         ease: [0.16, 1, 0.3, 1], // Fluid cubic-bezier
       }}
-      style={{ willChange: "transform, opacity", transform: "translateZ(0)" }}
+      suppressHydrationWarning
       className={`w-full ${aspectRatio} relative bg-[#111] border border-white/10 overflow-hidden rounded-2xl group shadow-[0_15px_50px_rgba(0,0,0,0.6)] transform-gpu isolate ${className}`}
     >
       {/* Ambient hover glow inside border */}
@@ -52,7 +52,6 @@ export function SmoothImage({
         className="relative w-full h-full transform-gpu"
         whileHover={{ scale: 1.06 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        style={{ willChange: "transform", transform: "translateZ(0)" }}
       >
         <Image
           src={src}

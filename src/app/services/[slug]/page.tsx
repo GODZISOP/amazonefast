@@ -1,7 +1,33 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Sparkles, CreditCard, ShieldCheck, Zap, Globe } from "lucide-react";
+import { 
+  ArrowUpRight, 
+  CheckCircle2, 
+  Sparkles, 
+  CreditCard, 
+  ShieldCheck, 
+  Zap, 
+  Globe,
+  Palette,
+  Camera,
+  BarChart3,
+  Search,
+  Sliders,
+  FileText,
+  TrendingUp,
+  Boxes,
+  Store,
+  Layers,
+  Lock,
+  Target,
+  RefreshCw,
+  Building,
+  Landmark,
+  FileCheck,
+  Award,
+  Users
+} from "lucide-react";
 import { notFound } from "next/navigation";
 import WalletServiceUI from "@/components/services/WalletServiceUI";
 import WiseServiceUI from "@/components/services/WiseServiceUI";
@@ -119,28 +145,30 @@ const serviceDetails: Record<string, any> = {
   },
   "amazon-ppc-advertising": {
     title: "Amazon PPC Advertising",
-    tagline: "Maximize ROAS and Dominate Your Niche",
-    description: "Stop wasting money on ineffective ad campaigns. Our Amazon PPC experts use advanced data analytics, keyword harvesting, and bidding algorithms to lower your ACoS, increase your organic ranking, and maximize your profitability.",
+    tagline: "Run Profitable Ads & Increase Sales",
+    description: "Amazon PPC Advertising means setting up, running, and improving ads on Amazon to reach real buyers, grow your sales, and keep daily costs under control.",
     image: "/srv_amazon_ppc_new.png",
     benefits: [
-      "In-Depth Keyword & Competitor Research",
-      "Campaign Setup (Sponsored Products, Brands, Display)",
-      "Bid Optimization & ACoS Reduction",
-      "Search Term Harvesting",
-      "Detailed Weekly Performance Reports"
+      "Keyword Research",
+      "Ad Setup",
+      "Budget Management",
+      "Ad Optimization",
+      "Reduce Wasted Spending",
+      "Performance Reports"
     ]
   },
   "product-hunting": {
     title: "Product Hunting & Sourcing",
-    tagline: "Find High-Demand, Low-Competition Winners",
-    description: "The secret to Amazon success starts with the right product. We use premium tools and proprietary strategies to identify products with high search volume, strong margins, and low competition to ensure your launch is a massive success.",
+    tagline: "Find Winning Products & Reliable Suppliers",
+    description: "Product Hunting & Sourcing means finding suitable products to sell and reliable suppliers to buy them from.",
     image: "/srv_product_hunting_v2_1791215473466.jpg",
     benefits: [
-      "Data-Backed Market Analysis",
-      "Competitor Weakness Identification",
-      "Profit Margin & ROI Calculations",
-      "Trend Forecasting",
-      "Supplier Sourcing Reports"
+      "Product Research",
+      "Competition Check",
+      "Profit Calculation",
+      "Supplier Research",
+      "Price Negotiation",
+      "Sample & Quality Checks"
     ]
   },
   "store-creation": {
@@ -159,14 +187,15 @@ const serviceDetails: Record<string, any> = {
   "a-content-ebc": {
     title: "A+ Content & EBC",
     tagline: "Boost Conversions with Premium Listing Designs",
-    description: "Enhanced Brand Content (A+ Content) increases conversion rates by up to 20%. Our design team crafts compelling, benefit-driven infographics, lifestyle images, and comparison charts that turn browsers into buyers.",
+    description: "Amazon A+ Content & EBC means adding professional images and detailed information to your product page to help customers understand your product. EBC (Enhanced Brand Content) is the former name for A+ Content.",
     image: "/srv_a_plus_content_new.jpg",
     benefits: [
-      "High-Converting Graphic Design",
-      "SEO-Optimized Image Alt Text",
-      "Competitor Comparison Charts",
-      "Lifestyle Imagery Selection",
-      "A/B Testing Support"
+      "Product Images",
+      "Product Descriptions",
+      "Brand Story",
+      "Comparison Charts",
+      "Page Design",
+      "Upload & Setup"
     ]
   },
   "listing-seo": {
@@ -326,6 +355,156 @@ const serviceDetails: Record<string, any> = {
     ]
   }
 };
+
+// Simple, human-friendly descriptions for service benefits (zero corporate fluff)
+const benefitDescriptions: Record<string, string> = {
+  // A+ Content & EBC
+  "Product Images": "Design clear, attractive product visuals.",
+  "Product Descriptions": "Explain features and benefits in simple words.",
+  "Brand Story": "Introduce your brand to customers.",
+  "Comparison Charts": "Compare your products to help shoppers choose.",
+  "Page Design": "Arrange images and text professionally.",
+  "Upload & Setup": "Add the content to your Amazon listings.",
+
+  // PPC Advertising
+  "Keyword Research": "Find the words people use to search for your products.",
+  "Ad Setup": "Create and run your ads on Amazon.",
+  "Budget Management": "Set how much to spend on ads each day.",
+  "Ad Optimization": "Improve ads to help bring more sales.",
+  "Reduce Wasted Spending": "Stop ads from showing for searches that don’t bring sales.",
+  "Performance Reports": "Show your ad spending, clicks, and sales.",
+
+  // Product Hunting & Sourcing
+  "Product Research": "Find products with good sales potential.",
+  "Competition Check": "See how many sellers offer similar products.",
+  "Profit Calculation": "Estimate profit after product costs and Amazon fees.",
+  "Supplier Research": "Find reliable brands, wholesalers, or manufacturers.",
+  "Price Negotiation": "Discuss better prices and buying terms.",
+  "Sample & Quality Checks": "Check samples before placing a bulk order.",
+
+  // Listing SEO
+  "Comprehensive Keyword Research": "Find high-search keywords that real customers actually type on Amazon.",
+  "SEO-Optimized Titles & Bullets": "Clear, readable titles and bullet points packed with high-converting search terms.",
+  "Backend Search Term Optimization": "Hidden backend keywords filled correctly to maximize your reach.",
+  "HTML Formatted Product Descriptions": "Neat, clean product descriptions that look great on both phone and computer screens.",
+  "Index Checking & Ranking Strategy": "Check that Amazon indexes every keyword so you rank higher over time.",
+
+  // Store Creation
+  "Custom Graphic Design & Layouts": "Custom banners and organized product collections tailored to your brand.",
+  "Brand Story Integration": "Tell your brand story and build buyer trust with professional layout modules.",
+  "Mobile-Optimized Storefronts": "Designed to look perfect and load quickly on mobile devices.",
+  "Shoppable Images & Video Modules": "Clickable images and video sections that make buying fast and simple.",
+  "Increased Brand Trust & Loyalty": "Turn one-time shoppers into repeat buyers with a polished storefront.",
+
+  // Account Creation
+  "Guaranteed Approval Process": "Step-by-step guidance to get your seller account approved on the first try.",
+  "Utility Bill & Identity Verification": "Proper document formatting to pass Amazon's verification without delays.",
+  "Tax Interview Completion (W8/W9)": "Accurate tax information setup for both US and international founders.",
+  "Bank Account Linking": "Connect your business bank account smoothly for direct deposit payouts.",
+  "Immediate Selling Privileges": "Get your account live and ready to list products right away.",
+
+  // Account Reinstatement
+  "In-Depth Suspension Analysis": "Find the exact root cause of your account suspension or listing deactivation.",
+  "Customized Plan of Action (POA)": "A professional, customized appeal letter tailored to Amazon seller policies.",
+  "Direct Communication with Amazon": "Follow up directly with seller performance until your account is restored.",
+  "Account Health Monitoring": "Keep your order defect rate and policy compliance clean to prevent issues.",
+  "Future Suspension Prevention Strategies": "Simple daily practices to keep your account safe from future flags.",
+
+  // US LLC Formation
+  "100% Non-Resident Remote Setup": "Form your US company online without needing a US visa or SSN.",
+  "Official US Commercial Address & Mail Scanning": "A real US business address with digital mail forwarding and scanning.",
+  "Registered Agent (1 Full Year Included)": "A dedicated registered agent in your chosen state for 1 full year.",
+  "IRS Federal EIN Tax ID Issuance": "Official tax ID from the IRS needed for US banking and Amazon verification.",
+  "US Business Bank Account (Mercury / Relay / Wise)": "Setup your business bank account so you can receive payouts easily.",
+
+  // Wyoming LLC
+  "Wyoming Secretary of State Filing Included": "Official state filing submitted directly with Wyoming state authorities.",
+  "Full Member Anonymity & Privacy": "Keep your personal name off public state records for maximum privacy.",
+  "0% State Income & Corporate Tax": "Enjoy Wyoming's zero state corporate income tax benefits.",
+  "1 Year Registered Agent & US Address": "Full year of registered agent service with commercial address included.",
+  "IRS EIN for Non-Residents without SSN": "We handle the IRS EIN paperwork directly for non-US residents.",
+
+  // Payoneer / Wise / Wallets
+  "Fast Account Approval": "Quick verification with approved documents to get paid quickly.",
+  "Multi-Currency Receiving Accounts": "Receive USD, EUR, GBP, and other currencies like a local business.",
+  "Seamless Amazon Integration": "Connect directly to Amazon Seller Central with zero payout delays.",
+  "Low Conversion Fees": "Keep more of your earnings with low currency exchange rates.",
+  "Global Payment Solutions": "Withdraw funds directly to your local bank account anytime.",
+
+  // Trademark & Brand Registry
+  "Official USPTO Filing Included": "Direct trademark application filed with the US Patent and Trademark Office.",
+  "Licensed US Attorney Representation": "Required legal representation by a licensed US attorney for foreign filings.",
+  "Serial Number in 2 to 3 Days": "Get your official USPTO serial number fast to enroll in Amazon Brand Registry.",
+  "Instant Amazon Brand Registry Enrollment": "Unlock brand protection tools, A+ content, and sponsored brand ads.",
+  "Unlocks A+ Content & Video Ads": "Add rich product banners, videos, and storefronts to your listings.",
+  "Counterfeit & Hijacker Protection": "Remove unauthorized sellers and counterfeiters from your listing immediately.",
+  "Logo Conflict & Clearance Search": "Pre-filing search to make sure your logo design is safe to register.",
+  "Complete Name Clearance Search": "Check that no existing brand has the same or similar name.",
+  "100% Brand Name Ownership": "Full legal rights to your brand name across the United States.",
+
+  // Brand Approvals
+  "20% to 70% Profit Margin Brands": "Pre-vetted brand deals with healthy profit margins for wholesale sellers.",
+  "Official Letter of Authorization (LOA)": "Genuine authorization letters from brand owners or distributors.",
+  "Proforma & Paid Commercial Invoices": "Compliant invoices that meet Amazon's ungating requirements.",
+  "Brand Registry Approval Setup": "Approved status in Seller Central to list and sell restricted brands.",
+  "Complete Seller Central Ungating": "Help ungating top categories and major brands without suspension risk.",
+  "Zero Inauthentic Suspension Risk": "100% genuine sourcing documentation to keep your account safe.",
+
+  // Wholesale FBA
+  "Direct Brand Account Opening & Resale Approvals": "Open direct wholesale accounts with established US brands and distributors.",
+  "Authorized Distributor Invoices (Zero Ungate Risk)": "Clean commercial invoices from verified distributors to ungate products.",
+  "Send-To-Amazon (STA) Inbound Shipment Plans": "Proper shipping plans, pallet labels, and box labels for Amazon warehouses.",
+  "Prep Center Barcode & FNSKU Logistics": "Inspection, polybagging, and FNSKU labeling through reliable US prep centers.",
+  "24/7 Algorithmic BuyBox Repricing & Inventory Forecasting": "Automated repricing to win the BuyBox and reorder stock before running out.",
+
+  // Private Label
+  "Data-Driven Product Hunting & Niche Selection": "Find high-demand, low-competition products with strong profit potential.",
+  "Competitor Weakness & Reverse-ASIN Gap Analysis": "Check customer complaints in competitor reviews to build a better product.",
+  "Direct OEM/ODM Factory Sourcing & Price Negotiation": "Source directly from verified factories with sample checks and price negotiation.",
+  "USPTO Patent Search & Design Verification": "Check for patents to avoid trademark or intellectual property disputes.",
+  "Pre-Shipment Quality Testing (AQL 2.5) & Inspection": "Inspect goods before shipping so defective units never reach Amazon warehouses.",
+  "Custom Die-Cut Packaging & Compliant Labeling": "Professional custom packaging and barcode labels ready for Amazon FBA.",
+  "Studio 3D Renders, Lifestyle Photography & A+ Content": "High-resolution photos, 3D renders, and A+ content that convert visitors into buyers.",
+  "Honeymoon Period PPC Launch & Algorithmic Ranking": "Targeted ad launch during Amazon's early ranking window to build organic sales."
+};
+
+function getBenefitDesc(benefit: string, serviceTitle: string): string {
+  if (benefitDescriptions[benefit]) {
+    return benefitDescriptions[benefit];
+  }
+  return `Professional setup and support to help your ${serviceTitle} run smoothly and get real results.`;
+}
+
+function getBenefitIcon(benefit: string): React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }> {
+  const bLower = benefit.toLowerCase();
+  
+  // Specific Exact Matches & Core Priorities
+  if (bLower.includes("product images") || bLower.includes("photo") || bLower.includes("imagery") || bLower.includes("lifestyle") || bLower.includes("camera") || bLower.includes("render")) return Camera;
+  if (bLower.includes("product descriptions") || bLower.includes("invoice") || bLower.includes("poa") || bLower.includes("document") || bLower.includes("filing") || bLower.includes("ein")) return FileText;
+  if (bLower.includes("brand story") || bLower.includes("storefront") || bLower.includes("brand registry") || bLower.includes("catalog")) return Store;
+  if (bLower.includes("comparison") || bLower.includes("chart") || bLower.includes("report") || bLower.includes("analytics")) return BarChart3;
+  if (bLower.includes("page design") || bLower.includes("graphic") || bLower.includes("design") || bLower.includes("a+ content")) return Palette;
+  if (bLower.includes("upload & setup") || bLower.includes("sample & quality") || bLower.includes("approval") || bLower.includes("verified") || bLower.includes("compliant")) return CheckCircle2;
+  
+  if (bLower.includes("keyword") || bLower.includes("product research") || bLower.includes("alt text") || bLower.includes("seo") || bLower.includes("search") || bLower.includes("hunting")) return Search;
+  if (bLower.includes("ad setup") || bLower.includes("competition") || bLower.includes("target") || bLower.includes("niche") || bLower.includes("ppc") || bLower.includes("campaign")) return Target;
+  if (bLower.includes("budget") || bLower.includes("price negotiation") || bLower.includes("fee") || bLower.includes("tax") || bLower.includes("card") || bLower.includes("margin") || bLower.includes("roi")) return CreditCard;
+  if (bLower.includes("optimization") || bLower.includes("a/b") || bLower.includes("test") || bLower.includes("reprice")) return Sliders;
+  if (bLower.includes("wasted spending") || bLower.includes("waste") || bLower.includes("protect") || bLower.includes("safe") || bLower.includes("counterfeit") || bLower.includes("suspension") || bLower.includes("risk")) return ShieldCheck;
+  
+  if (bLower.includes("profit") || bLower.includes("growth") || bLower.includes("rank") || bLower.includes("sales") || bLower.includes("scale") || bLower.includes("revenue")) return TrendingUp;
+  if (bLower.includes("supplier") || bLower.includes("llc") || bLower.includes("address") || bLower.includes("factory") || bLower.includes("commercial")) return Building;
+  if (bLower.includes("bank") || bLower.includes("chase") || bLower.includes("entity") || bLower.includes("tier-1")) return Landmark;
+  if (bLower.includes("shipment") || bLower.includes("fba") || bLower.includes("prep") || bLower.includes("fnsku") || bLower.includes("packaging") || bLower.includes("barcode")) return Boxes;
+  if (bLower.includes("trademark") || bLower.includes("attorney") || bLower.includes("trust") || bLower.includes("ownership")) return Award;
+  if (bLower.includes("fast") || bLower.includes("speed") || bLower.includes("quick") || bLower.includes("instant") || bLower.includes("serial number")) return Zap;
+  if (bLower.includes("global") || bLower.includes("multi-currency") || bLower.includes("remote") || bLower.includes("international")) return Globe;
+  if (bLower.includes("sync") || bLower.includes("integration") || bLower.includes("wire")) return RefreshCw;
+  if (bLower.includes("privacy") || bLower.includes("anonymity") || bLower.includes("secure")) return Lock;
+  if (bLower.includes("support") || bLower.includes("communication") || bLower.includes("team")) return Users;
+
+  return Sparkles;
+}
 
 // Required for Next.js App Router dynamic params
 export async function generateStaticParams() {
@@ -497,14 +676,13 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
         {/* Features Bento Grid Section */}
         <div className="mt-24 mb-16 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">Core features that set us apart</h2>
-          <p className="text-white/60 text-lg">Explore our standout features designed to deliver exceptional performance and value, ensuring your success from day one.</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">What&apos;s Included</h2>
+          <p className="text-white/60 text-lg">Clear, simple steps to make your Amazon listings look professional and bring in more sales.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.benefits.map((benefit: string, idx: number) => {
-            const icons = [ShieldCheck, Zap, Globe, CreditCard, Sparkles, CheckCircle2];
-            const IconComponent = icons[idx % icons.length];
+            const IconComponent = getBenefitIcon(benefit);
             
             return (
               <div 
@@ -519,7 +697,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 
                 <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{benefit}</h3>
                 <p className="text-white/50 leading-relaxed relative z-10">
-                  Ensuring premium service delivery directly integrated with your overarching {data.title} goals.
+                  {getBenefitDesc(benefit, data.title)}
                 </p>
               </div>
             );

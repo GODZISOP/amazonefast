@@ -744,6 +744,10 @@ export default function Home() {
             className="w-full lg:w-1/2"
           >
               <div className="mb-8">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/20 text-[#ff6b35] text-xs font-semibold uppercase tracking-wider mb-5">
+                  <TrendingUp size={14} />
+                  <span>Amazon Services & Growth</span>
+                </div>
                 <motion.h2
                   initial="hidden"
                   whileInView="visible"
@@ -751,7 +755,7 @@ export default function Home() {
                   variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] flex flex-wrap gap-x-3 gap-y-1"
                 >
-                  {"Join the Trusted AmazonFast Community".split(" ").map((word, i) => (
+                  {"Start, Run & Grow Your Amazon Store".split(" ").map((word, i) => (
                     <motion.span
                       key={i}
                       variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
@@ -769,7 +773,7 @@ export default function Home() {
                   variants={{ visible: { transition: { staggerChildren: 0.025, delayChildren: 0.15 } } }}
                   className="text-white/60 text-lg leading-relaxed flex flex-wrap gap-x-1.5 gap-y-0.5"
                 >
-                  {"We are just beginning our journey, and every new brand matters to us. Join others who have already chosen growth, transparency, and safety.".split(" ").map((word, i) => (
+                  {"We handle the hard work for you — from US LLC and bank setup to finding profitable products, running ads, and managing your daily store operations.".split(" ").map((word, i) => (
                     <motion.span
                       key={i}
                       variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
@@ -788,11 +792,13 @@ export default function Home() {
                 className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-[#ff6b35]/30 transition duration-500"
               >
                 <div className="w-10 h-10 rounded-xl bg-[#ff6b35] flex items-center justify-center shrink-0 shadow-lg shadow-[#ff6b35]/20">
-                  <Sparkles size={20} className="text-white" />
+                  <TrendingUp size={20} className="text-white" />
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Partner Program</h4>
-                  <p className="text-white/50 text-sm leading-relaxed">Invite other sellers and earn up to 5% of their initial project volume in real-time.</p>
+                  <h4 className="text-white font-semibold mb-2">Complete Store Management</h4>
+                  <p className="text-white/50 text-sm leading-relaxed">
+                    We manage your orders, inventory, and ads every day so your Amazon business keeps making sales without the stress.
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
