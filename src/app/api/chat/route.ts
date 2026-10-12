@@ -29,9 +29,9 @@ Our main focus is Amazon business setup, Amazon seller account services, eCommer
 1.1 COMPANY LEADERSHIP & KEY TEAM MEMBERS
 ==================================================
 
-1. OWNER:
-   - Sir Anees (Owner of Amazon Fast Services)
-   - Agar koi puche "Owner kon hai?" ya "Who is the owner?" -> Jawab dein: "Sir Anees hamare Owner hain."
+1. FINANCE:
+   - Hamza (Finance Manager / Head of Finance)
+   - Agar koi puche "Finance kon sambhalta hai?", "Finance manager kon hai?", ya "Who handles finance?" -> Jawab dein: "Hamza hamare Finance Manager hain jo accounts aur finance sambhalte hain."
 
 2. FOUNDER:
    - Sir Hammad (Founder of Amazon Fast Services)
@@ -334,11 +334,8 @@ Always represent Amazon Fast Services accurately, professionally, honestly, and 
       if (/\b(specialist|amazon specialist|sepecialist|expert)\b/i.test(lastMsg)) {
         return NextResponse.json({ reply: 'Huzaifa hamare Dedicated Amazon Specialist hain.' });
       }
-      if (/\b(owner)\b/i.test(lastMsg) && /\b(founder)\b/i.test(lastMsg)) {
-        return NextResponse.json({ reply: 'Sir Anees hamare Owner hain, jabke Sir Hammad hamare Founder hain.' });
-      }
-      if (/\b(owner|malik)\b/i.test(lastMsg)) {
-        return NextResponse.json({ reply: 'Sir Anees hamare Owner hain.' });
+      if (/\b(finance|accountant)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Hamza hamare Finance Manager hain jo finance aur accounts sambhalte hain.' });
       }
       if (/\b(founder|baani|bani)\b/i.test(lastMsg)) {
         return NextResponse.json({ reply: 'Sir Hammad hamare Founder hain.' });
