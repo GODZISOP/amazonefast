@@ -323,6 +323,27 @@ Always represent Amazon Fast Services accurately, professionally, honestly, and 
     if (!response.ok) {
       const errorData = await response.text();
       console.error('Groq API Error:', errorData);
+
+      const lastMsg = (messages?.[messages.length - 1]?.content || '').toLowerCase();
+      if (/\b(kg|the kg|graphics?|graphic designer)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'King of Graphics hai wo (The KG)! Hamare creative graphic design mastermind.' });
+      }
+      if (/\b(web design|web designer|developer|website)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Zain Shabbir hamare Web Designer & Developer hain.' });
+      }
+      if (/\b(specialist|amazon specialist|sepecialist|expert)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Huzaifa hamare Dedicated Amazon Specialist hain.' });
+      }
+      if (/\b(owner)\b/i.test(lastMsg) && /\b(founder)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Sir Anees hamare Owner hain, jabke Sir Hammad hamare Founder hain.' });
+      }
+      if (/\b(owner|malik)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Sir Anees hamare Owner hain.' });
+      }
+      if (/\b(founder|baani|bani)\b/i.test(lastMsg)) {
+        return NextResponse.json({ reply: 'Sir Hammad hamare Founder hain.' });
+      }
+
       return NextResponse.json({ error: 'Failed to generate response' }, { status: 500 });
     }
 
