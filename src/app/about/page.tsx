@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatedText } from "@/components/AnimatedText";
+import { SmoothImage } from "@/components/SmoothImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,37 +23,7 @@ export default function AboutPage() {
       tl.from(".hero-pill", { y: 30, opacity: 0, duration: 1 })
         .from(".hero-desc", { y: 20, opacity: 0, duration: 1 }, "-=0.2");
 
-      // Scroll Animations for Service Blocks
-      gsap.utils.toArray(".service-block").forEach((block: any) => {
-        gsap.from(block, {
-          scrollTrigger: {
-            trigger: block,
-            start: "top 80%",
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out"
-        });
-      });
 
-      // Small-to-Big Scale Animation for Images
-      gsap.utils.toArray(".scale-image").forEach((img: any) => {
-        gsap.fromTo(img,
-          { scale: 0.6, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 1.5,
-            ease: "power4.out",
-            scrollTrigger: {
-              trigger: img,
-              start: "top 85%",
-              toggleActions: "play none none reverse"
-            }
-          }
-        );
-      });
 
       // Scroll Animation for Cosmic Stats Box
       gsap.from(".cosmic-stats", {
@@ -180,14 +151,11 @@ export default function AboutPage() {
           <div className="service-block flex flex-col md:flex-row items-start relative w-full mb-32 z-10">
             {/* Image Box */}
             <div className="w-full md:w-[45%] flex flex-col items-start relative">
-              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
-                <Image
-                  src="/srv_store_creation.jpg"
-                  alt="Amazon account management"
-                  fill
-                  className="object-cover scale-image"
-                />
-              </div>
+              <SmoothImage
+                src="/srv_store_creation.jpg"
+                alt="Amazon account management"
+                aspectRatio="aspect-[4/5]"
+              />
               <div className="flex gap-4 mt-8 ml-4">
                 <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&lt;</button>
                 <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&gt;</button>
@@ -249,14 +217,11 @@ export default function AboutPage() {
 
             {/* Image Box */}
             <div className="w-full md:w-[45%] flex flex-col items-end md:ml-auto relative">
-              <div className="w-full aspect-[4/5] relative bg-[#111] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-white/5 overflow-hidden rounded-xl">
-                <Image
-                  src="/theme-gradient.png"
-                  alt="Account setup and brand registry"
-                  fill
-                  className="object-cover scale-image"
-                />
-              </div>
+              <SmoothImage
+                src="/theme-gradient.png"
+                alt="Account setup and brand registry"
+                aspectRatio="aspect-[4/5]"
+              />
             </div>
           </div>
         </div>
