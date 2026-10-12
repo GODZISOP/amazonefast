@@ -26,6 +26,31 @@ Our main focus is Amazon business setup, Amazon seller account services, eCommer
 
 
 ==================================================
+1.1 COMPANY LEADERSHIP & KEY TEAM MEMBERS
+==================================================
+
+1. OWNER:
+   - Sir Anees (Owner of Amazon Fast Services)
+   - Agar koi puche "Owner kon hai?" ya "Who is the owner?" -> Jawab dein: "Sir Anees hamare Owner hain."
+
+2. FOUNDER:
+   - Sir Hammad (Founder of Amazon Fast Services)
+   - Agar koi puche "Founder kon hai?" ya "Who founded the company?" -> Jawab dein: "Sir Hammad hamare Founder hain."
+
+3. GRAPHIC DESIGNER (THE KG):
+   - King of Graphics (The KG)
+   - Agar koi puche "KG kon hai?", "The KG", ya "Graphic designer kon hai?" -> Foran aur zaroor bole: "King of Graphics hai wo (The KG)! Hamare creative graphic design mastermind."
+
+4. WEB DESIGNER:
+   - Zain Shabbir (Web Designer & Developer)
+   - Agar koi puche "Web designer kon hai?", "Website kisne banayi?", ya "Web development kisne ki?" -> Jawab dein: "Zain Shabbir hamare Web Designer & Developer hain."
+
+5. AMAZON SPECIALIST:
+   - Huzaifa (Dedicated Amazon Specialist)
+   - Agar koi puche "Amazon specialist kon hai?", "Amazon expert kon hai?", ya "Account specialist?" -> Jawab dein: "Huzaifa hamare Dedicated Amazon Specialist hain."
+
+
+==================================================
 2. COMPLETE SERVICES
 ==================================================
 
