@@ -1,13 +1,46 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, type Variants } from "framer-motion";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: (custom: number = 0) => ({
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.035,
+      delayChildren: custom * 0.15,
+    },
+  }),
+};
+
+const letterVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      damping: 16,
+      stiffness: 120,
+      mass: 0.8,
+    },
+  },
+};
 
 export default function Footer() {
   return (
     <footer className="relative w-full bg-[#0a0a0a] overflow-hidden flex flex-col justify-between pt-16">
       
-      {/* Background Gradient matching the image */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-[#ff6b35]/20 to-[#ff6b35]/80 pointer-events-none z-0"></div>
+      {/* Background Gradient - perfectly balanced warm glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-[#ff6b35]/20 to-[#ff6b35]/50 pointer-events-none z-0"></div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto w-full px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
@@ -68,14 +101,78 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Massive Bottom Text */}
-      <div className="relative z-10 w-full flex flex-col justify-center items-center mt-auto pointer-events-none pb-4 overflow-hidden">
-        <h1 className="text-[13vw] whitespace-nowrap leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] drop-shadow-[0_0_30px_rgba(255,107,53,0.5)] select-none">
-          AmazonFast
-        </h1>
-        <h1 className="text-[9vw] whitespace-nowrap leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] drop-shadow-[0_0_30px_rgba(255,107,53,0.5)] select-none mt-2 md:mt-4">
-          SERVICES
-        </h1>
+      {/* Massive Animated Bottom Text */}
+      <div 
+        className="relative z-10 w-full flex flex-col justify-center items-center mt-auto pb-6 pt-2 overflow-hidden select-none"
+        style={{ perspective: 1000 }}
+      >
+        <motion.div
+          className="flex flex-col items-center justify-center w-full"
+          animate={{
+            filter: [
+              "drop-shadow(0 0 20px rgba(255,107,53,0.4))",
+              "drop-shadow(0 0 32px rgba(255,107,53,0.58))",
+              "drop-shadow(0 0 20px rgba(255,107,53,0.4))",
+            ],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {/* Row 1: AmazonFast */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            custom={0}
+            className="flex items-center justify-center py-1"
+          >
+            {"AmazonFast".split("").map((char, index) => (
+              <motion.span
+                key={`brand-${index}`}
+                variants={letterVariants}
+                whileHover={{
+                  y: -12,
+                  scale: 1.1,
+                  filter: "drop-shadow(0 0 25px rgba(255,107,53,0.75))",
+                  transition: { type: "spring", stiffness: 400, damping: 15 },
+                }}
+                className="text-[13vw] whitespace-nowrap leading-[0.85] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] cursor-pointer inline-block"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.div>
+
+          {/* Row 2: Services */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            custom={1}
+            className="flex items-center justify-center py-1 mt-1 md:mt-3"
+          >
+            {"Services".split("").map((char, index) => (
+              <motion.span
+                key={`service-${index}`}
+                variants={letterVariants}
+                whileHover={{
+                  y: -10,
+                  scale: 1.1,
+                  filter: "drop-shadow(0 0 25px rgba(255,107,53,0.75))",
+                  transition: { type: "spring", stiffness: 400, damping: 15 },
+                }}
+                className="text-[9.5vw] whitespace-nowrap leading-[0.85] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#ff6b35] to-[#ffaa55] cursor-pointer inline-block"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
       
     </footer>
