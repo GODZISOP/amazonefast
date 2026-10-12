@@ -55,7 +55,7 @@ export default function ContactUs() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-[clamp(2.5rem,6vw,3.75rem)] font-bold text-white leading-[1.1]"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.15]"
                 >
                   Let's Scale Your Brand Together
                 </motion.h1>

@@ -58,7 +58,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed z-50 w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
+    <header className="fixed z-[100] w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
       {/* Logo */}
       <a href="/" className="flex items-center shrink-0">
         <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 sm:h-12 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
@@ -354,7 +354,11 @@ export default function Navbar() {
         className="absolute top-full left-0 w-full overflow-hidden bg-[#0a0a0a]/98 backdrop-blur-3xl border-t border-white/5 lg:hidden flex flex-col"
       >
         <div className="flex flex-col p-6 gap-6 mt-2 overflow-y-auto max-h-[calc(100vh-200px)]">
-          {[{name: 'Home', href: '/'}, {name: 'About', href: '/about'}].map((item, i) => (
+          {[
+            { name: 'Home', href: '/' },
+            { name: 'About', href: '/about' },
+            { name: 'Contact Us', href: '/contact-us' }
+          ].map((item, i) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, y: 10 }}
@@ -582,8 +586,8 @@ export default function Navbar() {
           transition={{ delay: 0.4 }}
           className="mt-auto p-6 border-t border-white/10 bg-[#0a0a0a]"
         >
-          <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center bg-white text-black hover:bg-[#ea5c2b] hover:text-white transition-colors py-3.5 rounded-full font-bold tracking-wide text-base shadow-lg">
-            Book a Meeting
+          <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center bg-[#ff6b35] hover:bg-[#e85c2b] text-white transition-colors py-3.5 rounded-full font-bold tracking-wide text-base shadow-lg shadow-[#ff6b35]/25">
+            Contact Us
           </Link>
         </motion.div>
       </motion.div>
