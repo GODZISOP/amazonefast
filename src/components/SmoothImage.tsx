@@ -1,17 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface SmoothImageProps {
   src: string;
   alt: string;
   aspectRatio?: string;
   className?: string;
+  imageClassName?: string;
   priority?: boolean;
   once?: boolean;
   sizes?: string;
+  children?: React.ReactNode;
 }
 
 export function SmoothImage({
@@ -19,39 +21,60 @@ export function SmoothImage({
   alt,
   aspectRatio = "aspect-[4/5]",
   className = "",
+  imageClassName = "",
   priority = false,
-  once = false,
-  sizes = "(max-width: 768px) 100vw, 50vw",
+  once = true,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+  children,
 }: SmoothImageProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll progress as the image passes through the viewport
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Inertia spring physics for buttery scroll movement without jank
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
+  // Pure on-scroll parallax: image glides smoothly inside the frame as you scroll
+  const imageY = useTransform(smoothProgress, [0, 1], ["-10%", "10%"]);
+  const imageScale = useTransform(smoothProgress, [0, 0.5, 1], [1.14, 1.05, 1.14]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.72, y: 35 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once, margin: "0px 0px -60px 0px" }}
+      ref={containerRef}
+      initial={{ opacity: 0, y: 50, scale: 0.94 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1], // Fluid cubic-bezier
+        duration: 0.85,
+        ease: [0.16, 1, 0.3, 1],
       }}
       suppressHydrationWarning
-      className={`w-full ${aspectRatio} relative bg-[#111] border border-white/10 overflow-hidden rounded-2xl group shadow-[0_15px_50px_rgba(0,0,0,0.6)] transform-gpu isolate ${className}`}
+      className={`w-full ${aspectRatio} relative bg-[#121212] border border-white/10 overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] ${className}`}
     >
-      {/* Ambient hover glow inside border */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#ff6b35]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
-
-      {/* Elegant entrance shimmer line sweep */}
+      {/* On-scroll light beam sweep */}
       <motion.div
-        initial={{ x: "-150%" }}
-        whileInView={{ x: "250%" }}
-        viewport={{ once }}
-        transition={{ duration: 1.3, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 pointer-events-none z-20"
+        initial={{ x: "-120%", opacity: 0 }}
+        whileInView={{ x: "220%", opacity: [0, 0.7, 0] }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+        className="absolute inset-0 w-3/4 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none z-20"
       />
 
-      {/* Butter-smooth zoom and color reveal on hover */}
+      {/* Pure on-scroll parallax image container */}
       <motion.div
-        className="relative w-full h-full transform-gpu"
-        whileHover={{ scale: 1.06 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          y: imageY,
+          scale: imageScale,
+        }}
+        className="relative w-full h-full will-change-transform"
       >
         <Image
           src={src}
@@ -59,9 +82,20 @@ export function SmoothImage({
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover grayscale group-hover:grayscale-0 transition-[filter,transform] duration-700 ease-out transform-gpu"
+          className={`object-cover ${imageClassName}`}
         />
       </motion.div>
+
+      {/* Subtle depth vignette */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none z-10" />
+
+      {/* Optional Children overlay */}
+      {children && (
+        <div className="absolute inset-0 z-20 pointer-events-auto">
+          {children}
+        </div>
+      )}
     </motion.div>
   );
 }

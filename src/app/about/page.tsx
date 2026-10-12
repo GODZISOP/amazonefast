@@ -25,18 +25,6 @@ export default function AboutPage() {
 
 
 
-      // Scroll Animation for Cosmic Stats Box
-      gsap.from(".cosmic-stats", {
-        scrollTrigger: {
-          trigger: ".cosmic-stats",
-          start: "top 75%",
-        },
-        scale: 0.95,
-        y: 60,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out"
-      });
 
       // Scroll Animation for Value Cards
       gsap.utils.toArray(".value-card").forEach((card: any, i: number) => {
@@ -156,10 +144,6 @@ export default function AboutPage() {
                 alt="Amazon account management"
                 aspectRatio="aspect-[4/5]"
               />
-              <div className="flex gap-4 mt-8 ml-4">
-                <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&lt;</button>
-                <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition text-white/50 hover:text-white">&gt;</button>
-              </div>
             </div>
 
             {/* Connecting Line (Desktop) */}
@@ -227,38 +211,38 @@ export default function AboutPage() {
         </div>
 
         {/* Cosmic Stats Section */}
-        <div className="cosmic-stats relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] rounded-[30px] md:rounded-[40px] overflow-hidden mb-32 border border-[#ff3b30]/20 shadow-[0_0_80px_rgba(255,59,48,0.15)] bg-[#050000]">
-          {/* Background Image */}
-          <Image
+        <div className="w-full max-w-[1200px] mx-auto mb-32">
+          <SmoothImage
             src="/amazon-account-setup.png"
             alt="Amazon Fast Services Audience Stats"
-            fill
-            className="object-cover opacity-90"
-          />
-
-          {/* Top Left Text */}
-          <div className="absolute top-10 left-6 md:top-14 md:left-10 max-w-[280px] md:max-w-[380px] z-20">
-            <AnimatedText
-              text="Get your products in front of people who are ready to buy"
-              className="text-xl md:text-[26px] font-medium text-white/95 leading-snug tracking-wide"
-              tag="h2"
-              stagger={0.04}
-            />
-          </div>
-
-          {/* Bottom Left Glassmorphism Card */}
-          <div className="absolute bottom-8 left-6 md:bottom-10 md:left-10 z-20 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-5 max-w-[260px] md:max-w-[300px] shadow-2xl">
-            <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mb-3 border border-white/5">
-              <Users className="text-white/80 w-4 h-4" />
+            aspectRatio=""
+            className="h-[450px] md:h-[550px] rounded-[30px] md:rounded-[40px] border border-[#ff3b30]/20 shadow-[0_0_80px_rgba(255,59,48,0.15)] bg-[#050000]"
+            imageClassName="opacity-90"
+          >
+            {/* Top Left Text */}
+            <div className="absolute top-10 left-6 md:top-14 md:left-10 max-w-[280px] md:max-w-[380px] z-20">
+              <AnimatedText
+                text="Get your products in front of people who are ready to buy"
+                className="text-xl md:text-[26px] font-medium text-white/95 leading-snug tracking-wide"
+                tag="h2"
+                stagger={0.04}
+              />
             </div>
-            <AnimatedText
-              text="With smart PPC ads and strong A+ Content, we bring buyers who really want to purchase, not just people who are looking around."
-              className="text-white/70 text-[11px] md:text-xs leading-relaxed"
-              tag="p"
-              stagger={0.02}
-              y={10}
-            />
-          </div>
+
+            {/* Bottom Left Glassmorphism Card */}
+            <div className="absolute bottom-8 left-6 md:bottom-10 md:left-10 z-20 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-5 max-w-[260px] md:max-w-[300px] shadow-2xl">
+              <div className="w-8 h-8 bg-white/10 rounded-md flex items-center justify-center mb-3 border border-white/5">
+                <Users className="text-white/80 w-4 h-4" />
+              </div>
+              <AnimatedText
+                text="With smart PPC ads and strong A+ Content, we bring buyers who really want to purchase, not just people who are looking around."
+                className="text-white/70 text-[11px] md:text-xs leading-relaxed"
+                tag="p"
+                stagger={0.02}
+                y={10}
+              />
+            </div>
+          </SmoothImage>
         </div>
 
         {/* Core Values */}
