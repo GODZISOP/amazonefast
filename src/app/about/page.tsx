@@ -7,49 +7,9 @@ import { ArrowUpRight, CheckCircle2, Users, Trophy, Target } from "lucide-react"
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AnimatedText } from "@/components/AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// Framer Motion word-by-word scroll animation matching home page
-const AnimatedText = ({
-  text,
-  className = "",
-  tag = "h2",
-  stagger = 0.05,
-  y = 20,
-  delay = 0,
-}: {
-  text: string;
-  className?: string;
-  tag?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
-  stagger?: number;
-  y?: number;
-  delay?: number;
-}) => {
-  const Component = motion[tag] as any;
-  return (
-    <Component
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: "0px 0px -50px 0px" }}
-      variants={{ visible: { transition: { staggerChildren: stagger, delayChildren: delay } } }}
-      className={className}
-    >
-      {text.split(" ").map((word, i) => (
-        <motion.span
-          key={i}
-          className="inline-block whitespace-pre"
-          variants={{
-            hidden: { opacity: 0, y },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-          }}
-        >
-          {word}{" "}
-        </motion.span>
-      ))}
-    </Component>
-  );
-};
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -159,7 +119,12 @@ export default function AboutPage() {
         {/* Header Section */}
         <div className="flex flex-col items-center text-center mb-20">
           <div className="hero-pill inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
-            <span className="text-[#ff6b35] text-sm font-semibold tracking-wide uppercase">Who We Are</span>
+            <AnimatedText
+              text="Who We Are"
+              className="text-[#ff6b35] text-sm font-semibold tracking-wide uppercase inline-block"
+              tag="span"
+              stagger={0.06}
+            />
           </div>
 
           <div className="mb-6 flex flex-col items-center">
@@ -349,8 +314,19 @@ export default function AboutPage() {
             ].map((value, i) => (
               <div key={i} className="value-card bg-[#111] border border-white/5 p-8 rounded-3xl hover:bg-white/5 transition-colors">
                 <CheckCircle2 className="text-[#ff6b35] mb-6 w-10 h-10" />
-                <h4 className="text-xl font-bold mb-3">{value.title}</h4>
-                <p className="text-white/50 leading-relaxed">{value.desc}</p>
+                <AnimatedText
+                  text={value.title}
+                  className="text-xl font-bold mb-3 text-white"
+                  tag="h4"
+                  stagger={0.06}
+                />
+                <AnimatedText
+                  text={value.desc}
+                  className="text-white/50 leading-relaxed"
+                  tag="p"
+                  stagger={0.02}
+                  y={12}
+                />
               </div>
             ))}
           </div>
