@@ -27,7 +27,7 @@ export default function AnimatedGraphSection() {
   ];
 
   return (
-    <section className="relative w-full py-20 sm:py-28 md:py-36 bg-[#0a0400] text-white overflow-hidden border-t border-white/5">
+    <section className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#0a0400] text-white overflow-hidden border-t border-white/5">
       {/* Background ambient glow */}
       <div 
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[500px] rounded-full pointer-events-none opacity-40"
@@ -42,9 +42,9 @@ export default function AnimatedGraphSection() {
           whileInView="visible"
           viewport={{ once: false, margin: "0px 0px -60px 0px" }}
           variants={{ visible: { transition: { staggerChildren: 0.02 } } }}
-          className="max-w-4xl mb-14 sm:mb-20"
+          className="max-w-4xl mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-[2.6rem] lg:text-[2.9rem] font-medium leading-[1.3] sm:leading-[1.28] tracking-tight text-white flex flex-wrap gap-x-2 gap-y-1 items-baseline">
+          <h2 className="text-2xl sm:text-3xl md:text-[2.2rem] lg:text-[2.6rem] font-medium leading-[1.3] sm:leading-[1.28] tracking-tight text-white flex flex-wrap gap-x-2 gap-y-1 items-baseline">
             <motion.span
               variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
               className="font-bold text-white inline-flex items-center gap-1.5 mr-1"

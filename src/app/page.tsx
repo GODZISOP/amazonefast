@@ -193,7 +193,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute left-[-5%] xl:left-[-15%] top-[65%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute left-[-2%] xl:left-[-8%] 2xl:left-[-14%] top-[65%] w-[280px] xl:w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
           >
             <h4 className="text-white font-bold mb-2">Automated PPC Optimization</h4>
             <p className="text-white/70 text-sm leading-relaxed">
@@ -206,7 +206,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute right-[-5%] xl:right-[-15%] top-[70%] w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
+            whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }} className="hidden lg:block absolute right-[-2%] xl:right-[-8%] 2xl:right-[-14%] top-[70%] w-[280px] xl:w-[320px] bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-left shadow-2xl transition-all duration-700"
           >
             <h4 className="text-white font-bold mb-2">Global Market Access</h4>
             <p className="text-white/70 text-sm leading-relaxed">
@@ -320,19 +320,19 @@ export default function Home() {
         {/* Typography & Scroll Reveal Container */}
         <motion.div 
           style={{ y: sec2TextY, opacity: sec2Opacity }}
-          className="relative z-20 max-w-[1500px] mx-auto w-full px-6 sm:px-12 pointer-events-none py-16"
+          className="relative z-20 max-w-[1400px] mx-auto w-full px-6 sm:px-12 pointer-events-none py-16"
         >
           {/* Top Section (Huge Headline & Paragraph) */}
           <div className="flex flex-col md:flex-row justify-between items-start gap-6 sm:gap-12">
 
             {/* Top Left: Massive Bold Headline */}
-            <div className="w-full md:w-[50%] lg:w-[45%]">
+            <div className="w-full md:w-[50%] lg:w-[48%]">
               <motion.h2
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, margin: "0px 0px -100px 0px" }}
                 variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-                className="text-4xl sm:text-6xl lg:text-[4.8rem] font-bold leading-[1.05] tracking-[-0.04em] flex flex-wrap gap-x-3 gap-y-2 text-white"
+                className="text-3xl sm:text-5xl lg:text-[3.5rem] xl:text-[4.2rem] font-bold leading-[1.08] tracking-[-0.03em] flex flex-wrap gap-x-3 gap-y-2 text-white"
               >
                 {"Automate & Scale Your Global Amazon Brand".split(" ").map((word, i) => (
                   <motion.span
@@ -964,10 +964,10 @@ export default function Home() {
             </div>
 
             <motion.div
-              initial={{ x: 120, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="w-full lg:w-1/2 lg:pl-8"
             >
               {/* Secure Payment Gateways Tag */}
