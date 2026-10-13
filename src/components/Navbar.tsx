@@ -338,15 +338,6 @@ export default function Navbar() {
 
       {/* Right Actions / Balancing Box */}
       <div className="flex items-center justify-end shrink-0 w-[180px] sm:w-[220px]">
-        {/* Desktop Subtle Action to balance Logo */}
-        <Link 
-          href="/contact-us"
-          className="hidden xl:inline-flex items-center gap-1.5 text-xs text-white/70 hover:text-white transition px-3.5 py-1.5 rounded-full hover:bg-white/10 border border-white/15"
-        >
-          <span>Get Started</span>
-          <ArrowUpRight size={13} className="text-[#ff6b35]" />
-        </Link>
-
         {/* Mobile Hamburger Menu */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
