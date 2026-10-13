@@ -139,7 +139,7 @@ export default function Home() {
         </div>
 
         {/* Main Content Layout (Clean balanced spacing below navbar) */}
-        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 pt-20 sm:pt-24 md:pt-28 pb-16 md:pb-24 flex flex-col justify-center items-center text-center">
+        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 -mt-6 sm:-mt-8 md:-mt-10 pt-14 sm:pt-16 md:pt-18 pb-12 md:pb-16 flex flex-col justify-center items-center text-center">
 
           <motion.h1
             initial="hidden"
@@ -686,26 +686,48 @@ export default function Home() {
             </motion.div>
 
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-5"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "0px 0px -60px 0px" }}
+              variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-5 flex flex-wrap justify-center gap-x-2.5 gap-y-1.5"
             >
-              Real Sellers. Real Results. <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffaa55]">
-                Scaled with AmazonFast.
+              {"Real Sellers. Real Results.".split(" ").map((word, i) => (
+                <motion.span
+                  key={`rs-${i}`}
+                  variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <div className="w-full h-0"></div>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffaa55] flex flex-wrap justify-center gap-x-2.5 gap-y-1.5">
+                {"Scaled with AmazonFast.".split(" ").map((word, i) => (
+                  <motion.span
+                    key={`saf-${i}`}
+                    variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </span>
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "0px 0px -40px 0px" }}
+              variants={{ visible: { transition: { staggerChildren: 0.02, delayChildren: 0.15 } } }}
+              className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto flex flex-wrap justify-center gap-x-1.5 gap-y-0.5"
             >
-              From automated wholesale account management to 7-figure brand setups, explore how our global partners scale their eCommerce operations with zero friction.
+              {"From automated wholesale account management to 7-figure brand setups, explore how our global partners scale their eCommerce operations with zero friction.".split(" ").map((word, i) => (
+                <motion.span
+                  key={`p-${i}`}
+                  variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
           </div>
 
@@ -721,9 +743,22 @@ export default function Home() {
                 <span className="text-xs font-bold uppercase tracking-widest text-[#ff6b35] flex items-center gap-2 mb-1">
                   <ShieldCheck className="w-4 h-4" /> Authentic Social Proof
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                  Direct Recommendations from Our Clients
-                </h3>
+                <motion.h3
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "0px 0px -40px 0px" }}
+                  variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+                  className="text-2xl sm:text-3xl font-bold text-white flex flex-wrap gap-x-2 gap-y-1"
+                >
+                  {"Direct Recommendations from Our Clients".split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.h3>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-white/50 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -772,9 +807,22 @@ export default function Home() {
                   </div>
 
                   {/* Text Excerpt */}
-                  <p className="text-white/80 text-sm leading-relaxed relative z-10 italic">
-                    "Professional team with clear communication and helpful support. A great experience overall."
-                  </p>
+                  <motion.p
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, margin: "0px 0px -30px 0px" }}
+                    variants={{ visible: { transition: { staggerChildren: 0.035, delayChildren: 0.1 } } }}
+                    className="text-white/80 text-sm leading-relaxed relative z-10 italic flex flex-wrap gap-x-1.5 gap-y-0.5"
+                  >
+                    {'"Professional team with clear communication and helpful support. A great experience overall."'.split(" ").map((word, i) => (
+                      <motion.span
+                        key={i}
+                        variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.p>
                 </div>
 
                 <div className="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs text-white/40 relative z-10">
@@ -823,9 +871,22 @@ export default function Home() {
                   </div>
 
                   {/* Text Excerpt */}
-                  <p className="text-white/80 text-sm leading-relaxed relative z-10 italic">
-                    "Great experience to work with them. Highly dependable services, prompt communication, and exceptional commitment to client satisfaction."
-                  </p>
+                  <motion.p
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, margin: "0px 0px -30px 0px" }}
+                    variants={{ visible: { transition: { staggerChildren: 0.03, delayChildren: 0.1 } } }}
+                    className="text-white/80 text-sm leading-relaxed relative z-10 italic flex flex-wrap gap-x-1.5 gap-y-0.5"
+                  >
+                    {'"Great experience to work with them. Highly dependable services, prompt communication, and exceptional commitment to client satisfaction."'.split(" ").map((word, i) => (
+                      <motion.span
+                        key={i}
+                        variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } }}
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.p>
                 </div>
 
                 <div className="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs text-white/40 relative z-10">

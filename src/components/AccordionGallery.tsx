@@ -18,13 +18,13 @@ interface PanelData {
 const panelsData: PanelData[] = [
   {
     idx: "01",
-    spine: "Hassnain Shoro",
-    titlePrimary: "Hassnain",
+    spine: "Ali Waris Shoro",
+    titlePrimary: "Ali Waris",
     titleEm: "Shoro",
-    desc: "The company maintains a professional working environment and places great importance on delivering high-quality products and customer satisfaction. Dedicated, dependable and honest team.",
+    desc: "Amazon Fast Service offers reliable e-commerce services with professional and responsive client handling. Highly recommended.",
     img: "/review-1.png",
-    alt: "Hassnain Shoro - Verified Recommendation",
-    meta: ["22 July", "Amazon Wholesale", "Review 01/04"],
+    alt: "Ali Waris Shoro - Verified Recommendation",
+    meta: ["6 January", "Amazon Wholesale", "Review 01/04"],
   },
   {
     idx: "02",

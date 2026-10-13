@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -14,9 +14,17 @@ import { playTapSound } from "@/utils/sound";
 
 export default function CardStack() {
   const [cards, setCards] = useState(initialCards);
+  const lastTapRef = useRef(0);
 
-  const nextCard = () => {
+  const triggerNextCard = (e?: React.SyntheticEvent) => {
+    const now = Date.now();
+    // Debounce to prevent duplicate event triggers (e.g. pointerdown followed by click)
+    if (now - lastTapRef.current < 200) return;
+    lastTapRef.current = now;
+
+    // Instant tactile audio feedback
     playTapSound();
+
     setCards((prev) => {
       const newArray = [...prev];
       const first = newArray.shift();
@@ -27,8 +35,18 @@ export default function CardStack() {
 
   return (
     <div 
-      className="relative w-full max-w-[450px] aspect-[1.58/1] perspective-[1200px] cursor-pointer mx-auto"
-      onClick={nextCard}
+      role="button"
+      tabIndex={0}
+      aria-label="Next payment card"
+      className="relative w-full max-w-[450px] aspect-[1.58/1] perspective-[1200px] cursor-pointer mx-auto select-none touch-manipulation focus:outline-none"
+      onPointerDown={triggerNextCard}
+      onClick={triggerNextCard}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          triggerNextCard(e);
+        }
+      }}
     >
       <AnimatePresence mode="popLayout">
         {cards.map((card, index) => {
