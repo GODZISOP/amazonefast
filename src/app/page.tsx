@@ -138,8 +138,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a]"></div>
         </div>
 
-        {/* Main Content Layout (Clean spacing below fixed navbar) */}
-        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 pt-32 sm:pt-40 md:pt-44 pb-20 md:pb-28 flex flex-col justify-center items-center text-center">
+        {/* Main Content Layout (Clean balanced spacing below navbar) */}
+        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 pt-20 sm:pt-24 md:pt-28 pb-16 md:pb-24 flex flex-col justify-center items-center text-center">
 
           <motion.h1
             initial="hidden"
