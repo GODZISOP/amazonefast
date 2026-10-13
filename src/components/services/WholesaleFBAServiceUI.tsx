@@ -12,6 +12,7 @@ import {
   Store,
   Boxes
 } from "lucide-react";
+import { playTapSound } from "@/utils/sound";
 
 interface WholesaleFBAServiceUIProps {
   data?: any;
@@ -308,7 +309,10 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
                 className="bg-white/[0.02] border border-white/10 rounded-xl overflow-hidden transition-colors"
               >
                 <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  onClick={() => {
+                    playTapSound();
+                    setOpenFaq(openFaq === idx ? null : idx);
+                  }}
                   className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-3"
                 >
                   <span className="text-sm font-semibold text-white">{faq.q}</span>

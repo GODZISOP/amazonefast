@@ -44,6 +44,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;125,400&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
         <link rel="preload" href="/amazon-fast-logo.png" as="image" />
         <link rel="preload" href="/homepage-hero.png" as="image" />
         <link rel="preload" href="/section2-highres.jpg" as="image" />

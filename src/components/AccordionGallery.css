@@ -1,0 +1,163 @@
+.vs-accordion-gallery{
+  --vs-accordion-gallery-h: 560px;
+  --vs-accordion-gallery-closed: 74;
+  --vs-accordion-gallery-closed-y: 60;
+  --vs-accordion-gallery-open-y: 1.15;
+  --vs-accordion-gallery-gap: 10;
+  --vs-accordion-gallery-radius: 24px;
+  --vs-accordion-gallery-bounce: .45;
+  --vs-accordion-gallery-drift: 14;
+  --vs-accordion-gallery-ink: #ffffff;
+  --vs-accordion-gallery-accent: #ff6b35;
+  --vs-accordion-gallery-stack-at: 768;
+  position: relative; width: 100%; height: var(--vs-accordion-gallery-h); overflow: hidden;
+  color: var(--vs-accordion-gallery-ink); font-family: "Archivo", system-ui, sans-serif;
+  list-style: none; margin: 0; padding: 0; contain: layout paint; container-type: inline-size;
+  -webkit-user-select: none; user-select: none; touch-action: manipulation;
+}
+.vs-accordion-gallery, .vs-accordion-gallery *, .vs-accordion-gallery *::before, .vs-accordion-gallery *::after{ box-sizing: border-box; }
+.vs-accordion-gallery.is-stacked{ height: auto; }
+.vs-accordion-gallery-panel{ /* layer A: sits at the slot's start edge and clips the near side */
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;
+  border-radius: var(--vs-accordion-gallery-radius); will-change: transform; transform: translateZ(0);
+  pointer-events: none;   /* the slot box overlaps its neighbours; only the visible button takes the pointer */
+}
+.vs-accordion-gallery-win{ /* layer B: clips the far edge */
+  position: absolute; inset: 0; overflow: hidden; border-radius: var(--vs-accordion-gallery-radius);
+  will-change: transform; background: #111111;
+}
+.vs-accordion-gallery-body{ position: absolute; inset: 0; will-change: transform; }
+.vs-accordion-gallery-img{
+  position: absolute;
+  top: 16px;
+  left: 10px;
+  right: 10px;
+  bottom: 84px;
+  width: calc(100% - 20px);
+  height: calc(100% - 100px);
+  object-fit: cover;
+  object-position: left 20%;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: #ffffff;
+  padding: 3px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.75);
+  will-change: transform, opacity;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  transition: border-radius .4s, padding .4s;
+}
+.vs-accordion-gallery-panel.is-open .vs-accordion-gallery-img{
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  bottom: 124px;
+  width: calc(100% - 48px);
+  height: calc(100% - 148px);
+  object-fit: contain;
+  object-position: center center;
+  border-radius: 18px;
+  padding: 6px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.75);
+}
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-img{
+  top: 48px;
+  left: 14px;
+  right: 14px;
+  bottom: 110px;
+  width: calc(100% - 28px);
+  height: calc(100% - 158px);
+  padding: 4px;
+  border-radius: 14px;
+  object-fit: contain;
+  object-position: center center;
+}
+.vs-accordion-gallery-shade{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 48%;
+  pointer-events: none;
+  will-change: opacity;
+  background: linear-gradient(to top, rgba(10,12,11,.98) 0%, rgba(10,12,11,.8) 40%, rgba(10,12,11,0) 100%);
+}
+.vs-accordion-gallery-dim{ position: absolute; inset: 0; background: #0b0d0c; pointer-events: none; will-change: opacity; }
+.vs-accordion-gallery-lift{ /* hover: a soft light from above, fades in on the panel under the pointer */
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .45s cubic-bezier(.16,1,.3,1);
+  background: radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.16), rgba(255,255,255,0) 60%); }
+
+.vs-accordion-gallery-hit{
+  position: absolute; inset: 0; z-index: 4; appearance: none; border: 0; padding: 0; margin: 0; background: transparent;
+  cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; border-radius: 0; pointer-events: auto;
+}
+.vs-accordion-gallery-panel.is-open .vs-accordion-gallery-hit{ cursor: default; }
+.vs-accordion-gallery-idx{
+  position: absolute; top: 16px; left: 16px; z-index: 3; pointer-events: none;
+  font: 400 11px/1 "IBM Plex Mono", ui-monospace, Menlo, monospace; letter-spacing: .06em; font-variant-numeric: tabular-nums;
+  width: 40px; padding: 7px 0 6px; text-align: center; border-radius: 999px;
+  background: rgba(10,12,11,.34); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2), inset 0 1px 0 rgba(255,255,255,.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4);
+  transition: background-color .5s cubic-bezier(.16,1,.3,1), color .5s, box-shadow .5s;
+}
+.vs-accordion-gallery-panel.is-open .vs-accordion-gallery-idx{ color: #0c0f0e; background: var(--vs-accordion-gallery-accent); box-shadow: 0 6px 18px -6px rgba(0,0,0,.5); }
+.vs-accordion-gallery-spine{ /* the closed label, set vertically */
+  position: absolute; left: 0; bottom: 22px; width: calc(var(--vs-accordion-gallery-closed) * 1px); z-index: 3; pointer-events: none;
+  display: flex; justify-content: center; will-change: opacity;
+}
+.vs-accordion-gallery-spine span{ writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap;
+  font: 500 13px/1 "Archivo", system-ui, sans-serif; font-stretch: 125%; letter-spacing: .08em; text-transform: uppercase;
+  transition: color .35s;
+  background: rgba(10,12,11,.84);
+  padding: 10px 5px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.6);
+}
+.vs-accordion-gallery-copy{
+  position: absolute; left: 0; bottom: 0; z-index: 3; padding: 0 30px 28px; pointer-events: none;
+  width: min(var(--vs-accordion-gallery-open, 100%), 580px);
+}
+.vs-accordion-gallery-copy > *{ will-change: opacity, transform; }
+.vs-accordion-gallery-copy h3{ margin: 0; font: 400 clamp(26px, 4.3cqi, 46px)/.9 "Archivo", system-ui, sans-serif;
+  font-stretch: 125%; letter-spacing: -.025em; text-transform: uppercase; text-wrap: balance; }
+.vs-accordion-gallery-copy h3 em{ font-style: normal; opacity: .5; }
+.vs-accordion-gallery-copy p{ margin: 14px 0 0; max-width: 42ch; font-size: 14.5px; line-height: 1.5; font-stretch: 100%; opacity: .8; }
+.vs-accordion-gallery-meta{ position: relative; display: flex; gap: 18px; margin-top: 16px; padding-top: 13px;
+  font: 400 10.5px/1 "IBM Plex Mono", ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.vs-accordion-gallery-meta span{ opacity: .72; }
+.vs-accordion-gallery-meta::before{ content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(255,255,255,.2); }
+.vs-accordion-gallery-meta::after{ /* accent rule draws across when the panel settles open */
+  content: ""; position: absolute; left: 0; top: 0; width: 64px; height: 1px; background: var(--vs-accordion-gallery-accent);
+  transform-origin: 0 50%; transform: scaleX(var(--vs-accordion-gallery-rule, 0)); }
+.vs-accordion-gallery-ringL, .vs-accordion-gallery-ringR{ position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; transition: opacity .2s; }
+.vs-accordion-gallery-ringR{ border-radius: inherit; box-shadow: inset 0 0 0 2px var(--vs-accordion-gallery-accent), inset 0 0 0 4px rgba(0,0,0,.35); }
+.vs-accordion-gallery-ringL{ border-radius: var(--vs-accordion-gallery-radius); box-shadow: inset 2px 0 0 0 var(--vs-accordion-gallery-accent), inset 4px 0 0 0 rgba(0,0,0,.35); }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-ringL{ box-shadow: inset 0 2px 0 0 var(--vs-accordion-gallery-accent), inset 0 4px 0 0 rgba(0,0,0,.35); }
+.vs-accordion-gallery-edge{ /* sub-pixel inner edge + top highlight, drawn on the far clip layer so it follows the live width */
+  position: absolute; inset: 0; z-index: 5; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.09), inset 0 1px 0 rgba(255,255,255,.14); }
+
+/* states */
+@media (hover: hover){
+  .vs-accordion-gallery-panel:not(.is-open):hover .vs-accordion-gallery-lift{ opacity: 1; }
+  .vs-accordion-gallery-panel:not(.is-open):hover .vs-accordion-gallery-spine span{ color: var(--vs-accordion-gallery-accent); }
+}
+.vs-accordion-gallery-panel:has(.vs-accordion-gallery-hit:focus-visible) :is(.vs-accordion-gallery-ringL, .vs-accordion-gallery-ringR){ opacity: 1; }
+.vs-accordion-gallery-panel.is-focus :is(.vs-accordion-gallery-ringL, .vs-accordion-gallery-ringR){ opacity: 1; }
+
+/* stacked (vertical) mode */
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-spine{ left: 68px; right: 0; bottom: auto; top: 0; width: auto;
+  height: calc(var(--vs-accordion-gallery-closed-y) * 1px); justify-content: flex-start; align-items: center; }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-spine span{ writing-mode: horizontal-tb; transform: none; font-size: 13px; }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-idx{ top: calc(var(--vs-accordion-gallery-closed-y) * .5px - 13px); left: 14px; }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-copy{ width: 100%; padding: 0 20px 20px; bottom: var(--vs-accordion-gallery-slack, 0px); }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-shade{ bottom: var(--vs-accordion-gallery-slack, 0px); }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-copy h3{ font-size: 30px; }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-copy p{ font-size: 13.5px; margin-top: 10px; }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-meta{ gap: 14px; margin-top: 12px; }
+@media (prefers-reduced-motion: reduce){
+  .vs-accordion-gallery-lift, .vs-accordion-gallery-idx, .vs-accordion-gallery-spine span{ transition: none; }
+}
+.vs-accordion-gallery-body::after{ content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  border-radius: var(--vs-accordion-gallery-radius); box-shadow: inset 1px 0 0 rgba(255,255,255,.09); }
+.vs-accordion-gallery.is-stacked .vs-accordion-gallery-body::after{ box-shadow: inset 0 1px 0 rgba(255,255,255,.14); }

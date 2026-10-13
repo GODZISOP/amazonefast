@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search, Store, FileText } from "lucide-react";
 import CardStack from "@/components/CardStack";
+import AccordionGallery from "@/components/AccordionGallery";
 import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedGraphSection from "../components/AnimatedGraphSection";
+import { playTapSound } from "@/utils/sound";
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -659,80 +661,169 @@ export default function Home() {
       <section className="relative w-full py-24 lg:py-32 bg-[#000000] px-6 sm:px-12 border-t border-white/[0.05] overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
 
-          {/* Top Avatars Row */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px", amount: 0.1 }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2 } } }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32 relative"
-          >
-            {/* Connector Line (Desktop) */}
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
-              variants={{ hidden: { scaleX: 0, opacity: 0 }, visible: { scaleX: 1, opacity: 0.5, transition: { duration: 1.2, ease: "easeInOut" } } }}
-              style={{ transformOrigin: "center" }}
-              className="hidden md:block absolute top-[50%] left-[16%] right-[16%] h-[1px] bg-gradient-to-r from-transparent via-[#ff6b35] to-transparent z-0"
-            ></motion.div>
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ff6b35]/10 border border-[#ff6b35]/25 text-[#ff6b35] text-xs font-bold uppercase tracking-widest mb-6 shadow-[0_0_20px_rgba(255,107,53,0.15)]"
+            >
+              <Award className="w-3.5 h-3.5 text-[#ff6b35]" />
+              <span>250+ Verified Client Success Stories</span>
+            </motion.div>
 
-            {[
-              { img: "/desi-man-1.png", text: "Brand owners who want to scale without complex logistics.", active: false, name: "David M.", role: "Brand Owner" },
-              { img: "/desi-woman.png", text: "Established sellers looking for a reliable, borderless growth partner.", active: true, name: "Sarah J.", role: "Established Seller" },
-              { img: "/desi-man-2.png", text: "Anyone tired of stagnant sales and risks of unoptimized listings.", active: false, name: "Michael C.", role: "eCommerce Director" }
-            ].map((item, idx) => (
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-5"
+            >
+              Real Sellers. Real Results. <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffaa55]">
+                Scaled with AmazonFast.
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-white/60 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto"
+            >
+              From automated wholesale account management to 7-figure brand setups, explore how our global partners scale their eCommerce operations with zero friction.
+            </motion.p>
+          </div>
+
+          {/* Vividsites Accordion Gallery Component */}
+          <div className="w-full mb-20">
+            <AccordionGallery />
+          </div>
+
+          {/* Verified Facebook Client Reviews Spotlight (Real Community Proof) */}
+          <div className="mb-28">
+            <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-[#ff6b35] flex items-center gap-2 mb-1">
+                  <ShieldCheck className="w-4 h-4" /> Authentic Social Proof
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                  Direct Recommendations from Our Clients
+                </h3>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-semibold text-white/50 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                100% Client Verified
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Review Card 1: Rana Faizan */}
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: item.active ? 0 : 30, scale: item.active ? 0.9 : 1 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: item.active ? 0.4 : 0.5,
-                  delay: item.active ? 0 : 0.2,
-                  ease: "easeOut"
-                }}
-                viewport={{ once: true, margin: '-20px' }}
-                className={`relative z-10 rounded-[2rem] overflow-hidden group ${item.active ? 'bg-[#ff6b35]' : 'bg-[#0a0a0a] border border-white/[0.05]'} p-8 flex flex-col items-center text-center transition-transform duration-500 hover:-translate-y-2 shadow-2xl`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="group relative rounded-3xl bg-[#0e0e0e] border border-white/10 p-6 hover:border-[#ff6b35]/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
               >
-                {/* Sliding shine for active card */}
-                {item.active && (
-                  <motion.div
-                    initial={{ x: '-100%', opacity: 0 }}
-                    whileInView={{ x: '100%', opacity: [0, 0.6, 0] }}
-                    transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2 }}
-                    className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent z-0 pointer-events-none"
-                  />
-                )}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff6b35]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#ff6b35]/20 transition-all duration-500"></div>
 
-                {/* Quote Icon Background */}
-                <div className={`absolute top-6 left-6 opacity-20 ${item.active ? 'text-white' : 'text-[#ff6b35]'}`}>
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M14.017 21L16.44 14.282C16.666 13.567 16.515 12.784 16.035 12.193C15.556 11.603 14.814 11.282 14.017 11.282H10.741L11.531 8.525C11.678 8.01 12.138 7.641 12.671 7.641H16.017V3.535H12.671C10.518 3.535 8.653 5.03 8.058 7.108L4.629 19.066C4.422 19.789 4.962 20.535 5.723 20.535H14.017V21ZM22.585 21L25.008 14.282C25.234 13.567 25.083 12.784 24.603 12.193C24.124 11.603 23.382 11.282 22.585 11.282H19.309L20.099 8.525C20.246 8.01 20.706 7.641 21.239 7.641H24.585V3.535H21.239C19.086 3.535 17.221 5.03 16.626 7.108L13.197 19.066C12.99 19.789 13.53 20.535 14.291 20.535H22.585V21Z" transform="scale(0.8) translate(-2, 0)" />
-                  </svg>
+                <div>
+                  {/* Top Bar with Google Icon and Rating */}
+                  <div className="flex items-center justify-between gap-4 mb-5 relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#EA4335]/15 border border-[#EA4335]/30 flex items-center justify-center text-[#EA4335]">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-base leading-tight">Rana Faizan</h4>
+                        <p className="text-white/50 text-xs">Verified Client · 5.0 Rating</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 bg-[#ff6b35]/15 border border-[#ff6b35]/30 px-2.5 py-1 rounded-full text-[#ff6b35] text-xs font-bold">
+                      <span>★ 5.0</span>
+                    </div>
+                  </div>
+
+                  {/* Screenshot Container */}
+                  <div className="relative z-10 rounded-2xl overflow-hidden mb-6 flex items-center justify-center">
+                    <img
+                      src="/testimonial-faizan.png"
+                      alt="Rana Faizan Recommendation Screenshot"
+                      className="w-full h-auto rounded-xl object-contain max-h-[240px] sm:max-h-[280px] mx-auto"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Text Excerpt */}
+                  <p className="text-white/80 text-sm leading-relaxed relative z-10 italic">
+                    "Professional team with clear communication and helpful support. A great experience overall."
+                  </p>
                 </div>
 
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-4 border-4 border-black/20 relative z-10 shadow-lg">
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
-                </div>
-
-                {/* 5 Stars */}
-                <div className="flex gap-1 mb-4 relative z-10">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill={item.active ? "white" : "#ffb700"} className={item.active ? "opacity-90" : ""}>
-                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                    </svg>
-                  ))}
-                </div>
-
-                <p className={`text-sm sm:text-base leading-relaxed italic relative z-10 mb-6 flex-grow flex items-center ${item.active ? 'text-white' : 'text-white/70'}`}>
-                  "{item.text}"
-                </p>
-
-                {/* Author Info */}
-                <div className="mt-auto relative z-10 flex flex-col items-center">
-                  <span className={`font-bold ${item.active ? 'text-white' : 'text-white'}`}>{item.name}</span>
-                  <span className={`text-xs mt-1 ${item.active ? 'text-white/80' : 'text-[#ff6b35]'}`}>{item.role}</span>
+                <div className="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs text-white/40 relative z-10">
+                  <span className="font-semibold text-[#ff6b35]">Amazon Growth & Support</span>
+                  <span>Google Verified Review</span>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
+
+              {/* Review Card 2: Wali Muhammad Shoro */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="group relative rounded-3xl bg-[#0e0e0e] border border-white/10 p-6 hover:border-[#ff6b35]/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff6b35]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#ff6b35]/20 transition-all duration-500"></div>
+
+                <div>
+                  {/* Top Bar with Google Icon and Rating */}
+                  <div className="flex items-center justify-between gap-4 mb-5 relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#EA4335]/15 border border-[#EA4335]/30 flex items-center justify-center text-[#EA4335]">
+                        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-base leading-tight">Wali Muhammad Shoro</h4>
+                        <p className="text-white/50 text-xs">Verified Client · 3 reviews</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 bg-[#ff6b35]/15 border border-[#ff6b35]/30 px-2.5 py-1 rounded-full text-[#ff6b35] text-xs font-bold">
+                      <span>★ 5.0</span>
+                    </div>
+                  </div>
+
+                  {/* Screenshot Container */}
+                  <div className="relative z-10 rounded-2xl overflow-hidden mb-6 flex items-center justify-center">
+                    <img
+                      src="/testimonial-wali.png"
+                      alt="Wali Muhammad Shoro Review Screenshot"
+                      className="w-full h-auto rounded-xl object-contain max-h-[240px] sm:max-h-[280px] mx-auto"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Text Excerpt */}
+                  <p className="text-white/80 text-sm leading-relaxed relative z-10 italic">
+                    "Great experience to work with them. Highly dependable services, prompt communication, and exceptional commitment to client satisfaction."
+                  </p>
+                </div>
+
+                <div className="pt-5 mt-5 border-t border-white/10 flex items-center justify-between text-xs text-white/40 relative z-10">
+                  <span className="font-semibold text-[#ff6b35]">Account Services</span>
+                  <span>Google Verified Review</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
 
           {/* Middle Row (Community & Graphic) */}
           <div className="flex flex-col lg:flex-row gap-16 items-center mb-32">
@@ -1013,6 +1104,7 @@ export default function Home() {
                     type="text"
                     required
                     value={contactData.name}
+                    onFocus={playTapSound}
                     onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
                     placeholder="Your name"
                     className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
@@ -1021,6 +1113,7 @@ export default function Home() {
                     type="email"
                     required
                     value={contactData.email}
+                    onFocus={playTapSound}
                     onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
                     placeholder="Your email"
                     className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
@@ -1029,6 +1122,7 @@ export default function Home() {
                 <input
                   type="text"
                   value={contactData.subject}
+                  onFocus={playTapSound}
                   onChange={(e) => setContactData({ ...contactData, subject: e.target.value })}
                   placeholder="Subject"
                   className="w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl px-5 py-4 text-white placeholder-white/40 focus:border-[#ff6b35] outline-none transition"
@@ -1036,6 +1130,7 @@ export default function Home() {
                 <textarea
                   required
                   value={contactData.message}
+                  onFocus={playTapSound}
                   onChange={(e) => setContactData({ ...contactData, message: e.target.value })}
                   placeholder="Your message"
                   rows={4}
@@ -1047,6 +1142,7 @@ export default function Home() {
 
                 <button
                   type="submit"
+                  onClick={() => playTapSound()}
                   disabled={contactStatus === 'loading'}
                   className="mt-4 w-full bg-[#ff6b35] hover:bg-[#e85c2b] disabled:bg-[#ff6b35]/50 text-white font-semibold py-4 rounded-2xl transition flex justify-center items-center gap-2 disabled:cursor-not-allowed"
                 >
@@ -1213,7 +1309,10 @@ function FAQSection() {
                         className={`border-b transition-colors duration-300 ${isOpen ? 'border-[#ff6b35]/40' : 'border-white/[0.06]'}`}
                       >
                         <button
-                          onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
+                          onClick={() => {
+                            playTapSound();
+                            setOpenIdx(isOpen ? null : globalIdx);
+                          }}
                           className="w-full flex items-center justify-between py-6 text-left gap-4 group"
                         >
                           <span className={`text-sm sm:text-base font-semibold uppercase tracking-wider transition-colors duration-300 ${isOpen ? 'text-[#ff6b35]' : 'text-white/80 group-hover:text-white'}`}>

@@ -10,10 +10,13 @@ const initialCards = [
   { id: 4, src: "/stripe-hero.png", alt: "Stripe Card" }
 ];
 
+import { playTapSound } from "@/utils/sound";
+
 export default function CardStack() {
   const [cards, setCards] = useState(initialCards);
 
   const nextCard = () => {
+    playTapSound();
     setCards((prev) => {
       const newArray = [...prev];
       const first = newArray.shift();
@@ -75,9 +78,10 @@ export default function CardStack() {
                 opacity,
                 zIndex 
               }}
+              whileTap={{ scale: scale * 0.96 }}
               exit={{ opacity: 0, scale: 0.5, x: 200 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden border border-white/10"
+              className="absolute inset-0 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden border border-white/10 select-none active:brightness-105"
               style={{ transformOrigin: "center" }}
             >
               <Image 

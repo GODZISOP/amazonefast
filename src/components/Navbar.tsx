@@ -58,42 +58,45 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed z-[100] w-full px-6 sm:px-8 py-4 sm:py-6 flex justify-between items-center top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
-      {/* Logo */}
-      <a href="/" className="flex items-center shrink-0">
-        <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-10 sm:h-12 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
-      </a>
+    <header className="fixed z-[100] w-full top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 py-3.5 sm:py-4 flex justify-between items-center relative">
+        {/* Left: Logo */}
+        <div className="flex items-center shrink-0 w-[180px] sm:w-[220px]">
+          <a href="/" className="flex items-center shrink-0">
+            <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-9 sm:h-11 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
+          </a>
+        </div>
 
-      {/* Center Pill Navbar */}
-      <nav className="hidden lg:flex items-center bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20">
-        <Link href="/" className="bg-white text-black px-6 py-2 rounded-full text-sm font-medium transition">Home</Link>
-        <Link href="/about" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">About Us</Link>
-        
-        {/* Services Dropdown */}
-        <div 
-          ref={servicesMenuRef}
-          className="relative"
-        >
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsDesktopServicesOpen(!isDesktopServicesOpen);
-            }}
-            className={`flex items-center gap-1.5 px-6 py-2 rounded-full text-sm font-medium transition cursor-pointer ${isDesktopServicesOpen ? "text-white bg-white/10" : "text-white/80 hover:text-white"}`}
-          >
-            Services
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopServicesOpen ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
-          </button>
+        {/* Center Pill Navbar (Mathematically Centered Across All Laptops and Desktops) */}
+        <nav className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md rounded-full p-1.5 border border-white/20 whitespace-nowrap shadow-lg">
+          <Link href="/" className="bg-white text-black px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition">Home</Link>
+          <Link href="/about" className="text-white/80 hover:text-white px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition">About Us</Link>
           
+          {/* Services Dropdown */}
           <div 
-            className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 ${isDesktopServicesOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
+            ref={servicesMenuRef}
+            className="relative"
           >
-            {/* Invisible Hover Bridge connecting navbar pill to dropdown */}
-            <div className="absolute -top-4 left-0 right-0 h-5 pointer-events-auto" />
-
-            <div 
-              className="bg-[#111111]/98 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[620px] max-w-[calc(100vw-48px)] shadow-2xl relative"
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDesktopServicesOpen(!isDesktopServicesOpen);
+              }}
+              className={`flex items-center gap-1.5 px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition cursor-pointer ${isDesktopServicesOpen ? "text-white bg-white/10" : "text-white/80 hover:text-white"}`}
             >
+              Services
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDesktopServicesOpen ? "rotate-180 text-[#ff6b35]" : "opacity-70"}`}><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            
+            <div 
+              className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50 ${isDesktopServicesOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
+            >
+              {/* Invisible Hover Bridge connecting navbar pill to dropdown */}
+              <div className="absolute -top-4 left-0 right-0 h-5 pointer-events-auto" />
+
+              <div 
+                className="bg-[#111111]/98 backdrop-blur-xl border border-white/10 rounded-2xl p-4 w-[620px] max-w-[calc(100vw-32px)] shadow-2xl relative"
+              >
               <div 
                 className="grid grid-cols-2 gap-4"
               >
@@ -329,12 +332,21 @@ export default function Navbar() {
           </div>
         </div>
 
-        <Link href="/privacy-policy" className="text-white/80 hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Privacy Policy</Link>
-        <Link href="/contact-us" className="bg-[#ff6b35] text-white hover:bg-[#e85c2b] px-6 py-2 rounded-full text-sm font-medium transition ml-2">Contact Us</Link>
+        <Link href="/privacy-policy" className="text-white/80 hover:text-white px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition">Privacy Policy</Link>
+        <Link href="/contact-us" className="bg-[#ff6b35] text-white hover:bg-[#e85c2b] px-4 xl:px-6 py-1.5 xl:py-2 rounded-full text-xs xl:text-sm font-medium transition ml-1.5">Contact Us</Link>
       </nav>
 
-      {/* Right Actions */}
-      <div className="flex items-center gap-3">
+      {/* Right Actions / Balancing Box */}
+      <div className="flex items-center justify-end shrink-0 w-[180px] sm:w-[220px]">
+        {/* Desktop Subtle Action to balance Logo */}
+        <Link 
+          href="/contact-us"
+          className="hidden xl:inline-flex items-center gap-1.5 text-xs text-white/70 hover:text-white transition px-3.5 py-1.5 rounded-full hover:bg-white/10 border border-white/15"
+        >
+          <span>Get Started</span>
+          <ArrowUpRight size={13} className="text-[#ff6b35]" />
+        </Link>
+
         {/* Mobile Hamburger Menu */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -342,6 +354,7 @@ export default function Navbar() {
         >
           {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
+      </div>
       </div>
       
       {/* Mobile Menu Dropdown */}
