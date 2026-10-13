@@ -36,6 +36,17 @@ const letterVariants: Variants = {
 };
 
 export default function Footer() {
+  const [emailCopied, setEmailCopied] = React.useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("info@amazonfastservices.com");
+    }
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
+  };
+
   return (
     <footer className="relative w-full bg-[#0a0a0a] overflow-hidden flex flex-col justify-between pt-16">
 

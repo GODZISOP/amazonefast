@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search, Store, FileText } from "lucide-react";
+import { ArrowUpRight, Sparkles, Wifi, Menu, X, UserPlus, Landmark, Building2, Boxes, ShieldCheck, Award, TrendingUp, Search, Store, FileText, Check, Copy } from "lucide-react";
 import CardStack from "@/components/CardStack";
 import AccordionGallery from "@/components/AccordionGallery";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -41,6 +41,17 @@ export default function Home() {
 
   const [contactData, setContactData] = useState({ name: '', email: '', subject: '', message: '' });
   const [contactStatus, setContactStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleEmailCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("info@amazonfastservices.com");
+    }
+    setEmailCopied(true);
+    playTapSound();
+    setTimeout(() => setEmailCopied(false), 2200);
+  };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,8 +138,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a]"></div>
         </div>
 
-        {/* Main Content Layout (Center/Lower) */}
-        <main className="relative z-20 w-full h-full flex-grow max-w-[1000px] mx-auto px-6 pt-12 md:pt-20 pb-20 md:pb-32 flex flex-col justify-center items-center text-center -mt-20 md:-mt-32">
+        {/* Main Content Layout (Clean spacing below fixed navbar) */}
+        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 pt-32 sm:pt-40 md:pt-44 pb-20 md:pb-28 flex flex-col justify-center items-center text-center">
 
           <motion.h1
             initial="hidden"
@@ -1080,8 +1091,29 @@ export default function Home() {
                 <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">+92 332 2568950</a>
               </div>
               <div>
-                <p className="text-white/40 text-xs mb-2 uppercase tracking-widest font-semibold">Email Us</p>
-                <a href="mailto:info@amazonfastservices.com" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">info@amazonfastservices.com</a>
+                <div className="flex items-center gap-2 mb-2">
+                  <p className="text-white/40 text-xs uppercase tracking-widest font-semibold">Email Us</p>
+                  {emailCopied && (
+                    <span className="text-[#00ff88] text-[11px] font-bold inline-flex items-center gap-1 animate-pulse">
+                      <Check size={12} /> Copied!
+                    </span>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleEmailCopy}
+                  className="text-white text-lg font-medium hover:text-[#ff6b35] transition flex items-center gap-2 text-left group cursor-pointer"
+                  title="Click to copy email address"
+                >
+                  <span className={emailCopied ? "text-[#00ff88]" : ""}>info@amazonfastservices.com</span>
+                  <span className="p-1 rounded-md bg-white/5 border border-white/10 group-hover:bg-[#ff6b35]/20 group-hover:border-[#ff6b35]/40 transition-colors">
+                    {emailCopied ? (
+                      <Check size={14} className="text-[#00ff88]" />
+                    ) : (
+                      <Copy size={14} className="text-white/50 group-hover:text-[#ff6b35] transition-colors" />
+                    )}
+                  </span>
+                </button>
               </div>
             </div>
           </div>
