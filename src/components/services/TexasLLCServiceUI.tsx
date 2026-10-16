@@ -117,7 +117,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(255,107,53,0.35)] hover:scale-105"
@@ -193,7 +193,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
             </div>
 
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"

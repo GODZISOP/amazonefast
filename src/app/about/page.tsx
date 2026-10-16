@@ -307,7 +307,7 @@ export default function AboutPage() {
                 Book a Call
                 <ArrowUpRight size={20} />
               </Link>
-              <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]">
+              <Link href="https://wa.me/923142573033" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform flex items-center gap-2 shadow-[0_0_15px_rgba(37,211,102,0.4)]">
                 WhatsApp Message
                 <ArrowUpRight size={20} />
               </Link>

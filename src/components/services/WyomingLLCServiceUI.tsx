@@ -134,7 +134,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(255,107,53,0.35)] hover:scale-105"
@@ -143,7 +143,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
             </Link>
 
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(questionsMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(questionsMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-semibold text-sm sm:text-base transition-all"
@@ -263,7 +263,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
             </div>
 
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"

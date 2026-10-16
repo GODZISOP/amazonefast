@@ -158,7 +158,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
 
           <div className="pt-2">
             <a 
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg shadow-[#ff6b35]/30 transition"
@@ -234,7 +234,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
                 </div>
 
                 <a 
-                  href={`https://wa.me/923322568950?text=${encodeURIComponent(`Hi AmazonFast, I want the ${pkg.name} (${pkg.price} - ${pkg.margin}) Brand Approval package.`)}`}
+                  href={`https://wa.me/923142573033?text=${encodeURIComponent(`Hi AmazonFast, I want the ${pkg.name} (${pkg.price} - ${pkg.margin}) Brand Approval package.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white transition"
@@ -289,7 +289,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
             </p>
             <div className="pt-2">
               <a 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"

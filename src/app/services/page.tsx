@@ -351,7 +351,7 @@ export default function ServicesPage() {
             Speak directly with our senior Amazon and US corporate specialists to design a tailor-made roadmap for your brand.
           </p>
           <Link
-            href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+            href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105 relative"

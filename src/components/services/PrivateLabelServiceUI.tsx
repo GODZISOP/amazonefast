@@ -150,7 +150,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
 
           <div className="pt-3">
             <a 
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg shadow-[#ff6b35]/30 transition"
@@ -281,7 +281,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
             {/* CTA */}
             <div className="mt-8 pt-6 border-t border-white/10 text-center">
               <a 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"
@@ -336,7 +336,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
             </p>
             <div className="pt-2">
               <a 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"

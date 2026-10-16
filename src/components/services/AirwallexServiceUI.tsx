@@ -46,7 +46,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
               <Link 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="px-8 py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm tracking-wide transition-all flex items-center justify-center shadow-[0_5px_15px_rgba(255,107,53,0.2)]"
@@ -104,7 +104,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
             </p>
             <div>
               <Link 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-full font-bold text-sm tracking-wide transition-all"
@@ -219,7 +219,7 @@ export default function AirwallexServiceUI({ data }: AirwallexServiceUIProps) {
                     </p>
                     
                     <Link 
-                      href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                      href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-base transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden group"

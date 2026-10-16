@@ -53,7 +53,7 @@ export default function Chatbot() {
         setMessages([...newMessages, { role: "assistant", content: "Sorry, I am having trouble connecting to the server. Please connect with us directly on WhatsApp!" }]);
       }
     } catch (error) {
-      setMessages([...newMessages, { role: "assistant", content: "Sorry, an error occurred. Please contact us on WhatsApp at +92 332 2568950." }]);
+      setMessages([...newMessages, { role: "assistant", content: "Sorry, an error occurred. Please contact us on WhatsApp at +92 314 2573033." }]);
     } finally {
       setIsLoading(false);
     }
@@ -137,7 +137,7 @@ export default function Chatbot() {
 
             {/* Quick WhatsApp Link if needed */}
             <div className="px-5 py-2 border-t border-white/5 bg-white/5 flex justify-center">
-              <Link href="https://wa.me/923322568950" target="_blank" className="text-xs text-white/60 hover:text-[#ff6b35] transition flex items-center gap-1">
+              <Link href="https://wa.me/923142573033" target="_blank" className="text-xs text-white/60 hover:text-[#ff6b35] transition flex items-center gap-1">
                 Chat with a human on WhatsApp &rarr;
               </Link>
             </div>

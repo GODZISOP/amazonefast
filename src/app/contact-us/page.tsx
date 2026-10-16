@@ -67,14 +67,14 @@ export default function ContactUs() {
             </div>
 
             <div className="flex flex-col gap-6 mt-8">
-              <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors group cursor-pointer">
+              <a href="https://wa.me/923142573033" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors group cursor-pointer">
                 <div className="w-12 h-12 rounded-full bg-[#ff6b35]/20 flex items-center justify-center shrink-0 group-hover:bg-[#ff6b35] transition-colors">
                   <Phone className="text-[#ff6b35] group-hover:text-white transition-colors" size={24} />
                 </div>
                 <div>
                   <p className="text-white/50 text-sm font-medium mb-1 group-hover:text-white/70 transition-colors">Call or WhatsApp</p>
                   <p className="text-xl font-bold text-white group-hover:text-[#ff6b35] transition-colors">
-                    +92 332 2568950
+                    +92 314 2573033
                   </p>
                 </div>
               </a>

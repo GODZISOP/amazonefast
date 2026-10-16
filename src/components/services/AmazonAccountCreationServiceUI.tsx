@@ -160,7 +160,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105"
@@ -239,7 +239,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
               </div>
 
               <Link
-                href={`https://wa.me/923322568950?text=${encodeURIComponent("Hi AmazonFast, please pre-audit my documents for Amazon Account Creation.")}`}
+                href={`https://wa.me/923142573033?text=${encodeURIComponent("Hi AmazonFast, please pre-audit my documents for Amazon Account Creation.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 rounded-xl bg-[#ff6b35] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition hover:bg-[#ff824d]"
@@ -340,7 +340,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
             </div>
 
             <Link
-              href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-9 py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_30px_rgba(255,107,53,0.4)] hover:scale-105"

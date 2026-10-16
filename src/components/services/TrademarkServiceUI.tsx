@@ -200,7 +200,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
                   </div>
 
                   <a 
-                    href={`https://wa.me/923322568950?text=${encodeURIComponent(p.whatsappMsg)}`}
+                    href={`https://wa.me/923142573033?text=${encodeURIComponent(p.whatsappMsg)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
@@ -279,7 +279,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
             </p>
             <div className="pt-2">
               <a 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent("Hi AmazonFast, I want to Pay Now for Trademark & Brand Registry.")}`}
+                href={`https://wa.me/923142573033?text=${encodeURIComponent("Hi AmazonFast, I want to Pay Now for Trademark & Brand Registry.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"

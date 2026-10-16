@@ -927,7 +927,7 @@ export default function Home() {
                 </motion.p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] hover:bg-[#1ebd57] text-white px-8 py-4 rounded-xl font-semibold transition shadow-lg shadow-[#25D366]/20 text-center inline-block">
+                <Link href="https://wa.me/923142573033" target="_blank" rel="noopener noreferrer" className="bg-[#25D366] hover:bg-[#1ebd57] text-white px-8 py-4 rounded-xl font-semibold transition shadow-lg shadow-[#25D366]/20 text-center inline-block">
                   Start a Project
                 </Link>
                 <Link href="https://calendly.com/amazonfastservice1/new-meeting-1" target="_blank" rel="noopener noreferrer" className="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-xl font-semibold transition text-center inline-block">
@@ -988,7 +988,7 @@ export default function Home() {
               <div>
                 <p className="text-white/40 text-xs mb-2 uppercase tracking-widest font-semibold">Call Us</p>
                 <a href="tel:+18502139930" className="text-white text-lg font-medium mb-1 hover:text-[#ff6b35] transition block">+1 (850) 213-9930</a>
-                <a href="https://wa.me/923322568950" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">+92 332 2568950</a>
+                <a href="https://wa.me/923142573033" target="_blank" rel="noopener noreferrer" className="text-white text-lg font-medium hover:text-[#ff6b35] transition block">+92 314 2573033</a>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-2">

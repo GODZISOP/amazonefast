@@ -32,7 +32,7 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
             
             <div className="flex flex-wrap items-center gap-4 mb-16">
               <Link 
-                href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
                 target="_blank"
                 className="px-8 py-4 flex items-center gap-3 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_10px_30px_rgba(255,107,53,0.2)] hover:-translate-y-1"
               >
@@ -261,7 +261,7 @@ export default function StripeServiceUI({ data }: StripeServiceUIProps) {
                   </p>
                   
                   <Link 
-                    href={`https://wa.me/923322568950?text=${encodeURIComponent(whatsappMessage)}`} 
+                    href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-base transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden group"
