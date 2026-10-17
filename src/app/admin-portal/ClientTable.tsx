@@ -13,6 +13,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   const [searchQuery, setSearchQuery] = useState('');
   const supabase = createClient();
   const deletedClientIdsRef = useRef<Set<string>>(new Set());
+  const pendingStatusUpdatesRef = useRef<Map<string, string>>(new Map());
 
   // Live Auto-Refresh every 4 seconds to catch new documents & credential updates in real-time
   useEffect(() => {
@@ -22,8 +23,26 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         if (res.ok) {
           const json = await res.json();
           if (json?.data && Array.isArray(json.data)) {
-            // Filter out any client that was deleted locally so they never flicker back into the UI
-            const activeClients = json.data.filter((c: any) => !deletedClientIdsRef.current.has(c.id));
+            // Filter out deleted clients AND preserve optimistic document status updates
+            const activeClients = json.data
+              .filter((c: any) => !deletedClientIdsRef.current.has(c.id))
+              .map((c: any) => {
+                const docs = (c.documents || []).map((d: any) => {
+                  const pendingStatus = pendingStatusUpdatesRef.current.get(d.id);
+                  if (pendingStatus) {
+                    if (d.status === pendingStatus) {
+                      // Server has caught up, clear pending update lock
+                      pendingStatusUpdatesRef.current.delete(d.id);
+                    } else {
+                      // Server hasn't finished writing yet, keep the optimistic status
+                      return { ...d, status: pendingStatus };
+                    }
+                  }
+                  return d;
+                });
+                return { ...c, documents: docs };
+              });
+
             setClients(activeClients);
             setSelectedClient((prev: any) => {
               if (!prev || deletedClientIdsRef.current.has(prev.id)) return null;
@@ -41,7 +60,10 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   }, []);
 
   const handleStatusUpdate = async (docId: string, newStatus: string) => {
-    // 1. Instant Optimistic UI Update: Dropdown & badges change immediately (0 ms)
+    // 1. Lock this status in memory so background polling never overwrites it with stale data
+    pendingStatusUpdatesRef.current.set(docId, newStatus);
+
+    // 2. Instant Optimistic UI Update: Dropdown & badges change immediately (0 ms)
     const previousClients = [...clients];
     const previousSelectedClient = selectedClient ? { ...selectedClient } : null;
 
@@ -63,7 +85,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       });
     }
 
-    // 2. Server API call in background
+    // 3. Server API call in background
     try {
       const res = await fetch('/api/update-doc-status', {
         method: 'POST',
@@ -72,12 +94,14 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       });
       if (!res.ok) {
         // Rollback on server failure
+        pendingStatusUpdatesRef.current.delete(docId);
         setClients(previousClients);
         setSelectedClient(previousSelectedClient);
         alert("Update failed! Please check your network or server configuration.");
       }
     } catch (e) {
       console.error(e);
+      pendingStatusUpdatesRef.current.delete(docId);
       setClients(previousClients);
       setSelectedClient(previousSelectedClient);
       alert("Network error updating status.");
