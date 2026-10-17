@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X, Mail, Phone, Globe, Edit3 } from 'lucide-react';
+import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X, Mail, Phone, Globe, Edit3, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { parseClientInfo } from '@/utils/clientCodeHelper';
 
 export default function ClientPortal() {
   const [user, setUser] = useState<any>(null);
@@ -63,8 +64,8 @@ export default function ClientPortal() {
 
         await fetchDocs();
         
-        // Auto-refresh documents every 5 seconds
-        intervalId = setInterval(fetchDocs, 5000);
+        // Auto-refresh documents and service updates every 3 seconds
+        intervalId = setInterval(fetchDocs, 3000);
       } catch (error) {
         console.error("Error in fetchData", error);
       } finally {
@@ -280,12 +281,24 @@ export default function ClientPortal() {
           <span className="hidden md:inline-flex items-center gap-2 border-l border-gray-300 pl-3 text-sm font-bold tracking-wide text-gray-500">
             Client Workspace
             {(() => {
-              const match = (clientName || '').match(/^(AMZ-C\d+)/i);
-              return match ? (
+              const info = parseClientInfo(clientName);
+              return info.code ? (
                 <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[11px] px-2 py-0.5 rounded-md font-black tracking-wider">
-                  {match[1].toUpperCase()}
+                  {info.code}
                 </span>
               ) : null;
+            })()}
+            {(() => {
+              const sDoc = documents.find(d => d.document_type === 'Assigned Service');
+              if (sDoc?.file_name) {
+                return (
+                  <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] px-2 py-0.5 rounded-md font-bold flex items-center gap-1">
+                    <Briefcase size={10} />
+                    {sDoc.file_name}
+                  </span>
+                );
+              }
+              return null;
             })()}
           </span>
         </div>
@@ -384,18 +397,18 @@ export default function ClientPortal() {
               <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900 flex flex-wrap items-center gap-2.5">
                 <span>Welcome,</span>
                 {(() => {
-                  const match = (clientName || '').match(/^(AMZ-C\d+)\s*(.*)/i);
-                  if (match) {
+                  const info = parseClientInfo(clientName);
+                  if (info.code) {
                     return (
                       <>
                         <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-2xl md:text-3xl px-3 py-0.5 rounded-xl font-black tracking-wider shadow-sm">
-                          {match[1].toUpperCase()}
+                          {info.code}
                         </span>
-                        <span>{match[2] || 'Client'}!</span>
+                        <span>{info.name}!</span>
                       </>
                     );
                   }
-                  return <span>{clientName || 'Client'}!</span>;
+                  return <span>{info.name || 'Client'}!</span>;
                 })()}
               </h1>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
@@ -406,6 +419,43 @@ export default function ClientPortal() {
             </div>
           </div>
         </div>
+
+        {/* Active Enrolled Service Package Card */}
+        {(() => {
+          const serviceDoc = documents.find(d => d.document_type === 'Assigned Service');
+          const serviceName = serviceDoc?.file_name;
+          return (
+            <div className="w-full bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-orange-50/40 border border-indigo-100 rounded-2xl p-5 mb-8 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-indigo-600/20">
+                  <Briefcase size={22} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] uppercase font-black tracking-widest text-indigo-600 bg-indigo-100/70 px-2 py-0.5 rounded font-mono">
+                      Enrolled Service Package
+                    </span>
+                    <span className="flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-50 px-2.5 py-0.5 rounded-full border border-green-200">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                      Active
+                    </span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-black text-gray-900 mt-1">
+                    {serviceName || 'Amazon FBA Onboarding & Verification'}
+                  </h3>
+                  <p className="text-xs text-gray-500 font-medium">
+                    Dedicated Amazon Fast operations team assigned to your account
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+                <span className="text-xs font-bold text-indigo-700 bg-white border border-indigo-200/80 px-3.5 py-2 rounded-xl shadow-xs">
+                  Priority Support Active
+                </span>
+              </div>
+            </div>
+          );
+        })()}
 
         <div className="w-full bg-white border border-gray-200 shadow-sm rounded-2xl p-5 mb-12 flex items-start gap-4 hover:shadow-md transition">
           <div className="mt-1 text-green-500 bg-green-50 p-2 rounded-lg">

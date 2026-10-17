@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { FileText, Search, Download, CheckCircle2, AlertCircle, Clock, ChevronDown, ChevronUp, User, Eye, X } from 'lucide-react';
+import { parseClientInfo } from '@/utils/clientCodeHelper';
 
 export default function GlobalDocuments({ clients: initialClients }: { clients: any[] }) {
   const [clients, setClients] = useState(initialClients);
@@ -85,10 +86,11 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
           filteredClients.map((client) => {
             const isExpanded = expandedClients[client.id];
             const allDocs = client.documents || [];
-            const displayDocs = allDocs.filter((d: any) => d.document_type !== 'Profile Image');
+            const displayDocs = allDocs.filter((d: any) => d.document_type !== 'Profile Image' && d.document_type !== 'Assigned Service');
             const sortedDisplayDocs = [...displayDocs].sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime());
             const pendingDocs = displayDocs.filter((d: any) => d.status === 'Pending').length;
             const profileDoc = allDocs.find((d: any) => d.document_type === 'Profile Image');
+            const info = parseClientInfo(client.full_name);
             
             return (
               <div key={client.id} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all">
@@ -101,27 +103,18 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
                     <div className="w-10 h-10 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] flex items-center justify-center font-black text-xs border border-[#ff6b35]/20 overflow-hidden shrink-0">
                       {profileDoc ? (
                         <img src={profileDoc.file_url} alt="Profile" className="w-full h-full object-cover" />
-                      ) : (() => {
-                        const match = (client.full_name || '').match(/^AMZ-C0*(\d+)/i);
-                        return match ? `C${match[1]}` : (client.full_name ? client.full_name.substring(0, 2).toUpperCase() : <User size={18} />);
-                      })()}
+                      ) : (
+                        info.avatarText
+                      )}
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 flex items-center gap-1.5 flex-wrap">
-                        {(() => {
-                          const match = (client.full_name || '').match(/^(AMZ-C\d+)\s*(.*)/i);
-                          if (match) {
-                            return (
-                              <>
-                                <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[10px] px-2 py-0.5 rounded font-black tracking-wider">
-                                  {match[1].toUpperCase()}
-                                </span>
-                                <span>{match[2] || 'Client'}</span>
-                              </>
-                            );
-                          }
-                          return client.full_name;
-                        })()}
+                        {info.code ? (
+                          <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[10px] px-2 py-0.5 rounded font-black tracking-wider">
+                            {info.code}
+                          </span>
+                        ) : null}
+                        <span>{info.name}</span>
                       </h3>
                       <p className="text-xs text-gray-500">{client.email}</p>
                     </div>
