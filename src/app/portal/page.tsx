@@ -586,7 +586,7 @@ export default function ClientPortal() {
           </div>
 
           <DocumentCard docs={utilityDocs} title="Utility Bill" desc="A recent utility bill matching your registration address. Used for verification." type="Utility Bill" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} sampleImage="/utility-bill-sample.png" sampleLabel="Example KE / Utility Bill Format" setPreviewImage={setPreviewImage} />
-          <DocumentCard docs={bankDocs} title="Bank Statement" desc="A recent bank statement matching your address and details." type="Bank Statement" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} />
+          <DocumentCard docs={bankDocs} title="Bank Statement" desc="A recent bank statement matching your address and details." type="Bank Statement" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} sampleImage="/bank-statement-sample.png" sampleLabel="Example Bank Statement Format" setPreviewImage={setPreviewImage} />
         </div>
 
         {/* Optional Credentials & Contact Details Section */}
@@ -779,10 +779,11 @@ export default function ClientPortal() {
             >
               <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                 <span className="text-sm font-bold text-gray-800">
-                  {previewImage.includes('front') ? 'Passport ΓÇö Page 1 (Bio-Data & Details)' 
-                   : previewImage.includes('back') ? 'Passport ΓÇö Pages 2 & 3 (Signature & Endorsement)' 
-                   : previewImage.includes('cnic') ? 'CNIC ΓÇö Pakistan National Identity Card'
-                   : previewImage.includes('utility') ? 'Utility Bill ΓÇö Example Format'
+                  {previewImage.includes('front') ? 'Passport — Page 1 (Bio-Data & Details)' 
+                   : previewImage.includes('back') ? 'Passport — Pages 2 & 3 (Signature & Endorsement)' 
+                   : previewImage.includes('cnic') ? 'CNIC — Pakistan National Identity Card'
+                   : previewImage.includes('utility') ? 'Utility Bill — Example Format'
+                   : previewImage.includes('bank') ? 'Bank Statement — Example Format'
                    : 'Example Document'}
                 </span>
                 <button
@@ -797,6 +798,7 @@ export default function ClientPortal() {
                   src={previewImage}
                   alt="Document Sample Preview"
                   fill
+                  sizes="(max-width: 768px) 100vw, 800px"
                   className="object-contain"
                 />
               </div>

@@ -13,29 +13,34 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   const [searchQuery, setSearchQuery] = useState('');
   const supabase = createClient();
   const deletedClientIdsRef = useRef<Set<string>>(new Set());
-  const pendingStatusUpdatesRef = useRef<Map<string, string>>(new Map());
+  // Store status updates with a 15-second TTL so background polling never overwrites with stale data
+  const pendingStatusUpdatesRef = useRef<Map<string, { status: string; expiresAt: number }>>(new Map());
 
   // Live Auto-Refresh every 4 seconds to catch new documents & credential updates in real-time
   useEffect(() => {
     const fetchLatest = async () => {
       try {
-        const res = await fetch('/api/get-all-clients');
+        const res = await fetch(`/api/get-all-clients?t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: { 'Pragma': 'no-cache', 'Cache-Control': 'no-cache' }
+        });
         if (res.ok) {
           const json = await res.json();
           if (json?.data && Array.isArray(json.data)) {
-            // Filter out deleted clients AND preserve optimistic document status updates
+            const now = Date.now();
+            // Filter out deleted clients AND preserve optimistic document status updates with TTL lock
             const activeClients = json.data
               .filter((c: any) => !deletedClientIdsRef.current.has(c.id))
               .map((c: any) => {
                 const docs = (c.documents || []).map((d: any) => {
-                  const pendingStatus = pendingStatusUpdatesRef.current.get(d.id);
-                  if (pendingStatus) {
-                    if (d.status === pendingStatus) {
-                      // Server has caught up, clear pending update lock
-                      pendingStatusUpdatesRef.current.delete(d.id);
+                  const pending = pendingStatusUpdatesRef.current.get(d.id);
+                  if (pending) {
+                    if (now < pending.expiresAt) {
+                      // Still locked in TTL window - enforce optimistic status 100%
+                      return { ...d, status: pending.status };
                     } else {
-                      // Server hasn't finished writing yet, keep the optimistic status
-                      return { ...d, status: pendingStatus };
+                      // TTL expired, safe to let server data take over
+                      pendingStatusUpdatesRef.current.delete(d.id);
                     }
                   }
                   return d;
@@ -60,30 +65,41 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   }, []);
 
   const handleStatusUpdate = async (docId: string, newStatus: string) => {
-    // 1. Lock this status in memory so background polling never overwrites it with stale data
-    pendingStatusUpdatesRef.current.set(docId, newStatus);
+    // 1. Lock this status in memory for 15 seconds so background polling NEVER reverts it
+    pendingStatusUpdatesRef.current.set(docId, {
+      status: newStatus,
+      expiresAt: Date.now() + 15000
+    });
 
-    // 2. Instant Optimistic UI Update: Dropdown & badges change immediately (0 ms)
+    // 2. Instant Optimistic UI Update: Dropdown, badges, & review modal change immediately (0 ms)
     const previousClients = [...clients];
     const previousSelectedClient = selectedClient ? { ...selectedClient } : null;
 
-    const updatedClients = clients.map(c => {
-      if (selectedClient && c.id === selectedClient.id) {
+    setClients(prev => prev.map(c => {
+      const hasDoc = (c.documents || []).some((d: any) => d.id === docId);
+      if (hasDoc) {
         return {
           ...c,
           documents: (c.documents || []).map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
         };
       }
       return c;
+    }));
+
+    setSelectedClient((prev: any) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        documents: (prev.documents || []).map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
+      };
     });
 
-    setClients(updatedClients);
-    if (selectedClient) {
-      setSelectedClient({
-        ...selectedClient,
-        documents: (selectedClient.documents || []).map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
-      });
-    }
+    setPreviewDoc((prev: any) => {
+      if (prev && prev.id === docId) {
+        return { ...prev, status: newStatus };
+      }
+      return prev;
+    });
 
     // 3. Server API call in background
     try {

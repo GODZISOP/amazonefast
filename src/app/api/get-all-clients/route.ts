@@ -38,7 +38,13 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({ data });
+    return NextResponse.json({ data }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
