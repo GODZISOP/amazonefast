@@ -1081,6 +1081,13 @@ export default function Home() {
                   {contactStatus === 'loading' ? 'Sending...' : 'Send Message'}
                   {!contactStatus || contactStatus !== 'loading' ? <ArrowUpRight size={18} /> : null}
                 </button>
+
+                <p className="text-center text-xs text-white/50 mt-3 leading-relaxed">
+                  We value your confidentiality. By submitting, you agree to our{" "}
+                  <Link href="/privacy-policy" className="text-[#ff6b35] hover:underline font-semibold">
+                    Privacy Policy
+                  </Link>. We never sell your personal information.
+                </p>
               </form>
             </div>
           </motion.div>

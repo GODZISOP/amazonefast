@@ -139,6 +139,13 @@ export default function ContactUs() {
               <button type="submit" onClick={() => playTapSound()} disabled={status === 'loading'} className="mt-2 w-full bg-[#ff6b35] hover:bg-[#e85c2b] text-white py-4 rounded-xl font-bold transition-colors shadow-[0_0_15px_rgba(255,107,53,0.3)] hover:shadow-[0_0_25px_rgba(255,107,53,0.5)] disabled:opacity-50 disabled:cursor-not-allowed">
                 {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
+
+              <p className="text-center text-xs text-white/50 mt-1 leading-relaxed">
+                We respect your confidentiality. By submitting, you agree to our{" "}
+                <Link href="/privacy-policy" className="text-[#ff6b35] hover:underline font-semibold">
+                  Privacy Policy
+                </Link>. No spam, guaranteed.
+              </p>
             </form>
 
             <div className="relative flex items-center py-2 mb-6">

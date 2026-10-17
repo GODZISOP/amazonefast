@@ -84,12 +84,15 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Quick Links & Legal */}
-          <div className="col-span-1 lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-white font-medium mb-2 opacity-80">Pages</h4>
+          <div className="col-span-1 lg:col-span-2 flex flex-col gap-3">
+            <h4 className="text-white font-medium mb-2 opacity-80">Pages & Legal</h4>
             <Link href="/" className="text-white/60 hover:text-white transition text-sm">Home</Link>
             <Link href="/about" className="text-white/60 hover:text-white transition text-sm">About Us</Link>
             <Link href="/contact-us" className="text-white/60 hover:text-white transition text-sm">Contact Us</Link>
-            <Link href="/privacy-policy" className="text-white/60 hover:text-white transition text-sm mt-4">Privacy Policy</Link>
+            <Link href="/login" className="text-white/60 hover:text-white transition text-sm">Client Portal</Link>
+            <Link href="/privacy-policy" className="text-[#ff6b35] hover:text-orange-400 transition text-sm font-semibold inline-flex items-center gap-1 mt-1">
+              Privacy Policy
+            </Link>
           </div>
 
           {/* Column 4: Newsletter */}

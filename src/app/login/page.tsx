@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { Mail, Lock, ArrowRight, Loader2, KeyRound, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -263,6 +264,13 @@ export default function LoginPage() {
               {loading ? <Loader2 size={18} className="animate-spin" /> : (isLogin ? 'Sign In' : 'Create Account')}
               {!loading && <ArrowRight size={18} />}
             </button>
+
+            <p className="text-[11px] text-gray-500 text-center mt-2 leading-relaxed">
+              By continuing, you agree to our{" "}
+              <Link href="/privacy-policy" className="text-[#ff6b35] hover:underline font-semibold" target="_blank">
+                Privacy Policy
+              </Link>.
+            </p>
           </form>
         ) : step === 'forgot-password' ? (
           <form onSubmit={handleForgotPasswordSendOtp} className="space-y-5">
@@ -382,6 +390,14 @@ export default function LoginPage() {
             </button>
           </div>
         )}
+
+        <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-center gap-4 text-xs text-gray-400">
+          <Link href="/privacy-policy" className="hover:text-gray-700 transition" target="_blank">Privacy Policy</Link>
+          <span>•</span>
+          <Link href="/contact-us" className="hover:text-gray-700 transition">Contact Support</Link>
+          <span>•</span>
+          <Link href="/" className="hover:text-gray-700 transition">Back to Site</Link>
+        </div>
 
       </div>
     </div>

@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X, Mail, Phone, Globe, Edit3 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ClientPortal() {
   const [user, setUser] = useState<any>(null);
@@ -283,6 +284,14 @@ export default function ClientPortal() {
             <ShieldCheck size={14} strokeWidth={2.5} />
             End-to-End Encrypted
           </div>
+
+          <Link
+            href="/privacy-policy"
+            target="_blank"
+            className="hidden sm:inline-flex text-xs font-semibold text-gray-500 hover:text-[#ff6b35] transition underline underline-offset-2"
+          >
+            Privacy Policy
+          </Link>
 
           {/* Client Notification Bell */}
           <div className="relative mr-2 md:mr-4">
@@ -765,6 +774,28 @@ export default function ClientPortal() {
               </div>
             </form>
           )}
+        </div>
+
+        {/* Onboarding Privacy & Security Commitment Card */}
+        <div className="mt-8 p-6 bg-white border border-gray-200 rounded-[24px] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-left">
+            <div className="w-11 h-11 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center text-[#ff6b35] shrink-0">
+              <ShieldCheck size={22} />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-gray-900">Your Business Privacy & Document Security</p>
+              <p className="text-xs text-gray-500 mt-0.5">
+                All uploaded documents and account details are strictly confidential, stored with bank-grade encryption, and used exclusively for your authorized Amazon services and LLC/banking verification. We never sell your personal information.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/privacy-policy"
+            target="_blank"
+            className="px-4 py-2 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200 text-xs font-bold text-gray-700 hover:text-[#ff6b35] transition whitespace-nowrap shrink-0"
+          >
+            Privacy Policy →
+          </Link>
         </div>
 
         {/* Lightbox Preview Modal */}
