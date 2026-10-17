@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
     images: ["/amazon-fast-logo.png"],
   },
+  verification: {
+    google: "h0VQoiKNfg_sZJhEYVWmLABYaBAl5losKrl_NHu4-QU",
+  },
 };
 
 import ClientLayoutManager from "@/components/ClientLayoutManager";
@@ -59,6 +62,7 @@ export default function RootLayout({
       className="h-full antialiased font-sans"
     >
       <head>
+        <meta name="google-site-verification" content="h0VQoiKNfg_sZJhEYVWmLABYaBAl5losKrl_NHu4-QU" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
