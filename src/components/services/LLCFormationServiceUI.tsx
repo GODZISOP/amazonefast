@@ -137,7 +137,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
       {/* Background ambient glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#ff6b35]/15 via-[#f97316]/5 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
@@ -155,7 +155,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
             <span>Complete US Corporate Infrastructure for Non-Residents</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6 break-words">
             US LLC Formation <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#ff6b35]">
               For Global Founders & Sellers
@@ -182,7 +182,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
         {/* 4 State Selection Grid (Direct links to each individual state page) */}
         <div className="pt-6 pb-20">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
               Choose Your US Formation State
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
@@ -194,7 +194,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
             {states.map((st) => (
               <div
                 key={st.slug}
-                className={`bg-[#120904]/90 backdrop-blur-xl border ${st.border} rounded-3xl p-7 sm:p-9 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden`}
+                className={`bg-[#120904]/90 backdrop-blur-xl border ${st.border} rounded-3xl p-6 sm:p-9 flex flex-col justify-between shadow-2xl transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

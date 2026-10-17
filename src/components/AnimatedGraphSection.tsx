@@ -34,7 +34,7 @@ export default function AnimatedGraphSection() {
         style={{ background: "radial-gradient(circle, rgba(255,107,53,0.18) 0%, rgba(10,4,0,0) 70%)" }}
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 w-full">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-3.5 sm:px-8 lg:px-12 w-full">
         
         {/* Top Editorial Statement (Grounded & Realistic) */}
         <motion.div

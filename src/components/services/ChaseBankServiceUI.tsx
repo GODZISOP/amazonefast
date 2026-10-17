@@ -18,7 +18,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
     <div className="bg-[#0a0a0a] min-h-screen font-sans selection:bg-[#ff6b35]/30 overflow-x-hidden text-white">
       
       {/* 1. HERO SECTION (Layout: Text Left, Image Center, Stats Right) */}
-      <div className="relative pt-32 pb-24 lg:pb-32 px-6 lg:px-12 border-b border-white/5">
+      <div className="relative pt-32 pb-24 lg:pb-32 px-4 sm:px-6 lg:px-12 border-b border-white/5">
         
         {/* Dynamic Background Glow - Bottom Center */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#ff6b35]/10 blur-[120px] rounded-full pointer-events-none"></div>
@@ -35,13 +35,13 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
           
           {/* Left Text Block (col-span-4) */}
           <div className="lg:col-span-4 flex flex-col justify-center text-center lg:text-left">
-            <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6 break-words">
               The ultimate <br/>
               <span className="text-[#ff6b35]">US banking</span><br/>
               solution.
             </h1>
             
-            <p className="text-white/60 text-lg mb-10 leading-relaxed mx-auto lg:mx-0 max-w-sm">
+            <p className="text-white/60 text-base sm:text-lg mb-10 leading-relaxed mx-auto lg:mx-0 max-w-sm">
               Open your physical US Chase Bank business account remotely. Essential infrastructure for high-volume Amazon sellers.
             </p>
             
@@ -58,7 +58,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
           </div>
 
           {/* Center Image Block (col-span-5) */}
-          <div className="lg:col-span-5 relative h-[450px] sm:h-[550px] lg:h-[700px] flex items-center justify-center">
+          <div className="lg:col-span-5 relative h-[280px] sm:h-[450px] lg:h-[700px] flex items-center justify-center">
             <div className="relative w-full h-full drop-shadow-[0_0_50px_rgba(255,107,53,0.15)] rounded-[2.5rem] overflow-hidden">
               <Image 
                 src="/chase-hero-alternate.png"
@@ -101,16 +101,16 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
       </div>
 
       {/* 2. FEATURE GRID SECTION (Layout: Text Left, 2x2 Grid Right) */}
-      <div className="bg-[#0f0f0f] py-24 lg:py-32 px-6 lg:px-12 relative border-b border-white/5">
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-16">
+      <div className="bg-[#0f0f0f] py-20 lg:py-32 px-4 sm:px-6 lg:px-12 relative border-b border-white/5">
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
           
           {/* Left Text */}
-          <div className="w-full lg:w-1/3 flex flex-col lg:sticky top-32">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+          <div className="w-full lg:w-1/3 flex flex-col lg:sticky top-32 text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
               One account.<br/>
               Total control.
             </h2>
-            <p className="text-white/50 text-base mb-10 leading-relaxed max-w-sm">
+            <p className="text-white/50 text-base mb-10 leading-relaxed max-w-sm mx-auto lg:mx-0">
               Our tier-1 physical banking solution offers a seamless and highly secure platform for making vendor payments, managing Amazon payouts, and monitoring all business transactions.
             </p>
 
@@ -120,7 +120,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
           <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
             
             {/* Card 1 */}
-            <div className="bg-[#151515] border border-white/5 p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
+            <div className="bg-[#151515] border border-white/5 p-6 sm:p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
               <div className="w-12 h-12 rounded-full bg-[#ff6b35]/10 flex items-center justify-center mb-6 text-[#ff6b35] group-hover:scale-110 transition-transform">
                 <Zap size={24} />
               </div>
@@ -131,7 +131,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
             </div>
 
             {/* Card 2 (Highlighted) */}
-            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#ff6b35]/20 p-8 rounded-3xl relative overflow-hidden group">
+            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#ff6b35]/20 p-6 sm:p-8 rounded-3xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff6b35]/10 blur-3xl rounded-full"></div>
               <div className="w-12 h-12 rounded-full bg-[#ff6b35] flex items-center justify-center mb-6 text-black group-hover:scale-110 transition-transform relative z-10">
                 <Landmark size={24} />
@@ -143,7 +143,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#151515] border border-white/5 p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
+            <div className="bg-[#151515] border border-white/5 p-6 sm:p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
               <div className="w-12 h-12 rounded-full bg-[#ff6b35]/10 flex items-center justify-center mb-6 text-[#ff6b35] group-hover:scale-110 transition-transform">
                 <CreditCard size={24} />
               </div>
@@ -154,7 +154,7 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-[#151515] border border-white/5 p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
+            <div className="bg-[#151515] border border-white/5 p-6 sm:p-8 rounded-3xl hover:border-[#ff6b35]/30 transition-colors group">
               <div className="w-12 h-12 rounded-full bg-[#ff6b35]/10 flex items-center justify-center mb-6 text-[#ff6b35] group-hover:scale-110 transition-transform">
                 <BarChart3 size={24} />
               </div>
@@ -169,16 +169,16 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
       </div>
 
       {/* 3. SPLIT SECTION (Layout: Image Left, Text Right) */}
-      <div className="bg-[#0a0a0a] py-24 lg:py-32 px-6 lg:px-12 relative border-b border-white/5 overflow-hidden">
+      <div className="bg-[#0a0a0a] py-20 lg:py-32 px-4 sm:px-6 lg:px-12 relative border-b border-white/5 overflow-hidden">
         
         {/* Background Accent */}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#ff6b35]/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 relative z-10">
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10">
           
           {/* Left Image (Hand/Dashboard) */}
-          <div className="w-full lg:w-1/2 relative h-[350px] sm:h-[450px] lg:h-[550px]">
-            <div className="absolute inset-0 rounded-[3rem] overflow-hidden border border-white/10 bg-[#111]">
+          <div className="w-full lg:w-1/2 relative h-[250px] sm:h-[380px] lg:h-[550px]">
+            <div className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-white/10 bg-[#111]">
               <Image 
                 src="/chase-hand.png" 
                 alt="Chase Bank Corporate Card" 
@@ -191,12 +191,12 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
           </div>
 
           {/* Right Text */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
             <span className="text-[#ff6b35] font-bold text-sm mb-4 tracking-wider uppercase">Easy, safe, and hassle-free.</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
               Instantly receive & <br/> manage payouts.
             </h2>
-            <p className="text-white/50 text-base mb-10 max-w-md leading-relaxed">
+            <p className="text-white/50 text-base mb-10 max-w-md mx-auto lg:mx-0 leading-relaxed">
               Connect your physical US Chase Bank account directly to Amazon Seller Central. Benefit from Chase's premium banking infrastructure, high withdrawal limits, and unparalleled security for your business funds.
             </p>
             <div>
@@ -216,15 +216,15 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
 
       {/* 4. PRICING SECTION (Standard AmazonFast Pricing Block) */}
       {price && (
-        <div id="pricing" className="max-w-[1400px] mx-auto px-6 md:px-12 py-32 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+        <div id="pricing" className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-20 sm:py-32 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
             
             {/* Left Side Text & Guarantees */}
             <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight text-center lg:text-left">
                 Ready to Setup Your <br/> <span className="text-[#ff6b35]">Chase Bank Account?</span>
               </h2>
-              <p className="text-white/60 text-lg mb-12 max-w-lg">
+              <p className="text-white/60 text-base sm:text-lg mb-12 max-w-lg text-center lg:text-left mx-auto lg:mx-0">
                 Setting up a physical USA bank account typically requires a US visit. We handle the entire formation and banking process remotely for you.
               </p>
               
@@ -260,12 +260,12 @@ export default function ChaseBankServiceUI({ data }: ChaseBankServiceUIProps) {
                   </div>
 
                   {/* Inner Content */}
-                  <div className="p-10 flex flex-col">
+                  <div className="p-6 sm:p-10 flex flex-col">
                     
                     <h3 className="text-2xl font-semibold text-white mb-4">Physical Bank Setup</h3>
                     
                     <div className="flex items-end gap-1 mb-4">
-                      <span className="text-6xl font-black text-white leading-none tracking-tight">${price}</span>
+                      <span className="text-5xl sm:text-6xl font-black text-white leading-none tracking-tight">${price}</span>
                       <span className="text-white/50 text-base font-medium mb-1">/ one-time</span>
                     </div>
                     

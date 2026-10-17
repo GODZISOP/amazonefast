@@ -105,7 +105,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
         style={{ background: "radial-gradient(circle, rgba(255,107,53,0.2) 0%, rgba(10,4,0,0) 70%)" }}
       />
 
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
@@ -124,7 +124,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
             <span>#1 Recommended State for Non-Residents</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.12] mb-6 break-words">
             Wyoming LLC Formation
           </h1>
 
@@ -231,7 +231,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-[#ff6b35] text-black font-extrabold text-xs px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
               All-Inclusive Package
             </div>

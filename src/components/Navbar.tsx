@@ -59,11 +59,11 @@ export default function Navbar() {
 
   return (
     <header className="fixed z-[100] w-full top-0 left-0 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 py-3.5 sm:py-4 flex justify-between items-center relative">
+      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center relative">
         {/* Left: Logo */}
-        <div className="flex items-center shrink-0 w-[180px] sm:w-[220px]">
+        <div className="flex items-center shrink-0 lg:w-[180px] xl:w-[220px]">
           <a href="/" className="flex items-center shrink-0">
-            <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-9 sm:h-11 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
+            <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={180} height={50} className="object-contain h-8 sm:h-11 w-auto" style={{ filter: "drop-shadow(0 0 15px rgba(255,107,53,0.8))" }} priority />
           </a>
         </div>
 
@@ -337,11 +337,11 @@ export default function Navbar() {
       </nav>
 
       {/* Right Actions / Balancing Box */}
-      <div className="flex items-center justify-end shrink-0 w-[180px] sm:w-[220px]">
+      <div className="flex items-center justify-end shrink-0 lg:w-[180px] sm:lg:w-[220px]">
         {/* Mobile Hamburger Menu */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition z-50"
+          className="lg:hidden w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition z-50 shrink-0"
         >
           {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>

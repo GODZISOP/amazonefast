@@ -129,7 +129,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
       {/* Background ambient glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#ff6b35]/15 via-[#f97316]/5 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[1300px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
@@ -147,7 +147,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
             <span>Guaranteed Non-Resident Identity Verification & Approval</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6 break-words">
             Amazon Seller Central <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#ff6b35]">
               Account Creation & Verification
@@ -181,7 +181,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
         <div id="required-documents" className="pt-10 pb-20 scroll-mt-24">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs uppercase tracking-widest text-[#ff6b35] font-bold block mb-2">Mandatory Checklist</span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
               Required Documents For Approval
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
@@ -195,7 +195,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
               return (
                 <div
                   key={doc.num}
-                  className="bg-[#120703]/90 backdrop-blur-xl border border-white/10 hover:border-[#ff6b35]/50 rounded-3xl p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative group"
+                  className="bg-[#120703]/90 backdrop-blur-xl border border-white/10 hover:border-[#ff6b35]/50 rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 relative group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -229,7 +229,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
             })}
 
             {/* Reassurance Card */}
-            <div className="bg-gradient-to-br from-[#1c0c05] to-[#120703] border border-[#ff6b35]/30 rounded-3xl p-7 flex flex-col justify-between shadow-2xl">
+            <div className="bg-gradient-to-br from-[#1c0c05] to-[#120703] border border-[#ff6b35]/30 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-2xl">
               <div>
                 <span className="text-xs uppercase tracking-wider font-bold text-[#ff6b35] block mb-2">Our Guarantee</span>
                 <h3 className="text-xl font-bold text-white mb-3">Pre-Submission Audit</h3>
@@ -255,7 +255,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
         <div className="py-20 border-t border-white/10">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <span className="text-xs uppercase tracking-widest text-[#ff6b35] font-bold block mb-2">Global Coverage</span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
               Supported Countries & Major Marketplaces
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
@@ -290,7 +290,7 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
         <div className="py-20 border-t border-white/10">
           <div className="text-center max-w-xl mx-auto mb-14">
             <span className="text-xs uppercase tracking-widest text-[#ff6b35] font-bold block mb-2">Approval Process</span>
-            <h2 className="text-3xl font-bold text-white mb-2">How We Guarantee Approval</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">How We Guarantee Approval</h2>
             <p className="text-white/60 text-sm">Our structured methodology minimizes rejection risks to nearly zero.</p>
           </div>
 
@@ -307,12 +307,12 @@ export default function AmazonAccountCreationServiceUI({ data }: AmazonAccountCr
 
         {/* Section 4: Package Card */}
         <div className="py-16 border-t border-white/10">
-          <div className="max-w-2xl mx-auto bg-gradient-to-br from-[#170a04] via-[#120703] to-[#170a04] border border-[#ff6b35]/40 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl">
+          <div className="max-w-2xl mx-auto bg-gradient-to-br from-[#170a04] via-[#120703] to-[#170a04] border border-[#ff6b35]/40 rounded-3xl p-6 sm:p-12 text-center relative overflow-hidden shadow-2xl">
             <div className="inline-block px-3.5 py-1 rounded-full bg-[#ff6b35] text-black text-xs font-bold uppercase tracking-wider mb-4">
               Full-Service Package
             </div>
             
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">
               Amazon Account Creation & Verification
             </h2>
 

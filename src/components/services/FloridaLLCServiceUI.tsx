@@ -109,7 +109,7 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
         style={{ background: "radial-gradient(circle, rgba(255,107,53,0.18) 0%, rgba(10,4,0,0) 70%)" }}
       />
 
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
@@ -129,7 +129,7 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
               <span>Gateway for E-Commerce & East Coast Amazon FBA</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] mb-6 break-words">
               Florida LLC <br />
               <span className="text-[#ff6b35]">
                 Formation Service
@@ -219,7 +219,7 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
 
         {/* Section 2: Package Pricing Card ($500) */}
         <div className="py-16 border-t border-white/10">
-          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">Full Florida LLC Package</h3>

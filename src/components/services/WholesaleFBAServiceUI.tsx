@@ -86,7 +86,7 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
       {/* Background glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#ff6b35]/15 to-transparent blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white/50 mb-6">
@@ -104,7 +104,7 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
             <span>Complete Wholesale FBA Operations</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight break-words">
             Complete Amazon Wholesale <br />
             <span className="text-[#ff6b35]">Account Management</span>
           </h1>
@@ -114,15 +114,15 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
           </p>
 
           {/* Quick Price Pill */}
-          <div className="inline-flex items-center gap-4 bg-white/[0.04] border border-white/10 px-6 py-3 rounded-2xl">
+          <div className="inline-flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-4 bg-white/[0.04] border border-white/10 px-4 sm:px-6 py-3 rounded-2xl">
             <div>
               <span className="text-xs text-white/50 block">Months 1 & 2</span>
-              <span className="text-lg font-bold text-white">$300 / month</span>
+              <span className="text-base sm:text-lg font-bold text-white">$300 / month</span>
             </div>
-            <div className="w-px h-8 bg-white/10" />
+            <div className="hidden sm:block w-px h-8 bg-white/10" />
             <div>
               <span className="text-xs text-white/50 block">Month 3 onwards</span>
-              <span className="text-lg font-bold text-[#ff6b35]">Profit Share %</span>
+              <span className="text-base sm:text-lg font-bold text-[#ff6b35]">Profit Share %</span>
             </div>
           </div>
 

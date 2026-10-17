@@ -129,7 +129,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
       {/* Background glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#ff6b35]/15 to-transparent blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white/50 mb-6">
@@ -147,7 +147,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
             <span>Guaranteed Amazon Brand Approvals</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight break-words">
             Amazon Brand Approvals & <br />
             <span className="text-[#ff6b35]">Ungating Packages</span>
           </h1>

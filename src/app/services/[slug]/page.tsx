@@ -603,7 +603,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-[#ff6b35]/10 blur-[150px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-12 relative z-10">
         
         {/* Back link */}
         <Link href="/" className="inline-flex items-center gap-2 text-white/50 hover:text-[#ff6b35] transition-colors mb-12 text-sm font-medium uppercase tracking-widest">
@@ -621,11 +621,11 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1] mb-6 break-words">
             {data.title}
           </h1>
           
-          <p className="text-white/60 text-lg md:text-xl leading-relaxed font-light max-w-2xl mx-auto mb-10">
+          <p className="text-white/60 text-base sm:text-lg md:text-xl leading-relaxed font-light max-w-2xl mx-auto mb-10">
             {data.description}
           </p>
 
@@ -643,7 +643,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
         </div>
 
         {/* Hero Showcase Image */}
-        <div className="relative w-full max-w-6xl mx-auto aspect-[16/10] md:aspect-video rounded-[32px] md:rounded-[40px] overflow-hidden group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] mb-32 border border-white/10 bg-[#111]">
+        <div className="relative w-full max-w-6xl mx-auto aspect-[16/10] md:aspect-video rounded-[24px] md:rounded-[40px] overflow-hidden group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] mb-20 sm:mb-32 border border-white/10 bg-[#111]">
           {/* Subtle Overlays for depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-20 pointer-events-none opacity-80"></div>
           <div className="absolute inset-0 bg-gradient-to-tr from-[#ff6b35]/20 to-transparent z-20 pointer-events-none mix-blend-overlay opacity-50 group-hover:opacity-100 transition-opacity duration-1000"></div>
@@ -658,26 +658,26 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
           />
           
           {/* Floating Trust Banner */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-[90%] md:w-max bg-[#1a1a1a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:px-8 md:py-4 flex flex-wrap justify-center gap-6 md:gap-12 shadow-2xl">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="text-[#ff6b35] w-5 h-5" />
-              <span className="text-white/90 text-sm font-semibold">Guaranteed Approval</span>
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 w-[92%] sm:w-max bg-[#1a1a1a]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-4 md:px-8 md:py-4 flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-12 shadow-2xl">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <ShieldCheck className="text-[#ff6b35] w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-white/90 text-xs sm:text-sm font-semibold">Guaranteed Approval</span>
             </div>
-            <div className="flex items-center gap-3">
-              <Zap className="text-[#ff6b35] w-5 h-5" />
-              <span className="text-white/90 text-sm font-semibold">Fast Processing</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Zap className="text-[#ff6b35] w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-white/90 text-xs sm:text-sm font-semibold">Fast Processing</span>
             </div>
-            <div className="flex items-center gap-3 hidden sm:flex">
-              <Globe className="text-[#ff6b35] w-5 h-5" />
-              <span className="text-white/90 text-sm font-semibold">Global Support</span>
+            <div className="flex items-center gap-2 sm:gap-3 hidden sm:flex">
+              <Globe className="text-[#ff6b35] w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-white/90 text-xs sm:text-sm font-semibold">Global Support</span>
             </div>
           </div>
         </div>
 
         {/* Features Bento Grid Section */}
-        <div className="mt-24 mb-16 text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">What&apos;s Included</h2>
-          <p className="text-white/60 text-lg">Clear, simple steps to make your Amazon listings look professional and bring in more sales.</p>
+        <div className="mt-16 sm:mt-24 mb-12 sm:mb-16 text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">What&apos;s Included</h2>
+          <p className="text-white/60 text-base sm:text-lg">Clear, simple steps to make your Amazon listings look professional and bring in more sales.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -687,7 +687,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
             return (
               <div 
                 key={idx} 
-                className={`p-8 rounded-[32px] bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 hover:border-[#ff6b35]/50 transition-all duration-500 group flex flex-col justify-start relative overflow-hidden ${idx === 0 || idx === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+                className={`p-6 sm:p-8 rounded-[24px] sm:rounded-[32px] bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 hover:border-[#ff6b35]/50 transition-all duration-500 group flex flex-col justify-start relative overflow-hidden ${idx === 0 || idx === 3 ? 'md:col-span-2 lg:col-span-1' : ''}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#ff6b35]/0 to-[#ff6b35]/0 group-hover:from-[#ff6b35]/5 group-hover:to-transparent transition-all duration-500 z-0"></div>
                 
@@ -695,8 +695,8 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                   <IconComponent className="text-[#ff6b35]" size={28} strokeWidth={2} />
                 </div>
                 
-                <h3 className="text-2xl font-bold text-white mb-3 relative z-10">{benefit}</h3>
-                <p className="text-white/50 leading-relaxed relative z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 relative z-10">{benefit}</h3>
+                <p className="text-white/50 leading-relaxed text-sm sm:text-base relative z-10">
                   {getBenefitDesc(benefit, data.title)}
                 </p>
               </div>
@@ -706,7 +706,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
 
         {/* Exact Layout of the Image Pricing Card */}
         {price && (
-          <div className="mt-32 mb-10 flex justify-center">
+          <div className="mt-20 sm:mt-32 mb-10 flex justify-center">
             <div className="relative w-full max-w-sm">
               
               {/* Outer Container mimicking the image */}
@@ -719,7 +719,7 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
                 </div>
 
                 {/* Inner Content */}
-                <div className="p-8 sm:p-10 flex flex-col">
+                <div className="p-6 sm:p-10 flex flex-col">
                   
                   {/* Title */}
                   <h3 className="text-xl font-semibold text-white mb-4">Professional</h3>

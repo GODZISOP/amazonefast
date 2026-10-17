@@ -88,7 +88,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
         style={{ background: "radial-gradient(circle, rgba(255,107,53,0.18) 0%, rgba(10,4,0,0) 70%)" }}
       />
 
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-white/50 mb-6">
@@ -106,7 +106,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
             <span>The #2 Economy in the USA — Commercial Powerhouse</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-[1.1] mb-6 break-words">
             Texas LLC Formation
           </h1>
 
@@ -161,7 +161,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
 
         {/* Section 2: Complete $550 Package Card */}
         <div className="py-16 border-t border-white/10">
-          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+          <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
             <div className="absolute top-0 right-0 bg-[#ff6b35] text-black font-extrabold text-xs px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
               Includes $300 SOS State Fee
             </div>

@@ -139,7 +139,7 @@ export default function Home() {
         </div>
 
         {/* Main Content Layout (Clean balanced spacing below navbar) */}
-        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-6 -mt-6 sm:-mt-8 md:-mt-10 pt-14 sm:pt-16 md:pt-18 pb-12 md:pb-16 flex flex-col justify-center items-center text-center">
+        <main className="relative z-20 w-full flex-grow max-w-[1000px] mx-auto px-3.5 sm:px-6 -mt-6 sm:-mt-8 md:-mt-10 pt-16 sm:pt-16 md:pt-18 pb-12 md:pb-16 flex flex-col justify-center items-center text-center">
 
           <motion.h1
             initial="hidden"
@@ -152,7 +152,7 @@ export default function Home() {
                 }
               }
             }}
-            className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 text-white"
+            className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.12] sm:leading-[1.1] tracking-tight mb-5 sm:mb-6 flex flex-wrap justify-center gap-x-2 sm:gap-x-3 gap-y-1.5 sm:gap-y-2 text-white"
           >
             {/* First Line with Gradient Animation */}
             <motion.span
