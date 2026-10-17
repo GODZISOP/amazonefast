@@ -113,7 +113,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
       {/* Ambient background glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-b from-[#ff6b35]/15 to-transparent blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white/50 mb-6">
@@ -131,7 +131,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
             <span>USPTO Registered & Amazon Brand Registry</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight break-words">
             Amazon Trademark & <br />
             <span className="text-[#ff6b35]">Brand Registry Protection</span>
           </h1>
@@ -150,7 +150,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
               return (
                 <div 
                   key={p.id}
-                  className={`rounded-3xl p-7 sm:p-9 flex flex-col justify-between transition-all relative overflow-hidden ${
+                  className={`rounded-3xl p-6 sm:p-9 flex flex-col justify-between transition-all relative overflow-hidden ${
                     p.id === "word"
                       ? "bg-gradient-to-b from-[#1c0c05] via-[#120703] to-[#0a0401] border-2 border-[#ff6b35] shadow-[0_0_40px_rgba(255,107,53,0.2)]"
                       : "bg-white/[0.03] border border-white/10 hover:border-white/25"
