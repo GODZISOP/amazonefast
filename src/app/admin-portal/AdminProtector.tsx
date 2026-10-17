@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Loader2 } from 'lucide-react';
 
 export default function AdminProtector({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,15 +17,48 @@ export default function AdminProtector({ children }: { children: React.ReactNode
     }
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const savedPassword = localStorage.getItem('admin_master_password') || 'admin0000';
-    if (password === savedPassword) {
-      localStorage.setItem('admin_auth', 'true');
-      setIsAuthenticated(true);
-      setError('');
-    } else {
-      setError('Incorrect master password');
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/admin-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'login', password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data?.success) {
+        localStorage.setItem('admin_auth', 'true');
+        localStorage.setItem('admin_master_password', password.trim());
+        setIsAuthenticated(true);
+        setError('');
+      } else {
+        // Fallback check against localStorage in case offline
+        const localSaved = localStorage.getItem('admin_master_password') || 'admin0000';
+        if (password.trim() === localSaved) {
+          localStorage.setItem('admin_auth', 'true');
+          setIsAuthenticated(true);
+          setError('');
+        } else {
+          setError(data?.error || 'Incorrect master password');
+        }
+      }
+    } catch (err) {
+      // Offline fallback
+      const localSaved = localStorage.getItem('admin_master_password') || 'admin0000';
+      if (password.trim() === localSaved) {
+        localStorage.setItem('admin_auth', 'true');
+        setIsAuthenticated(true);
+        setError('');
+      } else {
+        setError('Connection error or incorrect password');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,13 +92,18 @@ export default function AdminProtector({ children }: { children: React.ReactNode
             />
           </div>
           
-          {error && <p className="text-red-500 text-sm font-bold">{error}</p>}
-          
-          <button 
+          {error && (
+            <p className="text-xs text-red-500 font-bold bg-red-50 py-2 rounded-lg border border-red-100">
+              {error}
+            </p>
+          )}
+
+          <button
             type="submit"
-            className="w-full bg-[#ff6b35] hover:bg-[#e85a2a] text-white font-bold py-3 px-4 rounded-xl transition shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+            disabled={loading}
+            className="w-full py-3.5 bg-[#ff6b35] hover:bg-[#e0531f] text-white font-bold rounded-xl shadow-lg shadow-[#ff6b35]/25 transition duration-200 uppercase tracking-wider text-xs flex items-center justify-center gap-2"
           >
-            Access Dashboard
+            {loading ? <Loader2 size={16} className="animate-spin" /> : 'Unlock Admin Portal'}
           </button>
         </form>
       </div>

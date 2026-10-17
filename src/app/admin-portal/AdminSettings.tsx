@@ -13,7 +13,7 @@ export default function AdminSettings() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setMessage('');
@@ -23,29 +23,41 @@ export default function AdminSettings() {
       return;
     }
 
-    const savedPassword = localStorage.getItem('admin_master_password') || 'admin0000';
-    
-    if (currentPassword !== savedPassword) {
-      setError("Current password is incorrect.");
+    if (newPassword.length < 4) {
+      setError("New password must be at least 4 characters long.");
       return;
     }
 
     setSaving(true);
-    
-    // Simulate network delay
-    setTimeout(() => {
-      if (newPassword) {
-        localStorage.setItem('admin_master_password', newPassword);
+
+    try {
+      const res = await fetch('/api/admin-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'change-password',
+          currentPassword: currentPassword.trim(),
+          newPassword: newPassword.trim()
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data?.success) {
+        localStorage.setItem('admin_master_password', newPassword.trim());
+        setMessage("Master password updated successfully across all devices!");
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        setTimeout(() => setMessage(''), 4000);
+      } else {
+        setError(data?.error || "Failed to update password. Please check your current password.");
       }
-      
-      setMessage("Settings updated successfully!");
+    } catch (err: any) {
+      setError(err?.message || "Network error updating password.");
+    } finally {
       setSaving(false);
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      
-      setTimeout(() => setMessage(''), 3000);
-    }, 1000);
+    }
   };
 
   return (

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { FileText, Search, Download, CheckCircle2, AlertCircle, Clock, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { FileText, Search, Download, CheckCircle2, AlertCircle, Clock, ChevronDown, ChevronUp, User, Eye, X } from 'lucide-react';
 
 export default function GlobalDocuments({ clients: initialClients }: { clients: any[] }) {
   const [clients, setClients] = useState(initialClients);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedClients, setExpandedClients] = useState<Record<string, boolean>>({});
+  const [previewDoc, setPreviewDoc] = useState<any>(null);
 
   useEffect(() => {
     const fetchLatestData = async () => {
@@ -162,14 +163,23 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
                                   Text Info
                                 </button>
                               ) : (
-                                <a 
-                                  href={doc.file_url} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-1 rounded bg-[#ff6b35]/10 text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white transition whitespace-nowrap shadow-sm hover:shadow-md"
-                                >
-                                  <Download size={12} /> View File
-                                </a>
+                                <div className="flex items-center gap-1.5">
+                                  <button 
+                                    type="button"
+                                    onClick={() => setPreviewDoc({ ...doc, clientName: client.full_name })}
+                                    className="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded bg-[#ff6b35]/10 text-[#ff6b35] hover:bg-[#ff6b35] hover:text-white transition whitespace-nowrap shadow-sm"
+                                  >
+                                    <Eye size={12} /> View
+                                  </button>
+                                  <a 
+                                    href={doc.file_url} 
+                                    target="_blank" 
+                                    download
+                                    className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-1 rounded bg-gray-100 text-gray-600 hover:bg-gray-200 transition whitespace-nowrap"
+                                  >
+                                    <Download size={11} /> Download
+                                  </a>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -183,6 +193,82 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
           })
         )}
       </div>
+
+      {/* Global In-App Document Lightbox Modal */}
+      {previewDoc && (
+        <div
+          onClick={() => setPreviewDoc(null)}
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh] border border-gray-100"
+          >
+            <div className="p-4 px-6 border-b border-gray-100 flex items-center justify-between bg-white">
+              <div>
+                <h3 className="font-bold text-base text-gray-900">{previewDoc.document_type}</h3>
+                <p className="text-xs text-gray-500 font-medium">
+                  {previewDoc.clientName ? `${previewDoc.clientName} • ` : ''}
+                  Uploaded: {new Date(previewDoc.uploaded_at).toLocaleString()}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={previewDoc.file_url}
+                  target="_blank"
+                  download
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
+                >
+                  <Download size={14} /> Download Original
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setPreviewDoc(null)}
+                  className="p-1.5 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-6 bg-gray-900/5 flex-1 overflow-auto flex items-center justify-center min-h-[300px] max-h-[70vh]">
+              {previewDoc.file_url?.toLowerCase().endsWith('.pdf') ? (
+                <iframe
+                  src={previewDoc.file_url}
+                  className="w-full h-[65vh] rounded-2xl border border-gray-200 shadow-md bg-white"
+                  title="PDF Preview"
+                />
+              ) : (
+                <img
+                  src={previewDoc.file_url}
+                  alt={previewDoc.document_type}
+                  className="max-w-full max-h-[65vh] object-contain rounded-2xl shadow-lg border border-gray-200 bg-white"
+                />
+              )}
+            </div>
+
+            <div className="p-4 px-6 border-t border-gray-100 bg-white flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-gray-500">Status:</span>
+                <span className={`text-[10px] font-black uppercase px-2.5 py-1 rounded-full border ${
+                  previewDoc.status === 'Approved' ? 'bg-green-50 text-green-600 border-green-200' :
+                  previewDoc.status === 'Rejected' ? 'bg-red-50 text-red-600 border-red-200' :
+                  'bg-orange-50 text-orange-600 border-orange-200'
+                }`}>
+                  {previewDoc.status}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPreviewDoc(null)}
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-xl text-xs font-bold text-gray-700 transition"
+              >
+                Close Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

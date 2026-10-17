@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect, useMemo } from 'react';
-import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter, Users, Search } from 'lucide-react';
+import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter, Users, Search, Eye, ExternalLink } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 
 export default function ClientTable({ initialClients }: { initialClients: any[] }) {
   const [clients, setClients] = useState(initialClients);
   const [selectedClient, setSelectedClient] = useState<any>(null);
+  const [previewDoc, setPreviewDoc] = useState<any>(null);
   const [updating, setUpdating] = useState(false);
   const [filter, setFilter] = useState('All'); // 'All', 'Pending', 'Approved'
   const [searchQuery, setSearchQuery] = useState('');
@@ -376,12 +377,36 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {selectedClient.documents.filter((d: any) => d.document_type !== 'Profile Image').map((doc: any) => (
+                  {selectedClient.documents.filter((d: any) => d.document_type !== 'Profile Image').map((doc: any) => {
+                    const isTextCred = doc.document_type === 'Gmail Credentials' || doc.document_type === 'Company Email' || doc.document_type === 'Phone Number';
+                    const isPdf = doc.file_url?.toLowerCase().endsWith('.pdf');
+
+                    return (
                     <div key={doc.id} className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400">
-                          <FileText size={20} />
-                        </div>
+                        {isTextCred ? (
+                          <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 shrink-0">
+                            <FileText size={20} />
+                          </div>
+                        ) : (
+                          <div 
+                            onClick={() => setPreviewDoc(doc)}
+                            className="w-14 h-14 rounded-xl border border-gray-200 overflow-hidden bg-gray-50 cursor-pointer group/thumb relative shrink-0 flex items-center justify-center hover:border-[#ff6b35] transition shadow-sm"
+                            title="Click to Enlarge / View"
+                          >
+                            {isPdf ? (
+                              <div className="flex flex-col items-center justify-center text-red-500">
+                                <FileText size={20} />
+                                <span className="text-[8px] font-black uppercase mt-0.5">PDF</span>
+                              </div>
+                            ) : (
+                              <img src={doc.file_url} alt={doc.document_type} className="w-full h-full object-cover group-hover/thumb:scale-110 transition duration-300" />
+                            )}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition flex items-center justify-center text-white">
+                              <Eye size={16} />
+                            </div>
+                          </div>
+                        )}
                         <div>
                           <p className="font-bold text-sm text-gray-900">{doc.document_type}</p>
                           {doc.document_type === 'Gmail Credentials' ? (
@@ -398,9 +423,23 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                               <p className="text-xs text-gray-500 font-bold">Phone Number: <span className="font-mono text-gray-800">{doc.file_name}</span></p>
                             </div>
                           ) : (
-                            <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-xs text-[#ff6b35] hover:underline flex items-center gap-1 mt-1 font-medium">
-                              <Download size={12} /> View / Download
-                            </a>
+                            <div className="flex items-center gap-2 mt-2">
+                              <button
+                                type="button"
+                                onClick={() => setPreviewDoc(doc)}
+                                className="text-xs font-bold text-[#ff6b35] bg-orange-50 hover:bg-orange-100 border border-orange-200 px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1.5"
+                              >
+                                <Eye size={13} /> View Document
+                              </button>
+                              <a 
+                                href={doc.file_url} 
+                                target="_blank" 
+                                download 
+                                className="text-xs font-medium text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition flex items-center gap-1.5"
+                              >
+                                <Download size={13} /> Download
+                              </a>
+                            </div>
                           )}
                           <p className="text-[9px] text-gray-400 mt-1 uppercase tracking-wide">
                             Uploaded: {new Date(doc.uploaded_at).toLocaleString()}
@@ -412,7 +451,6 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                         <select
                           value={doc.status}
                           onChange={(e) => handleStatusUpdate(doc.id, e.target.value)}
-                          disabled={updating}
                           className={`text-[10px] font-black uppercase tracking-wider px-2 py-1.5 rounded-md border outline-none cursor-pointer transition ${
                             doc.status === 'Approved' ? 'bg-green-50 text-green-600 border-green-200 hover:bg-green-100' :
                             doc.status === 'Rejected' ? 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100' :
@@ -425,9 +463,106 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                         </select>
                       </div>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* In-App Full Lightbox Document Viewer */}
+      {previewDoc && (
+        <div
+          onClick={() => setPreviewDoc(null)}
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh] border border-gray-100 animate-in fade-in zoom-in-95 duration-200"
+          >
+            {/* Modal Header */}
+            <div className="p-4 px-6 border-b border-gray-100 flex items-center justify-between bg-white">
+              <div>
+                <h3 className="font-bold text-base text-gray-900">{previewDoc.document_type}</h3>
+                <p className="text-xs text-gray-500 font-medium">
+                  {selectedClient?.full_name ? `${selectedClient.full_name} • ` : ''}
+                  Uploaded: {new Date(previewDoc.uploaded_at).toLocaleString()}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={previewDoc.file_url}
+                  target="_blank"
+                  download
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
+                  title="Download File"
+                >
+                  <Download size={14} /> Download Original
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setPreviewDoc(null)}
+                  className="p-1.5 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body: Document Display */}
+            <div className="p-4 sm:p-6 bg-gray-900/5 flex-1 overflow-auto flex items-center justify-center min-h-[300px] max-h-[70vh]">
+              {previewDoc.file_url?.toLowerCase().endsWith('.pdf') ? (
+                <iframe
+                  src={previewDoc.file_url}
+                  className="w-full h-[65vh] rounded-2xl border border-gray-200 shadow-md bg-white"
+                  title="PDF Preview"
+                />
+              ) : (
+                <img
+                  src={previewDoc.file_url}
+                  alt={previewDoc.document_type}
+                  className="max-w-full max-h-[65vh] object-contain rounded-2xl shadow-lg border border-gray-200 bg-white"
+                />
+              )}
+            </div>
+
+            {/* Modal Footer: Quick Verification Actions */}
+            <div className="p-4 px-6 border-t border-gray-100 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-gray-500">Document Status:</span>
+                <span className={`text-[10px] font-black uppercase px-2.5 py-1 rounded-full border ${
+                  previewDoc.status === 'Approved' ? 'bg-green-50 text-green-600 border-green-200' :
+                  previewDoc.status === 'Rejected' ? 'bg-red-50 text-red-600 border-red-200' :
+                  'bg-orange-50 text-orange-600 border-orange-200'
+                }`}>
+                  {previewDoc.status}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleStatusUpdate(previewDoc.id, 'Approved');
+                    setPreviewDoc((p: any) => p ? { ...p, status: 'Approved' } : null);
+                  }}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1.5"
+                >
+                  <CheckCircle2 size={15} /> Approve Document
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleStatusUpdate(previewDoc.id, 'Rejected');
+                    setPreviewDoc((p: any) => p ? { ...p, status: 'Rejected' } : null);
+                  }}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1.5"
+                >
+                  <AlertCircle size={15} /> Reject Document
+                </button>
+              </div>
             </div>
           </div>
         </div>
