@@ -18,20 +18,17 @@ export async function POST(req: Request) {
 
     const supabase = createSupabaseClient(supabaseUrl, supabaseKey);
 
-    // Delete documents first to avoid foreign key constraints
-    await supabase.from('documents').delete().eq('client_id', clientId);
+    // 1. Delete dependent records (notifications, documents) in parallel
+    await Promise.allSettled([
+      supabase.from('notifications').delete().eq('client_id', clientId),
+      supabase.from('documents').delete().eq('client_id', clientId)
+    ]);
     
-    // Delete the client from the database
-    const { error: dbError } = await supabase.from('clients').delete().eq('id', clientId);
-    
-    if (dbError) throw dbError;
-
-    // Delete the user from Supabase Auth (Admin action)
-    const { error: authError } = await supabase.auth.admin.deleteUser(clientId);
-    
-    if (authError) {
-      console.warn("Failed to delete user from Auth, they might only be a client record:", authError.message);
-    }
+    // 2. Delete the client record and auth user in parallel
+    await Promise.allSettled([
+      supabase.from('clients').delete().eq('id', clientId),
+      supabase.auth.admin.deleteUser(clientId)
+    ]);
 
     return NextResponse.json({ success: true });
   } catch (err: any) {

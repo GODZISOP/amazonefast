@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X } from 'lucide-react';
+import { UploadCloud, CheckCircle2, ShieldCheck, Clock, FileText, AlertCircle, Lock, Loader2, LogOut, Bell, Camera, User, Eye, X, Mail, Phone, Globe, Edit3 } from 'lucide-react';
 import Image from 'next/image';
 
 export default function ClientPortal() {
@@ -15,7 +15,10 @@ export default function ClientPortal() {
   
   const [gmailAddress, setGmailAddress] = useState('');
   const [gmailPassword, setGmailPassword] = useState('');
-  const [submittingGmail, setSubmittingGmail] = useState(false);
+  const [companyEmail, setCompanyEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [submittingCredentials, setSubmittingCredentials] = useState(false);
+  const [isEditingCredentials, setIsEditingCredentials] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [showPassportSample, setShowPassportSample] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -143,35 +146,93 @@ export default function ClientPortal() {
     }
   };
 
-  const handleGmailSubmit = async (e: React.FormEvent) => {
+  const handleCredentialsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!gmailAddress || !gmailPassword) return;
-    setSubmittingGmail(true);
+    if (!gmailAddress && !gmailPassword && !companyEmail && !phoneNumber) {
+      alert("Please enter at least one field to save, or leave empty if not needed.");
+      return;
+    }
+    setSubmittingCredentials(true);
     try {
-      await supabase.from('documents').insert({
-        client_id: user.id,
-        file_name: gmailAddress,
-        file_url: gmailPassword,
-        document_type: 'Gmail Credentials',
-        status: 'Pending Review'
-      });
+      const submittedItems: string[] = [];
+
+      // 1. Gmail Credentials (Optional)
+      if (gmailAddress || gmailPassword) {
+        submittedItems.push('Amazon Gmail Credentials');
+        const existingGmail = documents.find(d => d.document_type === 'Gmail Credentials');
+        if (existingGmail) {
+          await supabase.from('documents').delete().eq('id', existingGmail.id);
+        }
+        await supabase.from('documents').insert({
+          client_id: user.id,
+          file_name: gmailAddress || 'N/A',
+          file_url: gmailPassword || 'N/A',
+          document_type: 'Gmail Credentials',
+          status: 'Pending Review'
+        });
+      }
+
+      // 2. Company / Website Email (Optional)
+      if (companyEmail) {
+        submittedItems.push('Company Email');
+        const existingComp = documents.find(d => d.document_type === 'Company Email');
+        if (existingComp) {
+          await supabase.from('documents').delete().eq('id', existingComp.id);
+        }
+        await supabase.from('documents').insert({
+          client_id: user.id,
+          file_name: companyEmail,
+          file_url: companyEmail,
+          document_type: 'Company Email',
+          status: 'Pending Review'
+        });
+      }
+
+      // 3. Phone Number (Optional)
+      if (phoneNumber) {
+        submittedItems.push('Phone Number');
+        const existingPhone = documents.find(d => d.document_type === 'Phone Number');
+        if (existingPhone) {
+          await supabase.from('documents').delete().eq('id', existingPhone.id);
+        }
+        await supabase.from('documents').insert({
+          client_id: user.id,
+          file_name: phoneNumber,
+          file_url: phoneNumber,
+          document_type: 'Phone Number',
+          status: 'Pending Review'
+        });
+      }
+
+      // 4. Notify Admin via DB notifications
+      if (submittedItems.length > 0) {
+        await supabase.from('notifications').insert({
+          client_id: user.id,
+          message: `Submitted new details: ${submittedItems.join(', ')}`,
+        });
+      }
+
+      // 5. Notify Admin via Email
       fetch('/api/notify-admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           type: 'DOCUMENT_UPLOAD', 
-          fullName: user?.user_metadata?.full_name || 'Client', 
+          fullName: clientName || user?.user_metadata?.full_name || 'Client', 
           email: user?.email,
-          docType: `Gmail Credentials Submitted (${gmailAddress})`
+          docType: `Details Submitted (${submittedItems.join(', ')})`
         })
-      });
+      }).catch(e => console.error(e));
+
       const { data: newDocs } = await supabase.from('documents').select('*').eq('client_id', user.id);
       if (newDocs) setDocuments(newDocs);
-      alert("Gmail Credentials securely submitted!");
+      setIsEditingCredentials(false);
+      alert("Details saved securely and submitted for review!");
     } catch(e) {
-      alert("Error submitting credentials.");
+      console.error(e);
+      alert("Error submitting details.");
     } finally {
-      setSubmittingGmail(false);
+      setSubmittingCredentials(false);
     }
   };
 
@@ -202,14 +263,15 @@ export default function ClientPortal() {
   const utilityDocs = getDocuments('Utility Bill');
   const bankDocs = getDocuments('Bank Statement');
   const gmailDoc = getDocument('Gmail Credentials');
+  const companyEmailDoc = getDocument('Company Email');
+  const phoneDoc = getDocument('Phone Number');
   const profileImageDoc = getDocument('Profile Image');
 
   const isProfileApproved = 
     frontDoc?.status === 'Approved' &&
     backDoc?.status === 'Approved' &&
     utilityDocs.length > 0 && utilityDocs[0].status === 'Approved' &&
-    bankDocs.length > 0 && bankDocs[0].status === 'Approved' &&
-    gmailDoc?.status === 'Approved';
+    bankDocs.length > 0 && bankDocs[0].status === 'Approved';
 
   const clientNotifications = documents.filter(d => d.status === 'Approved' || d.status === 'Rejected');
   const unreadCount = clientNotifications.length;
@@ -551,47 +613,179 @@ export default function ClientPortal() {
           <DocumentCard docs={bankDocs} title="Bank Statement" desc="A recent bank statement matching your address and details." type="Bank Statement" handleFileUpload={handleFileUpload} uploading={uploading} handleDeleteDocument={handleDeleteDocument} multiple={false} />
         </div>
 
-        {/* Gmail Credentials Section */}
-        <div className="mt-8 bg-white border border-gray-200 rounded-[24px] p-8 shadow-sm">
-          <h3 className="text-xl font-bold mb-2 text-gray-900">Amazon Associated Gmail Details</h3>
-          <p className="text-sm text-gray-500 mb-6 font-medium">Please provide the Gmail address and password you want to associate with your Amazon FBA account. This is securely encrypted.</p>
-          
-          {gmailDoc ? (
-            <div className={`rounded-xl p-4 flex flex-col gap-3 border shadow-sm ${gmailDoc.status === 'Approved' ? 'bg-green-50 border-green-200' : gmailDoc.status === 'Rejected' ? 'bg-red-50 border-red-200' : 'bg-gray-50 border-gray-200'}`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {gmailDoc.status === 'Approved' ? <CheckCircle2 size={20} className="text-green-500" /> : gmailDoc.status === 'Rejected' ? <AlertCircle size={20} className="text-red-500" /> : <Clock size={20} className="text-orange-500" />}
-                  <p className="text-sm font-bold text-gray-800">
-                    {gmailDoc.status === 'Rejected' ? 'Credentials Rejected. Please re-upload.' : `Credentials submitted for: ${gmailDoc.file_name}`}
-                  </p>
+        {/* Optional Credentials & Contact Details Section */}
+        <div className="mt-8 bg-white border border-gray-200 rounded-[24px] p-6 md:p-8 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+            <div className="flex items-center gap-2">
+              <h3 className="text-xl font-bold text-gray-900">Additional Details & Credentials</h3>
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100">
+                100% Optional
+              </span>
+            </div>
+            {(gmailDoc || companyEmailDoc || phoneDoc) && !isEditingCredentials && (
+              <button
+                type="button"
+                onClick={() => {
+                  setGmailAddress(gmailDoc?.file_name && gmailDoc.file_name !== 'N/A' ? gmailDoc.file_name : '');
+                  setGmailPassword(gmailDoc?.file_url && gmailDoc.file_url !== 'N/A' ? gmailDoc.file_url : '');
+                  setCompanyEmail(companyEmailDoc?.file_name && companyEmailDoc.file_name !== 'N/A' ? companyEmailDoc.file_name : '');
+                  setPhoneNumber(phoneDoc?.file_name && phoneDoc.file_name !== 'N/A' ? phoneDoc.file_name : '');
+                  setIsEditingCredentials(true);
+                }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#ff6b35] bg-orange-50 hover:bg-orange-100 px-3.5 py-1.5 rounded-xl border border-orange-200 transition"
+              >
+                <Edit3 size={13} />
+                Edit / Update Details
+              </button>
+            )}
+          </div>
+          <p className="text-xs sm:text-sm text-gray-500 mb-6 font-medium">
+            These fields are completely optional. Your account approval only requires your 4 core verification documents (ID Card Front/Back, Utility Bill, Bank Statement). You can provide these details now or at any time.
+          </p>
+
+          {(gmailDoc || companyEmailDoc || phoneDoc) && !isEditingCredentials ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Gmail Display Card */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-gray-500 mb-1.5">
+                    <Mail size={14} className="text-[#ff6b35]" />
+                    <span>Amazon Associated Gmail</span>
+                  </div>
+                  {gmailDoc ? (
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 break-all">{gmailDoc.file_name}</p>
+                      <p className="text-xs text-gray-500 mt-1 font-mono">Password: {gmailDoc.file_url ? '••••••••' : 'Not set'}</p>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-gray-400 italic">Not provided (Optional)</p>
+                  )}
                 </div>
-                <button onClick={() => handleDeleteDocument(gmailDoc.id)} className="text-xs font-bold text-red-500 hover:text-red-700 bg-white px-3 py-1.5 rounded-lg border border-red-100 transition shadow-sm">
-                  {gmailDoc.status === 'Rejected' ? 'Re-upload Credentials' : 'Update Credentials'}
-                </button>
+                {gmailDoc && (
+                  <button onClick={() => handleDeleteDocument(gmailDoc.id)} className="self-start mt-3 text-[10px] font-bold text-red-500 hover:text-red-700">Remove</button>
+                )}
               </div>
-              <div className={`self-start flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border ${
-                gmailDoc.status === 'Approved' ? 'bg-green-100 text-green-700 border-green-200' : 
-                gmailDoc.status === 'Rejected' ? 'bg-red-100 text-red-700 border-red-200' : 
-                'bg-orange-100 text-orange-700 border-orange-200'
-              }`}>
-                {gmailDoc.status}
+
+              {/* Company Email Display Card */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-gray-500 mb-1.5">
+                    <Globe size={14} className="text-blue-500" />
+                    <span>Company / Website Email</span>
+                  </div>
+                  {companyEmailDoc ? (
+                    <p className="text-sm font-bold text-gray-900 break-all">{companyEmailDoc.file_name}</p>
+                  ) : (
+                    <p className="text-xs text-gray-400 italic">Not provided (Optional)</p>
+                  )}
+                </div>
+                {companyEmailDoc && (
+                  <button onClick={() => handleDeleteDocument(companyEmailDoc.id)} className="self-start mt-3 text-[10px] font-bold text-red-500 hover:text-red-700">Remove</button>
+                )}
+              </div>
+
+              {/* Phone Number Display Card */}
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-bold text-gray-500 mb-1.5">
+                    <Phone size={14} className="text-green-500" />
+                    <span>Phone Number</span>
+                  </div>
+                  {phoneDoc ? (
+                    <p className="text-sm font-bold text-gray-900">{phoneDoc.file_name}</p>
+                  ) : (
+                    <p className="text-xs text-gray-400 italic">Not provided (Optional)</p>
+                  )}
+                </div>
+                {phoneDoc && (
+                  <button onClick={() => handleDeleteDocument(phoneDoc.id)} className="self-start mt-3 text-[10px] font-bold text-red-500 hover:text-red-700">Remove</button>
+                )}
               </div>
             </div>
           ) : (
-            <form onSubmit={handleGmailSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form onSubmit={handleCredentialsSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Gmail Address</label>
-                <input type="email" value={gmailAddress} onChange={e => setGmailAddress(e.target.value)} required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition" placeholder="example@gmail.com" />
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  Gmail Address <span className="text-gray-400 font-normal">(Optional)</span>
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-3 text-gray-400" size={16} />
+                  <input
+                    type="email"
+                    value={gmailAddress}
+                    onChange={e => setGmailAddress(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition"
+                    placeholder="example@gmail.com"
+                  />
+                </div>
               </div>
+
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Password</label>
-                <input type="text" value={gmailPassword} onChange={e => setGmailPassword(e.target.value)} required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition" placeholder="Enter password" />
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  Gmail Password <span className="text-gray-400 font-normal">(Optional)</span>
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3.5 top-3 text-gray-400" size={16} />
+                  <input
+                    type="text"
+                    value={gmailPassword}
+                    onChange={e => setGmailPassword(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition"
+                    placeholder="Enter password"
+                  />
+                </div>
               </div>
-              <div className="md:col-span-2 mt-2">
-                <button type="submit" disabled={submittingGmail} className="bg-[#ff6b35] text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md transition disabled:opacity-70 flex items-center gap-2">
-                  {submittingGmail ? <Loader2 size={16} className="animate-spin" /> : <Lock size={16} />}
-                  Submit Securely
+
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  Company / Website Email <span className="text-gray-400 font-normal">(Optional)</span>
+                </label>
+                <div className="relative">
+                  <Globe className="absolute left-3.5 top-3 text-gray-400" size={16} />
+                  <input
+                    type="email"
+                    value={companyEmail}
+                    onChange={e => setCompanyEmail(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition"
+                    placeholder="info@yourcompany.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-gray-700 mb-1">
+                  Contact Phone Number <span className="text-gray-400 font-normal">(Optional)</span>
+                </label>
+                <div className="relative">
+                  <Phone className="absolute left-3.5 top-3 text-gray-400" size={16} />
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={e => setPhoneNumber(e.target.value)}
+                    className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-[#ff6b35] focus:ring-1 focus:ring-[#ff6b35] transition"
+                    placeholder="+1 (555) 000-0000 / +92 300 0000000"
+                  />
+                </div>
+              </div>
+
+              <div className="md:col-span-2 mt-2 flex items-center gap-3">
+                <button
+                  type="submit"
+                  disabled={submittingCredentials}
+                  className="bg-[#ff6b35] text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md transition disabled:opacity-70 flex items-center gap-2"
+                >
+                  {submittingCredentials ? <Loader2 size={16} className="animate-spin" /> : <Lock size={16} />}
+                  Save Details (Optional)
                 </button>
+                {isEditingCredentials && (
+                  <button
+                    type="button"
+                    onClick={() => setIsEditingCredentials(false)}
+                    className="px-4 py-2.5 rounded-xl font-bold text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 transition"
+                  >
+                    Cancel
+                  </button>
+                )}
               </div>
             </form>
           )}

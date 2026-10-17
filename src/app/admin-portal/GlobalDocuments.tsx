@@ -157,9 +157,9 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
                                 {new Date(doc.uploaded_at).toLocaleDateString()}
                               </span>
                               
-                              {doc.document_type === 'Gmail Credentials' ? (
+                              {doc.document_type === 'Gmail Credentials' || doc.document_type === 'Company Email' || doc.document_type === 'Phone Number' ? (
                                 <button className="text-[10px] font-bold px-2 py-1 rounded bg-gray-100 text-gray-400 cursor-not-allowed border border-transparent whitespace-nowrap" disabled>
-                                  Protected
+                                  Text Info
                                 </button>
                               ) : (
                                 <a 

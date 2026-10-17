@@ -12,10 +12,54 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   const [searchQuery, setSearchQuery] = useState('');
   const supabase = createClient();
 
+  // Live Auto-Refresh every 4 seconds to catch new documents & credential updates in real-time
+  useEffect(() => {
+    const fetchLatest = async () => {
+      try {
+        const res = await fetch('/api/get-all-clients');
+        if (res.ok) {
+          const json = await res.json();
+          if (json?.data && Array.isArray(json.data)) {
+            setClients(json.data);
+            setSelectedClient((prev: any) => {
+              if (!prev) return null;
+              return json.data.find((c: any) => c.id === prev.id) || prev;
+            });
+          }
+        }
+      } catch (err) {
+        // silent catch on network blip
+      }
+    };
+
+    const interval = setInterval(fetchLatest, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleStatusUpdate = async (docId: string, newStatus: string) => {
-    setUpdating(true);
-    
-    // Server API call taake Supabase RLS block na kare
+    // 1. Instant Optimistic UI Update: Dropdown & badges change immediately (0 ms)
+    const previousClients = [...clients];
+    const previousSelectedClient = selectedClient ? { ...selectedClient } : null;
+
+    const updatedClients = clients.map(c => {
+      if (selectedClient && c.id === selectedClient.id) {
+        return {
+          ...c,
+          documents: (c.documents || []).map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
+        };
+      }
+      return c;
+    });
+
+    setClients(updatedClients);
+    if (selectedClient) {
+      setSelectedClient({
+        ...selectedClient,
+        documents: (selectedClient.documents || []).map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
+      });
+    }
+
+    // 2. Server API call in background
     try {
       const res = await fetch('/api/update-doc-status', {
         method: 'POST',
@@ -23,35 +67,31 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         body: JSON.stringify({ docId, newStatus })
       });
       if (!res.ok) {
-        alert("Update failed! Aapke paas SUPABASE_SERVICE_ROLE_KEY nahi hai .env.local mein.");
-        setUpdating(false);
-        return;
+        // Rollback on server failure
+        setClients(previousClients);
+        setSelectedClient(previousSelectedClient);
+        alert("Update failed! Please check your network or server configuration.");
       }
     } catch (e) {
       console.error(e);
-      setUpdating(false);
-      return;
+      setClients(previousClients);
+      setSelectedClient(previousSelectedClient);
+      alert("Network error updating status.");
     }
-    
-    const updatedClients = clients.map(c => {
-      if (c.id === selectedClient.id) {
-        return {
-          ...c,
-          documents: c.documents.map((d: any) => d.id === docId ? { ...d, status: newStatus } : d)
-        };
-      }
-      return c;
-    });
-    setClients(updatedClients);
-    setSelectedClient(updatedClients.find(c => c.id === selectedClient.id));
-    setUpdating(false);
   };
 
   const handleDeleteClient = async (clientId: string, clientName: string) => {
     const isConfirmed = window.confirm(`Are you sure you want to completely delete ${clientName || 'this client'} and all their documents? This cannot be undone.`);
     if (!isConfirmed) return;
     
-    setUpdating(true);
+    // 1. Instant Optimistic UI Update: Client row disappears immediately (0 ms)
+    const previousClients = [...clients];
+    setClients(prev => prev.filter(c => c.id !== clientId));
+    if (selectedClient?.id === clientId) {
+      setSelectedClient(null);
+    }
+
+    // 2. Server API call in background
     try {
       const res = await fetch('/api/delete-client', {
         method: 'POST',
@@ -59,45 +99,16 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         body: JSON.stringify({ clientId })
       });
       if (!res.ok) {
+        // Rollback if server failed
+        setClients(previousClients);
         alert("Failed to delete client! Server error or missing keys.");
-        setUpdating(false);
-        return;
-      }
-      setClients(prev => prev.filter(c => c.id !== clientId));
-      if (selectedClient?.id === clientId) {
-        setSelectedClient(null);
       }
     } catch (e) {
       console.error(e);
+      setClients(previousClients);
       alert("An error occurred while deleting the client.");
-    } finally {
-      setUpdating(false);
     }
   };
-
-  // Auto-refresh the table every 5 seconds securely via API
-  useEffect(() => {
-    const fetchLatestData = async () => {
-      try {
-        const res = await fetch('/api/get-all-clients');
-        if (res.ok) {
-          const { data } = await res.json();
-          if (data) {
-            setClients(data);
-            if (selectedClient) {
-              const updatedSelected = data.find((c: any) => c.id === selectedClient.id);
-              if (updatedSelected) setSelectedClient(updatedSelected);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Failed to fetch latest clients", err);
-      }
-    };
-    
-    const intervalId = setInterval(fetchLatestData, 5000);
-    return () => clearInterval(intervalId);
-  }, [selectedClient]);
 
   const filteredClients = useMemo(() => {
     return clients.filter(c => {
@@ -120,8 +131,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         getLatest('ID Card (Front)')?.status === 'Approved' && 
         getLatest('ID Card (Back)')?.status === 'Approved' && 
         getLatest('Utility Bill')?.status === 'Approved' && 
-        getLatest('Bank Statement')?.status === 'Approved' && 
-        getLatest('Gmail Credentials')?.status === 'Approved';
+        getLatest('Bank Statement')?.status === 'Approved';
 
       if (filter === 'Approved') return isFullyApproved;
       if (filter === 'Pending') return !isFullyApproved;
@@ -151,8 +161,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
     return getLatest('ID Card (Front)')?.status === 'Approved' && 
            getLatest('ID Card (Back)')?.status === 'Approved' && 
            getLatest('Utility Bill')?.status === 'Approved' && 
-           getLatest('Bank Statement')?.status === 'Approved' && 
-           getLatest('Gmail Credentials')?.status === 'Approved';
+           getLatest('Bank Statement')?.status === 'Approved';
   };
 
   const totalClients = clients.length;
@@ -253,8 +262,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                     getLatest('ID Card (Front)')?.status === 'Approved' && 
                     getLatest('ID Card (Back)')?.status === 'Approved' && 
                     getLatest('Utility Bill')?.status === 'Approved' && 
-                    getLatest('Bank Statement')?.status === 'Approved' && 
-                    getLatest('Gmail Credentials')?.status === 'Approved';
+                    getLatest('Bank Statement')?.status === 'Approved';
 
                   const pendingDocs = docs.filter((d: any) => d.status === 'Pending Review' && d.document_type !== 'Profile Image');
                   const profileDoc = getLatest('Profile Image');
@@ -301,10 +309,10 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                     <td className="py-3 px-4 md:px-6 text-gray-500 text-xs md:text-sm">{client.email}</td>
                     <td className="py-3 px-4 md:px-6">
                       <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] md:text-[10px] font-black tracking-wide uppercase shadow-sm ${
-                        client.status === 'Pending' ? 'bg-red-50 border border-red-100 text-red-600' : 'bg-green-50 border border-green-100 text-green-600'
+                        isFullyApproved ? 'bg-green-50 border border-green-100 text-green-600' : 'bg-red-50 border border-red-100 text-red-600'
                       }`}>
-                        {client.status === 'Pending' && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>}
-                        {client.status}
+                        {!isFullyApproved && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>}
+                        {isFullyApproved ? 'Approved' : 'Pending'}
                       </div>
                     </td>
                     <td className="py-3 px-4 md:px-6 text-right">
@@ -380,6 +388,14 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                             <div className="mt-2 bg-white border border-gray-200 p-3 rounded-lg shadow-inner">
                               <p className="text-xs text-gray-500 font-bold mb-1">Email: <span className="font-mono text-gray-800">{doc.file_name}</span></p>
                               <p className="text-xs text-gray-500 font-bold">Password: <span className="font-mono text-gray-800">{doc.file_url}</span></p>
+                            </div>
+                          ) : doc.document_type === 'Company Email' ? (
+                            <div className="mt-2 bg-white border border-gray-200 p-3 rounded-lg shadow-inner">
+                              <p className="text-xs text-gray-500 font-bold">Company / Website Email: <span className="font-mono text-gray-800">{doc.file_name}</span></p>
+                            </div>
+                          ) : doc.document_type === 'Phone Number' ? (
+                            <div className="mt-2 bg-white border border-gray-200 p-3 rounded-lg shadow-inner">
+                              <p className="text-xs text-gray-500 font-bold">Phone Number: <span className="font-mono text-gray-800">{doc.file_name}</span></p>
                             </div>
                           ) : (
                             <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="text-xs text-[#ff6b35] hover:underline flex items-center gap-1 mt-1 font-medium">

@@ -46,8 +46,7 @@ export default async function AdminPortal({ searchParams }: { searchParams: any 
     return getLatest('ID Card (Front)')?.status === 'Approved' &&
       getLatest('ID Card (Back)')?.status === 'Approved' &&
       getLatest('Utility Bill')?.status === 'Approved' &&
-      getLatest('Bank Statement')?.status === 'Approved' &&
-      getLatest('Gmail Credentials')?.status === 'Approved';
+      getLatest('Bank Statement')?.status === 'Approved';
   };
 
   const totalClients = clients.length;

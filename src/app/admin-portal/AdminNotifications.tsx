@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { Bell, Activity } from 'lucide-react';
 
-export default function AdminNotifications({ notifications, unreadNotifs }: { notifications: any[], unreadNotifs: number }) {
+export default function AdminNotifications({ notifications: initialNotifications, unreadNotifs: initialUnread }: { notifications: any[], unreadNotifs: number }) {
+  const [notifications, setNotifications] = useState(initialNotifications || []);
+  const [unreadNotifs, setUnreadNotifs] = useState(initialUnread || 0);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -18,15 +20,37 @@ export default function AdminNotifications({ notifications, unreadNotifs }: { no
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Live Auto-Refresh polling every 4 seconds
+  useEffect(() => {
+    const pollNotifications = async () => {
+      try {
+        const res = await fetch('/api/get-notifications');
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.notifications) {
+            setNotifications(data.notifications);
+            setUnreadNotifs(data.notifications.filter((n: any) => !n.is_read).length);
+          }
+        }
+      } catch (err) {
+        // silent fail on network blip
+      }
+    };
+
+    const interval = setInterval(pollNotifications, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative cursor-pointer" ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="text-gray-400 hover:text-gray-900 transition relative p-2"
+        title="Admin Notifications"
       >
         <Bell size={20} />
         {unreadNotifs > 0 && (
-          <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
+          <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full animate-pulse"></span>
         )}
       </button>
 
@@ -34,24 +58,36 @@ export default function AdminNotifications({ notifications, unreadNotifs }: { no
       {isOpen && (
         <div className="absolute top-12 right-0 w-80 bg-white border border-gray-200 shadow-xl rounded-2xl z-50 overflow-hidden">
           <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-            <h4 className="font-bold text-sm text-gray-900">Recent Activity</h4>
-            <span className="text-xs text-[#ff6b35] font-semibold cursor-pointer hover:underline">Mark all as read</span>
+            <div className="flex items-center gap-2">
+              <h4 className="font-bold text-sm text-gray-900">Recent Activity</h4>
+              {unreadNotifs > 0 && (
+                <span className="text-[10px] font-bold px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full">
+                  {unreadNotifs} new
+                </span>
+              )}
+            </div>
+            <span 
+              onClick={() => setUnreadNotifs(0)} 
+              className="text-xs text-[#ff6b35] font-semibold cursor-pointer hover:underline"
+            >
+              Mark all as read
+            </span>
           </div>
           <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-6 text-center text-sm text-gray-500">No new notifications</div>
             ) : (
               notifications.map((notif: any) => (
-                <div key={notif.id} className={`p-4 border-b border-gray-50 flex gap-3 hover:bg-gray-50 transition ${!notif.is_read ? 'bg-orange-50/30' : ''}`}>
+                <div key={notif.id} className={`p-4 border-b border-gray-50 flex gap-3 hover:bg-gray-50 transition ${!notif.is_read ? 'bg-orange-50/40' : ''}`}>
                   <div className="w-8 h-8 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] flex items-center justify-center shrink-0">
                     <Activity size={14} />
                   </div>
                   <div>
                     <p className="text-sm text-gray-800">
-                      {notif.clients?.full_name ? <span className="font-bold">{notif.clients.full_name} </span> : ''}
+                      {notif.clients?.full_name ? <span className="font-bold text-gray-900">{notif.clients.full_name}: </span> : ''}
                       {notif.message}
                     </p>
-                    <p className="text-xs text-gray-400 mt-1">{new Date(notif.created_at).toLocaleDateString()}</p>
+                    <p className="text-xs text-gray-400 mt-1">{new Date(notif.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • {new Date(notif.created_at).toLocaleDateString()}</p>
                   </div>
                 </div>
               ))

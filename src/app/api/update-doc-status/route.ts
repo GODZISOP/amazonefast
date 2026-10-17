@@ -23,12 +23,37 @@ export async function POST(request: Request) {
       .from('documents')
       .update({ status: newStatus })
       .eq('id', docId)
-      .select('document_type, clients(email, full_name)')
+      .select('document_type, client_id, clients(email, full_name)')
       .single();
 
     if (error) {
       console.error('Error updating document status:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // Sync overall client status in clients table based on core verification documents
+    if (updatedDoc?.client_id) {
+      try {
+        const { data: clientDocs } = await supabase
+          .from('documents')
+          .select('document_type, status, uploaded_at')
+          .eq('client_id', updatedDoc.client_id)
+          .order('uploaded_at', { ascending: false });
+
+        const getLatest = (type: string) => clientDocs?.find(d => d.document_type === type);
+        const allApproved = 
+          getLatest('ID Card (Front)')?.status === 'Approved' &&
+          getLatest('ID Card (Back)')?.status === 'Approved' &&
+          getLatest('Utility Bill')?.status === 'Approved' &&
+          getLatest('Bank Statement')?.status === 'Approved';
+
+        await supabase
+          .from('clients')
+          .update({ status: allApproved ? 'Approved' : 'Pending' })
+          .eq('id', updatedDoc.client_id);
+      } catch (errSync) {
+        console.error('Error syncing client status:', errSync);
+      }
     }
 
     // Attempt to send email to client if their details are found
@@ -64,17 +89,14 @@ export async function POST(request: Request) {
             </div>
           `;
 
-          // Import dynamically or we can add it to the top
-          try {
-            const { sendEmail } = await import('@/lib/email');
-            await sendEmail({
+          // Send email in background without blocking the instant response
+          import('@/lib/email').then(({ sendEmail }) => {
+            sendEmail({
               to: clientEmail,
               subject: `Update on your document: ${docName}`,
               html: emailHtml
-            });
-          } catch (e) {
-            console.error('Failed to send status update email:', e);
-          }
+            }).catch(e => console.error('Failed to send status update email:', e));
+          }).catch(e => console.error('Failed to import email library:', e));
         }
       }
     }

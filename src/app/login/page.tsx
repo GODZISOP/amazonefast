@@ -28,29 +28,37 @@ export default function LoginPage() {
     setSuccessMsg('');
 
     if (isLogin) {
-      // Normal Email + Password Login
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        setError(error.message);
+      try {
+        // Normal Email + Password Login
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+          setError(error.message);
+          setLoading(false);
+          return;
+        }
+
+        // Guarantee profile exists for old users who might have been hit by the race condition bug
+        if (data?.session?.user) {
+          const realUserId = data.session.user.id;
+          const userEmail = data.session.user.email;
+          // fullName might not be provided in login, use a placeholder or extract from metadata
+          const name = data.session.user.user_metadata?.full_name || 'Client';
+
+          await fetch('/api/init-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: realUserId, email: userEmail, fullName: name })
+          }).catch(e => console.error(e));
+        }
+
+        window.location.href = '/portal';
+      } catch (err: any) {
+        console.error("Login fetch error:", err);
+        setError(err?.message === 'Failed to fetch' 
+          ? 'Network connection error. Please check your internet connection and try again.' 
+          : (err?.message || 'Failed to connect to authentication server.'));
         setLoading(false);
-        return;
       }
-
-      // Guarantee profile exists for old users who might have been hit by the race condition bug
-      if (data?.session?.user) {
-        const realUserId = data.session.user.id;
-        const userEmail = data.session.user.email;
-        // fullName might not be provided in login, use a placeholder or extract from metadata
-        const name = data.session.user.user_metadata?.full_name || 'Client';
-
-        await fetch('/api/init-profile', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: realUserId, email: userEmail, fullName: name })
-        }).catch(e => console.error(e));
-      }
-
-      window.location.href = '/portal';
     } else {
       // DIRECT INSTANT SIGNUP (NO OTP)
       try {
