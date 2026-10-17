@@ -98,15 +98,31 @@ export default function GlobalDocuments({ clients: initialClients }: { clients: 
                   className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] flex items-center justify-center font-bold border border-[#ff6b35]/20 overflow-hidden">
+                    <div className="w-10 h-10 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] flex items-center justify-center font-black text-xs border border-[#ff6b35]/20 overflow-hidden shrink-0">
                       {profileDoc ? (
                         <img src={profileDoc.file_url} alt="Profile" className="w-full h-full object-cover" />
-                      ) : (
-                        <User size={18} />
-                      )}
+                      ) : (() => {
+                        const match = (client.full_name || '').match(/^AMZ-C0*(\d+)/i);
+                        return match ? `C${match[1]}` : (client.full_name ? client.full_name.substring(0, 2).toUpperCase() : <User size={18} />);
+                      })()}
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900">{client.full_name}</h3>
+                      <h3 className="font-bold text-gray-900 flex items-center gap-1.5 flex-wrap">
+                        {(() => {
+                          const match = (client.full_name || '').match(/^(AMZ-C\d+)\s*(.*)/i);
+                          if (match) {
+                            return (
+                              <>
+                                <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[10px] px-2 py-0.5 rounded font-black tracking-wider">
+                                  {match[1].toUpperCase()}
+                                </span>
+                                <span>{match[2] || 'Client'}</span>
+                              </>
+                            );
+                          }
+                          return client.full_name;
+                        })()}
+                      </h3>
                       <p className="text-xs text-gray-500">{client.email}</p>
                     </div>
                   </div>

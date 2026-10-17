@@ -320,16 +320,30 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
                   <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition group">
                     <td className="py-3 px-4 md:px-6">
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black border shrink-0 overflow-hidden ${isFullyApproved ? 'bg-green-100 text-green-600 border-green-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black border shrink-0 overflow-hidden ${isFullyApproved ? 'bg-green-100 text-green-700 border-green-200' : 'bg-gray-100 text-gray-700 border-gray-200'}`}>
                           {profileDoc ? (
                             <img src={profileDoc.file_url} alt="Profile" className="w-full h-full object-cover" />
-                          ) : (
-                            client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C'
-                          )}
+                          ) : (() => {
+                            const match = (client.full_name || '').match(/^AMZ-C0*(\d+)/i);
+                            return match ? `C${match[1]}` : (client.full_name ? client.full_name.substring(0, 2).toUpperCase() : 'C');
+                          })()}
                         </div>
                         <div>
                           <p className="font-bold text-gray-900 flex flex-col md:flex-row md:items-center gap-1 md:gap-2 text-xs md:text-sm">
-                            {client.full_name || 'Unknown'}
+                            {(() => {
+                              const match = (client.full_name || '').match(/^(AMZ-C\d+)\s*(.*)/i);
+                              if (match) {
+                                return (
+                                  <span className="flex items-center gap-1.5 flex-wrap">
+                                    <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[10px] px-2 py-0.5 rounded font-black tracking-wider">
+                                      {match[1].toUpperCase()}
+                                    </span>
+                                    <span className="font-bold text-gray-900">{match[2] || 'Client'}</span>
+                                  </span>
+                                );
+                              }
+                              return client.full_name || 'Unknown';
+                            })()}
                             {isFullyApproved && (
                               <span className="bg-green-100 text-green-700 border border-green-200 text-[9px] uppercase px-2 py-0.5 rounded-full font-bold tracking-wider flex items-center gap-1 w-fit">
                                 <CheckCircle2 size={10} />
@@ -398,12 +412,36 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
               <div className="flex items-center gap-4">
                 {(() => {
                   const pDoc = selectedClient.documents?.sort((a: any, b: any) => new Date(b.uploaded_at).getTime() - new Date(a.uploaded_at).getTime()).find((d: any) => d.document_type === 'Profile Image');
-                  return pDoc ? (
-                    <img src={pDoc.file_url} alt="Profile" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
-                  ) : null;
+                  if (pDoc) {
+                    return (
+                      <img src={pDoc.file_url} alt="Profile" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
+                    );
+                  }
+                  const match = (selectedClient.full_name || '').match(/^AMZ-C0*(\d+)/i);
+                  const code = match ? `C${match[1]}` : (selectedClient.full_name ? selectedClient.full_name.substring(0, 2).toUpperCase() : 'C');
+                  return (
+                    <div className="w-12 h-12 rounded-full bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 flex items-center justify-center font-black text-sm shadow-sm">
+                      {code}
+                    </div>
+                  );
                 })()}
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900">{selectedClient.full_name}</h3>
+                  <h3 className="font-bold text-lg text-gray-900 flex items-center gap-2">
+                    {(() => {
+                      const match = (selectedClient.full_name || '').match(/^(AMZ-C\d+)\s*(.*)/i);
+                      if (match) {
+                        return (
+                          <>
+                            <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-xs px-2.5 py-0.5 rounded-lg font-black tracking-wider">
+                              {match[1].toUpperCase()}
+                            </span>
+                            <span>{match[2] || 'Client'}</span>
+                          </>
+                        );
+                      }
+                      return selectedClient.full_name;
+                    })()}
+                  </h3>
                   <p className="text-sm text-gray-500">{selectedClient.email}</p>
                 </div>
               </div>

@@ -277,7 +277,17 @@ export default function ClientPortal() {
       <header className="fixed top-0 left-0 w-full h-16 border-b border-gray-200 bg-white/90 backdrop-blur-lg flex items-center justify-between px-6 md:px-12 z-50 shadow-sm">
         <div className="flex items-center gap-3">
           <Image src="/amazon-fast-logo.png" alt="AmazonFast Logo" width={120} height={40} style={{ height: '40px', width: 'auto' }} className="object-contain" priority />
-          <span className="hidden md:inline-block border-l border-gray-300 pl-3 text-sm font-bold tracking-wide text-gray-500">Client Workspace</span>
+          <span className="hidden md:inline-flex items-center gap-2 border-l border-gray-300 pl-3 text-sm font-bold tracking-wide text-gray-500">
+            Client Workspace
+            {(() => {
+              const match = (clientName || '').match(/^(AMZ-C\d+)/i);
+              return match ? (
+                <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-[11px] px-2 py-0.5 rounded-md font-black tracking-wider">
+                  {match[1].toUpperCase()}
+                </span>
+              ) : null;
+            })()}
+          </span>
         </div>
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-2 text-xs font-bold text-green-600 bg-green-50 px-3 py-1.5 rounded-full border border-green-100 shadow-sm">
@@ -371,8 +381,22 @@ export default function ClientPortal() {
             </div>
 
             <div>
-              <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900">
-                Welcome, {clientName}!
+              <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-2 text-gray-900 flex flex-wrap items-center gap-2.5">
+                <span>Welcome,</span>
+                {(() => {
+                  const match = (clientName || '').match(/^(AMZ-C\d+)\s*(.*)/i);
+                  if (match) {
+                    return (
+                      <>
+                        <span className="bg-[#ff6b35]/10 text-[#ff6b35] border border-[#ff6b35]/25 text-2xl md:text-3xl px-3 py-0.5 rounded-xl font-black tracking-wider shadow-sm">
+                          {match[1].toUpperCase()}
+                        </span>
+                        <span>{match[2] || 'Client'}!</span>
+                      </>
+                    );
+                  }
+                  return <span>{clientName || 'Client'}!</span>;
+                })()}
               </h1>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
                 <span className="w-2 h-2 rounded-full bg-green-500"></span>
