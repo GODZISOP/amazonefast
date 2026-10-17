@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { X, FileText, CheckCircle, CheckCircle2, AlertCircle, Download, Check, XCircle, Filter, Users, Search, Eye, ExternalLink } from 'lucide-react';
 import { createClient } from '@/utils/supabase/client';
 
@@ -12,6 +12,7 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
   const [filter, setFilter] = useState('All'); // 'All', 'Pending', 'Approved'
   const [searchQuery, setSearchQuery] = useState('');
   const supabase = createClient();
+  const deletedClientIdsRef = useRef<Set<string>>(new Set());
 
   // Live Auto-Refresh every 4 seconds to catch new documents & credential updates in real-time
   useEffect(() => {
@@ -21,10 +22,12 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
         if (res.ok) {
           const json = await res.json();
           if (json?.data && Array.isArray(json.data)) {
-            setClients(json.data);
+            // Filter out any client that was deleted locally so they never flicker back into the UI
+            const activeClients = json.data.filter((c: any) => !deletedClientIdsRef.current.has(c.id));
+            setClients(activeClients);
             setSelectedClient((prev: any) => {
-              if (!prev) return null;
-              return json.data.find((c: any) => c.id === prev.id) || prev;
+              if (!prev || deletedClientIdsRef.current.has(prev.id)) return null;
+              return activeClients.find((c: any) => c.id === prev.id) || prev;
             });
           }
         }
@@ -85,14 +88,17 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
     const isConfirmed = window.confirm(`Are you sure you want to completely delete ${clientName || 'this client'} and all their documents? This cannot be undone.`);
     if (!isConfirmed) return;
     
-    // 1. Instant Optimistic UI Update: Client row disappears immediately (0 ms)
+    // 1. Mark as permanently deleted in ref so auto-refresh poll never re-adds them
+    deletedClientIdsRef.current.add(clientId);
+
+    // 2. Instant Optimistic UI Update: Client row disappears immediately (0 ms)
     const previousClients = [...clients];
     setClients(prev => prev.filter(c => c.id !== clientId));
     if (selectedClient?.id === clientId) {
       setSelectedClient(null);
     }
 
-    // 2. Server API call in background
+    // 3. Server API call in background
     try {
       const res = await fetch('/api/delete-client', {
         method: 'POST',
@@ -101,11 +107,13 @@ export default function ClientTable({ initialClients }: { initialClients: any[] 
       });
       if (!res.ok) {
         // Rollback if server failed
+        deletedClientIdsRef.current.delete(clientId);
         setClients(previousClients);
         alert("Failed to delete client! Server error or missing keys.");
       }
     } catch (e) {
       console.error(e);
+      deletedClientIdsRef.current.delete(clientId);
       setClients(previousClients);
       alert("An error occurred while deleting the client.");
     }
