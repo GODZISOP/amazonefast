@@ -7,8 +7,21 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://amazonfastservices.com"),
   title: "AmazonFast | Expert Amazon Scaling & Marketing",
   description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "AmazonFast | Expert Amazon Scaling & Marketing",
     description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
@@ -46,6 +59,11 @@ export default function RootLayout({
       className="h-full antialiased font-sans"
     >
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -53,6 +71,18 @@ export default function RootLayout({
         <link rel="preload" href="/amazon-fast-logo.png" as="image" />
         <link rel="preload" href="/homepage-hero.png" as="image" />
         <link rel="preload" href="/section2-highres.jpg" as="image" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Amazon Fast Services",
+              "url": "https://amazonfastservices.com",
+              "logo": "https://amazonfastservices.com/amazon-fast-logo.png",
+            }),
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0a]">
         <InitialLoader />
