@@ -39,24 +39,8 @@ export async function POST(req: Request) {
         subject: `New Client Alert: ${fullName}`,
         html: emailHtml
       });
-    } else if (type === 'DOCUMENT_UPLOAD') {
-      const emailHtml = `
-        <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 12px; padding: 24px;">
-          <h2 style="color: #ff6b35;">📄 Document Uploaded</h2>
-          <p>Hello Admin,</p>
-          <p><strong>${fullName}</strong> (${email}) has just uploaded a new document:</p>
-          <h3 style="background-color: #f9fafb; padding: 12px; border-radius: 8px;">${docType}</h3>
-          <p>Please log in to the admin portal to review it.</p>
-          <a href="https://amazonfastservices.com/admin-portal" style="background-color: #ff6b35; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; margin-top: 10px;">Review Document</a>
-        </div>
-      `;
-
-      await sendEmail({
-        to: 'amazonfastservice1@gmail.com',
-        subject: `Document Uploaded: ${fullName}`,
-        html: emailHtml
-      });
     }
+    // DOCUMENT_UPLOAD emails are intentionally disabled as per requirements (in-app notifications are used instead)
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

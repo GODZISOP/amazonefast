@@ -111,23 +111,11 @@ export default function ClientPortal() {
         if (dbError) throw dbError;
       }
 
-      // 3. Notify Admin via DB
+      // 3. Notify Admin via DB (In-App notification only)
       await supabase.from('notifications').insert({
         client_id: user.id,
         message: `Uploaded document(s): ${docType}`,
       });
-
-      // 4. Notify Admin via Email (Fire and forget)
-      fetch('/api/notify-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          type: 'DOCUMENT_UPLOAD', 
-          fullName: user?.user_metadata?.full_name || 'Client', 
-          email: user?.email,
-          docType: docType
-        })
-      }).catch(e => console.error("Email notification failed", e));
 
       // Refresh documents
       const { data: newDocs } = await supabase
@@ -204,25 +192,13 @@ export default function ClientPortal() {
         });
       }
 
-      // 4. Notify Admin via DB notifications
+      // 4. Notify Admin via DB notifications (In-App notification only)
       if (submittedItems.length > 0) {
         await supabase.from('notifications').insert({
           client_id: user.id,
           message: `Submitted new details: ${submittedItems.join(', ')}`,
         });
       }
-
-      // 5. Notify Admin via Email
-      fetch('/api/notify-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          type: 'DOCUMENT_UPLOAD', 
-          fullName: clientName || user?.user_metadata?.full_name || 'Client', 
-          email: user?.email,
-          docType: `Details Submitted (${submittedItems.join(', ')})`
-        })
-      }).catch(e => console.error(e));
 
       const { data: newDocs } = await supabase.from('documents').select('*').eq('client_id', user.id);
       if (newDocs) setDocuments(newDocs);
