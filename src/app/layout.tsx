@@ -9,8 +9,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amazonfastservices.com"),
-  title: "AmazonFast | Expert Amazon Scaling & Marketing",
-  description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
+  title: {
+    default: "Amazon Fast Services | Expert Amazon Scaling & Marketing",
+    template: "%s | Amazon Fast Services",
+  },
+  description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth with Amazon Fast Services.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -24,24 +27,24 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "AmazonFast | Expert Amazon Scaling & Marketing",
-    description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
+    title: "Amazon Fast Services | Expert Amazon Scaling & Marketing",
+    description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth with Amazon Fast Services.",
     url: "https://amazonfastservices.com",
-    siteName: "AmazonFast",
+    siteName: "Amazon Fast Services",
     images: [
       {
         url: "/amazon-fast-logo.png",
         width: 1200,
         height: 675,
-        alt: "AmazonFast - Expert Amazon Scaling & Marketing",
+        alt: "Amazon Fast Services - Expert Amazon Scaling & Marketing",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AmazonFast | Expert Amazon Scaling & Marketing",
-    description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth.",
+    title: "Amazon Fast Services | Expert Amazon Scaling & Marketing",
+    description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth with Amazon Fast Services.",
     images: ["/amazon-fast-logo.png"],
   },
   verification: {
@@ -94,10 +97,36 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Amazon Fast Services",
-              "url": "https://amazonfastservices.com",
-              "logo": "https://amazonfastservices.com/amazon-fast-logo.png",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://amazonfastservices.com/#website",
+                  "url": "https://amazonfastservices.com",
+                  "name": "Amazon Fast Services",
+                  "alternateName": [
+                    "Amazon Fast Service",
+                    "AmazonFast",
+                    "AFS",
+                    "amazonfastservices.com"
+                  ],
+                  "publisher": {
+                    "@id": "https://amazonfastservices.com/#organization"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://amazonfastservices.com/#organization",
+                  "name": "Amazon Fast Services",
+                  "url": "https://amazonfastservices.com",
+                  "logo": "https://amazonfastservices.com/amazon-fast-logo.png",
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+92-332-2568950",
+                    "contactType": "customer service",
+                    "email": "info@amazonfastservices.com"
+                  }
+                }
+              ]
             }),
           }}
         />

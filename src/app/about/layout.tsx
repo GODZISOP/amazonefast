@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Us | Amazon Fast Services',
     description: 'Scaling Amazon brands globally with end-to-end management.',
+    url: 'https://amazonfastservices.com/about',
+    siteName: 'Amazon Fast Services',
     type: 'website',
   }
 };

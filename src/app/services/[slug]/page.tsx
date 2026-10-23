@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -504,6 +505,26 @@ function getBenefitIcon(benefit: string): React.ComponentType<{ size?: number; c
   if (bLower.includes("support") || bLower.includes("communication") || bLower.includes("team")) return Users;
 
   return Sparkles;
+}
+
+// Dynamic Metadata for Service Pages
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const data = serviceDetails[params.slug];
+  if (!data) {
+    return {
+      title: "Services",
+    };
+  }
+  return {
+    title: data.title,
+    description: data.description || data.tagline,
+    openGraph: {
+      title: `${data.title} | Amazon Fast Services`,
+      description: data.description || data.tagline,
+      siteName: "Amazon Fast Services",
+    },
+  };
 }
 
 // Required for Next.js App Router dynamic params
