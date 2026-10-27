@@ -129,7 +129,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
           </h1>
 
           <p className="text-white/70 text-base sm:text-lg md:text-xl leading-relaxed mb-8 font-normal">
-            The most popular choice for international founders. Low fees, strong privacy, zero state income tax, and the fastest formation timeline. Full Package: <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl ml-1">$500</span>
+            The most popular choice for international founders. Low fees, strong privacy, zero state income tax, and the fastest formation timeline.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -220,11 +220,11 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
           </div>
         </div>
 
-        {/* Section 3: Package Breakdown Card ($650 Complete) */}
+        {/* Section 3: Package Breakdown Card */}
         <div className="py-20 border-t border-white/10">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
-              What's Included in Your <span className="text-[#ff6b35]">$500</span> Wyoming Formation
+              What's Included in Your <span className="text-[#ff6b35]">Turnkey</span> Wyoming Formation
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
               Zero hidden charges. Everything required to sell on Amazon US and open US bank accounts.
@@ -242,8 +242,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
                 <span className="text-[#ff6b35] text-xs font-semibold">100% Non-Resident Ready</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="font-instrument italic text-4xl sm:text-5xl font-extrabold text-white">$500</span>
-                <span className="text-white/50 text-xs">/ one-time</span>
+                <span className="font-instrument italic text-3xl sm:text-4xl font-extrabold text-white">Complete Setup</span>
               </div>
             </div>
 
@@ -268,7 +267,7 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"
             >
-              Get Started on WhatsApp ($500)
+              Get Started on WhatsApp
               <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
             </Link>
           </div>
