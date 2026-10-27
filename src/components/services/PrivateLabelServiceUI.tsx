@@ -24,7 +24,7 @@ interface PrivateLabelServiceUIProps {
 
 export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to start Private Label Account Management ($500/month for 6 months + 60/40 profit share).";
+  const whatsappMessage = "Hi AmazonFast, I want to discuss Amazon Private Label Account Management and launch phases.";
 
   const steps = [
     {
@@ -85,8 +85,8 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
 
   const faqs = [
     {
-      q: "How does the $500 for 6 months and 60/40 profit share model work?",
-      a: "For the first 6 months, you pay $500 per month while our team builds everything from scratch (finding the product, factory sourcing, patent check, photos, packaging, and ads). Starting in Month 7, once the product is making profit, there is no monthly fee. We share the net profit: 60% goes to you, and 40% goes to AmazonFast."
+      q: "How does the incubation and 60/40 profit share model work?",
+      a: "For the first 6 months, our team builds everything from scratch (finding the product, factory sourcing, patent check, photos, packaging, and ads). Starting in Month 7, once the product is making profit, there is no monthly fee. We share net profit: 60% goes to you, and 40% goes to AmazonFast."
     },
     {
       q: "What is included in the service?",
