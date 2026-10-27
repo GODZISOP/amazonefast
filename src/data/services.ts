@@ -90,7 +90,7 @@ export const serviceDetails = {
   "payoneer-wallet": {
     "id": "payoneer-wallet",
     "title": "Payoneer Setup",
-    "tagline": "Digital Wallet Setup ($100)",
+    "tagline": "Digital Wallet Setup",
     "description": "Set up a professional Payoneer account to manage your international Amazon payouts securely and efficiently with low transaction fees.",
     "image": "/srv_payoneer_setup.png",
     "benefits": [
@@ -178,7 +178,7 @@ export const serviceDetails = {
   "wise-wallet": {
     "id": "wise-wallet",
     "title": "Wise Setup",
-    "tagline": "Digital Wallet Setup ($100)",
+    "tagline": "Digital Wallet Setup",
     "description": "Get your Wise (formerly TransferWise) business account set up correctly for Amazon to receive funds with real exchange rates and zero hidden fees.",
     "image": "/srv_wise_setup.png",
     "benefits": [
@@ -266,7 +266,7 @@ export const serviceDetails = {
   "stripe-setup": {
     "id": "stripe-setup",
     "title": "Stripe Setup",
-    "tagline": "Digital Wallet Setup ($100)",
+    "tagline": "Digital Wallet Setup",
     "description": "Professional Stripe account setup to process global payments, manage cash flow, and integrate flawlessly with your e-commerce ecosystem.",
     "image": "/srv_account_reinstatement.png",
     "benefits": [
@@ -965,7 +965,7 @@ export const serviceDetails = {
   },
   "airwallex-wallet": {
     "title": "Airwallex Setup",
-    "tagline": "Digital Wallet Setup ($100)",
+    "tagline": "Digital Wallet Setup",
     "description": "Professional service by AmazonFast.",
     "image": "/srv_airwallex_setup.jpg",
     "benefits": [
@@ -1052,7 +1052,7 @@ export const serviceDetails = {
   },
   "chase-bank": {
     "title": "Chase Bank Setup",
-    "tagline": "Physical Bank Setup ($1,500)",
+    "tagline": "Physical Bank Setup",
     "description": "Professional service by AmazonFast.",
     "image": "/srv_account_reinstatement.png",
     "benefits": [
@@ -1139,7 +1139,7 @@ export const serviceDetails = {
   },
   "bank-of-america": {
     "title": "Bank of America Setup",
-    "tagline": "Physical Bank Setup ($1,500)",
+    "tagline": "Physical Bank Setup",
     "description": "Professional service by AmazonFast.",
     "image": "/srv_account_reinstatement.png",
     "benefits": [

@@ -71,11 +71,11 @@ export const servicesData: ServiceItem[] = [
     slug: "fba-store-automation",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "$300 M1 & M2 · Profit %",
+    tag: "Hands-Free Store",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Completely hands-free Amazon FBA store: product research, sourcing, inventory, shipments, and daily account management — all done for you.",
     icon: Boxes,
-    highlights: ["End-to-end hands-free operation", "Daily store management & health checks", "$300 M1 & M2, then profit percentage"]
+    highlights: ["End-to-end hands-free operation", "Daily store management & health checks", "Full account scaling & optimization"]
   },
   {
     name: "Amazon Product Hunting",
@@ -92,62 +92,62 @@ export const servicesData: ServiceItem[] = [
     slug: "wyoming-llc",
     category: "llc",
     categoryLabel: "US Corporate",
-    tag: "$350 Complete",
+    tag: "Zero State Tax",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "The gold standard privacy-first LLC. Zero state income tax, anonymous ownership, and the strongest asset protection laws in the US.",
     icon: Building2,
-    highlights: ["Includes $100 Wyoming state fee", "Anonymous ownership available", "Zero state income tax"]
+    highlights: ["Wyoming state fee covered", "Anonymous ownership available", "Zero state income tax"]
   },
   {
     name: "Florida LLC Formation",
     slug: "florida-llc",
     category: "llc",
     categoryLabel: "US Corporate",
-    tag: "$500 Complete",
+    tag: "Prime Logistics",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "East Coast commerce hub with direct Sunbiz electronic processing, zero personal income tax, and prime logistics gateway.",
     icon: Globe2,
-    highlights: ["Includes $125 Florida state fee", "Direct Sunbiz electronic processing", "Prime East Coast logistics gateway"]
+    highlights: ["Florida state fee covered", "Direct Sunbiz electronic processing", "Prime East Coast logistics gateway"]
   },
   {
     name: "Texas LLC Formation",
     slug: "texas-llc",
     category: "llc",
     categoryLabel: "US Corporate",
-    tag: "$550 Complete",
+    tag: "Prestige Entity",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Commercial powerhouse entity in the #2 US economy, with central logistics access across 25+ Amazon fulfillment centers.",
     icon: Landmark,
-    highlights: ["Includes $300 Texas SOS fee", "No Personal State Income Tax", "Tier-1 US Commercial Banking Weight"]
+    highlights: ["Texas SOS filing included", "No Personal State Income Tax", "Tier-1 US Commercial Banking Weight"]
   },
   {
     name: "Wholesale Account Management",
     slug: "amazon-wholesale-fba",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "$300 M1 & M2 · Profit %",
+    tag: "Turnkey Wholesale",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Complete wholesale operations: direct brand purchasing, Send-to-Amazon shipment plans, prep center labels, and daily BuyBox store management.",
     icon: Boxes,
-    highlights: ["Brand approvals & real invoices", "Send-to-Amazon (STA) shipment plans", "$300 M1 & M2, then profit percentage"]
+    highlights: ["Brand approvals & real invoices", "Send-to-Amazon (STA) shipment plans", "Complete inventory & BuyBox management"]
   },
   {
     name: "Private Label Account Management",
     slug: "amazon-private-label",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "$500 x 6 Mo · 60/40 Profit",
+    tag: "End-to-End Brand",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Build your brand from scratch. Product finding, competitor research, factory sourcing, patent check, product testing, custom packaging, photos, A+ content, and PPC ads.",
     icon: ShoppingBag,
-    highlights: ["Complete launch from scratch", "Sourcing, testing & patent clearance", "$500/mo for 6 months, then 60/40 profit share"]
+    highlights: ["Complete launch from scratch", "Sourcing, testing & patent clearance", "Custom packaging, A+ content & PPC"]
   },
   {
     name: "Brand Approvals",
     slug: "brand-approvals",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "20%–70% Margin · $3K–$10K",
+    tag: "High-Margin Brands",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Get official approvals to sell big brands on Amazon. Official Letter of Authorization (LOA), Brand Registry approval, Proforma Invoices, Paid Invoices, and complete account setup.",
     icon: ShieldCheck,
@@ -158,11 +158,11 @@ export const servicesData: ServiceItem[] = [
     slug: "trademark-brand-registry",
     category: "amazon",
     categoryLabel: "Amazon Growth",
-    tag: "Logo $600 · Word $700",
+    tag: "USPTO Protection",
     tagColor: "bg-[#ff6b35] text-black font-bold",
     description: "Official USPTO trademark filing. Get your serial number in 2 to 3 days to unlock Amazon Brand Registry, A+ Content, video ads, and protect against copycats.",
     icon: Award,
-    highlights: ["Logo ($600) & Wordmark ($700)", "Serial number in 2 to 3 days", "Instant Amazon Brand Registry access"]
+    highlights: ["Logo & Wordmark Protection", "Serial number in 2 to 3 days", "Instant Amazon Brand Registry access"]
   }
 ];
 
@@ -186,7 +186,7 @@ export default function ServicesPage() {
     ? servicesData
     : servicesData.filter(s => s.category === activeTab);
 
-  const whatsappMessage = "Hi AmazonFast, I would like to consult about your services and pricing.";
+  const whatsappMessage = "Hi AmazonFast, I would like to consult about your services.";
 
   return (
     <div className="relative font-sans bg-[#080503] text-white pt-32 pb-24 min-h-screen overflow-hidden selection:bg-[#ff6b35]/30">

@@ -661,7 +661,7 @@ export default function Home() {
               href="/services"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base transition-all shadow-[0_0_25px_rgba(255,107,53,0.4)] hover:scale-105 active:scale-95"
             >
-              <span>View All Services & Pricing</span>
+              <span>View All Services</span>
               <ArrowUpRight size={18} className="stroke-[2.5]" />
             </Link>
           </motion.div>
