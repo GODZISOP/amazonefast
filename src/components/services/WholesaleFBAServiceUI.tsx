@@ -351,10 +351,9 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
             </div>
           </div>
         </div>
-          </div>
-        </div>
 
       </div>
     </div>
   );
 }
+

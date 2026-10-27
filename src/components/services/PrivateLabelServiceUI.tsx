@@ -155,7 +155,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg shadow-[#ff6b35]/30 transition"
             >
-              <span>Pay Now</span>
+              <span>Get Started on WhatsApp</span>
               <ArrowUpRight size={16} />
             </a>
           </div>
@@ -286,7 +286,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"
               >
-                <span>Pay Now</span>
+                <span>Get Started on WhatsApp</span>
                 <ArrowUpRight size={16} />
               </a>
             </div>
@@ -341,7 +341,7 @@ export default function PrivateLabelServiceUI({ data }: PrivateLabelServiceUIPro
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"
               >
-                <span>Pay Now</span>
+                <span>Get Started on WhatsApp</span>
                 <ArrowUpRight size={16} />
               </a>
             </div>
