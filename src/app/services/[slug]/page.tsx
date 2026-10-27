@@ -227,7 +227,7 @@ const serviceDetails: Record<string, any> = {
   },
   "payoneer-wallet": {
     title: "Payoneer Setup",
-    tagline: "Digital Wallet Setup ($100)",
+    tagline: "Digital Wallet Setup",
     description: "Set up a professional Payoneer account to manage your international Amazon payouts securely and efficiently with low transaction fees.",
     image: "/srv_payoneer_setup.png",
     benefits: [
@@ -240,7 +240,7 @@ const serviceDetails: Record<string, any> = {
   },
   "wise-wallet": {
     title: "Wise Setup",
-    tagline: "Digital Wallet Setup ($100)",
+    tagline: "Digital Wallet Setup",
     description: "Get your Wise (formerly TransferWise) business account set up correctly for Amazon to receive funds with real exchange rates and zero hidden fees.",
     image: "/srv_wise_setup.png",
     benefits: [
@@ -253,7 +253,7 @@ const serviceDetails: Record<string, any> = {
   },
   "airwallex-wallet": {
     title: "Airwallex Setup",
-    tagline: "Digital Wallet Setup ($100)",
+    tagline: "Digital Wallet Setup",
     description: "Create your Airwallex global business account for seamless international Amazon payments and multi-currency management.",
     image: "/srv_airwallex_setup.jpg",
     benefits: [
@@ -266,7 +266,7 @@ const serviceDetails: Record<string, any> = {
   },
   "stripe-setup": {
     title: "Stripe Setup",
-    tagline: "Digital Wallet Setup ($100)",
+    tagline: "Digital Wallet Setup",
     description: "Professional Stripe account setup to process global payments, manage cash flow, and integrate flawlessly with your e-commerce ecosystem.",
     image: "/srv_account_reinstatement.png",
     benefits: [
@@ -279,7 +279,7 @@ const serviceDetails: Record<string, any> = {
   },
   "chase-bank": {
     title: "Chase Bank Setup",
-    tagline: "Physical Bank Setup ($1,500)",
+    tagline: "Physical Bank Setup",
     description: "Get a legitimate physical US bank account with Chase Bank for your Amazon business, providing ultimate credibility and financial flexibility.",
     image: "/srv_account_reinstatement.png",
     benefits: [
@@ -292,7 +292,7 @@ const serviceDetails: Record<string, any> = {
   },
   "bank-of-america": {
     title: "Bank of America Setup",
-    tagline: "Physical Bank Setup ($1,500)",
+    tagline: "Physical Bank Setup",
     description: "Establish a strong financial foundation with a Bank of America physical business account, tailored for international Amazon sellers.",
     image: "/srv_account_reinstatement.png",
     benefits: [
@@ -318,7 +318,7 @@ const serviceDetails: Record<string, any> = {
   },
   "wyoming-llc": {
     title: "Wyoming LLC Formation",
-    tagline: "Most Popular for Non-Residents ($500)",
+    tagline: "Most Popular for Non-Residents",
     description: "Wyoming LLC formation for international founders. Low fees, strong privacy, zero state income tax, and fastest formation timeline.",
     image: "/srv_account_reinstatement.png",
     benefits: [
@@ -331,11 +331,11 @@ const serviceDetails: Record<string, any> = {
   },
   "florida-llc": {
     title: "Florida LLC Formation",
-    tagline: "East Coast E-Commerce Hub ($500)",
+    tagline: "East Coast E-Commerce Hub",
     description: "Form your Florida LLC directly through Sunbiz. Prime logistics gateway for Amazon FBA imports and zero personal state income tax.",
     image: "/srv_account_reinstatement.png",
     benefits: [
-      "Includes $125 Florida State Filing Fee",
+      "Florida State Filing Fee Included",
       "Direct Sunbiz Electronic Processing",
       "0% Personal State Income Tax",
       "1 Year Registered Agent & US Address",
@@ -344,11 +344,11 @@ const serviceDetails: Record<string, any> = {
   },
   "texas-llc": {
     title: "Texas LLC Formation",
-    tagline: "Economic & Logistics Powerhouse ($550)",
+    tagline: "Economic & Logistics Powerhouse",
     description: "Establish your Texas LLC in the #2 US economy. Zero personal income tax, $2.47M franchise tax exemption, and central Amazon FBA mega-hubs.",
     image: "/srv_account_reinstatement.png",
     benefits: [
-      "Includes $300 Texas SOS Statutory Fee",
+      "Texas SOS Statutory Fee Included",
       "$2.47M Franchise Tax Exemption",
       "0% Personal State Income Tax",
       "1 Year Registered Agent & Commercial Address",
