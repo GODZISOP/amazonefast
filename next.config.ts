@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
       { source: '/amazon-private-label', destination: '/services/amazon-private-label', permanent: true },
       { source: '/amazon-wholesale-fba', destination: '/services/amazon-wholesale-fba', permanent: true },
       { source: '/trademark-brand-registry', destination: '/services/trademark-brand-registry', permanent: true },
+      { source: '/services/amazon-product-hunting', destination: '/services/product-hunting', permanent: true },
+      { source: '/services/amazon-ppc-management', destination: '/services/amazon-ppc-advertising', permanent: true },
+      { source: '/amazon-product-hunting', destination: '/services/product-hunting', permanent: true },
+      { source: '/amazon-ppc-management', destination: '/services/amazon-ppc-advertising', permanent: true },
+      { source: '/amazon-fba-automation', destination: '/services/fba-store-automation', permanent: true },
+      { source: '/services/amazon-fba-automation', destination: '/services/fba-store-automation', permanent: true },
     ];
   },
 };

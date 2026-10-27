@@ -5,6 +5,14 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: [
+        "/admin-portal",
+        "/admin-portal/*",
+        "/portal",
+        "/portal/*",
+        "/api/*",
+        "/login"
+      ],
     },
     sitemap: "https://amazonfastservices.com/sitemap.xml",
   };
