@@ -27,7 +27,6 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
     {
       id: "logo",
       name: "Logo Trademark",
-      price: "$600",
       icon: ImageIcon,
       badge: "Design Mark",
       tagline: "Protects Your Brand Logo & Graphic Symbol",
@@ -41,12 +40,11 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
         "Unlocks A+ Content & Brand Store",
         "Hijacker & Counterfeit Protection"
       ],
-      whatsappMsg: "Hi AmazonFast, I want to Pay Now for the Logo Trademark ($600)."
+      whatsappMsg: "Hi AmazonFast, I want to get started with the Logo Trademark."
     },
     {
       id: "word",
       name: "Word Trademark",
-      price: "$700",
       icon: Type,
       badge: "Most Popular & Strongest",
       tagline: "Protects Your Brand Name Text in Any Font or Color",
@@ -61,7 +59,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
         "Unlocks Amazon Brand Analytics & Video Ads",
         "Strongest Defense Against Copycats"
       ],
-      whatsappMsg: "Hi AmazonFast, I want to Pay Now for the Word Trademark ($700)."
+      whatsappMsg: "Hi AmazonFast, I want to get started with the Word Trademark."
     }
   ];
 
@@ -90,8 +88,8 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
 
   const faqs = [
     {
-      q: "What is the difference between Logo Trademark ($600) and Word Trademark ($700)?",
-      a: "A Logo Trademark ($600) protects your exact visual artwork and symbol. A Word Trademark ($700) protects the actual name/words in any font or styling. Wordmarks give the strongest protection on Amazon because no one can use your brand name text."
+      q: "What is the difference between a Logo Trademark and a Word Trademark?",
+      a: "A Logo Trademark protects your exact visual artwork and symbol. A Word Trademark protects the actual name/words in any font or styling. Wordmarks give the strongest protection on Amazon because no one can use your brand name text."
     },
     {
       q: "Can I get Amazon Brand Registry before final trademark approval?",
@@ -102,8 +100,8 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
       a: "Brand Registry unlocks A+ Content (EBC), your own Amazon Storefront, Sponsored Brands video ads, Amazon Brand Analytics, and fast removal of unauthorized counterfeiters."
     },
     {
-      q: "Are the government and attorney fees included in the price?",
-      a: "Yes. Both the $600 Logo package and $700 Word package include your attorney filing fee, clearance search, and application setup."
+      q: "Are the government and attorney fees included in the package?",
+      a: "Yes. Both the Logo package and Word package include your attorney filing fee, clearance search, and application setup."
     }
   ];
 
@@ -176,10 +174,10 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
                     <p className="text-xs text-[#ffaa75] font-semibold mb-4">{p.tagline}</p>
 
                     <div className="my-4 pb-4 border-b border-white/10">
-                      <span className="text-4xl sm:text-5xl font-extrabold text-white block">
-                        {p.price}
+                      <span className="text-2xl sm:text-3xl font-extrabold text-white block">
+                        USPTO Package
                       </span>
-                      <span className="text-xs text-white/50 block mt-1">Complete USPTO filing package</span>
+                      <span className="text-xs text-white/50 block mt-1">Complete attorney filing package</span>
                     </div>
 
                     <p className="text-xs text-white/70 leading-relaxed mb-6">
@@ -209,7 +207,7 @@ export default function TrademarkServiceUI({ data, defaultPlan }: TrademarkServi
                         : "bg-white/10 hover:bg-white/20 text-white border border-white/15"
                     }`}
                   >
-                    <span>Pay Now ({p.price})</span>
+                    <span>Get Started on WhatsApp</span>
                     <ArrowUpRight size={16} />
                   </a>
                 </div>
