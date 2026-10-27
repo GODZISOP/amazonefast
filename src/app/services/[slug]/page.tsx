@@ -725,65 +725,63 @@ export default async function ServicePage(props: { params: Promise<{ slug: strin
           })}
         </div>
 
-        {/* Exact Layout of the Image Pricing Card */}
-        {price && (
-          <div className="mt-20 sm:mt-32 mb-10 flex justify-center">
-            <div className="relative w-full max-w-sm">
+        {/* Consultation / Quote Card */}
+        <div className="mt-20 sm:mt-32 mb-10 flex justify-center">
+          <div className="relative w-full max-w-sm">
+            
+            {/* Outer Container mimicking the image */}
+            <div className="bg-[#111111] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1 group">
               
-              {/* Outer Container mimicking the image */}
-              <div className="bg-[#111111] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1 group">
-                
-                {/* Top Badge Area (Like the purple bar in the image) */}
-                <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 py-2.5 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
-                  <Sparkles size={14} className="text-[#ff6b35]" />
-                  <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
-                </div>
-
-                {/* Inner Content */}
-                <div className="p-6 sm:p-10 flex flex-col">
-                  
-                  {/* Title */}
-                  <h3 className="text-xl font-semibold text-white mb-4">Professional</h3>
-                  
-                  {/* Price */}
-                  <div className="flex items-end gap-1 mb-4">
-                    <span className="text-5xl font-black text-white leading-none tracking-tight">${price}</span>
-                    <span className="text-white/50 text-sm font-medium mb-1">/ one-time</span>
-                  </div>
-                  
-                  {/* Description */}
-                  <p className="text-white/50 text-sm leading-relaxed mb-6">
-                    Perfect for sellers that need speed, structure, and a premium setup for success.
-                  </p>
-                  
-                  {/* Pay Now Button (Positioned exactly like the image) */}
-                  <Link 
-                    href={`https://wa.me/923142573033?text=${encodeURIComponent(whatsappMessage)}`} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden"
-                  >
-                    {/* Button highlight effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                    Pay Now
-                  </Link>
-
-                  {/* Features List */}
-                  <div className="flex flex-col gap-3.5">
-                    {data.benefits.map((benefit: string, idx: number) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b35]/70 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
-                        <span className="text-white/80 text-sm font-medium">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
+              {/* Top Badge Area */}
+              <div className="bg-gradient-to-r from-[#ff6b35]/20 to-[#ff6b35]/10 py-2.5 flex items-center justify-center gap-1.5 border-b border-[#ff6b35]/20">
+                <Sparkles size={14} className="text-[#ff6b35]" />
+                <span className="text-[#ff6b35] text-xs font-bold tracking-widest uppercase">Most Recommended</span>
               </div>
 
+              {/* Inner Content */}
+              <div className="p-6 sm:p-10 flex flex-col">
+                
+                {/* Title */}
+                <h3 className="text-xl font-semibold text-white mb-2">Professional</h3>
+                
+                {/* Plan Indicator */}
+                <div className="flex flex-col mb-4">
+                  <span className="text-3xl font-black text-white leading-tight tracking-tight">Custom Plan</span>
+                  <span className="text-[#ff6b35] text-xs font-semibold mt-1">Tailored for your business</span>
+                </div>
+                
+                {/* Description */}
+                <p className="text-white/50 text-sm leading-relaxed mb-6">
+                  Perfect for sellers that need speed, structure, and a premium setup for success.
+                </p>
+                
+                {/* Contact for Quote Button */}
+                <Link 
+                  href={`https://wa.me/923142573033?text=${encodeURIComponent(`Hi AmazonFast, I would like to get a quote and details for the ${data.title} service.`)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-4 bg-[#ff6b35] hover:bg-[#e55a2b] text-white rounded-full font-bold text-sm transition-all shadow-[0_5px_15px_rgba(255,107,53,0.2)] hover:shadow-[0_10px_30px_rgba(255,107,53,0.4)] flex items-center justify-center gap-2 mb-8 relative overflow-hidden"
+                >
+                  {/* Button highlight effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                  Get Quote on WhatsApp
+                </Link>
+
+                {/* Features List */}
+                <div className="flex flex-col gap-3.5">
+                  {data.benefits.map((benefit: string, idx: number) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#ff6b35]/70 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
+                      <span className="text-white/80 text-sm font-medium">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
             </div>
+
           </div>
-        )}
+        </div>
 
       </div>
     </div>
