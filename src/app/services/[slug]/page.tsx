@@ -513,16 +513,27 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const data = serviceDetails[params.slug];
   if (!data) {
     return {
-      title: "Services",
+      title: "Services | Amazon Fast Services",
     };
   }
+  const pageUrl = `https://amazonfastservices.com/services/${params.slug}`;
   return {
     title: data.title,
     description: data.description || data.tagline,
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title: `${data.title} | Amazon Fast Services`,
       description: data.description || data.tagline,
+      url: pageUrl,
       siteName: "Amazon Fast Services",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${data.title} | Amazon Fast Services`,
+      description: data.description || data.tagline,
     },
   };
 }

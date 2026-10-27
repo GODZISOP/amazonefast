@@ -186,9 +186,9 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
           <div className="rounded-3xl bg-gradient-to-b from-[#1c0c05] via-[#120703] to-[#0a0401] border-2 border-[#ff6b35]/40 p-7 sm:p-10 max-w-4xl mx-auto">
             
             <div className="text-center mb-8 pb-6 border-b border-white/10">
-              <span className="text-xs font-mono uppercase text-[#ff6b35] font-semibold">Pricing Structure</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">One Simple Plan</h2>
-              <p className="text-xs sm:text-sm text-white/60 mt-1">First two months are $300 each. From Month 3, we work on profit percentage only.</p>
+              <span className="text-xs font-mono uppercase text-[#ff6b35] font-semibold">Service Roadmap</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mt-1">Structured Growth Model</h2>
+              <p className="text-xs sm:text-sm text-white/60 mt-1">Hands-on account setup & launch phases, followed by a pure profit-share model.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -196,10 +196,10 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
               {/* Month 1 */}
               <div className="bg-black/40 border border-white/10 rounded-2xl p-5">
                 <span className="text-xs font-mono text-[#ff6b35] bg-[#ff6b35]/10 px-2 py-0.5 rounded-full border border-[#ff6b35]/20 inline-block mb-2">
-                  Month 01
+                  Phase 01
                 </span>
                 <div className="mb-2">
-                  <span className="text-2xl sm:text-3xl font-bold text-white block">$300</span>
+                  <span className="text-2xl sm:text-3xl font-bold text-white block">Setup</span>
                   <span className="text-[11px] text-white/50 block">Brand Approvals</span>
                 </div>
                 <p className="text-xs text-white/70 leading-relaxed mb-3">
@@ -224,10 +224,10 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
               {/* Month 2 */}
               <div className="bg-black/40 border border-white/10 rounded-2xl p-5">
                 <span className="text-xs font-mono text-[#ff6b35] bg-[#ff6b35]/10 px-2 py-0.5 rounded-full border border-[#ff6b35]/20 inline-block mb-2">
-                  Month 02
+                  Phase 02
                 </span>
                 <div className="mb-2">
-                  <span className="text-2xl sm:text-3xl font-bold text-white block">$300</span>
+                  <span className="text-2xl sm:text-3xl font-bold text-white block">Launch</span>
                   <span className="text-[11px] text-white/50 block">Shipment & FBA Dispatch</span>
                 </div>
                 <p className="text-xs text-white/70 leading-relaxed mb-3">
@@ -252,19 +252,19 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
               {/* Month 3 */}
               <div className="bg-gradient-to-b from-[#2a1309] to-black/60 border border-[#ff6b35]/60 rounded-2xl p-5">
                 <span className="text-xs font-mono text-black bg-[#ff6b35] font-extrabold px-2 py-0.5 rounded-full inline-block mb-2">
-                  Month 03+
+                  Phase 03+
                 </span>
                 <div className="mb-2">
-                  <span className="text-2xl sm:text-3xl font-bold text-[#ffaa75] block">Profit %</span>
-                  <span className="text-[11px] text-white/50 block">Zero fixed monthly fee</span>
+                  <span className="text-2xl sm:text-3xl font-bold text-[#ffaa75] block">Profit Share</span>
+                  <span className="text-[11px] text-white/50 block">Zero fixed monthly retainer</span>
                 </div>
                 <p className="text-xs text-white/70 leading-relaxed mb-3">
-                  Zero monthly retainer! Once your sales are running, we only earn based on a percentage of net profit.
+                  Zero monthly retainer! Once your sales are running, we align incentives on a percentage of net profit.
                 </p>
                 <div className="space-y-1.5 text-xs text-white/85">
                   <div className="flex items-center gap-1.5">
                     <Check size={13} className="text-[#ff6b35]" />
-                    <span>No fixed monthly fee</span>
+                    <span>Aligned growth incentives</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Check size={13} className="text-[#ff6b35]" />
@@ -287,7 +287,7 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"
               >
-                <span>Pay Now</span>
+                <span>Get Started on WhatsApp</span>
                 <ArrowUpRight size={16} />
               </a>
             </div>
@@ -345,10 +345,12 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm transition"
               >
-                <span>Pay Now</span>
+                <span>Get Started on WhatsApp</span>
                 <ArrowUpRight size={16} />
               </a>
             </div>
+          </div>
+        </div>
           </div>
         </div>
 
