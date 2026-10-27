@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     template: "%s | Amazon Fast Services",
   },
   description: "Scale your brand on Amazon with smart FBA strategies, advertising, and automated growth with Amazon Fast Services.",
+  alternates: {
+    canonical: "https://amazonfastservices.com",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
