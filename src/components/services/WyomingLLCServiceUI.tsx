@@ -20,14 +20,14 @@ interface WyomingLLCServiceUIProps {
 
 export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to form my Wyoming LLC ($500 package). Please guide me through the next steps.";
+  const whatsappMessage = "Hi AmazonFast, I want to form my Wyoming LLC. Please guide me through the next steps.";
   const questionsMessage = "Hi AmazonFast, I have some questions about forming a Wyoming LLC as a non-resident.";
 
   const features = [
     {
       icon: Percent,
       title: "Lowest Ongoing Fees",
-      desc: "$100 state filing fee. Annual report fee is just $60. No franchise tax. No minimum capital requirements."
+      desc: "Low state filing fee and minimal annual report fees. No franchise tax. No minimum capital requirements."
     },
     {
       icon: Lock,
@@ -57,16 +57,16 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
   ];
 
   const comparisonRows = [
-    { feature: "State Filing Fee", wyoming: "$100 (Included in package)", delaware: "$110 + Franchise fee" },
-    { feature: "Annual Report Fee", wyoming: "$60 flat (Lowest in US)", delaware: "$300+ annual franchise tax" },
+    { feature: "State Filing Fee", wyoming: "Included in package", delaware: "Variable + Franchise fee" },
+    { feature: "Annual Report Fee", wyoming: "Low flat fee (Lowest in US)", delaware: "High annual franchise tax" },
     { feature: "State Income Tax", wyoming: "0% None", delaware: "8.7% on income earned in DE" },
     { feature: "Privacy & Anonymity", wyoming: "Strong (Anonymous LLC)", delaware: "Moderate" },
     { feature: "Best For", wyoming: "Amazon FBA, E-Commerce, Non-Residents", delaware: "Startups seeking US Venture Capital" },
-    { feature: "Full All-Inclusive Package", wyoming: "$500 Complete", delaware: "$750+" }
+    { feature: "Full All-Inclusive Package", wyoming: "Complete Turnkey", delaware: "Higher Total Cost" }
   ];
 
   const packageIncludes = [
-    "Wyoming Secretary of State Filing Fee ($100 included)",
+    "Wyoming Secretary of State Filing Fee (Included)",
     "Registered Agent Service (1 Full Year Included)",
     "Official US Commercial Business Address (1 Year)",
     "IRS Federal EIN (Tax ID) for Non-Residents without SSN",
@@ -91,8 +91,8 @@ export default function WyomingLLCServiceUI({ data }: WyomingLLCServiceUIProps) 
       a: "State registration is usually approved in 2 to 4 business days. After that, we apply for your EIN with the IRS, which typically takes 10 to 14 business days for non-residents."
     },
     {
-      q: "Are there any hidden fees beyond the $500 package?",
-      a: "No. The $500 package covers all state filing fees, registered agent for the first year, US address, EIN filing, BOI filing, and banking guidance. Ongoing maintenance begins in Year 2 with the annual report ($60 state fee) and registered agent renewal."
+      q: "Are there any hidden fees beyond the package?",
+      a: "No. The turnkey package covers all state filing fees, registered agent for the first year, US address, EIN filing, BOI filing, and banking guidance. Ongoing maintenance begins in Year 2 with the standard annual report and registered agent renewal."
     }
   ];
 
