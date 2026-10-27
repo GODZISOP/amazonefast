@@ -16,7 +16,7 @@ interface FloridaLLCServiceUIProps {
 
 export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to form my Florida LLC ($500 package). Please guide me through the registration.";
+  const whatsappMessage = "Hi AmazonFast, I want to form my Florida LLC. Please guide me through the registration.";
 
   const floridaBenefits = [
     {
@@ -69,7 +69,7 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
   ];
 
   const packageItems = [
-    "Florida Division of Corporations Filing Fee ($125 Included)",
+    "Florida Division of Corporations Filing Fee (Included)",
     "Florida Registered Agent Service (1 Full Year)",
     "Commercial Street Address in Florida with Mail Forwarding",
     "Federal EIN (Tax ID) from IRS for Non-Residents",
@@ -87,12 +87,12 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
       a: "Florida is the #1 logistics gateway for e-commerce with world-class ports, massive Amazon warehouse infrastructure, zero personal income tax, and high commercial credibility with US banks."
     },
     {
-      q: "Is the $125 Florida state filing fee included in this $500 price?",
-      a: "Yes! The $500 package is 100% all-inclusive. It covers the $125 Florida state fee, 1 year of registered agent, commercial address, EIN, BOI compliance, and bank account setup support."
+      q: "Is the Florida state filing fee included in this package?",
+      a: "Yes! The package is 100% all-inclusive. It covers the Florida state fee, 1 year of registered agent, commercial address, EIN, BOI compliance, and bank account setup support."
     },
     {
       q: "What are Florida's annual ongoing requirements?",
-      a: "Florida requires an Annual Report filed with Sunbiz between January 1st and May 1st each year ($138.75 state fee). We alert you and assist you with every deadline."
+      a: "Florida requires an Annual Report filed with Sunbiz between January 1st and May 1st each year. We alert you and assist you with every deadline."
     },
     {
       q: "Can I form a Florida LLC without visiting the USA?",
@@ -183,8 +183,8 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
                 <span className="font-semibold text-white">$0</span>
               </div>
               <div className="flex justify-between items-center text-white/80">
-                <span>Total Turnkey Price</span>
-                <span className="font-instrument italic font-bold text-[#ff6b35] text-2xl">$500 Flat</span>
+                <span>Turnkey Package</span>
+                <span className="font-instrument italic font-bold text-[#ff6b35] text-xl">All-Inclusive</span>
               </div>
             </div>
 
@@ -217,17 +217,16 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
           </div>
         </div>
 
-        {/* Section 2: Package Pricing Card ($500) */}
+        {/* Section 2: Package Card */}
         <div className="py-16 border-t border-white/10">
           <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
               <div>
                 <h3 className="text-2xl font-bold text-white">Full Florida LLC Package</h3>
-                <span className="text-[#ff6b35] text-xs font-semibold">Includes $125 State Fee</span>
+                <span className="text-[#ff6b35] text-xs font-semibold">Includes State Filing Fee</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="font-instrument italic text-4xl sm:text-5xl font-extrabold text-white">$500</span>
-                <span className="text-white/50 text-xs">/ all-inclusive</span>
+                <span className="font-instrument italic text-3xl sm:text-4xl font-extrabold text-white">Complete Package</span>
               </div>
             </div>
 
@@ -252,7 +251,7 @@ export default function FloridaLLCServiceUI({ data }: FloridaLLCServiceUIProps) 
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"
             >
-              Order Florida LLC on WhatsApp ($500)
+              Order Florida LLC on WhatsApp
               <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
             </Link>
           </div>

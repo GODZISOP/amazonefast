@@ -31,38 +31,35 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
     {
       name: "Wyoming LLC",
       slug: "wyoming-llc",
-      price: "$500",
       tagline: "#1 Choice for Non-Residents",
       badge: "Most Popular",
       badgeColor: "bg-[#ff6b35] text-black",
       border: "border-white/10 hover:border-[#ff6b35]/60",
       accent: "text-[#ff6b35]",
       desc: "Top privacy, anonymous member protection, $0 state income tax, and the lowest ongoing annual report fees in the nation.",
-      highlights: ["Strong Privacy & Anonymity", "$60 Annual Report Fee", "0% State Income Tax", "Fastest Approval Timeline"]
+      highlights: ["Strong Privacy & Anonymity", "Low Annual Report Fees", "0% State Income Tax", "Fastest Approval Timeline"]
     },
     {
       name: "Florida LLC",
       slug: "florida-llc",
-      price: "$500",
       tagline: "East Coast E-Commerce Gateway",
       badge: "Best Value",
       badgeColor: "bg-[#ff6b35] text-black",
       border: "border-white/10 hover:border-[#ff6b35]/60",
       accent: "text-[#ff6b35]",
       desc: "Ideal for sellers importing cargo through East Coast ports. Direct Sunbiz electronic processing and $0 personal state income tax.",
-      highlights: ["Includes $125 State Fee", "0% Personal Income Tax", "Direct Sunbiz Electronic Filing", "Prime Amazon East Coast Hub"]
+      highlights: ["State Fee Included", "0% Personal Income Tax", "Direct Sunbiz Electronic Filing", "Prime Amazon East Coast Hub"]
     },
     {
       name: "Texas LLC",
       slug: "texas-llc",
-      price: "$550",
       tagline: "Commercial Industrial Powerhouse",
       badge: "High Growth",
       badgeColor: "bg-[#ff6b35] text-black",
       border: "border-white/10 hover:border-[#ff6b35]/60",
       accent: "text-[#ff6b35]",
       desc: "Establish your firm in the #2 economy in the US with top-tier corporate status and central logistics across major Amazon fulfillment centers.",
-      highlights: ["Includes $300 SOS State Fee", "0% Personal Income Tax", "Top Corporate Prestige", "Tier-1 Physical Bank Weight"]
+      highlights: ["Texas SOS Fee Included", "0% Personal Income Tax", "Top Corporate Prestige", "Tier-1 Physical Bank Weight"]
     }
   ];
 
@@ -186,7 +183,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
               Choose Your US Formation State
             </h2>
             <p className="text-white/60 text-sm sm:text-base">
-              Every state has distinct tax, privacy, and logistics benefits. Explore full details and pricing below:
+              Every state has distinct tax, privacy, and logistics benefits. Explore full details below:
             </p>
           </div>
 
@@ -201,8 +198,8 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
                     <span className={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full ${st.badgeColor}`}>
                       {st.badge}
                     </span>
-                    <span className="font-instrument italic text-3xl sm:text-4xl font-bold text-white">
-                      {st.price}
+                    <span className="text-xs font-bold text-[#ff6b35] bg-[#ff6b35]/10 border border-[#ff6b35]/20 px-3 py-1 rounded-full uppercase tracking-wider">
+                      Turnkey Setup
                     </span>
                   </div>
 
@@ -231,7 +228,7 @@ export default function LLCFormationServiceUI({ data }: LLCFormationServiceUIPro
                   href={`/services/${st.slug}`}
                   className="w-full py-3.5 rounded-xl bg-white/5 hover:bg-[#ff6b35] hover:text-black text-white font-bold text-sm flex items-center justify-center gap-2 border border-white/15 transition-all duration-300 group-hover:border-[#ff6b35]"
                 >
-                  View Full {st.name} Page & Packages
+                  View Full {st.name} Details
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>
