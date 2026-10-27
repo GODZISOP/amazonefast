@@ -50,7 +50,7 @@ import TrademarkServiceUI from "@/components/services/TrademarkServiceUI";
 const serviceDetails: Record<string, any> = {
   "trademark-brand-registry": {
     title: "Amazon Trademark & Brand Registry",
-    tagline: "Logo ($600) & Wordmark ($700) Protection",
+    tagline: "Logo & Wordmark USPTO Protection",
     description: "Official USPTO trademark filing and Amazon Brand Registry protection. Serial number in 2 to 3 days to unlock A+ Content, Storefront, and counterfeit protection.",
     image: "/srv_store_creation.jpg",
     benefits: [
@@ -64,7 +64,7 @@ const serviceDetails: Record<string, any> = {
   },
   "trademark-logo": {
     title: "Logo Trademark Registration",
-    tagline: "USPTO Design Mark ($600)",
+    tagline: "USPTO Design Mark Protection",
     description: "Official USPTO Logo / Design mark registration. Protects your unique brand logo and unlocks Amazon Brand Registry.",
     image: "/srv_store_creation.jpg",
     benefits: [
@@ -77,7 +77,7 @@ const serviceDetails: Record<string, any> = {
   },
   "trademark-word": {
     title: "Word Trademark Registration",
-    tagline: "USPTO Wordmark ($700)",
+    tagline: "USPTO Wordmark Protection",
     description: "Strongest Amazon legal protection. Protects your brand name text in any font or color and gives full Brand Registry privileges.",
     image: "/srv_store_creation.jpg",
     benefits: [
@@ -90,7 +90,7 @@ const serviceDetails: Record<string, any> = {
   },
   "brand-approvals": {
     title: "Brand Approval",
-    tagline: "Guaranteed Approvals ($3,000 – $10,000)",
+    tagline: "Guaranteed Brand Approvals",
     description: "Get official approvals to sell big brands on Amazon. Official Letter of Authorization (LOA), Brand Registry approval, Proforma Invoices, Paid Invoices, and complete Seller Central setup.",
     image: "/srv_product_hunting_v2_1791215473466.jpg",
     benefits: [
@@ -104,8 +104,8 @@ const serviceDetails: Record<string, any> = {
   },
   "amazon-private-label": {
     title: "Complete Private Label Account Management",
-    tagline: "Build Your 7-Figure Amazon Brand From Scratch ($500 x 6 Mo · 60/40 Profit)",
-    description: "Full-service private label incubation: product hunting, competitor review mining, direct OEM manufacturing, patent validation, custom packaging & testing, studio 3D/photography, A+ content, and aggressive PPC launch. $500/mo for 6 Months, then 60/40 Profit Share.",
+    tagline: "Build Your 7-Figure Amazon Brand From Scratch",
+    description: "Full-service private label incubation: product hunting, competitor review mining, direct OEM manufacturing, patent validation, custom packaging & testing, studio 3D/photography, A+ content, and aggressive PPC launch. Full-service brand scaling and profit share partnership.",
     image: "/srv_store_creation.jpg",
     benefits: [
       "Data-Driven Product Hunting & Niche Selection",
@@ -121,7 +121,7 @@ const serviceDetails: Record<string, any> = {
   "amazon-wholesale-fba": {
     title: "Complete Account Management and PL",
     tagline: "Turnkey Brand Approvals & Scaled Operations",
-    description: "End-to-end wholesale operations: direct brand approvals, distributor invoice procurement, FBA prep & shipment planning, and daily BuyBox store management. Month 1: $300, Month 2: $300, Month 3+: Profit Share %.",
+    description: "End-to-end wholesale operations: direct brand approvals, distributor invoice procurement, FBA prep & shipment planning, and daily BuyBox store management. Turnkey brand growth and profit share partnership.",
     image: "/srv_fba_automation_new.jpg",
     benefits: [
       "Direct Brand Account Opening & Resale Approvals",
