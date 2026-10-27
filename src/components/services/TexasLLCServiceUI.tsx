@@ -19,7 +19,7 @@ interface TexasLLCServiceUIProps {
 
 export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to form my Texas LLC ($550 package). Please guide me through the registration.";
+  const whatsappMessage = "Hi AmazonFast, I want to form my Texas LLC. Please guide me through the registration.";
 
   const texasBento = [
     {
@@ -49,7 +49,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
   ];
 
   const packageItems = [
-    "Texas Secretary of State Filing Fee ($300 Included)",
+    "Texas Secretary of State Filing Fee (Included)",
     "Texas Registered Agent Service (1 Full Year)",
     "Commercial Street Address in Texas with Mail Scanning",
     "IRS Federal EIN (Employer Identification Number) for Non-Residents",
@@ -62,8 +62,8 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
 
   const faqs = [
     {
-      q: "Is the $300 Texas Secretary of State fee included in the $550 price?",
-      a: "Yes! The State of Texas charges a $300 state filing fee, which is 100% included in our $550 total price. There are no surprise extra costs."
+      q: "Is the Texas Secretary of State fee included in the package?",
+      a: "Yes! The State of Texas statutory fee is 100% included in our turnkey package. There are no surprise extra costs."
     },
     {
       q: "What is the Texas Franchise Tax rule for non-residents?",
@@ -111,7 +111,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
           </h1>
 
           <p className="text-white/70 text-base sm:text-lg md:text-xl leading-relaxed mb-8">
-            Establish your business in the industrial and e-commerce capital of the southern US for <span className="font-instrument italic text-[#ff6b35] font-bold text-3xl">$550 all-inclusive</span>. Zero personal state tax, top-tier corporate prestige, and premier commercial banking status.
+            Establish your business in the industrial and e-commerce capital of the southern US. Zero personal state tax, top-tier corporate prestige, and premier commercial banking status.
           </p>
 
 
@@ -122,7 +122,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(255,107,53,0.35)] hover:scale-105"
             >
-              Start Texas LLC ($550)
+              Start Texas LLC
               <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
           </div>
@@ -159,11 +159,11 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
           </div>
         </div>
 
-        {/* Section 2: Complete $550 Package Card */}
+        {/* Section 2: Complete Package Card */}
         <div className="py-16 border-t border-white/10">
           <div className="max-w-2xl mx-auto bg-gradient-to-b from-[#140702] to-[#0d0401] border-2 border-[#ff6b35]/40 rounded-3xl p-6 sm:p-10 shadow-2xl relative">
             <div className="absolute top-0 right-0 bg-[#ff6b35] text-black font-extrabold text-xs px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
-              Includes $300 SOS State Fee
+              Includes SOS State Fee
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
@@ -172,13 +172,12 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
                 <span className="text-[#ff6b35] text-xs font-semibold">100% Non-Resident Remote Setup</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="font-instrument italic text-4xl sm:text-5xl font-extrabold text-white">$550</span>
-                <span className="text-white/50 text-xs">/ flat fee</span>
+                <span className="font-instrument italic text-3xl sm:text-4xl font-extrabold text-white">Complete Package</span>
               </div>
             </div>
 
             <p className="text-white/70 text-sm leading-relaxed mb-8">
-              Includes the entire $300 Texas Secretary of State statutory fee, full year of registered agent, commercial address, federal EIN, and US banking guidance.
+              Includes the entire Texas Secretary of State statutory fee, full year of registered agent, commercial address, federal EIN, and US banking guidance.
             </p>
 
             <div className="space-y-3 mb-8">
@@ -198,7 +197,7 @@ export default function TexasLLCServiceUI({ data }: TexasLLCServiceUIProps) {
               rel="noopener noreferrer"
               className="w-full py-4 rounded-xl bg-[#ff6b35] hover:bg-[#ff824d] text-black font-bold text-base flex items-center justify-center gap-2 transition-all shadow-[0_5px_25px_rgba(255,107,53,0.35)] hover:scale-[1.02]"
             >
-              Order Texas LLC on WhatsApp ($550)
+              Order Texas LLC on WhatsApp
               <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
             </Link>
           </div>
