@@ -20,7 +20,7 @@ interface WholesaleFBAServiceUIProps {
 
 export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const whatsappMessage = "Hi AmazonFast, I want to get started with the Complete Amazon Wholesale FBA Service ($300 M1 + $300 M2 + Profit Share).";
+  const whatsappMessage = "Hi AmazonFast, I want to get started with the Complete Amazon Wholesale FBA Service.";
 
   const pillars = [
     {
@@ -63,8 +63,8 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
 
   const faqs = [
     {
-      q: "How does the Month 1 ($300), Month 2 ($300), and Month 3 (Profit Share %) model work?",
-      a: "In Month 1 ($300), we open brand accounts and find profitable products. In Month 2 ($300), we create shipment plans, send stock to Amazon, and start selling. Starting Month 3, there is no fixed monthly fee. We work on a percentage of net profit so you only pay when your business makes money."
+      q: "How does the onboarding and profit share model work?",
+      a: "In Month 1, we open brand accounts and find profitable products. In Month 2, we create shipment plans, send stock to Amazon, and start selling. Starting Month 3, there is no fixed monthly fee. We work on a percentage of net profit so you only pay when your business makes money."
     },
     {
       q: "What is included in Brand Purchasing?",
@@ -113,16 +113,16 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
             We handle everything for your Wholesale FBA business: direct brand purchasing, shipment plans with prep centers, and daily BuyBox account management.
           </p>
 
-          {/* Quick Price Pill */}
+          {/* Quick Plan Pill */}
           <div className="inline-flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-4 bg-white/[0.04] border border-white/10 px-4 sm:px-6 py-3 rounded-2xl">
             <div>
-              <span className="text-xs text-white/50 block">Months 1 & 2</span>
-              <span className="text-base sm:text-lg font-bold text-white">$300 / month</span>
+              <span className="text-xs text-white/50 block">Phase 1 & 2</span>
+              <span className="text-base sm:text-lg font-bold text-white">Turnkey Setup</span>
             </div>
             <div className="hidden sm:block w-px h-8 bg-white/10" />
             <div>
-              <span className="text-xs text-white/50 block">Month 3 onwards</span>
-              <span className="text-base sm:text-lg font-bold text-[#ff6b35]">Profit Share %</span>
+              <span className="text-xs text-white/50 block">Phase 3 onwards</span>
+              <span className="text-base sm:text-lg font-bold text-[#ff6b35]">Profit Share Model</span>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ export default function WholesaleFBAServiceUI({ data }: WholesaleFBAServiceUIPro
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white px-8 py-3.5 rounded-full font-bold text-sm shadow-lg shadow-[#ff6b35]/30 transition"
             >
-              <span>Pay Now</span>
+              <span>Get Started on WhatsApp</span>
               <ArrowUpRight size={16} />
             </a>
           </div>

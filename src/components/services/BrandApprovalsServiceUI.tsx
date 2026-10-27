@@ -187,7 +187,7 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
         {/* 4 PACKAGES SECTION */}
         <div className="mb-20">
           <div className="text-center max-w-xl mx-auto mb-12 space-y-2">
-            <span className="text-xs uppercase tracking-wider text-[#ff6b35] font-bold">Simple Pricing</span>
+            <span className="text-xs uppercase tracking-wider text-[#ff6b35] font-bold">Brand Packages</span>
             <h2 className="text-2xl sm:text-3xl font-bold text-white">Choose Your Package</h2>
             <p className="text-white/60 text-xs sm:text-sm">Pick the profit margin percentage you want for your approved brands.</p>
           </div>
@@ -204,11 +204,11 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
                   </span>
 
                   <div className="mb-4 pb-4 border-b border-white/10">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-white block">
-                      {pkg.price}
-                    </span>
-                    <span className="text-xs font-bold text-[#ffaa75] block mt-1">
+                    <span className="text-xl sm:text-2xl font-extrabold text-white block">
                       {pkg.margin}
+                    </span>
+                    <span className="text-xs font-semibold text-[#ffaa75] block mt-1">
+                      Direct Wholesaler Approvals
                     </span>
                   </div>
 
@@ -230,12 +230,12 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
                 </div>
 
                 <a 
-                  href={`https://wa.me/923142573033?text=${encodeURIComponent(`Hi AmazonFast, I want the ${pkg.name} (${pkg.price} - ${pkg.margin}) Brand Approval package.`)}`}
+                  href={`https://wa.me/923142573033?text=${encodeURIComponent(`Hi AmazonFast, I want the ${pkg.name} (${pkg.margin}) Brand Approval package.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 bg-[#ff6b35] hover:bg-[#ea5c2b] text-white transition"
                 >
-                  <span>Pay Now ({pkg.price})</span>
+                  <span>Get Started on WhatsApp</span>
                   <ArrowUpRight size={14} />
                 </a>
               </div>
