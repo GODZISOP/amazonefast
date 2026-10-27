@@ -24,9 +24,7 @@ const serviceSlugs = [
   "wyoming-llc",
   "florida-llc",
   "texas-llc",
-  "fba-store-automation",
-  "amazon-product-hunting",
-  "amazon-ppc-management"
+  "fba-store-automation"
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

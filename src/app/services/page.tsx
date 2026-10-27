@@ -57,7 +57,7 @@ export const servicesData: ServiceItem[] = [
   },
   {
     name: "Amazon PPC Management",
-    slug: "amazon-ppc-management",
+    slug: "amazon-ppc-advertising",
     category: "amazon",
     categoryLabel: "Amazon Growth",
     tag: "3x–8x ROAS",
@@ -79,7 +79,7 @@ export const servicesData: ServiceItem[] = [
   },
   {
     name: "Amazon Product Hunting",
-    slug: "amazon-product-hunting",
+    slug: "product-hunting",
     category: "amazon",
     categoryLabel: "Amazon Growth",
     tag: "Winning Products",

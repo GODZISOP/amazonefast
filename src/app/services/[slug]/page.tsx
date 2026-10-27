@@ -131,6 +131,20 @@ const serviceDetails: Record<string, any> = {
       "24/7 Algorithmic BuyBox Repricing & Inventory Forecasting"
     ]
   },
+  "fba-store-automation": {
+    title: "Amazon FBA Store Automation",
+    tagline: "Hands-Free Passive Income on Amazon",
+    description: "Our complete Amazon FBA automation service is designed for investors who want to scale a highly profitable e-commerce business without dealing with the day-to-day operations. We handle everything from LLC formation and product research to inventory management, PPC, and customer service.",
+    image: "/srv_fba_automation_new.jpg",
+    benefits: [
+      "End-to-End Account Management",
+      "Winning Product Sourcing & Supplier Negotiation",
+      "Send-To-Amazon Inventory & Inbound Logistics",
+      "Daily BuyBox Monitoring & Automated Repricing",
+      "Advanced Inventory Forecasting & Daily Health Checks",
+      "Continuous PPC Scaling & Profit Maximization"
+    ]
+  },
   "amazon-account-creation": {
     title: "Amazon Account Creation",
     tagline: "Professional Setup & Verification",
