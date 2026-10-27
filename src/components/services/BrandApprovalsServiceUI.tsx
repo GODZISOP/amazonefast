@@ -24,7 +24,6 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
   const packages = [
     {
       name: "Package 1",
-      price: "$3,000",
       margin: "20% to 30% Profit Margin",
       desc: "Get brand approvals with 20% to 30% profit margin and complete documents to start selling.",
       deliverables: [
@@ -38,7 +37,6 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
     },
     {
       name: "Package 2",
-      price: "$5,000",
       margin: "20% to 45% Profit Margin",
       desc: "Get brand approvals with 20% to 45% profit margin for bigger profits and variety.",
       deliverables: [
@@ -52,7 +50,6 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
     },
     {
       name: "Package 3",
-      price: "$7,000",
       margin: "20% to 50% Profit Margin",
       desc: "Get brand approvals with 20% to 50% profit margin to sell popular high-demand items.",
       deliverables: [
@@ -66,7 +63,6 @@ export default function BrandApprovalsServiceUI({ data }: BrandApprovalsServiceU
     },
     {
       name: "Package 4",
-      price: "$10,000",
       margin: "20% to 70% Profit Margin",
       desc: "Get brand approvals with 20% to 70% profit margin for maximum selling profits.",
       deliverables: [
